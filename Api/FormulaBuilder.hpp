@@ -18,13 +18,9 @@
 #include <ostream>
 #include <climits>
 
-//#include "Helper.hpp"
-
 #include "Lib/VString.hpp"
 
 namespace Api {
-
-using namespace std;
 
 /**
  * Exception that is thrown when some of the Api code
