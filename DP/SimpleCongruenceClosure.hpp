@@ -29,9 +29,11 @@
 
 namespace DP {
 
-using namespace Lib;
-using namespace Kernel;
-
+using Kernel::Ordering;
+using Kernel::LiteralIterator;
+using Kernel::LiteralStack;
+using Kernel::Literal;
+using Kernel::TermList;
 /**
  * Implementation of congruence closure.
  * 

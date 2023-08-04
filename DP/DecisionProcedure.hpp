@@ -19,8 +19,6 @@
 
 namespace DP {
 
-using namespace Lib;
-using namespace Kernel;
 
 /**
  * A pure virtual class implementing decision procedures.
@@ -41,13 +39,13 @@ public:
 
   virtual ~DecisionProcedure() {}
   /** add literals */
-  virtual void addLiterals(LiteralIterator lits, bool onlyEqualites = false) = 0;
+  virtual void addLiterals(Kernel::LiteralIterator lits, bool onlyEqualites = false) = 0;
   /** return the result */
   virtual Status getStatus(bool getMultipleCores=false) = 0;
 
   // TODO: this is needed for the model experiment with the SimpleCongruenceClosure class
   // but does it make sense for a general dp?
-  virtual void getModel(LiteralStack& model) = 0;
+  virtual void getModel(Kernel::LiteralStack& model) = 0;
 
   /**
    * Return number of unsatisfiable cores that can be retrieved.
@@ -57,7 +55,7 @@ public:
    * Can be called only after getStatus before any next call to addLiterals.
    */
   virtual unsigned getUnsatCoreCount() = 0;
-  virtual void getUnsatCore(LiteralStack& res, unsigned coreIndex=0) = 0;
+  virtual void getUnsatCore(Kernel::LiteralStack& res, unsigned coreIndex=0) = 0;
   /** reset decision procedure object into state equivalent to its initial state */
   virtual void reset() = 0;
 };

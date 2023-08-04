@@ -378,9 +378,6 @@ std::ostream& operator<< (std::ostream& str,const Api::AnnotatedFormula& f);
 namespace Api
 {
 
-using namespace std;
-using namespace Lib;
-
 class Problem;
 
 class OutputOptions

@@ -37,10 +37,6 @@
 
 namespace CASC {
 
-using namespace std;
-using namespace Lib;
-using namespace Kernel;
-
 enum Category {
   HH4,
   ISA,

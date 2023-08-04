@@ -17,6 +17,7 @@
 namespace DP
 {
 
+using namespace Kernel;
 /**
  * Computes number of literals in core not implied at the zero level
  * of the SAT solver i.e. those that have not been fully decided and
@@ -24,7 +25,6 @@ namespace DP
  */
 unsigned ShortConflictMetaDP::getCoreSize(const LiteralStack& core)
 {
-  // ASS_EQ(_solver.getStatus(), SATSolver::SATISFIABLE);
 
   unsigned res = 0;
   LiteralStack::ConstIterator cit(core);

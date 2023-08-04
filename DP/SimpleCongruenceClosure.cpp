@@ -244,7 +244,7 @@ struct SimpleCongruenceClosure::FOConversionWorker
         return;
       }
 
-      Term::Iterator argIt(t.term());
+      Kernel::Term::Iterator argIt(t.term());
       while(argIt.hasNext()) {
         TermList arg = argIt.next();
         childCallbackFn(arg);
@@ -264,7 +264,7 @@ struct SimpleCongruenceClosure::FOConversionWorker
     }
     else {
       ASS(t.isTerm());
-      Term* trm = t.term();
+      Kernel::Term* trm = t.term();
       SignatureKind sk = trm->isSort() ? SignatureKind::TYPECON : SignatureKind::FUNCTION;
       res = _parent.getSignatureConst(trm->functor(), sk);
       for(size_t i=0; i<childCnt; i++) {
@@ -318,7 +318,7 @@ unsigned SimpleCongruenceClosure::convertFONonEquality(Literal* lit)
   // notice that we ignore the polarity below:
 
   res = getSignatureConst(lit->functor(), SignatureKind::PREDICATE);
-  Term::Iterator ait(lit);
+  Kernel::Term::Iterator ait(lit);
   while(ait.hasNext()) {
     TermList a = ait.next();
     unsigned argConst = convertFO(a);
@@ -843,7 +843,7 @@ void SimpleCongruenceClosure::computeConstsNormalForm(unsigned c, NFMap& normalF
 {
   ConstInfo& cInfo = _cInfos[c];
   if (!cInfo.term.isEmpty() && cInfo.normalForm.isEmpty()) {
-    Term* t = cInfo.term.term();
+    Kernel::Term* t = cInfo.term.term();
     unsigned idx = t->arity();
     unsigned d = c;
     
@@ -858,9 +858,9 @@ void SimpleCongruenceClosure::computeConstsNormalForm(unsigned c, NFMap& normalF
     }
     ASS_EQ(_cInfos[d].sigSymbol,t->functor());
     if(t->isSort()){
-      cInfo.normalForm = TermList(AtomicSort::create(static_cast<AtomicSort*>(t),args.array()));
+      cInfo.normalForm = TermList(Kernel::AtomicSort::create(static_cast<Kernel::AtomicSort*>(t),args.array()));
     } else {
-      cInfo.normalForm = TermList(Term::create(t,args.array()));
+      cInfo.normalForm = TermList(Kernel::Term::create(t,args.array()));
     }
   }
 }
@@ -1019,7 +1019,7 @@ void SimpleCongruenceClosure::getModel(LiteralStack& model)
     computeConstsNormalForm(r,normalForms); // maybe calling for a second time, but that's cheap    
     if (!seen.contains(_cInfos[r].normalForm)) {
       //cout << _cInfos[r].normalForm << " -> " << nf << endl;
-      model.push(Literal::createEquality(true,_cInfos[r].normalForm,nf,SortHelper::getResultSort(nf.term())));
+      model.push(Literal::createEquality(true,_cInfos[r].normalForm,nf,Kernel::SortHelper::getResultSort(nf.term())));
       seen.insert(_cInfos[r].normalForm);
     }
     
@@ -1031,7 +1031,7 @@ void SimpleCongruenceClosure::getModel(LiteralStack& model)
       computeConstsNormalForm(c,normalForms); // maybe calling for a second time, but that's cheap
       if (!seen.contains(_cInfos[c].normalForm)) {
         //cout << _cInfos[c].normalForm << " -> " << nf << endl;
-        model.push(Literal::createEquality(true,_cInfos[c].normalForm,nf,SortHelper::getResultSort(nf.term())));
+        model.push(Literal::createEquality(true,_cInfos[c].normalForm,nf,Kernel::SortHelper::getResultSort(nf.term())));
         seen.insert(_cInfos[c].normalForm);
       }
     }

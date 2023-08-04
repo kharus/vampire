@@ -29,9 +29,6 @@
 namespace CASC
 {
 
-using namespace Lib;
-using namespace Shell;
-
 class PortfolioMode {
   enum {
     SEM_LOCK = 0,

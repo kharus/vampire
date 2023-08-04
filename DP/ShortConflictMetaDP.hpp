@@ -28,10 +28,6 @@
 
 namespace DP {
 
-using namespace Lib;
-using namespace Kernel;
-using namespace SAT;
-
 class ShortConflictMetaDP : public DecisionProcedure {
 public:
   CLASS_NAME(ShortConflictMetaDP);
@@ -40,10 +36,10 @@ public:
   /**
    * Create object using @c inner decision procedure. Object takes ownership of the @c inner object.
    */
-  ShortConflictMetaDP(DecisionProcedure* inner, SAT2FO& sat2fo, SATSolver& solver)
+  ShortConflictMetaDP(DecisionProcedure* inner, SAT::SAT2FO& sat2fo, SAT::SATSolver& solver)
   : _inner(inner), _sat2fo(sat2fo), _solver(solver) {}
 
-  virtual void addLiterals(LiteralIterator lits, bool onlyEqualites) override {
+  virtual void addLiterals(Kernel::LiteralIterator lits, bool onlyEqualites) override {
     _inner->addLiterals(lits, onlyEqualites);
   }
 
@@ -54,7 +50,7 @@ public:
 
   virtual Status getStatus(bool getMultipleCores) override;
 
-  void getModel(LiteralStack& model) override {
+  void getModel(Kernel::LiteralStack& model) override {
     _inner->getModel(model);
   }
 
@@ -66,18 +62,18 @@ public:
    * Can be called only after getStatus before any next call to addLiterals.
    */
   virtual unsigned getUnsatCoreCount() override { return _unsatCores.size(); }
-  virtual void getUnsatCore(LiteralStack& res, unsigned coreIndex) override;
+  virtual void getUnsatCore(Kernel::LiteralStack& res, unsigned coreIndex) override;
 
 
 private:
-  unsigned getCoreSize(const LiteralStack& core);
+  unsigned getCoreSize(const Kernel::LiteralStack& core);
 
 
-  Stack<LiteralStack> _unsatCores;
+  Stack<Kernel::LiteralStack> _unsatCores;
 
   ScopedPtr<DecisionProcedure> _inner;
-  SAT2FO& _sat2fo;
-  SATSolver& _solver;
+  SAT::SAT2FO& _sat2fo;
+  SAT::SATSolver& _solver;
 };
 
 }
