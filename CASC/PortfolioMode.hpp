@@ -47,12 +47,12 @@ private:
   unsigned getSliceTime(const vstring &sliceCode);
   bool searchForProof();
   bool prepareScheduleAndPerform(const Shell::Property& prop);
-  void getSchedules(const Property& prop, Schedule& quick, Schedule& fallback);
+  void getSchedules(const Shell::Property& prop, Schedule& quick, Schedule& fallback);
 
   bool runSchedule(Schedule schedule);
   bool runScheduleAndRecoverProof(Schedule schedule);
   [[noreturn]] void runSlice(vstring sliceCode, int remainingTime);
-  [[noreturn]] void runSlice(Options& strategyOpt);
+  [[noreturn]] void runSlice(Shell::Options& strategyOpt);
 
 #if VDEBUG
   DHSet<pid_t> childIds;
