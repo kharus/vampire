@@ -84,7 +84,7 @@ private:
    * problem that should be attempted. */
   StringPairStack _problemFiles;
 
-  ScopedPtr<Problem> _baseProblem;
+  ScopedPtr<Kernel::Problem> _baseProblem;
 
   Semaphore stratSem;
   SyncPipe* strategies;
@@ -120,7 +120,7 @@ private:
   static ofstream* writerFileStream;
   [[noreturn]] static void terminatingSignalHandler(int sigNum);
   [[noreturn]] void runSlice(vstring slice, unsigned milliseconds,bool printProof);
-  [[noreturn]] void runSlice(Options& strategyOpt, bool printProof);
+  [[noreturn]] void runSlice(Kernel::Options& strategyOpt, bool printProof);
 
   static vstring problemFinishedString;
 
@@ -140,7 +140,7 @@ private:
    * because in the current process this child object is the only one that
    * will be using the problem object.
    */
-  Problem& prb;
+  Kernel::Problem& prb;
 
   Semaphore _syncSemaphore; // semaphore for synchronizing writing if the solution
 

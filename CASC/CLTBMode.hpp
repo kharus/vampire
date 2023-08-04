@@ -96,7 +96,7 @@ private:
    * problem that should be attempted. */
   StringPairStack _problemFiles;
 
-  ScopedPtr<Problem> _baseProblem;
+  ScopedPtr<Kernel::Problem> _baseProblem;
 
   // This contains formulas 'learned' in the sense that they were input
   // formulas used in proofs of previous problems
@@ -130,7 +130,7 @@ private:
   static ofstream* writerFileStream;
   [[noreturn]] static void terminatingSignalHandler(int sigNum);
   [[noreturn]] void runSlice(vstring slice, unsigned milliseconds);
-  [[noreturn]] void runSlice(Options& strategyOpt);
+  [[noreturn]] void runSlice(Kernel::Options& strategyOpt);
 
   static vstring problemFinishedString;
 
