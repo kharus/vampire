@@ -150,7 +150,7 @@ private:
    * because in the current process this child object is the only one that
    * will be using the problem object.
    */
-  Problem& prb;
+  Kernel::Problem& prb;
 
   Semaphore _syncSemaphore; // semaphore for synchronizing writing if the solution
 
