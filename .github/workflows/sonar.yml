@@ -26,6 +26,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ls -l -R /home/runner/work/vampire/
-          chmod +x /home/runner/work/vampire/vampire/.scannerwork/.sonartmp/*/subprocess
+          ls -la -R /home/runner/work/vampire/vampire
           sonar-scanner --define sonar.cfamily.compile-commands=build/compile_commands.json
