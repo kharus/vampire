@@ -6,7 +6,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ ubuntu-22.04, ubuntu-20.04 ]
+        cxx: [ clang++, g++ ]
+
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout Tree
       uses: actions/checkout@v3
@@ -20,7 +25,7 @@ jobs:
       working-directory: ${{runner.workspace}}/vampire/z3/build
       run: cmake .. -DCMAKE_BUILD_TYPE=Debug -DZ3_BUILD_EXECUTABLE=OFF -DZ3_BUILD_TEST_EXECUTABLES=OFF
       env:
-        CXX: clang++
+        CXX: ${{ matrix.cxx }}
     - name: Z3 Build
       working-directory: ${{runner.workspace}}/vampire/z3/build
       run: make -j8
@@ -30,7 +35,7 @@ jobs:
       working-directory: ${{runner.workspace}}/vampire/build
       run: cmake .. -DCMAKE_BUILD_TYPE=Debug
       env:
-        CXX: clang++
+        CXX: ${{ matrix.cxx }}
     - name: Build
       working-directory: ${{runner.workspace}}/vampire/build
       run: make -j8
