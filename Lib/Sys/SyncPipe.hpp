@@ -56,7 +56,7 @@ public:
   /**
    * If we have read privileges, return reference to an istream object
    */
-  istream& in()
+  std::istream& in()
   {
     ASS(_istream);
     ASS(isReading());
@@ -69,7 +69,7 @@ public:
   /**
    * If we have write privileges, return reference to an ostream object
    */
-  ostream& out()
+  std::ostream& out()
   {
     ASS(_ostream);
     ASS(isWriting());

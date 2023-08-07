@@ -32,7 +32,6 @@
 
 //#define DEBUG_SHOW_STATE
 
-using namespace std;
 using namespace Lib;
 using namespace Kernel;
 

@@ -28,7 +28,6 @@
 
 namespace Shell {
 
-using namespace std;
 using namespace Lib;
 
 class LispLexer;

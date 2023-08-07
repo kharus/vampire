@@ -33,7 +33,6 @@ namespace Indexing {
 
 using namespace Lib;
 using namespace Kernel;
-using namespace std;
 using Key = pair<Stack<LiteralStack>,pair<Literal*,Literal*>>;
 
 class InductionFormulaIndex

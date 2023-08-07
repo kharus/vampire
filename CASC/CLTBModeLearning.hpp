@@ -36,7 +36,6 @@
 
 namespace CASC {
 
-using namespace std;
 using namespace Lib;
 using namespace Kernel;
 

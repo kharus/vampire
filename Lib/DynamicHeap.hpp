@@ -27,7 +27,6 @@
 
 namespace Lib {
 
-using namespace std;
 
 /**
  * Minimum binary heap

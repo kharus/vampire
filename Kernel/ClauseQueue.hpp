@@ -19,7 +19,6 @@
 
 #if VDEBUG
 #include <ostream>
-using namespace std;
 #endif
 
 #include "Debug/Assertion.hpp"
