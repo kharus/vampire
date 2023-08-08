@@ -869,7 +869,7 @@ MainLoopResult IGAlgorithm::onModelFound()
       if(szsOutputMode()) {
         env.beginOutput();
         env.out() << "% SZS status "<<( UIHelper::haveConjecture() ? "CounterSatisfiable" : "Satisfiable" )
-            << " for " << _opt.problemName() << std::endl << flush;
+            << " for " << _opt.problemName() << std::endl << std::flush;
         env.endOutput();
         UIHelper::satisfiableStatusWasAlreadyOutput = true;
       }

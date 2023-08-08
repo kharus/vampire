@@ -405,7 +405,7 @@ void UIHelper::outputResult(std::ostream& out)
       }
       InferenceStore::instance()->outputProof(out, env.statistics->refutation);
       if (szsOutputMode()) {
-        out << "% SZS output end Proof for " << env.options->problemName() << std::endl << flush;
+        out << "% SZS output end Proof for " << env.options->problemName() << std::endl << std::flush;
       }
       // outputProof could have triggered proof minimization which might have cause inductionDepth to change (in fact, decrease)
       env.statistics->maxInductionDepth = env.statistics->refutation->inference().inductionDepth();

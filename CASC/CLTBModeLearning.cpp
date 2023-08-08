@@ -192,8 +192,8 @@ void CLTBModeLearning::solveBatch(istream& batchFile, bool first,vstring inputDi
     coutLineOutput() << "problem termination time " << problemTerminationTime << std::endl;
 
     env.beginOutput();
-    env.out() << flush << "%" << std::endl;
-    lineOutput() << "SZS status Started for " << probFile << std::endl << flush;
+    env.out() << std::flush << "%" << std::endl;
+    lineOutput() << "SZS status Started for " << probFile << std::endl << std::flush;
     env.endOutput();
 
     pid_t child = Multiprocessing::instance()->fork();
@@ -236,8 +236,8 @@ void CLTBModeLearning::solveBatch(istream& batchFile, bool first,vstring inputDi
     else {
       lineOutput() << "SZS status GaveUp for " << probFile << std::endl;
     }
-    env.out() << flush << '%' << std::endl;
-    lineOutput() << "% SZS status Ended for " << probFile << std::endl << flush;
+    env.out() << std::flush << '%' << std::endl;
+    lineOutput() << "% SZS status Ended for " << probFile << std::endl << std::flush;
     env.endOutput();
 
     Timer::syncClock();
@@ -886,7 +886,7 @@ void CLTBProblemLearning::exitOnNoSuccess()
   }
   env.endOutput();
 
-  CLTBModeLearning::coutLineOutput() << "problem proof search terminated (fail)" << std::endl << flush;
+  CLTBModeLearning::coutLineOutput() << "problem proof search terminated (fail)" << std::endl << std::flush;
   System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
 } // CLTBProblemLearning::exitOnNoSuccess
 
@@ -925,7 +925,7 @@ bool CLTBProblemLearning::runSchedule(Schedule& schedule,StrategySet& used,bool 
   while (it.hasNext()) {
     while (processesLeft) {
       CLTBModeLearning::coutLineOutput() << "Slices left: " << slices-- << std::endl;
-      CLTBModeLearning::coutLineOutput() << "Processes available: " << processesLeft << std::endl << flush;
+      CLTBModeLearning::coutLineOutput() << "Processes available: " << processesLeft << std::endl << std::flush;
       ASS_G(processesLeft,0);
 
       int elapsedTime = env.timer->elapsedMilliseconds();
@@ -974,14 +974,14 @@ bool CLTBProblemLearning::runSchedule(Schedule& schedule,StrategySet& used,bool 
       Timer::syncClock();
       ASS(childIds.insert(childId));
       CLTBModeLearning::coutLineOutput() << "slice pid "<< childId << " slice: " << sliceCode
-				 << " time: " << (sliceTime/100)/10.0 << std::endl << flush;
+				 << " time: " << (sliceTime/100)/10.0 << std::endl << std::flush;
       processesLeft--;
       if (!it.hasNext()) {
 	break;
       }
     }
 
-    CLTBModeLearning::coutLineOutput() << "No processes available: " << std::endl << flush;
+    CLTBModeLearning::coutLineOutput() << "No processes available: " << std::endl << std::flush;
     if (processesLeft==0) {
       waitForChildAndExitWhenProofFound(stopOnProof);
       // proof search failed
@@ -1017,11 +1017,11 @@ void CLTBProblemLearning::waitForChildAndExitWhenProofFound(bool stopOnProof)
   if (!resValue) {
     // we have found the proof. It has been already written down by the writter child,
     // so we can just terminate
-    CLTBModeLearning::coutLineOutput() << "terminated slice pid " << finishedChild << " (success)" << std::endl << flush;
+    CLTBModeLearning::coutLineOutput() << "terminated slice pid " << finishedChild << " (success)" << std::endl << std::flush;
     if(stopOnProof){ System::terminateImmediately(0);}
   }
   // proof not found
-  CLTBModeLearning::coutLineOutput() << "terminated slice pid " << finishedChild << " (fail)" << std::endl << flush;
+  CLTBModeLearning::coutLineOutput() << "terminated slice pid " << finishedChild << " (fail)" << std::endl << std::flush;
 } // waitForChildAndExitWhenProofFound
 
 ofstream* CLTBProblemLearning::writerFileStream = 0;
