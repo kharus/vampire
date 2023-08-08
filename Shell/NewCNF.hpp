@@ -31,10 +31,10 @@
 #define LOGGING 0
 
 #if LOGGING
-#define LOG1(arg)         cout << arg << endl;
-#define LOG2(a1,a2)       cout << a1 << " " << a2 << endl;
-#define LOG3(a1,a2,a3)    cout << a1 << " " << a2 << " " << a3 << endl;
-#define LOG4(a1,a2,a3,a4) cout << a1 << " " << a2 << " " << a3 << " " << a4 << endl;
+#define LOG1(arg)         cout << arg << std::endl;
+#define LOG2(a1,a2)       cout << a1 << " " << a2 << std::endl;
+#define LOG3(a1,a2,a3)    cout << a1 << " " << a2 << " " << a3 << std::endl;
+#define LOG4(a1,a2,a3,a4) cout << a1 << " " << a2 << " " << a3 << " " << a4 << std::endl;
 #else
 #define LOG1(arg)
 #define LOG2(a1,a2)

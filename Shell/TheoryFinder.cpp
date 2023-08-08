@@ -297,13 +297,13 @@ bool TheoryFinder::matchCode(const void* obj,
     const Term* t = ts->term();
     if (t->isSort()) {
 #if TRACE_FINDER
-    cout << "Failing to match a sort argument against an OLDFUN" << endl;
+    cout << "Failing to match a sort argument against an OLDFUN" << std::endl;
 #endif
       goto backtrack;
     }
     if (funs[code[cp+1]] != t->functor()) {
 #if TRACE_FINDER
-    cout << "found a different functor, going to backtrack" << endl;
+    cout << "found a different functor, going to backtrack" << std::endl;
 #endif
       goto backtrack;
     }
@@ -388,7 +388,7 @@ bool TheoryFinder::matchCode(const void* obj,
     obj = objects[--objectPos];
     clause = reinterpret_cast<const Clause*>(obj);
 #if TRACE_FINDER
-    cout << "M: CLS: " << clause->toString() << endl;
+    cout << "M: CLS: " << clause->toString() << std::endl;
 #endif
     clength = clause->length();
     cp++;

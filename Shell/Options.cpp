@@ -2491,7 +2491,7 @@ void Options::set(const char* name,const char* value, bool longOpt)
         if (outputAllowed()) {
           env.beginOutput();
           addCommentSignForSZS(env.out());
-          env.out() << "WARNING: invalid value "<< value << " for option " << name << endl;
+          env.out() << "WARNING: invalid value "<< value << " for option " << name << std::endl;
           env.endOutput();
         }
         break;
@@ -2507,7 +2507,7 @@ void Options::set(const char* name,const char* value, bool longOpt)
         if (outputAllowed()) {
           env.beginOutput();
           addCommentSignForSZS(env.out());
-          env.out() << "WARNING: " << msg << endl;
+          env.out() << "WARNING: " << msg << std::endl;
           env.endOutput();
         }
         return;
@@ -2628,7 +2628,7 @@ vstring Options::includeFileName (const vstring& relativeName)
 void Options::output (std::ostream& str) const
 {
   if(printAllTheoryAxioms()){
-    cout << "Sorry, not implemented yet!" << endl;
+    cout << "Sorry, not implemented yet!" << std::endl;
 
     return;
   }
@@ -2652,7 +2652,7 @@ void Options::output (std::ostream& str) const
        }
      }
      if(!option){ 
-       str << name << " not a known option" << endl;
+       str << name << " not a known option" << std::endl;
        Stack<vstring> sim_s = getSimilarOptionNames(name,true);
        Stack<vstring> sim_l = getSimilarOptionNames(name,false);
        VirtualIterator<vstring> sit = pvi(getConcatenatedIterator(
@@ -2663,7 +2663,7 @@ void Options::output (std::ostream& str) const
           if(sit.hasNext()) str << "one of:\n\t\t";
           str << first;
           while(sit.hasNext()){ str << "\n\t\t"+sit.next();}
-          str << endl;
+          str << std::endl;
         }
      }
      else{
@@ -2734,18 +2734,18 @@ void Options::output (std::ostream& str) const
       ASS(label.length() < 40);
       vstring br = "******************************";
       vstring br_gap = br.substr(0,(br.length()-(label.length()/2)));
-      str << endl << br << br;
+      str << std::endl << br << br;
       if (label.length() % 2 == 0) {
-        str << endl;
+        str << std::endl;
       } else {
-        str << "*" << endl;
+        str << "*" << std::endl;
       }
-      str << br_gap << label << br_gap << endl;
+      str << br_gap << label << br_gap << std::endl;
       str << br << br;
       if (label.length() % 2 == 0) {
-        str << endl << endl;
+        str << std::endl << std::endl;
       } else {
-        str << "*" << endl << endl;
+        str << "*" << std::endl << std::endl;
       }
 
       // Sort
@@ -2820,11 +2820,11 @@ bool Options::OptionValue<T>::checkConstraints(){
            case BadOption::HARD :
                USER_ERROR("\nBroken Constraint: "+con->msg(*this));
            case BadOption::SOFT :
-               cout << "WARNING Broken Constraint: "+con->msg(*this) << endl;
+               cout << "WARNING Broken Constraint: "+con->msg(*this) << std::endl;
                return false;
            case BadOption::FORCED :
                if(con->force(this)){
-                 cout << "Forced constraint " + con->msg(*this) << endl;
+                 cout << "Forced constraint " + con->msg(*this) << std::endl;
                  break;
                }else{
                  USER_ERROR("\nCould not force Constraint: "+con->msg(*this));
@@ -2854,7 +2854,7 @@ bool Options::OptionValue<T>::checkProblemConstraints(Property* prop){
          switch(env.options->getBadOptionChoice()){
          case BadOption::OFF: break;
          default:
-           cout << "WARNING: " << longName << con->msg() << endl;
+           cout << "WARNING: " << longName << con->msg() << std::endl;
          }
          return false;
       }
@@ -3135,12 +3135,12 @@ void Options::randomizeStrategy(Property* prop)
           valid = checkGlobalOptionConstraints(true) && (!prop || checkProblemOptionConstraints(prop,true));
         }
         if(!valid){
-           //cout << "Failed for " << option->longName << endl;
+           //cout << "Failed for " << option->longName << std::endl;
            option->set(def);
            option->is_set=false;
         }
-        //else cout << "Randomized " << option->longName << endl;
-      }// else cout << "cannot randomize " << option->longName << endl;
+        //else cout << "Randomized " << option->longName << std::endl;
+      }// else cout << "cannot randomize " << option->longName << std::endl;
     }
   }
 
@@ -3148,7 +3148,7 @@ void Options::randomizeStrategy(Property* prop)
   _badOption.actualValue = saved_bad_option;
   Random::setSeed(saved_seed);
 
-  if(prop) cout << "Random strategy: " + generateEncodedOptions() << endl;
+  if(prop) cout << "Random strategy: " + generateEncodedOptions() << std::endl;
 }
 
 /**
@@ -3191,7 +3191,7 @@ void Options::readOptionsString(vstring optionsString,bool assign)
                 if (outputAllowed()) {
                   env.beginOutput();
                   addCommentSignForSZS(env.out());
-                  env.out() << "WARNING: value " << value << " for option "<< param <<" not known" << endl;
+                  env.out() << "WARNING: value " << value << " for option "<< param <<" not known" << std::endl;
                   env.endOutput();
                 }
                 break;
@@ -3217,7 +3217,7 @@ void Options::readOptionsString(vstring optionsString,bool assign)
         if (outputAllowed()) {
           env.beginOutput();
           addCommentSignForSZS(env.out());
-          env.out() << "WARNING: option "<< param << " not known." << endl;
+          env.out() << "WARNING: option "<< param << " not known." << std::endl;
           env.endOutput();
         }
         break;

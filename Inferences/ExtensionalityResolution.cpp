@@ -211,7 +211,7 @@ Clause* ExtensionalityResolution::performExtensionalityResolution(
     env.statistics->inferencesSkippedDueToColors++;
     if(opts.showBlocked()) {
       env.beginOutput();
-      env.out()<<"Blocked extensionality resolution of "<<extCl->toString()<<" and "<<otherCl->toString()<<endl;
+      env.out()<<"Blocked extensionality resolution of "<<extCl->toString()<<" and "<<otherCl->toString()<<std::endl;
       env.endOutput();
     }
     return 0;

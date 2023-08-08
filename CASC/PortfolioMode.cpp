@@ -88,7 +88,7 @@ bool PortfolioMode::perform(float slowness)
   try {
       resValue = pm.searchForProof();
   } catch (Exception& exc) {
-      cerr << "% Exception at proof search level" << endl;
+      cerr << "% Exception at proof search level" << std::endl;
       exc.cry(cerr);
       System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
   }
@@ -97,21 +97,21 @@ bool PortfolioMode::perform(float slowness)
     env.beginOutput();
     if (resValue) {
       addCommentSignForSZS(env.out());
-      env.out()<<"Success in time "<<Timer::msToSecondsString(env.timer->elapsedMilliseconds())<<endl;
+      env.out()<<"Success in time "<<Timer::msToSecondsString(env.timer->elapsedMilliseconds())<<std::endl;
     }
     else {
       addCommentSignForSZS(env.out());
-      env.out()<<"Proof not found in time "<<Timer::msToSecondsString(env.timer->elapsedMilliseconds())<<endl;
+      env.out()<<"Proof not found in time "<<Timer::msToSecondsString(env.timer->elapsedMilliseconds())<<std::endl;
       if (env.remainingTime()/100>0) {
         addCommentSignForSZS(env.out());
-        env.out()<<"SZS status GaveUp for "<<env.options->problemName()<<endl;
+        env.out()<<"SZS status GaveUp for "<<env.options->problemName()<<std::endl;
       }
       else {
         //From time to time we may also be terminating in the timeLimitReached()
         //function in Lib/Timer.cpp in case the time runs out. We, however, output
         //the same string there as well.
         addCommentSignForSZS(env.out());
-        env.out()<<"SZS status Timeout for "<<env.options->problemName()<<endl;
+        env.out()<<"SZS status Timeout for "<<env.options->problemName()<<std::endl;
       }
     }
 #if VTIME_PROFILING
@@ -451,7 +451,7 @@ bool PortfolioMode::runSchedule(Schedule schedule) {
     /*
     cout << "Child " << process
         << " exit " << exited
-        << " sig " << signalled << " code " << code << endl;
+        << " sig " << signalled << " code " << code << std::endl;
         */
 
     // child died, remove it from the pool and check if succeeded
@@ -467,7 +467,7 @@ bool PortfolioMode::runSchedule(Schedule schedule) {
       // killed by an external agency (could be e.g. a slurm cluster killing for too much memory allocated)
       env.beginOutput();
       Shell::addCommentSignForSZS(env.out());
-      env.out()<<"Child killed by signal " << code << endl;
+      env.out()<<"Child killed by signal " << code << std::endl;
       env.endOutput();
       ALWAYS(processes.remove(process));
     }
@@ -514,7 +514,7 @@ bool PortfolioMode::runScheduleAndRecoverProof(Schedule schedule)
     } else {
       if (outputAllowed()) {
         env.beginOutput();
-        addCommentSignForSZS(env.out()) << "Failed to restore proof from tempfile " << _tmpFileNameForProof << endl;
+        addCommentSignForSZS(env.out()) << "Failed to restore proof from tempfile " << _tmpFileNameForProof << std::endl;
         env.endOutput();
       }
     }
@@ -543,7 +543,7 @@ unsigned PortfolioMode::getSliceTime(const vstring &sliceCode)
     if (outputAllowed()) {
       env.beginOutput();
       addCommentSignForSZS(env.out());
-      env.out() << "WARNING: time unlimited strategy and instruction limiting not in place - attempting to translate instructions to time" << endl;
+      env.out() << "WARNING: time unlimited strategy and instruction limiting not in place - attempting to translate instructions to time" << std::endl;
       env.endOutput();
     }
 
@@ -589,7 +589,7 @@ void PortfolioMode::runSlice(vstring sliceCode, int timeLimitInDeciseconds)
     Options opt = *env.options;
 
     // opt.randomSeed() would normally be inherited from the parent
-    // addCommentSignForSZS(cout) << "runSlice - seed before setting: " << opt.randomSeed() << endl;    
+    // addCommentSignForSZS(cout) << "runSlice - seed before setting: " << opt.randomSeed() << std::endl;    
     if (env.options->randomizeSeedForPortfolioWorkers()) {
       // but here we want each worker to have their own seed
       opt.setRandomSeed(std::random_device()());
@@ -643,7 +643,7 @@ void PortfolioMode::runSlice(Options& strategyOpt)
 #ifdef __linux__
       "/" << opt.instructionLimit() << "Mi" <<
 #endif
-      ")" << endl;
+      ")" << std::endl;
     env.endOutput();
   }
 
@@ -656,7 +656,7 @@ void PortfolioMode::runSlice(Options& strategyOpt)
 
     /*
      env.beginOutput();
-     lineOutput() << " found solution " << endl;
+     lineOutput() << " found solution " << std::endl;
      env.endOutput();
     */
   }
@@ -680,7 +680,7 @@ void PortfolioMode::runSlice(Options& strategyOpt)
 
     if (outputAllowed() && env.options->multicore() != 1) {
       env.beginOutput();
-      addCommentSignForSZS(env.out()) << "First to succeed." << endl;
+      addCommentSignForSZS(env.out()) << "First to succeed." << std::endl;
       env.endOutput();
     }
 
@@ -697,14 +697,14 @@ void PortfolioMode::runSlice(Options& strategyOpt)
     if (output.fail()) {
       // fallback to old printing method
       env.beginOutput();
-      addCommentSignForSZS(env.out()) << "Solution printing to a file '" << fname <<  "' failed. Outputting to stdout" << endl;
+      addCommentSignForSZS(env.out()) << "Solution printing to a file '" << fname <<  "' failed. Outputting to stdout" << std::endl;
       UIHelper::outputResult(env.out());
       env.endOutput();
     } else {
       UIHelper::outputResult(output);
       if (!env.options->printProofToFile().empty() && outputAllowed()) {
         env.beginOutput();
-        addCommentSignForSZS(env.out()) << "Solution written to " << fname << endl;
+        addCommentSignForSZS(env.out()) << "Solution written to " << fname << std::endl;
         env.endOutput();
       }
     }
@@ -713,7 +713,7 @@ void PortfolioMode::runSlice(Options& strategyOpt)
     if (resultValue) {
       UIHelper::outputResult(env.out());
     } else if (Lib::env.options && Lib::env.options->multicore() != 1) {
-      addCommentSignForSZS(env.out()) << "Also succeeded, but the first one will report." << endl;
+      addCommentSignForSZS(env.out()) << "Also succeeded, but the first one will report." << std::endl;
     }
     env.endOutput();
   }

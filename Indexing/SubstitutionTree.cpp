@@ -725,11 +725,11 @@ bool SubstitutionTree::UnificationsIterator::enter(Node* n, BacktrackData& bd)
 {
 #if VDEBUG
   if(_tag){
-    cout << "=========================================" << endl;
-    cout << "entering..." << *n << endl;
-    cout << "subst is " << _subst << endl;
-    cout << "svstack is " << _svStack << endl;
-    cout << "=========================================" << endl;
+    cout << "=========================================" << std::endl;
+    cout << "entering..." << *n << std::endl;
+    cout << "subst is " << _subst << std::endl;
+    cout << "svstack is " << _svStack << std::endl;
+    cout << "=========================================" << std::endl;
   } 
 #endif
 
@@ -846,7 +846,7 @@ void SubstitutionTree::IntermediateNode::output(std::ostream& out, bool multilin
 
     if (multiline) {
       auto outp = [&](Node** x) { 
-        out << endl; 
+        out << std::endl; 
         repeat(out, INDENT, indent + 1);
         out << "| ";
         (*x)->output(out, multiline, indent + 1);
@@ -856,7 +856,7 @@ void SubstitutionTree::IntermediateNode::output(std::ostream& out, bool multilin
       while (childIter.hasNext()) {
         outp(childIter.next());
       }
-      out << endl; 
+      out << std::endl; 
       repeat(out, INDENT, indent);
       out << "]";
 

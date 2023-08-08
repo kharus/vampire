@@ -114,14 +114,14 @@ OperatorType* OperatorType::getTypeFromKey(OperatorType::OperatorKey* key, unsig
   if (operatorTypes().find(resultType, resultType)) {
     key->deallocate();
 
-    //cout << " Found " + resultType->toString() << endl;
+    //cout << " Found " + resultType->toString() << std::endl;
     
     return resultType;
   }
 
   operatorTypes().insert(resultType);
 
-  //cout << " Created new " + resultType->toString() << endl;
+  //cout << " Created new " + resultType->toString() << std::endl;
 
   return resultType;
 }

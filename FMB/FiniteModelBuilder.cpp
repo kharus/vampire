@@ -67,7 +67,7 @@
 
 #define VTRACE_DOMAINS 0
 
-#define LOG(X) // cout << #X <<  X << endl;
+#define LOG(X) // cout << #X <<  X << std::endl;
 
 namespace FMB 
 {
@@ -97,7 +97,7 @@ FiniteModelBuilder::FiniteModelBuilder(Problem& prb, const Options& opt)
       if(outputAllowed()) {
         env.beginOutput();
         addCommentSignForSZS(env.out());
-        env.out() << "WARNING: trying to run FMB on interpreted or otherwise provably infinite-domain problem!" << endl;
+        env.out() << "WARNING: trying to run FMB on interpreted or otherwise provably infinite-domain problem!" << std::endl;
         env.endOutput();
       }
 
@@ -178,7 +178,7 @@ bool FiniteModelBuilder::reset(){
     if(del_f[f]) continue; 
     f_offsets[f]=offsets;
 #if VTRACE_FMB
-    cout << "offset for " << f << " is " << offsets << " (arity is " << env.signature->functionArity(f) << ") " << endl;
+    cout << "offset for " << f << " is " << offsets << " (arity is " << env.signature->functionArity(f) << ") " << std::endl;
 #endif
 
     DArray<unsigned> f_signature = _sortedSignature->functionSignatures[f];
@@ -204,7 +204,7 @@ bool FiniteModelBuilder::reset(){
     if(del_p[p]) continue;
     p_offsets[p]=offsets;
 #if VTRACE_FMB
-    cout << "offset for " << p << " is " << offsets << " for " << env.signature->predicateName(p) << endl; 
+    cout << "offset for " << p << " is " << offsets << " for " << env.signature->predicateName(p) << std::endl; 
  
 #endif
 
@@ -227,7 +227,7 @@ bool FiniteModelBuilder::reset(){
   }
 
 #if VTRACE_FMB
-  cout << "Maximum offset is " << offsets << endl;
+  cout << "Maximum offset is " << offsets << std::endl;
 #endif
 
   if (_xmass) {
@@ -275,7 +275,7 @@ bool FiniteModelBuilder::reset(){
 
   /*
   if(_opt.satSolver() != Options::SatSolver::MINISAT){
-    cout << "Warning: overriding sat solver for FMB, using minisat" << endl;
+    cout << "Warning: overriding sat solver for FMB, using minisat" << std::endl;
   }
   */
 /*
@@ -336,7 +336,7 @@ void FiniteModelBuilder::createSymmetryOrdering()
       g.f = _sortedSignature->sortedConstants[s][c];
       g.grounding.ensure(0); // no grounding needed
       _sortedGroundedTerms[s].push(g);
-      //cout << "Adding " << g.toString()  << " to " << s << endl;
+      //cout << "Adding " << g.toString()  << " to " << s << std::endl;
     }
 
     // Next add some groundings of function symbols
@@ -372,7 +372,7 @@ void FiniteModelBuilder::createSymmetryOrdering()
           if(outOfBounds) continue;
 
           _sortedGroundedTerms[s].push(g);
-          //cout << "Adding " << g.toString() <<  " to " << s << endl;
+          //cout << "Adding " << g.toString() <<  " to " << s << std::endl;
         }
       }
       break;
@@ -413,7 +413,7 @@ void FiniteModelBuilder::createSymmetryOrdering()
           if(outOfBounds) continue;
   
           _sortedGroundedTerms[s].push(g);
-          //cout << "Adding " << g.toString() << " to " << s << endl;
+          //cout << "Adding " << g.toString() << " to " << s << std::endl;
         }
       }
     }
@@ -520,11 +520,11 @@ void FiniteModelBuilder::init()
     }
 
 #if VTRACE_FMB
-    //cout << "Flatten " << c->toString() << endl;
+    //cout << "Flatten " << c->toString() << std::endl;
 #endif
     c = ClauseFlattening::flatten(c);
 #if VTRACE_FMB
-    //cout << "Flattened " << c->toString() << endl;
+    //cout << "Flattened " << c->toString() << std::endl;
 #endif
     ASS(c);
 
@@ -534,12 +534,12 @@ void FiniteModelBuilder::init()
 
     if(c->varCnt()==0){
 #if VTRACE_FMB
-      //cout << "Add ground clause " << c->toString() << endl;
+      //cout << "Add ground clause " << c->toString() << std::endl;
 #endif
       ClauseList::push(c, _groundClauses);
     }else{
 #if VTRACE_FMB
-    //cout << "Add non-ground clause " << c->toString() << endl;
+    //cout << "Add non-ground clause " << c->toString() << std::endl;
 #endif
       ClauseList::push(c, _clauses);
 
@@ -547,7 +547,7 @@ void FiniteModelBuilder::init()
   }
   if(!_clauses){
     if(outputAllowed()){
-      cout << "The problem is propositional so there are no sorts!" << endl;
+      cout << "The problem is propositional so there are no sorts!" << std::endl;
     }
   }
 
@@ -564,14 +564,14 @@ void FiniteModelBuilder::init()
     Renaming n;
     Clause* c = it.next();
 
-    // cout << "Normalize " << c->toString() <<endl;
+    // cout << "Normalize " << c->toString() <<std::endl;
     for(unsigned i=0;i<c->length();i++){
       Literal* l = (*c)[i];
       n.normalizeVariables(l);
       (*c)[i] = n.apply(l);
     }
 #if VTRACE_FMB
-    cout << "Normalized " << c->toString() << endl;
+    cout << "Normalized " << c->toString() << std::endl;
 #endif
 
   }
@@ -591,18 +591,18 @@ void FiniteModelBuilder::init()
   for(unsigned f=0;f<env.signature->functions();f++){
     del_f[f] = _deletedFunctions.find(f) || env.signature->getFunction(f)->usageCnt()==0;
 #if VTRACE_FMB
-    if(del_f[f]) cout << "Mark " << env.signature->functionName(f)  << " as deleted" << endl;
+    if(del_f[f]) cout << "Mark " << env.signature->functionName(f)  << " as deleted" << std::endl;
 #endif
   }
   for(unsigned p=0;p<env.signature->predicates();p++){
     del_p[p] = (_deletedPredicates.find(p) || _trivialPredicates.find(p));
 #if VTRACE_FMB
-    if(del_p[p]) cout << "Mark " << env.signature->predicateName(p) << " as deleted" << endl;
+    if(del_p[p]) cout << "Mark " << env.signature->predicateName(p) << " as deleted" << std::endl;
 #endif
   }
 
 #if VTRACE_FMB
-  cout << "Performing Sort Inference" << endl;
+  cout << "Performing Sort Inference" << std::endl;
 #endif
 
   // perform SortInference on ground and non-ground clauses
@@ -615,7 +615,7 @@ void FiniteModelBuilder::init()
     _sortedSignature = inference.getSignature(); 
     ASS(_sortedSignature);
 #if VTRACE_FMB
-    cout << "Done sort inference" << endl;
+    cout << "Done sort inference" << std::endl;
 #endif
 
     // now we have a mapping between vampire sorts and distinct sorts we can translate
@@ -626,10 +626,10 @@ void FiniteModelBuilder::init()
         std::pair<unsigned,unsigned> vconstraint = it.next();
         ASS(_sortedSignature->vampireToDistinctParent.find(vconstraint.first));
         ASS(_sortedSignature->vampireToDistinctParent.find(vconstraint.second));
-        //cout << "constraint " << vconstraint.first << " , " << vconstraint.second << endl;
+        //cout << "constraint " << vconstraint.first << " , " << vconstraint.second << std::endl;
         unsigned s1 = _sortedSignature->vampireToDistinctParent.get(vconstraint.first);
         unsigned s2 = _sortedSignature->vampireToDistinctParent.get(vconstraint.second);
-        //cout << "is " << s1 << " , " << s2 << endl;
+        //cout << "is " << s1 << " , " << s2 << std::endl;
         _distinct_sort_constraints.push(std::make_pair(s1,s2));
       }
     }
@@ -639,16 +639,16 @@ void FiniteModelBuilder::init()
         std::pair<unsigned,unsigned> vconstraint = it.next();
         ASS(_sortedSignature->vampireToDistinctParent.find(vconstraint.first));
         ASS(_sortedSignature->vampireToDistinctParent.find(vconstraint.second));
-        //cout << "strict constraint " << vconstraint.first << " , " << vconstraint.second << endl;
+        //cout << "strict constraint " << vconstraint.first << " , " << vconstraint.second << std::endl;
         unsigned s1 = _sortedSignature->vampireToDistinctParent.get(vconstraint.first);
         unsigned s2 = _sortedSignature->vampireToDistinctParent.get(vconstraint.second);
-        //cout << "is " << s1 << " , " << s2 << endl;
+        //cout << "is " << s1 << " , " << s2 << std::endl;
         _strict_distinct_sort_constraints.push(std::make_pair(s1,s2));
       }
     }
 
 #if VTRACE_FMB
-  cout << "Finding Min and Max Sort Sizes" << endl;
+  cout << "Finding Min and Max Sort Sizes" << std::endl;
 #endif
 
     // Record the maximum sort sizes detected during sort inference 
@@ -707,7 +707,7 @@ void FiniteModelBuilder::init()
           while(children.hasNext()){
             unsigned child = children.next();
             if(child==parent) continue;
-            //cout << "max of " << parent << " inherets child " << child << endl;
+            //cout << "max of " << parent << " inherets child " << child << std::endl;
             _distinctSortMaxs[parent] = std::max(_distinctSortMaxs[parent],_distinctSortMaxs[child]);
           }
         }
@@ -727,13 +727,13 @@ void FiniteModelBuilder::init()
           _distinctSortMins[ds.next()]=max;
         }
 #if VTRACE_FMB
-        cout << "Setting min for " << env.signature->typeConName(s) << " to " << max << endl;
+        cout << "Setting min for " << env.signature->typeConName(s) << " to " << max << std::endl;
 #endif
       }
     }
 
 #if VTRACE_FMB
-  cout << "Optionally doing Symmetry Ordering precomputation" << endl;
+  cout << "Optionally doing Symmetry Ordering precomputation" << std::endl;
 #endif
 
     // If symmetry ordering uses the usage after preprocessing then recompute symbol usage
@@ -778,7 +778,7 @@ void FiniteModelBuilder::init()
   }
 
 #if VTRACE_FMB
-  cout << "Now Find Minimum Sort Bounds" << endl;
+  cout << "Now Find Minimum Sort Bounds" << std::endl;
 #endif
 
   //TODO why is this here? Can intermediate steps introduce new functions?
@@ -823,17 +823,17 @@ void FiniteModelBuilder::init()
   }
 
 #if VTRACE_FMB
-  cout << "Set up Clause Signatures" << endl;
+  cout << "Set up Clause Signatures" << std::endl;
 #endif
 
   //Set up clause signature
-  //cout << "Setting up clause sigs" << endl;
+  //cout << "Setting up clause sigs" << std::endl;
   {
     ClauseList::Iterator cit(_clauses);
     while(cit.hasNext()){
       Clause* c = cit.next();
 #if VTRACE_FMB
-      cout << "CLAUSE " << c->toString() << endl;  
+      cout << "CLAUSE " << c->toString() << std::endl;  
 #endif
       // will record the sorts for each variable in the clause 
       // note that clauses have been normalized so variables go from 0 to varCnt
@@ -894,7 +894,7 @@ void FiniteModelBuilder::init()
         ASS(lit->isTwoVarEquality());
         unsigned var1 = lit->nthArgument(0)->var();
         unsigned var2 = lit->nthArgument(1)->var();
-        //cout << var1 << " and " << var2 << endl;
+        //cout << var1 << " and " << var2 << std::endl;
         if(csig_set[var1]){
           if(csig_set[var2]){
             // This is a special edge case where we process a two-var equality before having
@@ -942,7 +942,7 @@ void FiniteModelBuilder::init()
       }
 #endif
       _clauseVariableSorts.insert(c,csig);
-      //cout << "done" << endl;
+      //cout << "done" << std::endl;
     } 
   }
 } // init()
@@ -962,7 +962,7 @@ void FiniteModelBuilder::addGroundClauses()
       ASS(c);
 
 #if VTRACE_FMB
-      cout << "Ground clause " << c->toString() << endl;
+      cout << "Ground clause " << c->toString() << std::endl;
 #endif
 
       static SATLiteralStack satClauseLits;
@@ -1011,7 +1011,7 @@ void FiniteModelBuilder::addNewInstances()
     Clause* c = cit.next();
     ASS(c);
 #if VTRACE_FMB
-    cout << "Instances of " << c->toString() << endl;
+    cout << "Instances of " << c->toString() << std::endl;
 #endif
 
     unsigned vars = c->varCnt();
@@ -1035,12 +1035,12 @@ void FiniteModelBuilder::addNewInstances()
       varDistinctSortsMaxes.reset();
     }
 
-    //cout << "maxVarSizes "<<endl;;
+    //cout << "maxVarSizes "<<std::endl;;
     for(unsigned var=0;var<vars;var++) {
       unsigned srt = (*varSorts)[var];
       //cout << "srt="<<srt;
       maxVarSize[var] = min(_sortModelSizes[srt],_sortedSignature->sortBounds[srt]);
-      //cout << ",max="<<maxVarSize[var] << endl;
+      //cout << ",max="<<maxVarSize[var] << std::endl;
 
       if (!_xmass) {
         unsigned dsort = _sortedSignature->parents[srt];
@@ -1090,7 +1090,7 @@ instanceLabel:
 
             varDistinctSortsMaxes.set(dsr,std::max(cur,prev));
 
-            // cout << endl;
+            // cout << std::endl;
           }
 
           // start by adding the sort markers
@@ -1098,11 +1098,11 @@ instanceLabel:
             unsigned val = varDistinctSortsMaxes.get(i,0);
 
             if (val > 1) {
-              // cout << "Marking sort " << i << " with " << val-2 << " negative" << endl;
+              // cout << "Marking sort " << i << " with " << val-2 << " negative" << std::endl;
               satClauseLits.push(SATLiteral(marker_offsets[i]+val-2,0));
             }
           }
-          // cout << "Clause finised" << endl;
+          // cout << "Clause finised" << std::endl;
         } else {
           for (unsigned i = 0; i < _distinctSortSizes.size(); i++) {
             if (varDistinctSortsMaxes.get(i,0)) {
@@ -1206,7 +1206,7 @@ void FiniteModelBuilder::addNewFunctionalDefs()
     unsigned arity = env.signature->functionArity(f);
 
 #if VTRACE_FMB
-    cout << "Adding func defs for " << env.signature->functionName(f) << endl;
+    cout << "Adding func defs for " << env.signature->functionName(f) << std::endl;
 #endif
 
     const DArray<unsigned>& f_signature = _sortedSignature->functionSignatures[f];
@@ -1239,7 +1239,7 @@ newFuncLabel:
           grounding[var]++;
           //cout << "Grounding: ";
           //for(unsigned j=0;j<grounding.size();j++) cout << grounding[j] << " ";
-          //cout << endl;
+          //cout << std::endl;
 
           // we only need to consider the non-symmetric cases where y >= z
           if(grounding[0]>=grounding[1]){
@@ -1283,7 +1283,7 @@ void FiniteModelBuilder::addNewSymmetryOrderingAxioms(unsigned size,
   grounding.ensure(arity+1);
   for(unsigned i=0;i<arity;i++) grounding[i] = gt.grounding[i];
 
-  //cout << "Add symmetry ordering for " << gt.toString() << endl;
+  //cout << "Add symmetry ordering for " << gt.toString() << std::endl;
 
   static SATLiteralStack satClauseLits;
   satClauseLits.reset(); 
@@ -1323,7 +1323,7 @@ void FiniteModelBuilder::addNewSymmetryCanonicityAxioms(unsigned size,
       grounding_i[arityi]=size;
       satClauseLits.push(getSATLiteral(gti.f,grounding_i,false,true));
  
-      //cout << "Adding cannon for " << gti.toString() << endl;
+      //cout << "Adding cannon for " << gti.toString() << std::endl;
 
       for(unsigned j=0;j<i;j++){
         GroundedTerm gtj = groundedTerms[j];
@@ -1332,7 +1332,7 @@ void FiniteModelBuilder::addNewSymmetryCanonicityAxioms(unsigned size,
         grounding_j.ensure(arityj+1);
         for(unsigned a=0;a<arityj;a++){ grounding_j[a]=gtj.grounding[a];}
         grounding_j[arityj]=size-1;
-        //cout << "with " <<gtj.toString()<<endl;
+        //cout << "with " <<gtj.toString()<<std::endl;
 
         satClauseLits.push(getSATLiteral(gtj.f,grounding_j,true,true));
       }
@@ -1402,7 +1402,7 @@ void FiniteModelBuilder::addNewTotalityDefs()
     unsigned arity = env.signature->functionArity(f);
 
 #if VTRACE_FMB
-    cout << "Adding total defs for " << env.signature->functionName(f) << endl;
+    cout << "Adding total defs for " << env.signature->functionName(f) << std::endl;
 #endif
 
     const DArray<unsigned>& f_signature = _sortedSignature->functionSignatures[f];
@@ -1412,7 +1412,7 @@ void FiniteModelBuilder::addNewTotalityDefs()
       unsigned dsrt = _sortedSignature->parents[srt];
       unsigned maxSize = min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
 
-      // cout << "Totality for const " << f << " of sort " << srt << " and max size " << maxSize << endl;
+      // cout << "Totality for const " << f << " of sort " << srt << " and max size " << maxSize << std::endl;
 
       for (unsigned i = (!_xmass || (_sortedSignature->monotonicSorts[dsrt])) ? maxSize : 1; i <= maxSize; i++) { // just the weakest one, if monotonic
         static SATLiteralStack satClauseLits;
@@ -1428,7 +1428,7 @@ void FiniteModelBuilder::addNewTotalityDefs()
           unsigned marker_idx = (i == maxSize) ? _distinctSortSizes[dsrt]-1 : i-1; // use the largest marker for the largest version even if it is smaller than _distinctSortSizes[dsrt]
           satClauseLits.push(SATLiteral(marker_offsets[dsrt] + marker_idx,1));
           ///cout << "out sort " << dsrt;
-          // cout << "  version for size " << i << " marked with " << i-1 << " positive" << endl;
+          // cout << "  version for size " << i << " marked with " << i-1 << " positive" << std::endl;
         } else {
           satClauseLits.push(SATLiteral(totalityMarker_offset+dsrt,0));
         }
@@ -1465,7 +1465,7 @@ newTotalLabel:
           grounding[var]++;
           //cout << "Grounding: ";
           //for(unsigned j=0;j<grounding.size();j++) cout << grounding[j] << " ";
-          //cout << endl;
+          //cout << std::endl;
 
           for (unsigned i = (!_xmass || (_sortedSignature->monotonicSorts[dRetSrt])) ? maxRtSrtSize : 1; i <= maxRtSrtSize; i++) {
             static SATLiteralStack satClauseLits;
@@ -1514,7 +1514,7 @@ SATLiteral FiniteModelBuilder::getSATLiteral(unsigned f, const DArray<unsigned>&
 
   //cout << "getSATLiteral " << f<< ","  << offset << ", grounding = ";
   //for(unsigned i=0;i<grounding.size();i++) cout <<  grounding[i] << " "; 
-  //cout << endl;
+  //cout << std::endl;
 
   DArray<unsigned>& signature = isFunction ?
              _sortedSignature->functionSignatures[f] : 
@@ -1525,10 +1525,10 @@ SATLiteral FiniteModelBuilder::getSATLiteral(unsigned f, const DArray<unsigned>&
   for(unsigned i=0;i<grounding.size();i++){
     var += mult*(grounding[i]-1);
     unsigned srt = signature[i];
-    //cout << var << ", " << mult << "," << _sortModelSizes[srt] << endl;
+    //cout << var << ", " << mult << "," << _sortModelSizes[srt] << std::endl;
     mult *= _sortModelSizes[srt];
   }
-  //cout << "return " << var << endl;
+  //cout << "return " << var << std::endl;
 
   return SATLiteral(var,polarity);
 }
@@ -1538,7 +1538,7 @@ void FiniteModelBuilder::addSATClause(SATClause* cl)
   cl = SATClause::removeDuplicateLiterals(cl);
   if(!cl){ return; }
 #if VTRACE_FMB
-  cout << "ADDING " << cl->toString() << endl; // " of size " << cl->length() << endl;
+  cout << "ADDING " << cl->toString() << std::endl; // " of size " << cl->length() << std::endl;
 #endif
 
   _clausesToBeAdded.push(cl);
@@ -1577,8 +1577,8 @@ MainLoopResult FiniteModelBuilder::runImpl()
         if(s+1 < _sortedSignature->distinctSorts){ max_res+=","; min_res+=",";}
       }
       if(doPrinting){
-        cout << "Detected minimum model sizes of " << min_res << "]" << endl;
-        cout << "Detected maximum model sizes of " << max_res << "]" << endl;
+        cout << "Detected minimum model sizes of " << min_res << "]" << std::endl;
+        cout << "Detected maximum model sizes of " << max_res << "]" << std::endl;
       }
   }
 
@@ -1605,7 +1605,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
         cout << _distinctSortSizes[i];
         if(i+1 < _distinctSortSizes.size()) cout << ",";
       }
-      cout << "]" << endl;
+      cout << "]" << std::endl;
     }
     Timer::syncClock();
     if(env.timeLimitReached()){ return MainLoopResult(Statistics::TIME_LIMIT); }
@@ -1615,31 +1615,31 @@ MainLoopResult FiniteModelBuilder::runImpl()
 
     // add the new clauses to _clausesToBeAdded
 #if VTRACE_FMB
-    cout << "GROUND" << endl;
+    cout << "GROUND" << std::endl;
 #endif
     addGroundClauses();
 #if VTRACE_FMB
-    cout << "INSTANCES" << endl;
+    cout << "INSTANCES" << std::endl;
 #endif
     addNewInstances();
 #if VTRACE_FMB
-    cout << "FUNC DEFS" << endl;
+    cout << "FUNC DEFS" << std::endl;
 #endif
     addNewFunctionalDefs();
 #if VTRACE_FMB
-    cout << "SYM DEFS" << endl;
+    cout << "SYM DEFS" << std::endl;
 #endif
     addNewSymmetryAxioms();
     
 #if VTRACE_FMB
-    cout << "TOTAL DEFS" << endl;
+    cout << "TOTAL DEFS" << std::endl;
 #endif
     addNewTotalityDefs();
 
     }
 
 #if VTRACE_FMB
-    cout << "SOLVING" << endl;
+    cout << "SOLVING" << std::endl;
 #endif
     //TODO consider adding clauses directly to SAT solver in new interface?
     // pass clauses and assumption to SAT Solver
@@ -1660,7 +1660,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
       if (_xmass) {
         for (unsigned i = 0; i < _distinctSortSizes.size(); i++) {
           assumptions.push(SATLiteral(marker_offsets[i]+_distinctSortSizes[i]-1,0));
-          // cout << "assuming sort " << i << " value " << _distinctSortSizes[i]-1 << " negative" << endl;
+          // cout << "assuming sort " << i << " value " << _distinctSortSizes[i]-1 << " negative" << std::endl;
         }
       } else {
         for (unsigned i = 0; i < _distinctSortSizes.size(); i++) {
@@ -1695,7 +1695,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
           ASS_L(j,_distinctSortSizes[i]); // at the latest "marker_offsets[i]+_distinctSortSizes[i]-1" must have been false (see the assumptions above)
 
 #if VTRACE_DOMAINS
-          cout << "dom " << i << " has final size " << (j+1) << endl;
+          cout << "dom " << i << " has final size " << (j+1) << std::endl;
 #endif
           _distinctSortSizes[i] = j+1;
         }
@@ -1744,7 +1744,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
 
           unsigned srt = which_sort(var);
 
-          // cout << "which_sort(var) = " << srt << endl;
+          // cout << "which_sort(var) = " << srt << std::endl;
 
           // skip if already maxed
           if (_distinctSortSizes[srt] == _distinctSortMaxs[srt]) {
@@ -1762,7 +1762,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
           }
 
   #if VTRACE_DOMAINS
-          cout << "dom "<<srt<<" of weight "<< weight << " could grow." << endl;
+          cout << "dom "<<srt<<" of weight "<< weight << " could grow." << std::endl;
   #endif
           if (weight < domsWeight) {
             domToGrow = srt;
@@ -1773,7 +1773,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
         if (domsWeight < UINT_MAX) {
           ASS_L(domToGrow,UINT_MAX);
   #if VTRACE_DOMAINS
-          cout << "chosen "<<domToGrow<< " of weight " << domsWeight << endl;
+          cout << "chosen "<<domToGrow<< " of weight " << domsWeight << std::endl;
   #endif
           _distinctSortSizes[domToGrow]++;
 
@@ -1838,7 +1838,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
 #if VTRACE_DOMAINS
         cout << "Learned a nogood: ";
         output_cg(nogood);
-        cout << " of weight " << weight << endl;
+        cout << " of weight " << weight << std::endl;
 #endif
 
         _dsaEnumerator->learnNogood(nogood,weight);
@@ -1849,7 +1849,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
             return MainLoopResult(Statistics::REFUTATION,empty);
           } else {
             if(outputAllowed()) {
-              cout << "Cannot enumerate next child to try in an incomplete setup" <<endl;
+              cout << "Cannot enumerate next child to try in an incomplete setup" <<std::endl;
             }
             goto gave_up;
           }
@@ -1870,7 +1870,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
   // reset returned false, we can't represent all the variables; giving up!
 
   if(outputAllowed()){
-    cout << "Cannot represent all propositional literals internally" <<endl;
+    cout << "Cannot represent all propositional literals internally" <<std::endl;
   }
 
   gave_up: // for jumping because of other reasons to give up (message printed elsewhere)
@@ -1879,7 +1879,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
   // Giles: In CASC mode we should only print GaveUp at the very end
   if(UIHelper::szsOutput) {
     env.beginOutput();
-    env.out() << "% SZS status GaveUp for " << _opt.problemName() << endl;
+    env.out() << "% SZS status GaveUp for " << _opt.problemName() << std::endl;
     env.endOutput();
   }
   */
@@ -1896,14 +1896,14 @@ void FiniteModelBuilder::onModelFound()
 
  reportSpiderStatus('-');
  if(outputAllowed()){
-   cout << "Finite Model Found!" << endl;
+   cout << "Finite Model Found!" << std::endl;
  }
 
  //we need to print this early because model generating can take some time
  if(szsOutputMode()) {
    env.beginOutput();
    env.out() << "% SZS status "<<( UIHelper::haveConjecture() ? "CounterSatisfiable" : "Satisfiable" )
-       << " for " << _opt.problemName() << endl << flush;
+       << " for " << _opt.problemName() << std::endl << flush;
    env.endOutput();
    UIHelper::satisfiableStatusWasAlreadyOutput = true;
  }
@@ -1935,7 +1935,7 @@ void FiniteModelBuilder::onModelFound()
       grounding[0]=c;
       SATLiteral slit = getSATLiteral(f,grounding,true,true);
       if(_solver->trueInAssignment(slit)){
-        //if(found){ cout << "Error: multiple interpretations of " << name << endl;}
+        //if(found){ cout << "Error: multiple interpretations of " << name << std::endl;}
         ASS(!found);
         DEBUG_CODE(found=true;)
         model.addConstantDefinition(f,c);
@@ -1950,7 +1950,7 @@ void FiniteModelBuilder::onModelFound()
     if(arity==0) continue;
     if(del_f[f]) continue;
 
-    //cout << "For " << env.signature->getFunction(f)->name() << endl;
+    //cout << "For " << env.signature->getFunction(f)->name() << std::endl;
 
     static DArray<unsigned> grounding;
     grounding.ensure(arity);
@@ -1987,7 +1987,7 @@ fModelLabel:
             use[arity]=c;
             SATLiteral slit = getSATLiteral(f,use,true,true);
             if(_solver->trueInAssignment(slit)){
-              //if(found){ cout << "Error: multiple interpretations of " << name << endl; }
+              //if(found){ cout << "Error: multiple interpretations of " << name << std::endl; }
               ASS(!found);
               found=true;
               model.addFunctionDefinition(f,grounding,c);
@@ -1998,7 +1998,7 @@ fModelLabel:
              // This is a result of the finite sort bounding and the argument
              // says that we can equate this domain element to a smaller one below the bound
              //TODO fix this 
-             //cout << "NOT FOUND for " << env.signature->functionName(f) << endl; 
+             //cout << "NOT FOUND for " << env.signature->functionName(f) << std::endl; 
           }
 
           goto fModelLabel;
@@ -2029,7 +2029,7 @@ fModelLabel:
     if(del_p[f]) continue;
     if(_partiallyDeletedPredicates.find(f)) continue;
 
-    //cout << "Record for " << env.signature->getPredicate(f)->name() << endl;
+    //cout << "Record for " << env.signature->getPredicate(f)->name() << std::endl;
 
     static DArray<unsigned> grounding;
     static DArray<unsigned> args;
@@ -2064,7 +2064,7 @@ pModelLabel:
             SATLiteral slit = getSATLiteral(f,grounding,true,false);
             res=_solver->trueInAssignment(slit); 
           }
-          //for(unsigned j=0;j<arity;j++){ cout << grounding[j] << ", ";}; cout << " = " << res << endl;
+          //for(unsigned j=0;j<arity;j++){ cout << grounding[j] << ", ";}; cout << " = " << res << std::endl;
 
           model.addPredicateDefinition(f,grounding,res);
 
@@ -2082,7 +2082,7 @@ pModelLabel:
   unsigned f=maxf;
   while(f > 0){ 
     f--;
-    //cout << "Consider " << f << endl;
+    //cout << "Consider " << f << std::endl;
     unsigned arity = env.signature->functionArity(f);
     if(!del_f[f]) continue; 
     // For now, just skip unused functions!
@@ -2092,8 +2092,8 @@ pModelLabel:
     ASS(_deletedFunctions.find(f));
     Literal* def = _deletedFunctions.get(f);
 
-    //cout << "For " << env.signature->getFunction(f)->name() << endl;
-    //cout << def->toString() << endl;
+    //cout << "For " << env.signature->getFunction(f)->name() << std::endl;
+    //cout << def->toString() << std::endl;
 
     ASS(def->isEquality());
     Term* funApp = 0; 
@@ -2146,17 +2146,17 @@ ffModelLabel:
           for(unsigned j=0;j<arity;j++){
             TermList vs = env.signature->getFunction(f)->fnType()->arg(j); 
             unsigned vampireSrt = vs.term()->functor();
-            //cout << grounding[j] << " is " << model.getDomainConstant(grounding[j],vampireSrt)->toString() << endl;
+            //cout << grounding[j] << " is " << model.getDomainConstant(grounding[j],vampireSrt)->toString() << std::endl;
             subst.bind(vars[j],model.getDomainConstant(grounding[j],vampireSrt));
           }
           Term* defGround = SubstHelper::apply(funDef,subst);
-          //cout << predDefGround << endl;
+          //cout << predDefGround << std::endl;
           try{
             unsigned res = model.evaluateGroundTerm(defGround);
             model.addFunctionDefinition(f,grounding,res);
           }
           catch(UserErrorException& exception){
-            //cout << "Setting unfinished" << endl;
+            //cout << "Setting unfinished" << std::endl;
             //unfinished=true;
             //del_f[f]=true;
           }
@@ -2171,7 +2171,7 @@ ffModelLabel:
         model.addConstantDefinition(f,model.evaluateGroundTerm(funDef));
       }
       catch(UserErrorException& exception){
-        //cout << "Setting unfinished" << endl;
+        //cout << "Setting unfinished" << std::endl;
         //unfinished=true;  
         //del_f[f]=true;
       }
@@ -2192,8 +2192,8 @@ ffModelLabel:
     Unit* udef = del_p[f] ? _deletedPredicates.get(f) : _partiallyDeletedPredicates.get(f);
 
     //if(_partiallyDeletedPredicates.find(f)){
-      //cout << "For " << env.signature->getPredicate(f)->name() << endl;
-      //cout << udef->toString() << endl;
+      //cout << "For " << env.signature->getPredicate(f)->name() << std::endl;
+      //cout << udef->toString() << std::endl;
     //}
     Formula* def = udef->getFormula();   
     Literal* predApp = 0;
@@ -2284,13 +2284,13 @@ ppModelLabel:
           else{
             Substitution subst;
             for(unsigned j=0;j<arity;j++){ 
-              //cout << grounding[j] << " is " << model.getDomainConstant(grounding[j])->toString() << endl;
+              //cout << grounding[j] << " is " << model.getDomainConstant(grounding[j])->toString() << std::endl;
               TermList vs = env.signature->getPredicate(f)->predType()->arg(j); 
               unsigned vampireSrt = vs.term()->functor();
               subst.bind(vars[j],model.getDomainConstant(grounding[j],vampireSrt));
             }
             Formula* predDefGround = SubstHelper::apply(predDef,subst);
-            //cout << predDefGround << endl;
+            //cout << predDefGround << std::endl;
             try{
               bool res = model.evaluate(
                 new FormulaUnit(predDefGround, NonspecificInference0(UnitInputType::AXIOM, InferenceRule::INPUT)));
@@ -2337,7 +2337,7 @@ bool FiniteModelBuilder::HackyDSAE::checkConstriant(DArray<unsigned>& newSortSiz
   }
 
 #if VTRACE_DOMAINS
-  cout << "  Ruled out by "; output_cg(constraint); cout << endl;
+  cout << "  Ruled out by "; output_cg(constraint); cout << std::endl;
 #endif
 
   return true;
@@ -2345,7 +2345,7 @@ bool FiniteModelBuilder::HackyDSAE::checkConstriant(DArray<unsigned>& newSortSiz
 
 bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSortSizes, DArray<unsigned>& sortMaxes)
 {
-  // cout << "_constraints_generators.size() " << _constraints_generators.size() << endl;
+  // cout << "_constraints_generators.size() " << _constraints_generators.size() << std::endl;
 
   while (!_constraints_generators.isEmpty()) {
     Constraint_Generator* generator_p = _constraints_generators.top();
@@ -2354,7 +2354,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
 #if VTRACE_DOMAINS
     cout << "Picking generator: ";
     FiniteModelBuilder::output_cg(generator);
-    cout << endl;
+    cout << std::endl;
 #endif
 
     // copy generator to _distinctSortSizes
@@ -2369,12 +2369,12 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
 
       // test 1 -- max sizes
       if (newSortSizes[i] > sortMaxes[i]) {
-        //cout << "Skipping increasing distinct sort " << i << " as has max of " << _distinctSortMaxs[i] << endl;
+        //cout << "Skipping increasing distinct sort " << i << " as has max of " << _distinctSortMaxs[i] << std::endl;
         goto next_candidate;
       }
 
 #if VTRACE_DOMAINS
-      cout << "  Testing increment on " << i << endl;
+      cout << "  Testing increment on " << i << std::endl;
 #endif
 
       // test 2a -- generator constraints
@@ -2414,7 +2414,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
           std::pair<unsigned,unsigned> constr = it1.next();
           if (newSortSizes[constr.first] < newSortSizes[constr.second]) {
   #if VTRACE_DOMAINS
-             cout << "  Ruled out by _distinct_sort_constraints " << constr.first << " >= " << constr.second << endl;
+             cout << "  Ruled out by _distinct_sort_constraints " << constr.first << " >= " << constr.second << std::endl;
   #endif
 
             // We will skip testing it, but we need it as a generator to proceed through the space:
@@ -2436,7 +2436,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
         while (it2.hasNext()) {
           std::pair<unsigned,unsigned> constr = it2.next();
           if (newSortSizes[constr.first] <= newSortSizes[constr.second]) {
-            // cout << "  Ruled out by _strict_distinct_sort_constraints " << constr.first << " > " << constr.second << endl;
+            // cout << "  Ruled out by _strict_distinct_sort_constraints " << constr.first << " > " << constr.second << std::endl;
 
             // We will skip testing it, but we need it as a generator to proceed through the space:
             Constraint_Generator* gen_p = new Constraint_Generator(newSortSizes.size(), ++_maxWeightSoFar /*effectively a fallback to FIFO for artificial children*/);
@@ -2467,7 +2467,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
     } else {
       delete _constraints_generators.pop();
 #if VTRACE_DOMAINS
-      cout << "Deleted" << endl;
+      cout << "Deleted" << std::endl;
 #endif    
     }
   }
@@ -2517,7 +2517,7 @@ bool FiniteModelBuilder::SmtBasedDSAE::init(unsigned _startModelSize, DArray<uns
     if (_strict_distinct_sort_constraints.size() > 0) {
       if (_smtSolver.check() == z3::check_result::unsat) {
        if(outputAllowed()){
-          cout << "Problem does not have a finite model." <<endl;
+          cout << "Problem does not have a finite model." <<std::endl;
         }
         return false;
       }
@@ -2582,7 +2582,7 @@ void FiniteModelBuilder::SmtBasedDSAE::reportZ3OutOfMemory()
 {
   env.beginOutput();
   reportSpiderStatus('m');
-  env.out() << "Z3 ran out of memory" << endl;
+  env.out() << "Z3 ran out of memory" << std::endl;
   if(env.statistics) {
     env.statistics->print(env.out());
   }
@@ -2633,7 +2633,7 @@ bool FiniteModelBuilder::SmtBasedDSAE::increaseModelSizes(DArray<unsigned>& newS
 
       if (_smtSolver.check() == z3::check_result::sat) {
         loadSizesFromSmt(newSortSizes);
-        // cout << "\nFound "; output_sizes(_distinctSortSizes); cout << endl;
+        // cout << "\nFound "; output_sizes(_distinctSortSizes); cout << std::endl;
         _smtSolver.pop(1);
         return true;
       } else {

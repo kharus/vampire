@@ -232,7 +232,7 @@ SaturationAlgorithm::SaturationAlgorithm(Problem& prb, const Options& opt)
   _ordering = OrderingSP(Ordering::create(prb, opt));
   if (!Ordering::trySetGlobalOrdering(_ordering)) {
     //this is not an error, it may just lead to lower performance (and most likely not significantly lower)
-    cerr << "SaturationAlgorithm cannot set its ordering as global" << endl;
+    cerr << "SaturationAlgorithm cannot set its ordering as global" << std::endl;
   }
   _selector = LiteralSelector::getSelector(*_ordering, opt, opt.selection());
 
@@ -494,7 +494,7 @@ void SaturationAlgorithm::onNewUsefulPropositionalClause(Clause* c)
  */
 void SaturationAlgorithm::onClauseRetained(Clause* cl)
 {
-  //cout << "[SA] retained " << cl->toString() << endl;
+  //cout << "[SA] retained " << cl->toString() << std::endl;
 
 }
 
@@ -532,16 +532,16 @@ void SaturationAlgorithm::onClauseReduction(Clause* cl, Clause** replacements, u
 
   if (env.options->showReductions()) {
     env.beginOutput();
-    env.out() << "[SA] " << (forward ? "forward" : "backward") << " reduce: " << cl->toString() << endl;
+    env.out() << "[SA] " << (forward ? "forward" : "backward") << " reduce: " << cl->toString() << std::endl;
     for(unsigned i = 0; i < numOfReplacements; i++){
       Clause* replacement = *replacements;
-      if(replacement){ env.out() << "      replaced by " << replacement->toString() << endl; }
+      if(replacement){ env.out() << "      replaced by " << replacement->toString() << std::endl; }
       replacements++;
     }
     ClauseStack::Iterator pit(premStack);
     while(pit.hasNext()){
       Clause* premise = pit.next();
-      if(premise){ env.out() << "     using " << premise->toString() << endl; }
+      if(premise){ env.out() << "     using " << premise->toString() << std::endl; }
     }
     env.endOutput();
   }
@@ -643,7 +643,7 @@ void SaturationAlgorithm::addInputClause(Clause* cl)
       level = env.maxSineLevel-1; // as the next available (unused) value
       // cout << " -> " << level;
     }
-    // cout << endl;
+    // cout << std::endl;
     cl->setAge(level);
   }
 
@@ -864,9 +864,9 @@ void SaturationAlgorithm::newClausesToUnprocessed()
     case Clause::SELECTED:
     case Clause::ACTIVE:
 #if VDEBUG
-      cout << "FAIL: " << cl->toString() << endl;
+      cout << "FAIL: " << cl->toString() << std::endl;
       //such clauses should not appear as new ones
-      cout << cl->toString() << endl;
+      cout << cl->toString() << std::endl;
 #endif
       ASSERTION_VIOLATION_REP(cl->store());
     }

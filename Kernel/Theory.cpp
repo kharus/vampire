@@ -1968,7 +1968,7 @@ std::ostream& operator<<(std::ostream& out, Kernel::Theory::Interpretation const
  */
 vstring Theory::tryGetInterpretedLaTeXName(unsigned func, bool pred,bool polarity)
 {
-   //cout << "Get LaTeX for " << func << endl;
+   //cout << "Get LaTeX for " << func << std::endl;
 
   // Used if no recorded template is found
   Interpretation i;

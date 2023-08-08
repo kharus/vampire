@@ -115,7 +115,7 @@ private:
 
 ClauseIterator Narrow::generateClauses(Clause* premise)
 {
-  //cout << "Narrow with " << premise->toString() << endl;
+  //cout << "Narrow with " << premise->toString() << std::endl;
 
   auto it1 = premise->getSelectedLiteralIterator();
 
@@ -144,9 +144,9 @@ Clause* Narrow::performNarrow(
   ASS(nClause->store()==Clause::ACTIVE);
   ASS(nTerm.isTerm());
   //if(nClause->number() == 276){
-    //cout << "performNarrow with " << nClause->toString() /*<< "\n and " << nLiteral->toString() << "\n and " << nTerm.toString()*/ << endl;
-    //cout << "the term being narrowed " << nTerm.toString() << endl;
-    //cout << "combAxLhs " << combAxLhs.toString() << endl;
+    //cout << "performNarrow with " << nClause->toString() /*<< "\n and " << nLiteral->toString() << "\n and " << nTerm.toString()*/ << std::endl;
+    //cout << "the term being narrowed " << nTerm.toString() << std::endl;
+    //cout << "combAxLhs " << combAxLhs.toString() << std::endl;
   //}
 
   static TermStack args;
@@ -182,7 +182,7 @@ Clause* Narrow::performNarrow(
   Literal* nLiteralS = subst->apply(nLiteral, 0); //0 is query bank
   TermList nTermS = subst->apply(nTerm, 0);
 
-  //cout << "Check ordering on " << tgtTermS.toString() << " and " << rwTermS.toString() << endl;
+  //cout << "Check ordering on " << tgtTermS.toString() << " and " << rwTermS.toString() << std::endl;
 
   TermList arg0=*nLiteralS->nthArgument(0);
   TermList arg1=*nLiteralS->nthArgument(1);
@@ -271,7 +271,7 @@ Clause* Narrow::performNarrow(
   return res;
 
 construction_fail:
-  //cout << "failed" << endl;
+  //cout << "failed" << std::endl;
   res->destroy();
   return 0;
 }

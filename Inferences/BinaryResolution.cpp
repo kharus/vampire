@@ -121,7 +121,7 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
     env.statistics->inferencesSkippedDueToColors++;
     if(opts.showBlocked()) {
       env.beginOutput();
-      env.out()<<"Blocked resolution of "<<queryCl->toString()<<" and "<<qr.clause->toString()<<endl;
+      env.out()<<"Blocked resolution of "<<queryCl->toString()<<" and "<<qr.clause->toString()<<std::endl;
       env.endOutput();
     }
     if(opts.colorUnblocking()) {
@@ -188,13 +188,13 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
 #if VDEBUG
 /*
   if(withConstraints && constraints->size() > 0){
-    cout << "Other: " << qr.clause->toString() << endl;
-    cout << "queryLit: " << queryLit->toString() << endl;
-    cout << "resLit: " << qr.literal->toString() << endl;
-    cout << "SUB:" << endl << qr.substitution->toString() << endl;
+    cout << "Other: " << qr.clause->toString() << std::endl;
+    cout << "queryLit: " << queryLit->toString() << std::endl;
+    cout << "resLit: " << qr.literal->toString() << std::endl;
+    cout << "SUB:" << std::endl << qr.substitution->toString() << std::endl;
 */
 /*
-    cout << "SUB(deref):" << endl << qr.substitution->toString(true) << endl;
+    cout << "SUB(deref):" << std::endl << qr.substitution->toString(true) << std::endl;
 */
   //}
 #endif
@@ -205,7 +205,7 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
       std::pair<pair<TermList,unsigned>,std::pair<TermList,unsigned>> con = (*constraints)[i]; 
 
 #if VDEBUG
-      //cout << "con pair " << con.first.toString() << " , " << con.second.toString() << endl;
+      //cout << "con pair " << con.first.toString() << " , " << con.second.toString() << std::endl;
 #endif
   
       TermList qT = qr.substitution->applyTo(con.first.first,con.first.second);
@@ -307,14 +307,14 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
     env.statistics->resolution++;
   }
 
-  //cout << "RESULT " << res->toString() << endl;
+  //cout << "RESULT " << res->toString() << std::endl;
 
   return res;
 }
 
 ClauseIterator BinaryResolution::generateClauses(Clause* premise)
 {
-  //cout << "BinaryResolution for " << premise->toString() << endl;
+  //cout << "BinaryResolution for " << premise->toString() << std::endl;
 
   PassiveClauseContainer* passiveClauseContainer = _salg->getPassiveClauseContainer();
 

@@ -279,7 +279,7 @@ void Preprocess::preprocess(Problem& prb)
       if (outputAllowed()) {
         env.beginOutput();
         addCommentSignForSZS(env.out());
-        env.out() << "WARNING: Not using newCnf currently not compatible with polymorphic/higher-order inputs." << endl;
+        env.out() << "WARNING: Not using newCnf currently not compatible with polymorphic/higher-order inputs." << std::endl;
         env.endOutput();
       }
     }
@@ -364,7 +364,7 @@ void Preprocess::preprocess(Problem& prb)
        if (outputAllowed()) {
          env.beginOutput();
          addCommentSignForSZS(env.out());
-         env.out() << "WARNING: Not using GeneralSplitting currently not compatible with polymorphic/higher-order inputs." << endl;
+         env.out() << "WARNING: Not using GeneralSplitting currently not compatible with polymorphic/higher-order inputs." << std::endl;
          env.endOutput();
        }
      } else {
@@ -407,7 +407,7 @@ void Preprocess::preprocess(Problem& prb)
        if (outputAllowed()) {
          env.beginOutput();
          addCommentSignForSZS(env.out());
-         env.out() << "WARNING: Not using TheoryFlattening currently not compatible with polymorphic inputs." << endl;
+         env.out() << "WARNING: Not using TheoryFlattening currently not compatible with polymorphic inputs." << std::endl;
          env.endOutput();
        }
      } else {

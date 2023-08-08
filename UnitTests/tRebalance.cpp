@@ -306,7 +306,7 @@ std::ostream& operator<<(std::ostream& out, initializer_list<expected_t> expecte
 }
 template<class A>
 std::ostream& operator<<(std::ostream& out, const BalanceIter<A>& x) {
-  return out << "\t" << x.lhs() << "\t->\t" << x.buildRhs() << endl;
+  return out << "\t" << x.lhs() << "\t->\t" << x.buildRhs() << std::endl;
 }
 template<class A>
 std::ostream& operator<<(std::ostream& out, const Balancer<A>& b) {
@@ -346,26 +346,26 @@ void test_rebalance(Literal* lit_, initializer_list<expected_t> expected) {
           { return get<0>(ex) == lhs && get<1>(ex) == rhs; }
       )) {
 
-      cout << "case: " << lit << endl;
-      cout << "unexpected entry in balancer:" << endl;
-      cout << "\t"  << lhs << "\t->\t" << rhs << endl;
-      cout << "expected: \n" << expected << endl;
+      cout << "case: " << lit << std::endl;
+      cout << "unexpected entry in balancer:" << std::endl;
+      cout << "\t"  << lhs << "\t->\t" << rhs << std::endl;
+      cout << "expected: \n" << expected << std::endl;
       exit(-1);
 
     } 
     cnt++;
   }
   if (cnt != expected.size()) {
-      cout << "case: " << lit << endl;
-      cout << "unexpected results in balancer:" << endl;
+      cout << "case: " << lit << std::endl;
+      cout << "unexpected results in balancer:" << std::endl;
       if (results.isEmpty()) {
-        cout << "\t< nothing >" << endl;
+        cout << "\t< nothing >" << std::endl;
       } else {
         for (auto r : results) {
-          cout << "\t" << get<0>(r) << "\t->\t" << get<1>(r) << endl;
+          cout << "\t" << get<0>(r) << "\t->\t" << get<1>(r) << std::endl;
         }
       }
-      cout << "expected: \n" << expected << endl;
+      cout << "expected: \n" << expected << std::endl;
       exit(-1);
   }
 }

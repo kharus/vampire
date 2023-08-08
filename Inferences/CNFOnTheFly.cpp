@@ -671,7 +671,7 @@ TermList sigmaRemoval(TermList sigmaTerm, TermList expsrt){
   TermList skolemTerm = ApplicativeHelper::createAppTerm(SortHelper::getResultSort(head.term()), head, termVars);
 
   ASS(*expsrt.term()->nthArgument(1) == AtomicSort::boolSort());
-  //cout << "OUT OF sigmaRemoval " + sigmaTerm.toString() << endl;
+  //cout << "OUT OF sigmaRemoval " + sigmaTerm.toString() << std::endl;
 
   return skolemTerm;
 }

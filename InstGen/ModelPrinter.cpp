@@ -363,7 +363,7 @@ void ModelPrinter::outputDomainSpec(std::ostream& out)
 {
   ASS(_domain.isNonEmpty());
 
-  out << "fof(model1,interpretation_domain," << endl
+  out << "fof(model1,interpretation_domain," << std::endl
       << "    ! [X] : ( ";
 
   TermStack::BottomFirstIterator dit(_domain);
@@ -375,14 +375,14 @@ void ModelPrinter::outputDomainSpec(std::ostream& out)
     }
   }
 
-  out << " ) )." << endl;
+  out << " ) )." << std::endl;
 }
 
 void ModelPrinter::outputFunInterpretations(std::ostream& out)
 {
   if(_rewrites.isEmpty()) { return; }
 
-  out << "fof(model2,interpretation_terms," << endl
+  out << "fof(model2,interpretation_terms," << std::endl
       << "    ( ";
 
   EqMap::Iterator eit(_rewrites);
@@ -395,7 +395,7 @@ void ModelPrinter::outputFunInterpretations(std::ostream& out)
     }
   }
 
-  out << ") )." << endl;
+  out << ") )." << std::endl;
 }
 
 
@@ -419,7 +419,7 @@ void ModelPrinter::outputPredInterpretations(std::ostream& out)
 
   if(model.isEmpty()) { return; }
 
-  out << "fof(model3,interpretation_atoms," << endl
+  out << "fof(model3,interpretation_atoms," << std::endl
       << "    ( ";
 
   LiteralStack::BottomFirstIterator mit(model);
@@ -427,10 +427,10 @@ void ModelPrinter::outputPredInterpretations(std::ostream& out)
     Literal* lit = mit.next();
     out << lit->toString();
     if(mit.hasNext()) {
-      out << " & " << endl << "      ";
+      out << " & " << std::endl << "      ";
     }
   }
-  out << " ) )." << endl;
+  out << " ) )." << std::endl;
 }
 
 }

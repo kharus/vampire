@@ -86,7 +86,7 @@ IGAlgorithm::IGAlgorithm(Problem& prb,const Options& opt)
       break;
 #if VZ3
     case Options::SatSolver::Z3:
-      //cout << "Warning: Z3 not compatible with inst_gen, using Minisat" << endl;
+      //cout << "Warning: Z3 not compatible with inst_gen, using Minisat" << std::endl;
       _satSolver = new MinisatInterfacing(opt,true);
       break;
 #endif
@@ -322,7 +322,7 @@ bool IGAlgorithm::isSelected(Literal* lit)
 bool IGAlgorithm::startGeneratingClause(Clause* orig, ResultSubstitution& subst, bool isQuery, Clause* otherCl,Literal* origLit, LiteralStack& genLits, bool& properInstance)
 {
 #if VTRACE_DM
-  cout << "tryGenC " << orig->number() << " and " << otherCl->number() << " on " << origLit->toString() << endl;
+  cout << "tryGenC " << orig->number() << " and " << otherCl->number() << " on " << origLit->toString() << std::endl;
 #endif
 
   genLits.reset();
@@ -352,8 +352,8 @@ bool IGAlgorithm::startGeneratingClause(Clause* orig, ResultSubstitution& subst,
       if (dmatch && dmatch->shouldBlock(olit,glit)) {
         RSTAT_CTR_INC("dismatch blocked");
 #if VTRACE_DM
-        cout << "[" << dmatch << "] " << "blocking for " << orig->number() << " and " << glit->toString() << endl;
-        cout << "block with origLit : " << (olit==origLit) << endl;
+        cout << "[" << dmatch << "] " << "blocking for " << orig->number() << " and " << glit->toString() << std::endl;
+        cout << "block with origLit : " << (olit==origLit) << std::endl;
 #endif
         return false;
       }
@@ -398,13 +398,13 @@ void IGAlgorithm::finishGeneratingClause(Clause* orig, ResultSubstitution& subst
       dmatch = new DismatchingContraints();
       ALWAYS(_dismatchMap.insert(orig,dmatch));
 #if VTRACE_DM
-      cout << "[" << dmatch << "] "<< "creating for " << orig->toString() << endl;
+      cout << "[" << dmatch << "] "<< "creating for " << orig->toString() << std::endl;
 #endif
     }
 
     Literal* dm_with = isQuery ? subst.applyToQuery(origLit) : subst.applyToResult(origLit);
 #if VTRACE_DM
-      cout << "[" << dmatch << "] "<< "dismatch " << orig->number() << " add " << dm_with->toString() << endl;
+      cout << "[" << dmatch << "] "<< "dismatch " << orig->number() << " add " << dm_with->toString() << std::endl;
 #endif
     dmatch->add(origLit,dm_with);
   }
@@ -869,7 +869,7 @@ MainLoopResult IGAlgorithm::onModelFound()
       if(szsOutputMode()) {
         env.beginOutput();
         env.out() << "% SZS status "<<( UIHelper::haveConjecture() ? "CounterSatisfiable" : "Satisfiable" )
-            << " for " << _opt.problemName() << endl << flush;
+            << " for " << _opt.problemName() << std::endl << flush;
         env.endOutput();
         UIHelper::satisfiableStatusWasAlreadyOutput = true;
       }

@@ -511,7 +511,7 @@ void Inference::minimizePremises()
 
   UnitList* newFOPrems = SATInference::getFOPremises(newSatRef);
 
-  // cout << "Minimized from " << _premises->length() << " to " << newFOPrems->length() << endl;
+  // cout << "Minimized from " << _premises->length() << " to " << newFOPrems->length() << std::endl;
 
   // "release" the old list
   {

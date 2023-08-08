@@ -44,14 +44,14 @@ void checkStatus(SAT::Z3Interfacing& z3, SAT2FO& s2f, SATSolver::Status expected
 
   auto status = z3.solve();
   if(status != expected) {
-    cout << "[ input    ] " << endl;
+    cout << "[ input    ] " << std::endl;
     for (auto a : assumptions) {
-      cout << "\t" << *a << endl;
+      cout << "\t" << *a << std::endl;
     }
-    cout << "[ expected ] " <<  expected << endl;
-    cout << "[ is       ] " <<  status << endl;
+    cout << "[ expected ] " <<  expected << std::endl;
+    cout << "[ is       ] " <<  status << std::endl;
     if (status == Z3Interfacing::SATISFIABLE) {
-      cout << "[ model    ] " <<  z3.getModel() << endl;
+      cout << "[ model    ] " <<  z3.getModel() << std::endl;
 
     }
     exit(-1);
@@ -216,14 +216,14 @@ void checkInstantiation(SAT::Z3Interfacing& z3, SAT2FO& s2f, Stack<Literal*> ass
   ASS_EQ(status, Z3Interfacing::SATISFIABLE);
   auto result = z3.evaluateInModel(toInstantiate.term());
   if (result != expected.term()) {
-    cout << "[ input    ] " << endl;
+    cout << "[ input    ] " << std::endl;
     for (auto a : assumptions) {
-      cout << "\t" << *a << endl;
+      cout << "\t" << *a << std::endl;
     }
-    cout << "[ toInstantiate ] " <<  toInstantiate << endl;
-    cout << "[ expected      ] " <<  expected << endl;
-    cout << "[ is            ] " <<  ( result == nullptr ? "null" : result->toString() ) << endl;
-    cout << "[ model         ] " <<  z3.getModel() << endl;
+    cout << "[ toInstantiate ] " <<  toInstantiate << std::endl;
+    cout << "[ expected      ] " <<  expected << std::endl;
+    cout << "[ is            ] " <<  ( result == nullptr ? "null" : result->toString() ) << std::endl;
+    cout << "[ model         ] " <<  z3.getModel() << std::endl;
     exit(-1);
   }
   z3.retractAllAssumptions();

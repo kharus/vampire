@@ -122,8 +122,8 @@ void TPTP::parse()
   while (!_states.isEmpty()) {
     State s = _states.pop();
 #ifdef DEBUG_SHOW_STATE
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-    cout << toString(s) << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+    cout << toString(s) << std::endl;
 #endif
     switch (s) {
     case UNIT_LIST:
@@ -273,9 +273,9 @@ void TPTP::parse()
 #endif
     }
 #ifdef DEBUG_SHOW_STATE
-    cout << "----------------------------------------" << endl;
+    cout << "----------------------------------------" << std::endl;
     printStacks();
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl << std::endl;
 #endif
   }
 } // TPTP::parse()
@@ -1414,7 +1414,7 @@ void TPTP::tff()
           symbol->setType(ot);  
           _typeConstructorArities.insert(nm, arity);
         }       
-        //cout << "added type constuctor " + nm + " of type " + symbol->fnType()->toString() << endl;
+        //cout << "added type constuctor " + nm + " of type " + symbol->fnType()->toString() << std::endl;
         while (lpars--) {
           consumeToken(T_RPAR);
         }
@@ -3787,7 +3787,7 @@ void TPTP::endTff()
         }
       }
     }
-    //cout << "added: " + symbol->name() + " of type " + ot->toString() + " and functor " << fun << endl;
+    //cout << "added: " + symbol->name() + " of type " + ot->toString() + " and functor " << fun << std::endl;
   }
 } // endTff
 
@@ -3903,7 +3903,7 @@ TPTP::SourceRecord* TPTP::getSource()
     vstring nameInFile = getTok(0).content;
     resetToks();
 
-    // cout << "Creating file source record for " << fileName << " and " << nameInFile << endl;
+    // cout << "Creating file source record for " << fileName << " and " << nameInFile << std::endl;
 
     consumeToken(T_RPAR);
     return new FileSourceRecord(fileName,nameInFile);
@@ -3914,7 +3914,7 @@ TPTP::SourceRecord* TPTP::getSource()
     vstring name = getTok(0).content;
     resetToks();
 
-    // cout << "Creating inference source record for " << name <<  endl;
+    // cout << "Creating inference source record for " << name <<  std::endl;
 
     InferenceSourceRecord* r = new InferenceSourceRecord(name);
 
@@ -3939,7 +3939,7 @@ TPTP::SourceRecord* TPTP::getSource()
       if(tok.tag == T_COMMA) continue;
    
       if (tok.tag != T_NAME && tok.tag != T_INT) {
-        cout << "read token " << tok.tag << " with content " << tok.content << endl;
+        cout << "read token " << tok.tag << " with content " << tok.content << std::endl;
 
         // TODO: parse errors are nice, but maybe we just want to ignore any info which we cannot understand?
 
@@ -3955,7 +3955,7 @@ TPTP::SourceRecord* TPTP::getSource()
         skipToRPAR();
       } else {
         r->premises.push(premise);
-        // cout << "pushed premise " << premise << endl;
+        // cout << "pushed premise " << premise << std::endl;
       }
     }
     resetToks();
@@ -5131,50 +5131,50 @@ void TPTP::printStacks() {
   cout << "States:";
   if   (!stit.hasNext()) cout << " <empty>";
   while (stit.hasNext()) cout << " " << toString(stit.next());
-  cout << endl;
+  cout << std::endl;
 
   /*Stack<Type*>::Iterator tyit(_types);
   cout << "Types:";
   if   (!tyit.hasNext()) cout << " <empty>";
   while (tyit.hasNext()) cout << " " << tyit.next()->tag();
-  cout << endl;
+  cout << std::endl;
 
   Stack<int>::Iterator cit(_connectives);
   cout << "Connectives:";
   if   (!cit.hasNext()) cout << " <empty>";
   while (cit.hasNext()) cout << " " << cit.next();
-  cout << endl; 
+  cout << std::endl; 
 
   Stack<vstring>::Iterator sit(_strings);
   cout << "Strings:";
   if   (!sit.hasNext()) cout << " <empty>";
   while (sit.hasNext()) cout << " " << sit.next();
-  cout << endl;
+  cout << std::endl;
 
   Stack<int>::Iterator iit(_ints);
   cout << "Ints:";
   if   (!iit.hasNext()) cout << " <empty>";
   while (iit.hasNext()) cout << " " << iit.next();
-  cout << endl;
+  cout << std::endl;
 
   Stack<bool>::Iterator bit(_bools);
   cout << "Bools:";
   if   (!bit.hasNext()) cout << " <empty>";
   while (bit.hasNext()) cout << " " << bit.next();
-  cout << endl;
+  cout << std::endl;
   */
 
   Stack<TermList>::Iterator tit(_termLists);
   cout << "Terms:";
   if   (!tit.hasNext()) cout << " <empty>";
   while (tit.hasNext()) cout << " " << tit.next().toString();
-  cout << endl;
+  cout << std::endl;
 
   Stack<Formula*>::Iterator fit(_formulas);
   cout << "Formulas:";
   if   (!fit.hasNext()) cout << " <empty>";
   while (fit.hasNext()) cout << " " << fit.next()->toString();
-  cout << endl;
+  cout << std::endl;
 
   /*
   Stack<Formula::VarList*>::Iterator vlit(_varLists);
@@ -5193,7 +5193,7 @@ void TPTP::printStacks() {
       cout << "]";
     }
   }
-  cout << endl;
+  cout << std::endl;
 
   Map<int, SortList*>::Iterator vsit(_variableSorts);
   cout << "Variables sorts:";
@@ -5208,7 +5208,7 @@ void TPTP::printStacks() {
     while (slit.hasNext()) cout << " " << (slit.next()).toString();
     cout << "}";
   }
-  cout << endl;
+  cout << std::endl;
 
   Stack<SortList*>::Iterator slsit(_sortLists);
   cout << "Sort lists: ";
@@ -5220,13 +5220,13 @@ void TPTP::printStacks() {
     while (slit.hasNext()) cout << (slit.next()).toString() << " ";
     cout << ";";
   }
-  cout << endl;
+  cout << std::endl;
 
   Stack<TheoryFunction>::Iterator tfit(_theoryFunctions);
   cout << "Theory functions: ";
   if   (!tfit.hasNext()) cout << " <empty>";
   while (tfit.hasNext()) cout << " " << tfit.next();
-  cout << endl;
+  cout << std::endl;
 
   Stack<LetSymbols>::Iterator lfsit(_letSymbols);
   cout << "Let functions scopes: ";
@@ -5255,7 +5255,7 @@ void TPTP::printStacks() {
       };
     }
   }
-  cout << endl;
+  cout << std::endl;
 
   Stack<LetSymbols>::Iterator clfsit(_letTypedSymbols);
   cout << "Current let functions scopes: ";
@@ -5284,7 +5284,7 @@ void TPTP::printStacks() {
       };
     }
   }
-  cout << endl;
+  cout << std::endl;
 
   Stack<LetDefinitions>::Iterator lbsit(_letDefinitions);
   cout << "Let definitions: ";
@@ -5311,6 +5311,6 @@ void TPTP::printStacks() {
       cout << "]";
     }
   }*/
-  cout << endl;
+  cout << std::endl;
 }
 #endif

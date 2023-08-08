@@ -378,7 +378,7 @@ protected:
         out << _is->getUnitIdStr(prem);
         first=false;
       }
-      out << "]" << endl;
+      out << "]" << std::endl;
     }
   }
 
@@ -441,9 +441,9 @@ struct InferenceStore::ProofPropertyPrinter
   {
     ProofPrinter::print();
     for(unsigned i=0;i<11;i++){ out << buckets[i] << " ";}
-    out << endl;
-    if(last_one){ out << "yes" << endl; }
-    else{ out << "no" << endl; }
+    out << std::endl;
+    if(last_one){ out << "yes" << std::endl; }
+    else{ out << "no" << std::endl; }
   }
 
 protected:
@@ -462,7 +462,7 @@ protected:
 
     // TODO we could make clauses track this information, but I am not sure that that's worth it
     if(us->isClause() && us->isPureTheoryDescendant()){
-      //cout << "HERE with " << us->toString() << endl;
+      //cout << "HERE with " << us->toString() << std::endl;
       Inference* inf = &us->inference();
       while(inf->rule() == InferenceRule::EVALUATION){
         Inference::Iterator piit = inf->iterator();
@@ -472,7 +472,7 @@ protected:
       current.push(inf);
       unsigned level = 0;
       while(!current.isEmpty()){
-        //cout << current.size() << endl;
+        //cout << current.size() << std::endl;
         Stack<Inference*> next;
         Stack<Inference*>::Iterator it(current);
         while(it.hasNext()){
@@ -487,7 +487,7 @@ protected:
               premInf = &premUnit->inference();
             }
 
-//for(unsigned i=0;i<level;i++){ cout << ">";}; cout << premUnit->toString() << endl;
+//for(unsigned i=0;i<level;i++){ cout << ">";}; cout << premUnit->toString() << std::endl;
             next.push(premInf);
           }
         }
@@ -495,7 +495,7 @@ protected:
         current = next;
       }
       level--;
-      //cout << "level is " << level << endl;
+      //cout << "level is " << level << std::endl;
       
       if(level > max_theory_clause_depth){
         max_theory_clause_depth=level;
@@ -740,7 +740,7 @@ protected:
       inferenceStr+="])";
     }
 
-    out<<getFofString(tptpUnitId(us), formulaStr, inferenceStr, rule, us->inputType())<<endl;
+    out<<getFofString(tptpUnitId(us), formulaStr, inferenceStr, rule, us->inputType())<<std::endl;
   }
 
   void printSplitting(Unit* us)
@@ -768,7 +768,7 @@ protected:
     }
     inferenceStr+="])";
 
-    out<<getFofString(tptpUnitId(us), getFormulaString(us), inferenceStr, rule)<<endl;
+    out<<getFofString(tptpUnitId(us), getFormulaString(us), inferenceStr, rule)<<std::endl;
   }
 
   void printGeneralSplittingComponent(Unit* us)
@@ -784,7 +784,7 @@ protected:
     vstring defId=tptpDefId(us);
 
     out<<getFofString(tptpUnitId(us), getFormulaString(us),
-	"inference("+tptpRuleName(InferenceRule::CLAUSIFY)+",[],["+defId+"])", InferenceRule::CLAUSIFY)<<endl;
+	"inference("+tptpRuleName(InferenceRule::CLAUSIFY)+",[],["+defId+"])", InferenceRule::CLAUSIFY)<<std::endl;
 
 
     List<unsigned>* nameVars=0;
@@ -837,7 +837,7 @@ protected:
 	      << ",[" << getNewSymbols("naming",getSingletonIterator(nameSymbol))
 	      << "])";
 
-    out<<getFofString(defId, defStr, originStm.str(), rule)<<endl;
+    out<<getFofString(defId, defStr, originStm.str(), rule)<<std::endl;
   }
 
   void printSplittingComponentIntroduction(Unit* us)
@@ -855,14 +855,14 @@ protected:
     vstring defStr=getQuantifiedStr(cl)+" <=> ~"+splitPred;
 
     out<<getFofString(tptpUnitId(us), getFormulaString(us),
-  "inference("+tptpRuleName(InferenceRule::CLAUSIFY)+",[],["+defId+"])", InferenceRule::CLAUSIFY)<<endl;
+  "inference("+tptpRuleName(InferenceRule::CLAUSIFY)+",[],["+defId+"])", InferenceRule::CLAUSIFY)<<std::endl;
 
     vstringstream originStm;
     originStm << "introduced(" << tptpRuleName(rule)
         << ",[" << getNewSymbols("naming",splitPred)
         << "])";
 
-    out<<getFofString(defId, defStr, originStm.str(), rule)<<endl;
+    out<<getFofString(defId, defStr, originStm.str(), rule)<<std::endl;
   }
 
 };
@@ -973,7 +973,7 @@ InferenceStore::ProofPrinter* InferenceStore::createProofPrinter(std::ostream& o
  */
 void InferenceStore::outputUnsatCore(std::ostream& out, Unit* refutation)
 {
-  out << "(" << endl;
+  out << "(" << std::endl;
 
   Stack<Unit*> todo;
   todo.push(refutation);
@@ -987,16 +987,16 @@ void InferenceStore::outputUnsatCore(std::ostream& out, Unit* refutation)
       if(!u->isClause()){
         if(u->getFormula()->hasLabel()){
           vstring label =  u->getFormula()->getLabel();
-          out << label << endl;
+          out << label << std::endl;
         }
         else{
           ASS(env.options->ignoreMissingInputsInUnsatCore() || u->getFormula()->hasLabel());
           if(!(env.options->ignoreMissingInputsInUnsatCore() || u->getFormula()->hasLabel())){
-            cout << "ERROR: There is a problem with the unsat core. There is an input formula in the proof" <<  endl;
-            cout << "that does not have a label. We expect all  input formulas to have labels as this  is what" << endl;
-            cout << "smtcomp does. If you don't want this then use the ignore_missing_inputs_in_unsat_core option" << endl;
-            cout << "The unlabelled  input formula is " << endl;
-            cout << u->toString() << endl;
+            cout << "ERROR: There is a problem with the unsat core. There is an input formula in the proof" <<  std::endl;
+            cout << "that does not have a label. We expect all  input formulas to have labels as this  is what" << std::endl;
+            cout << "smtcomp does. If you don't want this then use the ignore_missing_inputs_in_unsat_core option" << std::endl;
+            cout << "The unlabelled  input formula is " << std::endl;
+            cout << u->toString() << std::endl;
           }
         }
       }
@@ -1016,7 +1016,7 @@ void InferenceStore::outputUnsatCore(std::ostream& out, Unit* refutation)
     }
   }
 
-  out << ")" << endl;
+  out << ")" << std::endl;
 }
 
 

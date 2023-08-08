@@ -92,7 +92,7 @@ void CLTBMode::perform()
     bool ready = false;
     while (!in.eof()) {
       getline(in, line);
-      singleInst << line << endl;
+      singleInst << line << std::endl;
       if (line == "% SZS end BatchProblems") {
 	ready = true;
 	break;
@@ -157,9 +157,9 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
     // calculate the next problem time limit in milliseconds
     int elapsedTime = env.timer->elapsedMilliseconds();
     int timeRemainingForThisBatch = terminationTime - elapsedTime;
-    coutLineOutput() << "time remaining for this batch " << timeRemainingForThisBatch << endl;
+    coutLineOutput() << "time remaining for this batch " << timeRemainingForThisBatch << std::endl;
     int remainingBatchTimeForThisProblem = timeRemainingForThisBatch / remainingProblems;
-    coutLineOutput() << "remaining batch time for this problem " << remainingBatchTimeForThisProblem << endl;
+    coutLineOutput() << "remaining batch time for this problem " << remainingBatchTimeForThisProblem << std::endl;
     int nextProblemTimeLimit;
     if (!_problemTimeLimit) {
       nextProblemTimeLimit = remainingBatchTimeForThisProblem;
@@ -172,11 +172,11 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
     }
     // time in milliseconds when the current problem should terminate
     int problemTerminationTime = elapsedTime + nextProblemTimeLimit;
-    coutLineOutput() << "problem termination time " << problemTerminationTime << endl;
+    coutLineOutput() << "problem termination time " << problemTerminationTime << std::endl;
 
     env.beginOutput();
-    env.out() << flush << "%" << endl;
-    lineOutput() << "SZS status Started for " << probFile << endl << flush;
+    env.out() << flush << "%" << std::endl;
+    lineOutput() << "SZS status Started for " << probFile << std::endl << flush;
     env.endOutput();
 
     pid_t child = Multiprocessing::instance()->fork();
@@ -187,7 +187,7 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
       try {
         prob.searchForProof(problemTerminationTime,nextProblemTimeLimit,_category);
       } catch (Exception& exc) {
-        cerr << "% Exception at proof search level" << endl;
+        cerr << "% Exception at proof search level" << std::endl;
         exc.cry(cerr);
         System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
       }
@@ -196,7 +196,7 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
     }
 
     env.beginOutput();
-    lineOutput() << "solver pid " << child << endl;
+    lineOutput() << "solver pid " << child << std::endl;
     env.endOutput();
     int resValue;
     // wait until the child terminates
@@ -206,14 +206,14 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
       );
     }
     catch(SystemFailException& ex) {
-      cerr << "% SystemFailException at batch level" << endl;
+      cerr << "% SystemFailException at batch level" << std::endl;
       ex.cry(cerr);
     }
 
     // output the result depending on the termination code
     env.beginOutput();
     if (!resValue) {
-      lineOutput() << "SZS status Theorem for " << probFile << endl;
+      lineOutput() << "SZS status Theorem for " << probFile << std::endl;
       solvedProblems++;
 
       if (env.options->ltbLearning() != Options::LTBLearning::OFF){
@@ -222,10 +222,10 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
       }
     }
     else {
-      lineOutput() << "SZS status GaveUp for " << probFile << endl;
+      lineOutput() << "SZS status GaveUp for " << probFile << std::endl;
     }
-    env.out() << flush << '%' << endl;
-    lineOutput() << "% SZS status Ended for " << probFile << endl << flush;
+    env.out() << flush << '%' << std::endl;
+    lineOutput() << "% SZS status Ended for " << probFile << std::endl << flush;
     env.endOutput();
 
     Timer::syncClock();
@@ -233,7 +233,7 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
     remainingProblems--;
   }
   env.beginOutput();
-  lineOutput() << "Solved " << solvedProblems << " out of " << _problemFiles.size() << endl;
+  lineOutput() << "Solved " << solvedProblems << " out of " << _problemFiles.size() << std::endl;
   env.endOutput();
 } // CLTBMode::solveBatch(batchFile)
 
@@ -283,7 +283,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
       return; // ignore if we cannot get the solution file
       //USER_ERROR("Cannot open problem file: " + solnFileName);
     }
-    cout << "Reading solutions " << solnFileName << endl;
+    cout << "Reading solutions " << solnFileName << std::endl;
 
     ScopedPtr<DHMap<Unit*,Parse::TPTP::SourceRecord*> > sources;
     sources = new DHMap<Unit*,Parse::TPTP::SourceRecord*>();
@@ -299,7 +299,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
       env.options->setOutputAxiomNames(outputAxiomValue);
       solnUnits = parser.units();
     } catch (Lib::Exception& ex) {
-      cout << "Couldn't parse " << "solnFileName" << endl;
+      cout << "Couldn't parse " << "solnFileName" << std::endl;
       ex.cry(cout);
 
       //save memory by deleting the already loaded units:
@@ -332,7 +332,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
                 if (_learnedFormulasCount.get(name) > _learnedFormulasMaxCount){
                   _learnedFormulasMaxCount = _learnedFormulasCount.get(name);
                 }
-              //cout << name << "," << _learnedFormulasCount.get(name) << endl;
+              //cout << name << "," << _learnedFormulasCount.get(name) << std::endl;
               }
             }
 
@@ -358,7 +358,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
                 if (_learnedFormulasCount.get(name) > _learnedFormulasMaxCount){
                   _learnedFormulasMaxCount = _learnedFormulasCount.get(name);
                 }
-              //cout << name << "," << _learnedFormulasCount.get(name) << endl;
+              //cout << name << "," << _learnedFormulasCount.get(name) << std::endl;
               }
             }
           }
@@ -373,7 +373,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
 void CLTBMode::doTraining()
 {
   env.beginOutput();
-  env.out() << "Training in LTB currently unsupported" << endl;
+  env.out() << "Training in LTB currently unsupported" << std::endl;
   env.endOutput();
   return;
 
@@ -424,7 +424,7 @@ int CLTBMode::readInput(istream& in, bool first)
         StringStack ls;
         StringUtils::splitStr(line.c_str(),' ',ls);
         _category = getCategory(ls[1]);
-        coutLineOutput() << "read category " << ls[1] << endl;
+        coutLineOutput() << "read category " << ls[1] << std::endl;
     }
     else{ USER_ERROR("division category not found"); } 
   
@@ -670,7 +670,7 @@ void CLTBProblem::searchForProof(int terminationTime,int timeLimit,const Categor
       unsigned cutoff = parent->_learnedFormulasMaxCount/2;
       while (cutoff>0){
         cutoffs.push(cutoff);
-        //cout << "create cutoff " << cutoff << endl;
+        //cout << "create cutoff " << cutoff << std::endl;
         cutoff /= 2;
       }
     }
@@ -732,19 +732,19 @@ void CLTBProblem::searchForProof(int terminationTime,int timeLimit,const Categor
 void CLTBProblem::exitOnNoSuccess()
 {
   env.beginOutput();
-  CLTBMode::lineOutput() << "Proof not found in time " << Timer::msToSecondsString(env.timer->elapsedMilliseconds()) << endl;
+  CLTBMode::lineOutput() << "Proof not found in time " << Timer::msToSecondsString(env.timer->elapsedMilliseconds()) << std::endl;
   if (env.remainingTime()/100>0) {
-    CLTBMode::lineOutput() << "SZS status GaveUp for " << env.options->problemName() << endl;
+    CLTBMode::lineOutput() << "SZS status GaveUp for " << env.options->problemName() << std::endl;
   }
   else {
     //From time to time we may also be terminating in the timeLimitReached()
     //function in Lib/Timer.cpp in case the time runs out. We, however, output
     //the same string there as well.
-    CLTBMode::lineOutput() << "SZS status Timeout for " << env.options->problemName() << endl;
+    CLTBMode::lineOutput() << "SZS status Timeout for " << env.options->problemName() << std::endl;
   }
   env.endOutput();
 
-  CLTBMode::coutLineOutput() << "problem proof search terminated (fail)" << endl << flush;
+  CLTBMode::coutLineOutput() << "problem proof search terminated (fail)" << std::endl << flush;
   System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
 } // CLTBProblem::exitOnNoSuccess
 
@@ -782,8 +782,8 @@ bool CLTBProblem::runSchedule(Schedule& schedule,StrategySet& used,int terminati
   int slices = schedule.length();
   while (it.hasNext()) {
     while (processesLeft) {
-      CLTBMode::coutLineOutput() << "Slices left: " << slices-- << endl;
-      CLTBMode::coutLineOutput() << "Processes available: " << processesLeft << endl << flush;
+      CLTBMode::coutLineOutput() << "Slices left: " << slices-- << std::endl;
+      CLTBMode::coutLineOutput() << "Processes available: " << processesLeft << std::endl << flush;
       ASS_G(processesLeft,0);
 
       int elapsedTime = env.timer->elapsedMilliseconds();
@@ -824,7 +824,7 @@ bool CLTBProblem::runSchedule(Schedule& schedule,StrategySet& used,int terminati
         try {
           runSlice(sliceCode,sliceTime); //start proving
         } catch (Exception& exc) {
-          cerr << "% Exception at run slice level" << endl;
+          cerr << "% Exception at run slice level" << std::endl;
           exc.cry(cerr);
           System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
         }
@@ -833,14 +833,14 @@ bool CLTBProblem::runSchedule(Schedule& schedule,StrategySet& used,int terminati
       Timer::syncClock();
       ASS(childIds.insert(childId));
       CLTBMode::coutLineOutput() << "slice pid "<< childId << " slice: " << sliceCode
-				 << " time: " << (sliceTime/100)/10.0 << endl << flush;
+				 << " time: " << (sliceTime/100)/10.0 << std::endl << flush;
       processesLeft--;
       if (!it.hasNext()) {
 	break;
       }
     }
 
-    CLTBMode::coutLineOutput() << "No processes available: " << endl << flush;
+    CLTBMode::coutLineOutput() << "No processes available: " << std::endl << flush;
     if (processesLeft==0) {
       waitForChildAndExitWhenProofFound();
       // proof search failed
@@ -876,11 +876,11 @@ void CLTBProblem::waitForChildAndExitWhenProofFound()
   if (!resValue) {
     // we have found the proof. It has been already written down by the writter child,
     // so we can just terminate
-    CLTBMode::coutLineOutput() << "terminated slice pid " << finishedChild << " (success)" << endl << flush;
+    CLTBMode::coutLineOutput() << "terminated slice pid " << finishedChild << " (success)" << std::endl << flush;
     System::terminateImmediately(0);
   }
   // proof not found
-  CLTBMode::coutLineOutput() << "terminated slice pid " << finishedChild << " (fail)" << endl << flush;
+  CLTBMode::coutLineOutput() << "terminated slice pid " << finishedChild << " (fail)" << std::endl << flush;
 } // waitForChildAndExitWhenProofFound
 
 ofstream* CLTBProblem::writerFileStream = 0;
@@ -892,9 +892,9 @@ void CLTBProblem::terminatingSignalHandler(int sigNum)
       writerFileStream->close();
     }
   } catch (Lib::SystemFailException& ex) {
-    cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << endl;
+    cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
     ex.cry(cerr);
-    cerr << " and will now die" << endl;
+    cerr << " and will now die" << std::endl;
   }
   System::terminateImmediately(0);
 }
@@ -954,7 +954,7 @@ void CLTBProblem::runSlice(Options& strategyOpt)
 //  }
 
   env.beginOutput();
-  CLTBMode::lineOutput() << opt.testId() << " on " << opt.problemName() << endl;
+  CLTBMode::lineOutput() << opt.testId() << " on " << opt.problemName() << std::endl;
   env.endOutput();
 
   ProvingHelper::runVampire(prb, opt);

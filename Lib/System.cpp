@@ -327,7 +327,7 @@ void System::readDir(vstring dirName, Stack<vstring>& filenames)
     dirp = opendir(dir.c_str());
     
     if (!dirp) {
-      // cout << "Cannot open dir " << dir << endl;
+      // cout << "Cannot open dir " << dir << std::endl;
       continue;
     }
     
@@ -344,12 +344,12 @@ void System::readDir(vstring dirName, Stack<vstring>& filenames)
           filenames.push(dir+"/"+dp->d_name);
           break;
         case DT_DIR:
-          // cout << "seen dir " << dp->d_name << endl;
+          // cout << "seen dir " << dp->d_name << std::endl;
           todo.push(dir+"/"+dp->d_name);
           break;
         default:
           ;
-          // cout << "weird file type" << endl;
+          // cout << "weird file type" << std::endl;
       }
     }
     (void)closedir(dirp);

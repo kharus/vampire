@@ -205,7 +205,7 @@ void outputUnitToLaTeX(LaTeX& latex, ofstream& latexOut, Unit* u,unsigned index)
         count=0;
       }
     }
-    latexOut << "\\\\" << endl;
+    latexOut << "\\\\" << std::endl;
 }
 
 // print the clauses of a problem to a LaTeX file
@@ -217,10 +217,10 @@ void outputClausesToLaTeX(Problem* prb)
 
   LaTeX latex;
   ofstream latexOut(env.options->latexOutput().c_str());
-  latexOut << latex.header() << endl;
-  latexOut << "\\section{Problem "<<env.options->problemName() << "}" << endl;
+  latexOut << latex.header() << std::endl;
+  latexOut << "\\section{Problem "<<env.options->problemName() << "}" << std::endl;
   //TODO output more header
-  latexOut << "\\[\n\\begin{array}{ll}" << endl;
+  latexOut << "\\[\n\\begin{array}{ll}" << std::endl;
 
   CompositeISE simplifier;
   simplifier.addFront(new TrivialInequalitiesRemovalISE());
@@ -251,10 +251,10 @@ void outputProblemToLaTeX(Problem* prb)
 
   LaTeX latex;
   ofstream latexOut(env.options->latexOutput().c_str());
-  latexOut << latex.header() << endl;
-  latexOut << "\\section{Problem "<<env.options->problemName() << "}" << endl;
+  latexOut << latex.header() << std::endl;
+  latexOut << "\\section{Problem "<<env.options->problemName() << "}" << std::endl;
   //TODO output more header
-  latexOut << "\\[\n\\begin{array}{ll}" << endl;
+  latexOut << "\\[\n\\begin{array}{ll}" << std::endl;
 
   //TODO  get symbol and sort declarations into LaTeX
 
@@ -694,7 +694,7 @@ int main(int argc, char* argv[])
         vampireReturnValue = VAMP_RESULT_STATUS_SUCCESS;
       }
       else {
-        cout << "unknown" << endl;
+        cout << "unknown" << std::endl;
       }
       break;
 
@@ -716,9 +716,9 @@ int main(int argc, char* argv[])
           CASC::CLTBMode::perform();
         }
       } catch (Lib::SystemFailException& ex) {
-        cerr << "Process " << getpid() << " received SystemFailException" << endl;
+        cerr << "Process " << getpid() << " received SystemFailException" << std::endl;
         ex.cry(cerr);
-        cerr << " and will now die" << endl;
+        cerr << " and will now die" << std::endl;
       }
       //we have processed the ltb batch file, so we can return zero
       vampireReturnValue = VAMP_RESULT_STATUS_SUCCESS;
@@ -763,7 +763,7 @@ int main(int argc, char* argv[])
     BYPASSING_ALLOCATOR;
     vampireReturnValue = VAMP_RESULT_STATUS_UNHANDLED_EXCEPTION;
     if (outputAllowed()) {
-      cout << "Z3 exception:\n" << exception.msg() << endl;
+      cout << "Z3 exception:\n" << exception.msg() << std::endl;
     }
     reportSpiderFail();
   }

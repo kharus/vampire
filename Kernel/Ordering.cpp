@@ -841,7 +841,7 @@ DArray<int> PrecedenceOrdering::predLevelsFromOptsAndPrec(Problem& prb, const Op
         level = bound;
       }
       predicateLevels[i] = reverse ? (bound - level + 1) : level;
-      // cout << "setting predicate level of " << env.signature->predicateName(i) << " to " << predicateLevels[i] << endl;
+      // cout << "setting predicate level of " << env.signature->predicateName(i) << " to " << predicateLevels[i] << std::endl;
     }
   }
 

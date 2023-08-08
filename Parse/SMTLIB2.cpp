@@ -41,10 +41,10 @@
 #define LOGGING 0
 
 #if LOGGING
-#define LOG1(arg) cout << arg << endl;
-#define LOG2(a1,a2) cout << a1 << a2 << endl;
-#define LOG3(a1,a2,a3) cout << a1 << a2 << a3 << endl;
-#define LOG4(a1,a2,a3,a4) cout << a1 << a2 << a3 << a4 << endl;
+#define LOG1(arg) cout << arg << std::endl;
+#define LOG2(a1,a2) cout << a1 << a2 << std::endl;
+#define LOG3(a1,a2,a3) cout << a1 << a2 << a3 << std::endl;
+#define LOG4(a1,a2,a3,a4) cout << a1 << a2 << a3 << a4 << std::endl;
 #else
 #define LOG1(arg)
 #define LOG2(a1,a2)
@@ -386,7 +386,7 @@ void SMTLIB2::readBenchmark(LExprList* bench)
       // so let's just warn and exit
       if(env.options->mode()!=Options::Mode::SPIDER) {
         env.beginOutput();
-        env.out() << "% Warning: check-sat is not the last entry. Skipping the rest!" << endl;
+        env.out() << "% Warning: check-sat is not the last entry. Skipping the rest!" << std::endl;
         env.endOutput();
       }
       break;
@@ -1803,7 +1803,7 @@ void SMTLIB2::parseAnnotatedTerm(LExpr* exp)
 
   if (!annotation_warning) {
     //env.beginOutput();
-    //env.out() << "% Warning: term annotations ignored!" << endl;
+    //env.out() << "% Warning: term annotations ignored!" << std::endl;
     //env.endOutput();
     annotation_warning = true;
   }
@@ -2581,11 +2581,11 @@ SMTLIB2::ParseResult SMTLIB2::parseTermOrFormula(LExpr* body, bool isSort)
 
   while (_todo.isNonEmpty()) {
     /*
-    cout << "Results:" << endl;
+    cout << "Results:" << std::endl;
     for (unsigned i = 0; i < results.size(); i++) {
-      cout << results[i].toString() << endl;
+      cout << results[i].toString() << std::endl;
     }
-    cout << "---" << endl;
+    cout << "---" << std::endl;
     */
 
     std::pair<ParseOperation,LExpr*> cur = _todo.pop();

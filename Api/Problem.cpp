@@ -1612,7 +1612,7 @@ void outputSymbolTypeDefinitions(std::ostream& out, unsigned symNumber, bool fun
     out << "$o";
   }
   outputAttributes(out, attribs);
-  out << " )." << endl;
+  out << " )." << std::endl;
 
 }
 
@@ -1625,7 +1625,7 @@ void Problem::outputTypeDefinitions(std::ostream& out, bool outputAllTypeDefs)
   for(unsigned i=Sorts::FIRST_USER_SORT; i<sorts; i++) {
     out << "tff(sort_def_" << i << ",type, " << env.sorts->sortName(i) << ": $tType";
     if(core) { outputAttributes(out, &core->getSortAttributes(i)); }
-    out << " )." << endl;
+    out << " )." << std::endl;
   }
 
 
@@ -1648,7 +1648,7 @@ void Problem::output(std::ostream& out, bool outputTypeDefs, bool outputAllTypeD
   }
   AnnotatedFormulaIterator afit = formulas();
   while(afit.hasNext()) {
-    out<<afit.next()<<endl;
+    out<<afit.next()<<std::endl;
   }
 }
 

@@ -73,7 +73,7 @@ void TPTPPrinter::printWithRole(vstring name, vstring role, Unit* u, bool includ
 
   beginOutput();
   ensureHeadersPrinted(u);
-  tgt() << "tff(" << name << ", " << role << ", " << body << ")." << endl;
+  tgt() << "tff(" << name << ", " << role << ", " << body << ")." << std::endl;
   endOutput();
 }
 
@@ -176,7 +176,7 @@ void TPTPPrinter::printTffWrapper(Unit* u, vstring bodyStr)
   default:
      ASSERTION_VIOLATION;
   }
-  tgt() << ", " << endl << "    " << bodyStr << " )." << endl;
+  tgt() << ", " << std::endl << "    " << bodyStr << " )." << std::endl;
 }
 
 /**
@@ -238,7 +238,7 @@ void TPTPPrinter::outputSymbolTypeDefinitions(unsigned symNumber, SymbolType sym
 
   tgt() <<  type->toString();
 
-  tgt() << " )." << endl;
+  tgt() << " )." << std::endl;
 }
 
 /**
@@ -285,7 +285,7 @@ void TPTPPrinter::outputSymbolTypeDefinitions(unsigned symNumber, SymbolType sym
   for (i = Sorts::FIRST_USER_SORT; i < sorts; i++) {
     if (List<unsigned>::member(i, _usedSorts))
       tgt() << "tff(sort_def_" << i << ",type, " << env.sorts->sortName(i)
-            	      << ": $tType" << " )." << endl;
+            	      << ": $tType" << " )." << std::endl;
 
   }
 } */ //TODO fix this function. At te moment, not sure how important it is

@@ -115,14 +115,14 @@ void testProofWithAssumptions(SATSolver& s)
   SATClause* refutation = s.getRefutation();
   PropInference* inf = static_cast<PropInference*>(refutation->inference());
 
-  // cout << endl << "Refutation: " << refutation->toString() << endl;
+  // cout << std::endl << "Refutation: " << refutation->toString() << std::endl;
 
   List<SATClause*>* prems = inf->getPremises();
 
-  // cout << "Inference length: " << prems->length() << endl;
+  // cout << "Inference length: " << prems->length() << std::endl;
   
   while(prems){
-    // cout << prems->head()->toString() << endl;
+    // cout << prems->head()->toString() << std::endl;
     prems = prems->tail();
   }
 
@@ -190,7 +190,7 @@ void testInterface(SATSolverWithAssumptions &s) {
   for (int i = 0; i < 10; i++) {        
     cout << s.trueInAssignment(getLit('d'));
   }
-  cout << endl;  
+  cout << std::endl;  
   
   s.addAssumption(getLit('d'));
   s.addAssumption(getLit('a'));
@@ -220,12 +220,12 @@ void testInterface(SATSolverWithAssumptions &s) {
 
 TEST_FUN(testSATSolverInterface)
 { 
-  cout << endl << "Minisat" << endl;  
+  cout << std::endl << "Minisat" << std::endl;  
   MinisatInterfacing sMini(*env.options,true);
   testInterface(sMini);
     
   /* Not fully conforming - does not support zeroImplied and resource-limited solving
-  cout << endl << "Z3" << endl;
+  cout << std::endl << "Z3" << std::endl;
   {
     SAT2FO sat2fo;
     Z3Interfacing sZ3(*env.options,sat2fo);
@@ -262,7 +262,7 @@ void testAssumptions(SATSolverWithAssumptions &s) {
       cout << (char)('a' + lit.var()-1);
     }
   }
-  cout << endl;
+  cout << std::endl;
 
   const SATLiteralStack& minimized = s.explicitlyMinimizedFailedAssumptions();
   for (unsigned i = 0; i < minimized.size(); i++) {
@@ -273,16 +273,16 @@ void testAssumptions(SATSolverWithAssumptions &s) {
       cout << (char)('a' + lit.var()-1);
     }
   }
-  cout << endl;
+  cout << std::endl;
 }
 
 TEST_FUN(testSolvingUnderAssumptions)
 {
-  cout << endl << "Minisat" << endl;
+  cout << std::endl << "Minisat" << std::endl;
   MinisatInterfacing sMini(*env.options,true);
   testAssumptions(sMini);
 
-  /*cout << endl << "Z3" << endl;
+  /*cout << std::endl << "Z3" << std::endl;
   {
     SAT2FO sat2fo;
     Z3Interfacing sZ3(*env.options,sat2fo,true);

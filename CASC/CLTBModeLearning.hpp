@@ -175,12 +175,12 @@ private:
     // Probably dangerous to acquire in constructor
     ScopedSyncPipe(SyncPipe* p) : pipe(p)
     {
-      cout << "getting pipe" << endl;
+      cout << "getting pipe" << std::endl;
       pipe->acquireWrite();
-      cout << "got pipe" << endl;
+      cout << "got pipe" << std::endl;
     }
     ~ScopedSyncPipe(){
-      cout << "release pipe" << endl;
+      cout << "release pipe" << std::endl;
       pipe->releaseWrite();
     } 
   };

@@ -191,7 +191,7 @@ Clause* PredicateSplitPassiveClauseContainer::popSelected()
       toss -= _ratios[queueIndex];
       queueIndex++;
     }
-    // cout << " means " << queueIndex << " (below: " << _ratios.size() << ")" << endl;
+    // cout << " means " << queueIndex << " (below: " << _ratios.size() << ")" << std::endl;
   } else {
     // compute queue from which we will pick a clause:
     // choose queue using weighted round robin
