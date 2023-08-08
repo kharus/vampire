@@ -65,7 +65,7 @@ const int TPTP::SIGMA = 103u;
  * Create a parser, parse the input and return the parsed list of units.
  * @since 13/07/2011 Manchester
  */
-UnitList* TPTP::parse(istream& input)
+UnitList* TPTP::parse(std::istream& input)
 {
   Parse::TPTP parser(input);
   try{
@@ -82,7 +82,7 @@ UnitList* TPTP::parse(istream& input)
  * Initialise a lexer.
  * @since 27/07/2004 Torrevieja
  */
-TPTP::TPTP(istream& in)
+TPTP::TPTP(std::istream& in)
   : _containsConjecture(false),
     _allowedNames(0),
     _in(&in),
@@ -2111,7 +2111,7 @@ void TPTP::include()
   vstring fileName(env.options->includeFileName(relativeName));
   {
     BYPASSING_ALLOCATOR; // we cannot make ifstream allocated via Allocator
-    _in = new ifstream(fileName.c_str());
+    _in = new std::ifstream(fileName.c_str());
   }
   if (!*_in) {
     USER_ERROR((vstring)"cannot open file " + fileName);

@@ -192,7 +192,7 @@ void profileMode()
 } // profileMode
 
 // prints Unit u at an index to latexOut using the LaTeX object
-void outputUnitToLaTeX(LaTeX& latex, ofstream& latexOut, Unit* u,unsigned index)
+void outputUnitToLaTeX(LaTeX& latex, std::ofstream& latexOut, Unit* u,unsigned index)
 {
     vstring stringform = latex.toString(u);
     latexOut << index++ << " & ";
@@ -216,7 +216,7 @@ void outputClausesToLaTeX(Problem* prb)
   BYPASSING_ALLOCATOR; // not sure why we need this yet, ofstream?
 
   LaTeX latex;
-  ofstream latexOut(env.options->latexOutput().c_str());
+  std::ofstream latexOut(env.options->latexOutput().c_str());
   latexOut << latex.header() << std::endl;
   latexOut << "\\section{Problem "<<env.options->problemName() << "}" << std::endl;
   //TODO output more header
@@ -250,7 +250,7 @@ void outputProblemToLaTeX(Problem* prb)
   BYPASSING_ALLOCATOR; // not sure why we need this yet, ofstream?
 
   LaTeX latex;
-  ofstream latexOut(env.options->latexOutput().c_str());
+  std::ofstream latexOut(env.options->latexOutput().c_str());
   latexOut << latex.header() << std::endl;
   latexOut << "\\section{Problem "<<env.options->problemName() << "}" << std::endl;
   //TODO output more header
@@ -717,7 +717,7 @@ int main(int argc, char* argv[])
         }
       } catch (Lib::SystemFailException& ex) {
         std::cerr << "Process " << getpid() << " received SystemFailException" << std::endl;
-        ex.cry(cerr);
+        ex.cry(std::cerr);
         std::cerr << " and will now die" << std::endl;
       }
       //we have processed the ltb batch file, so we can return zero

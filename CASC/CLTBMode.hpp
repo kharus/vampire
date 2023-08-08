@@ -55,10 +55,10 @@ class CLTBMode
 public:
   static void perform();
 private:
-  void solveBatch(istream& batchFile, bool first,vstring inputDirectory);
-  int readInput(istream& batchFile, bool first);
-  static ostream& lineOutput();
-  static ostream& coutLineOutput();
+  void solveBatch(std::istream& batchFile, bool first,vstring inputDirectory);
+  int readInput(std::istream& batchFile, bool first);
+  static std::ostream& lineOutput();
+  static std::ostream& coutLineOutput();
   void loadIncludes();
   void doTraining();
   void learnFromSolutionFile(vstring& solnFileName);
@@ -130,7 +130,7 @@ private:
   void waitForChildAndExitWhenProofFound();
   [[noreturn]] void exitOnNoSuccess();
 
-  static ofstream* writerFileStream;
+  static std::ofstream* writerFileStream;
   [[noreturn]] static void terminatingSignalHandler(int sigNum);
   [[noreturn]] void runSlice(vstring slice, unsigned milliseconds);
   [[noreturn]] void runSlice(Options& strategyOpt);

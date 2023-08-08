@@ -54,7 +54,7 @@ class LexerException
 class Lexer 
 {
 public:
-  Lexer(istream& in);
+  Lexer(std::istream& in);
   /** True if the lexer is at the end of file */
   bool isAtEndOfFile () const { return _eof; }
   /** Return the last character */

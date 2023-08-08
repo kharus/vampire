@@ -51,7 +51,7 @@ using namespace CASC;
 PortfolioMode::PortfolioMode() : _slowness(1.0), _syncSemaphore(2) {
   unsigned cores = System::getNumberOfCores();
   cores = cores < 1 ? 1 : cores;
-  _numWorkers = min(cores, env.options->multicore());
+  _numWorkers = std::min(cores, env.options->multicore());
   if(!_numWorkers)
   {
     _numWorkers = cores >= 8 ? cores - 2 : cores;
@@ -89,7 +89,7 @@ bool PortfolioMode::perform(float slowness)
       resValue = pm.searchForProof();
   } catch (Exception& exc) {
       std::cerr << "% Exception at proof search level" << std::endl;
-      exc.cry(cerr);
+      exc.cry(std::cerr);
       System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
   }
 
@@ -503,7 +503,7 @@ bool PortfolioMode::runScheduleAndRecoverProof(Schedule schedule)
 
     BYPASSING_ALLOCATOR; 
     
-    ifstream input(_tmpFileNameForProof);
+    std::ifstream input(_tmpFileNameForProof);
 
     bool openSucceeded = !input.fail();
 
@@ -693,7 +693,7 @@ void PortfolioMode::runSlice(Options& strategyOpt)
 
     BYPASSING_ALLOCATOR; 
     
-    ofstream output(fname.c_str());
+    std::ofstream output(fname.c_str());
     if (output.fail()) {
       // fallback to old printing method
       env.beginOutput();

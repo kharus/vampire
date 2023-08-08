@@ -411,7 +411,7 @@ bool Problem::empty()
 ///////////////////////////////////////
 // Parsing
 
-void Problem::addFromStream(istream& s, vstring includeDirectory, bool simplifySyntax)
+void Problem::addFromStream(std::istream& s, vstring includeDirectory, bool simplifySyntax)
 {
   using namespace Shell;
 

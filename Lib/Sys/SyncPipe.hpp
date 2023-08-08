@@ -54,7 +54,7 @@ public:
   void releasePrivileges();
 
   /**
-   * If we have read privileges, return reference to an istream object
+   * If we have read privileges, return reference to an std::istream object
    */
   std::istream& in()
   {

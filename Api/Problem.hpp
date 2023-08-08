@@ -411,7 +411,7 @@ public:
    * @param includeDirectory where the parser will look for included files
    * @param simplifySyntax Simplify syntax will be used instead of the TPTP syntax.
    */
-  void addFromStream(istream& s, vstring includeDirectory="./", bool simplifySyntax=false);
+  void addFromStream(std::istream& s, vstring includeDirectory="./", bool simplifySyntax=false);
 
   /**
    * Return the current problem clausified

@@ -122,7 +122,7 @@ void CLTBMode::perform()
  * @author Andrei Voronkov
  * @since 04/06/2013 flight Manchester-Frankfurt
  */
-void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
+void CLTBMode::solveBatch(std::istream& batchFile, bool first,vstring inputDirectory)
 {
   // this is the time in milliseconds since the start when this batch file should terminate
   _timeUsedByPreviousBatches = env.timer->elapsedMilliseconds();
@@ -414,7 +414,7 @@ void CLTBMode::doTraining()
  * @since 04/06/2013 flight Manchester-Frankfurt
  * @author Andrei Voronkov
  */
-int CLTBMode::readInput(istream& in, bool first)
+int CLTBMode::readInput(std::istream& in, bool first)
 {
   vstring line, word;
 

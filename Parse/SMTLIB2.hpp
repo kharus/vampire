@@ -38,7 +38,7 @@ public:
   SMTLIB2(const Options& opts);
 
   /** Parse from an open stream */
-  void parse(istream& str);
+  void parse(std::istream& str);
   /** Parse a ready lisp expression */
   void parse(LExpr* bench);
 

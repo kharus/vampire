@@ -456,7 +456,7 @@ void Preprocess::preprocess(Problem& prb)
    }
 
    if (_options.printClausifierPremises()) {
-     UIHelper::outputAllPremises(cerr, prb.units());
+     UIHelper::outputAllPremises(std::cerr, prb.units());
    }
 
    if (env.options->showPreprocessing()) {

@@ -500,7 +500,7 @@ Formula* Skolem::skolemise (Formula* f)
 
         if (env.options->showNonconstantSkolemFunctionTrace() && arity!=0) {
           env.beginOutput();
-          ostream& out = env.out();
+          std::ostream& out = env.out();
             out <<"Nonconstant skolem function introduced: "
             <<skolemTerm->toString()<<" for X"<<v<<" in "<<f->toString()
             <<" in formula "<<_beingSkolemised->toString()<<std::endl;

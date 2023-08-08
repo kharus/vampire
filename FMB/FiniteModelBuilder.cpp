@@ -365,7 +365,7 @@ void FiniteModelBuilder::createSymmetryOrdering()
           bool outOfBounds = false;
           for(unsigned i=0;i<arity;i++){
             unsigned srtx = _sortedSignature->functionSignatures[g.f][i];
-            g.grounding[i] = min(m,_sortModelSizes[srtx]);
+            g.grounding[i] = std::min(m,_sortModelSizes[srtx]);
             if(_sortedSignature->sortBounds[srtx] < g.grounding[i])
               outOfBounds=true;
           }
@@ -406,7 +406,7 @@ void FiniteModelBuilder::createSymmetryOrdering()
           bool outOfBounds = false;
           for(unsigned i=0;i<arity;i++){
             unsigned srtx = _sortedSignature->functionSignatures[g.f][i];
-            g.grounding[i] = min(groundWith,_sortModelSizes[srtx]);
+            g.grounding[i] = std::min(groundWith,_sortModelSizes[srtx]);
             if(_sortedSignature->sortBounds[srtx] < g.grounding[i])
               outOfBounds=true;
           }
@@ -676,7 +676,7 @@ void FiniteModelBuilder::init()
       dFunctions[parent] += (_sortedSignature->sortedFunctions[s]).size();
     }
     for(unsigned s=0;s<_sortedSignature->distinctSorts;s++){ 
-      _distinctSortMaxs[s] = min(_distinctSortMaxs[s],bfromSI[s]); 
+      _distinctSortMaxs[s] = std::min(_distinctSortMaxs[s],bfromSI[s]);
     }
 
 
@@ -995,7 +995,7 @@ unsigned FiniteModelBuilder::estimateInstanceCount()
 
     for(unsigned var=0;var<vars;var++){
       unsigned srt = (*varSorts)[var];
-      instances *= min(_distinctSortSizes[_sortedSignature->parents[srt]],_sortedSignature->sortBounds[srt]);
+      instances *= std::min(_distinctSortSizes[_sortedSignature->parents[srt]],_sortedSignature->sortBounds[srt]);
     }
 
     res += instances;
@@ -1039,7 +1039,7 @@ void FiniteModelBuilder::addNewInstances()
     for(unsigned var=0;var<vars;var++) {
       unsigned srt = (*varSorts)[var];
       //std::cout << "srt="<<srt;
-      maxVarSize[var] = min(_sortModelSizes[srt],_sortedSignature->sortBounds[srt]);
+      maxVarSize[var] = std::min(_sortModelSizes[srt],_sortedSignature->sortBounds[srt]);
       //std::cout << ",max="<<maxVarSize[var] << std::endl;
 
       if (!_xmass) {
@@ -1181,13 +1181,13 @@ unsigned FiniteModelBuilder::estimateFunctionalDefCount()
 
     // find max size of y and z
     unsigned returnSrt = f_signature[arity];
-    instances *= min(_sortedSignature->sortBounds[returnSrt],_distinctSortSizes[_sortedSignature->parents[returnSrt]]);
-    instances *= min(_sortedSignature->sortBounds[returnSrt],_distinctSortSizes[_sortedSignature->parents[returnSrt]]);
+    instances *= std::min(_sortedSignature->sortBounds[returnSrt],_distinctSortSizes[_sortedSignature->parents[returnSrt]]);
+    instances *= std::min(_sortedSignature->sortBounds[returnSrt],_distinctSortSizes[_sortedSignature->parents[returnSrt]]);
 
     // we skip 0 and 1 as these are y and z
     for(unsigned var=2;var<arity+2;var++){
       unsigned srt = f_signature[var-2]; // f_signature[arity] is return sort
-      instances *= min(_sortedSignature->sortBounds[srt],_distinctSortSizes[_sortedSignature->parents[srt]]);
+      instances *= std::min(_sortedSignature->sortBounds[srt],_distinctSortSizes[_sortedSignature->parents[srt]]);
     }
 
     res += instances / 2;
@@ -1215,13 +1215,13 @@ void FiniteModelBuilder::addNewFunctionalDefs()
 
     // find max size of y and z 
     unsigned returnSrt = f_signature[arity];
-    maxVarSize[0] = min(_sortedSignature->sortBounds[returnSrt],_sortModelSizes[returnSrt]);
-    maxVarSize[1] = min(_sortedSignature->sortBounds[returnSrt],_sortModelSizes[returnSrt]);
+    maxVarSize[0] = std::min(_sortedSignature->sortBounds[returnSrt],_sortModelSizes[returnSrt]);
+    maxVarSize[1] = std::min(_sortedSignature->sortBounds[returnSrt],_sortModelSizes[returnSrt]);
 
     // we skip 0 and 1 as these are y and z
     for(unsigned var=2;var<arity+2;var++){
       unsigned srt = f_signature[var-2]; // f_signature[arity] is return sort
-      maxVarSize[var] = min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
+      maxVarSize[var] = std::min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
     }
 
     static DArray<unsigned> grounding;
@@ -1410,7 +1410,7 @@ void FiniteModelBuilder::addNewTotalityDefs()
     if(arity==0){
       unsigned srt = f_signature[0];
       unsigned dsrt = _sortedSignature->parents[srt];
-      unsigned maxSize = min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
+      unsigned maxSize = std::min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
 
       // std::cout << "Totality for const " << f << " of sort " << srt << " and max size " << maxSize << std::endl;
 
@@ -1444,11 +1444,11 @@ void FiniteModelBuilder::addNewTotalityDefs()
     maxVarSize.ensure(arity);
     for(unsigned var=0;var<arity;var++){
       unsigned srt = f_signature[var]; 
-      maxVarSize[var] = min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
+      maxVarSize[var] = std::min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
     }
     unsigned retSrt = f_signature[arity];
     unsigned dRetSrt = _sortedSignature->parents[retSrt];
-    unsigned maxRtSrtSize = min(_sortedSignature->sortBounds[retSrt],_sortModelSizes[retSrt]);
+    unsigned maxRtSrtSize = std::min(_sortedSignature->sortBounds[retSrt],_sortModelSizes[retSrt]);
 
     static DArray<unsigned> grounding;
     grounding.ensure(arity);
@@ -1964,10 +1964,10 @@ void FiniteModelBuilder::onModelFound()
     maxVarSize.ensure(arity);
     for(unsigned var=0;var<arity;var++){ 
       unsigned srt = f_signature[var];
-      maxVarSize[var] = min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
+      maxVarSize[var] = std::min(_sortedSignature->sortBounds[srt],_sortModelSizes[srt]);
     }
     unsigned retSrt = f_signature[arity];
-    unsigned maxRtSrtSize = min(_sortedSignature->sortBounds[retSrt],_sortModelSizes[retSrt]);
+    unsigned maxRtSrtSize = std::min(_sortedSignature->sortBounds[retSrt],_sortModelSizes[retSrt]);
 
 fModelLabel:
       for(unsigned var=arity-1;var+1!=0;var--){

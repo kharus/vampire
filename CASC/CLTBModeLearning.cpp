@@ -126,7 +126,7 @@ void CLTBModeLearning::perform()
  * @author Andrei Voronkov
  * @since 04/06/2013 flight Manchester-Frankfurt
  */
-void CLTBModeLearning::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
+void CLTBModeLearning::solveBatch(std::istream& batchFile, bool first,vstring inputDirectory)
 {
   // fill the global strats up
   fillSchedule(strats);
@@ -371,7 +371,7 @@ void CLTBModeLearning::doTraining(int time, bool startup)
   // it is important that we know that nobody will be using the semaphores etc
   if(stratSem.get(0)){
       strategies->acquireRead();
-      istream& sin = strategies->in();
+      std::istream& sin = strategies->in();
       while(stratSem.get(0)){
         stratSem.dec(0);
         vstring strat;
@@ -487,7 +487,7 @@ void CLTBModeLearning::doTraining(int time, bool startup)
  * @since 04/06/2013 flight Manchester-Frankfurt
  * @author Andrei Voronkov
  */
-int CLTBModeLearning::readInput(istream& in, bool first)
+int CLTBModeLearning::readInput(std::istream& in, bool first)
 {
   vstring line, word;
 

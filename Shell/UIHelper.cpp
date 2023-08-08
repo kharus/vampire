@@ -205,7 +205,7 @@ static bool hasEnding (vstring const &fullString, vstring const &ending) {
   }
 }
 
-UnitList* UIHelper::tryParseTPTP(istream* input)
+UnitList* UIHelper::tryParseTPTP(std::istream* input)
 {
   Parse::TPTP parser(*input);
   try{
@@ -219,7 +219,7 @@ UnitList* UIHelper::tryParseTPTP(istream* input)
   return parser.units();
 }
 
-UnitList* UIHelper::tryParseSMTLIB2(const Options& opts,istream* input,SMTLIBLogic& smtLibLogic)
+UnitList* UIHelper::tryParseSMTLIB2(const Options& opts,std::istream* input,SMTLIBLogic& smtLibLogic)
 {
   Parse::SMTLIB2 parser(opts);
   parser.parse(*input);
@@ -241,7 +241,7 @@ UnitList* UIHelper::tryParseSMTLIB2(const Options& opts,istream* input,SMTLIBLog
 
 // Call this function to report a parsing attempt has failed and to reset the input
 template<typename T>
-void resetParsing(T exception, vstring inputFile, istream*& input,vstring nowtry)
+void resetParsing(T exception, vstring inputFile, std::istream*& input,vstring nowtry)
 {
   if (env.options->mode()!=Options::Mode::SPIDER) {
     env.beginOutput();
@@ -275,7 +275,7 @@ Problem* UIHelper::getInputProblem(const Options& opts)
   vstring inputFile = opts.inputFile();
   auto inputSyntax = opts.inputSyntax();
 
-  istream* input;
+  std::istream* input;
   if (inputFile=="") {
     input=&cin;
 

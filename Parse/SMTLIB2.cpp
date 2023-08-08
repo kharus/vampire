@@ -68,7 +68,7 @@ SMTLIB2::SMTLIB2(const Options& opts)
 {
 }
 
-void SMTLIB2::parse(istream& str)
+void SMTLIB2::parse(std::istream& str)
 {
   LispLexer lex(str);
   LispParser lpar(lex);

@@ -822,7 +822,7 @@ void SortInference::doInference()
       for(unsigned srt=0;srt<_sig->sorts;srt++){
         if(_sig->parents[srt] == dsrt){
           //std::cout << "(" << srt << "," << max << ")" << std::endl;
-          _sig->sortBounds[srt] = min(_sig->sortBounds[srt],max);
+          _sig->sortBounds[srt] = std::min(_sig->sortBounds[srt],max);
         }
       }
     }

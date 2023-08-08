@@ -27,7 +27,7 @@ using namespace Lib;
  * Initialise a lexer.
  * @since 27/07/2004 Torrevieja
  */
-Lexer::Lexer (istream& in)
+Lexer::Lexer (std::istream& in)
   : _charBuffer(512),
     _charCursor(0),
     _stream(in),
