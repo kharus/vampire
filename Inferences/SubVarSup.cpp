@@ -151,7 +151,7 @@ private:
 
 ClauseIterator SubVarSup::generateClauses(Clause* premise)
 {
-  //cout << "SubVarSup with " << premise->toString() << std::endl;
+  //std::cout << "SubVarSup with " << premise->toString() << std::endl;
 
   auto itf1 = premise->getSelectedLiteralIterator();
 
@@ -181,7 +181,7 @@ ClauseIterator SubVarSup::generateClauses(Clause* premise)
   // Remove null elements - these can come from performSubVarSup
   auto it6 = getFilteredIterator(it5,NonzeroFn());
 
-  //cout << "out" << std::endl;
+  //std::cout << "out" << std::endl;
 
   return pvi( it6 );
 }
@@ -200,8 +200,8 @@ Clause* SubVarSup::performSubVarSup(
   ASS(eqClause->store()==Clause::ACTIVE);
   ASS(rwTerm.isVar());
 
-  //cout << "performSubVarSup with " << rwClause->toString() << " and " << eqClause->toString() << std::endl;
-  //cout << "rwTerm " << rwTerm.toString() << " eqLHSS " << eqLHS.toString() << std::endl;
+  //std::cout << "performSubVarSup with " << rwClause->toString() << " and " << eqClause->toString() << std::endl;
+  //std::cout << "rwTerm " << rwTerm.toString() << " eqLHSS " << eqLHS.toString() << std::endl;
 
   static RobSubstitution subst;
   subst.reset();
@@ -241,7 +241,7 @@ Clause* SubVarSup::performSubVarSup(
    //ASS_EQ(rwTermS,newEqLHS);
 #endif
 
-  //cout << "Check ordering on " << tgtTermS.toString() << " and " << rwTermS.toString() << std::endl;
+  //std::cout << "Check ordering on " << tgtTermS.toString() << " and " << rwTermS.toString() << std::endl;
 
   /*if(rwLitS->isEquality()) {
     //check that we're not rewriting only the smaller side of an equality
@@ -328,7 +328,7 @@ Clause* SubVarSup::performSubVarSup(
     env.statistics->backwardSubVarSup++;
   }
 
-  //cout << "SUBVARSUP " + res->toString() << std::endl;
+  //std::cout << "SUBVARSUP " + res->toString() << std::endl;
   return res;
 
 construction_fail:

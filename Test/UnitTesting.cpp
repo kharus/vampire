@@ -209,7 +209,7 @@ int main(int argc, const char** argv)
   } else if (cmd == "run") {
     success = Test::UnitTesting::instance().run(args);
   } else {
-    cerr << "unknown command: " << cmd << std::endl;
+    std::cerr << "unknown command: " << cmd << std::endl;
     success = false;
   }
   return success ? 0 : -1;

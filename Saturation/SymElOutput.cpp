@@ -71,7 +71,7 @@ void SymElOutput::onNonRedundantClause(Clause* c)
     }
   }
   //if(c->color()==COLOR_TRANSPARENT && c->inputType()!=Clause::AXIOM && !c->skip()) {
-  //  cout<<"Interesting: "<<c->toNiceString()<<std::endl;
+  //  std::cout<<"Interesting: "<<c->toNiceString()<<std::endl;
   //}
 }
 

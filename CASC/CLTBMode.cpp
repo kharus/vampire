@@ -187,7 +187,7 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
       try {
         prob.searchForProof(problemTerminationTime,nextProblemTimeLimit,_category);
       } catch (Exception& exc) {
-        cerr << "% Exception at proof search level" << std::endl;
+        std::cerr << "% Exception at proof search level" << std::endl;
         exc.cry(cerr);
         System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
       }
@@ -206,7 +206,7 @@ void CLTBMode::solveBatch(istream& batchFile, bool first,vstring inputDirectory)
       );
     }
     catch(SystemFailException& ex) {
-      cerr << "% SystemFailException at batch level" << std::endl;
+      std::cerr << "% SystemFailException at batch level" << std::endl;
       ex.cry(cerr);
     }
 
@@ -283,7 +283,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
       return; // ignore if we cannot get the solution file
       //USER_ERROR("Cannot open problem file: " + solnFileName);
     }
-    cout << "Reading solutions " << solnFileName << std::endl;
+    std::cout << "Reading solutions " << solnFileName << std::endl;
 
     ScopedPtr<DHMap<Unit*,Parse::TPTP::SourceRecord*> > sources;
     sources = new DHMap<Unit*,Parse::TPTP::SourceRecord*>();
@@ -299,7 +299,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
       env.options->setOutputAxiomNames(outputAxiomValue);
       solnUnits = parser.units();
     } catch (Lib::Exception& ex) {
-      cout << "Couldn't parse " << "solnFileName" << std::endl;
+      std::cout << "Couldn't parse " << "solnFileName" << std::endl;
       ex.cry(cout);
 
       //save memory by deleting the already loaded units:
@@ -332,7 +332,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
                 if (_learnedFormulasCount.get(name) > _learnedFormulasMaxCount){
                   _learnedFormulasMaxCount = _learnedFormulasCount.get(name);
                 }
-              //cout << name << "," << _learnedFormulasCount.get(name) << std::endl;
+              //std::cout << name << "," << _learnedFormulasCount.get(name) << std::endl;
               }
             }
 
@@ -358,7 +358,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
                 if (_learnedFormulasCount.get(name) > _learnedFormulasMaxCount){
                   _learnedFormulasMaxCount = _learnedFormulasCount.get(name);
                 }
-              //cout << name << "," << _learnedFormulasCount.get(name) << std::endl;
+              //std::cout << name << "," << _learnedFormulasCount.get(name) << std::endl;
               }
             }
           }
@@ -622,7 +622,7 @@ void CLTBProblem::fillSchedule(Schedule& sched,const Shell::Property* property,i
  */
 void CLTBProblem::performStrategy(int terminationTime,int timeLimit,Category category,const Shell::Property* property)
 {
-  cout << "% Hi Geoff, go and have some cold beer while I am trying to solve this very hard problem!\n";
+  std::cout << "% Hi Geoff, go and have some cold beer while I am trying to solve this very hard problem!\n";
 
   Schedule quick;
 
@@ -670,7 +670,7 @@ void CLTBProblem::searchForProof(int terminationTime,int timeLimit,const Categor
       unsigned cutoff = parent->_learnedFormulasMaxCount/2;
       while (cutoff>0){
         cutoffs.push(cutoff);
-        //cout << "create cutoff " << cutoff << std::endl;
+        //std::cout << "create cutoff " << cutoff << std::endl;
         cutoff /= 2;
       }
     }
@@ -824,7 +824,7 @@ bool CLTBProblem::runSchedule(Schedule& schedule,StrategySet& used,int terminati
         try {
           runSlice(sliceCode,sliceTime); //start proving
         } catch (Exception& exc) {
-          cerr << "% Exception at run slice level" << std::endl;
+          std::cerr << "% Exception at run slice level" << std::endl;
           exc.cry(cerr);
           System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
         }
@@ -892,9 +892,9 @@ void CLTBProblem::terminatingSignalHandler(int sigNum)
       writerFileStream->close();
     }
   } catch (Lib::SystemFailException& ex) {
-    cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
+    std::cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
     ex.cry(cerr);
-    cerr << " and will now die" << std::endl;
+    std::cerr << " and will now die" << std::endl;
   }
   System::terminateImmediately(0);
 }
@@ -1023,5 +1023,5 @@ ostream& CLTBMode::lineOutput()
  */
 ostream& CLTBMode::coutLineOutput()
 {
-  return cout << "% (" << getpid() << ',' << (env.timer->elapsedMilliseconds()/100)/10.0 << ") ";
+  return std::cout << "% (" << getpid() << ',' << (env.timer->elapsedMilliseconds()/100)/10.0 << ") ";
 } // CLTBMode::coutLineOutput

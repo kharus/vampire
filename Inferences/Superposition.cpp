@@ -114,7 +114,7 @@ ClauseIterator Superposition::generateClauses(Clause* premise)
 {
   PassiveClauseContainer* passiveClauseContainer = _salg->getPassiveClauseContainer();
 
-  //cout << "SUPERPOSITION with " << premise->toString() << std::endl;
+  //std::cout << "SUPERPOSITION with " << premise->toString() << std::endl;
 
   //TODO probably shouldn't go here!
   static bool withConstraints = env.options->unificationWithAbstraction()!=Options::UnificationWithAbstraction::OFF;
@@ -370,7 +370,7 @@ Clause* Superposition::performSuperposition(
   }
 #endif
 
-  //cout << "Check ordering on " << tgtTermS.toString() << " and " << rwTermS.toString() << std::endl;
+  //std::cout << "Check ordering on " << tgtTermS.toString() << " and " << rwTermS.toString() << std::endl;
 
   //check that we're not rewriting smaller subterm with larger
   if(Ordering::isGorGEorE(ordering.compare(tgtTermS,rwTermS))) {
@@ -413,14 +413,14 @@ Clause* Superposition::performSuperposition(
   // superposition on 
   if(env.options->proofExtra()==Options::ProofExtra::FULL){
     /*
-    cout << "rwClause " << rwClause->toString() << std::endl;
-    cout << "eqClause " << eqClause->toString() << std::endl;
-    cout << "rwLit " << rwLit->toString() << std::endl;
-    cout << "eqLit " << eqLit->toString() << std::endl;
-    cout << "rwTerm " << rwTerm.toString() << std::endl;
-    cout << "eqLHS " << eqLHS.toString() << std::endl;
+    std::cout << "rwClause " << rwClause->toString() << std::endl;
+    std::cout << "eqClause " << eqClause->toString() << std::endl;
+    std::cout << "rwLit " << rwLit->toString() << std::endl;
+    std::cout << "eqLit " << eqLit->toString() << std::endl;
+    std::cout << "rwTerm " << rwTerm.toString() << std::endl;
+    std::cout << "eqLHS " << eqLHS.toString() << std::endl;
      */
-    //cout << subst->toString() << std::endl;
+    //std::cout << subst->toString() << std::endl;
 
     // First find which literal it is in the clause, as selection has occured already
     // this should remain the same...?
@@ -439,7 +439,7 @@ Clause* Superposition::performSuperposition(
         eqPos+" in "+eqClauseNum+" and "+
         rwPos+" in "+rwClauseNum;
 
-    //cout << extra << std::endl;
+    //std::cout << extra << std::endl;
     //NOT_IMPLEMENTED;
 
     if (!env.proofExtra) {
@@ -579,10 +579,10 @@ Clause* Superposition::performSuperposition(
 
 /*
   if(hasConstraints){ 
-    cout << "RETURNING " << res->toString() << std::endl;
+    std::cout << "RETURNING " << res->toString() << std::endl;
     //NOT_IMPLEMENTED;
   }
 */
-//  cout << "result " + res->toString() << std::endl;
+//  std::cout << "result " + res->toString() << std::endl;
   return res;
 }

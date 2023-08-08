@@ -232,7 +232,7 @@ SaturationAlgorithm::SaturationAlgorithm(Problem& prb, const Options& opt)
   _ordering = OrderingSP(Ordering::create(prb, opt));
   if (!Ordering::trySetGlobalOrdering(_ordering)) {
     //this is not an error, it may just lead to lower performance (and most likely not significantly lower)
-    cerr << "SaturationAlgorithm cannot set its ordering as global" << std::endl;
+    std::cerr << "SaturationAlgorithm cannot set its ordering as global" << std::endl;
   }
   _selector = LiteralSelector::getSelector(*_ordering, opt, opt.selection());
 
@@ -494,7 +494,7 @@ void SaturationAlgorithm::onNewUsefulPropositionalClause(Clause* c)
  */
 void SaturationAlgorithm::onClauseRetained(Clause* cl)
 {
-  //cout << "[SA] retained " << cl->toString() << std::endl;
+  //std::cout << "[SA] retained " << cl->toString() << std::endl;
 
 }
 
@@ -638,12 +638,12 @@ void SaturationAlgorithm::addInputClause(Clause* cl)
 
   if (_opt.sineToAge()) {
     unsigned level = cl->getSineLevel();
-    // cout << "Adding " << cl->toString() << " level " << level;
+    // std::cout << "Adding " << cl->toString() << " level " << level;
     if (level == UINT_MAX) {
       level = env.maxSineLevel-1; // as the next available (unused) value
-      // cout << " -> " << level;
+      // std::cout << " -> " << level;
     }
-    // cout << std::endl;
+    // std::cout << std::endl;
     cl->setAge(level);
   }
 
@@ -864,9 +864,9 @@ void SaturationAlgorithm::newClausesToUnprocessed()
     case Clause::SELECTED:
     case Clause::ACTIVE:
 #if VDEBUG
-      cout << "FAIL: " << cl->toString() << std::endl;
+      std::cout << "FAIL: " << cl->toString() << std::endl;
       //such clauses should not appear as new ones
-      cout << cl->toString() << std::endl;
+      std::cout << cl->toString() << std::endl;
 #endif
       ASSERTION_VIOLATION_REP(cl->store());
     }

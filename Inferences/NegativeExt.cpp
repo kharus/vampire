@@ -98,7 +98,7 @@ struct NegativeExt::ResultFn
       VariableWithSortIterator vit(eqSort.term());
       while(vit.hasNext()){
         std::pair<TermList, TermList> varTypePair = vit.next();
-        //cout << "variable " + varTypePair.first.toString() + " has type " + varTypePair.second.toString() << std::endl;
+        //std::cout << "variable " + varTypePair.first.toString() + " has type " + varTypePair.second.toString() << std::endl;
         varSorts.insert(varTypePair.first.var(), varTypePair.second);
       }
     }
@@ -133,8 +133,8 @@ struct NegativeExt::ResultFn
     TermList skSymSort = AtomicSort::arrowSort(termVarSorts, resultSort);
     unsigned fun = Skolem::addSkolemFunction(typeVars.size(), typeVars.size(), 0, skSymSort);
     TermList head = TermList(Term::create(fun, typeVars.size(), typeVars.begin()));
-    //cout << "the head is " + head.toString() << std::endl;
-    //cout << "It has sort " + skSymSort.toString() << std::endl;
+    //std::cout << "the head is " + head.toString() << std::endl;
+    //std::cout << "It has sort " + skSymSort.toString() << std::endl;
     TermList skolemTerm = ApplicativeHelper::createAppTerm(SortHelper::getResultSort(head.term()), head, termVars);
 
     TermList newLhs = ApplicativeHelper::createAppTerm(alpha1, alpha2, lhs, skolemTerm);
@@ -164,7 +164,7 @@ private:
 
 ClauseIterator NegativeExt::generateClauses(Clause* premise)
 {
-  //cout << "NegativeExt with " + premise->toString() << std::endl;
+  //std::cout << "NegativeExt with " + premise->toString() << std::endl;
   if(premise->isEmpty()) {
     return ClauseIterator::getEmpty();
   }
@@ -178,7 +178,7 @@ ClauseIterator NegativeExt::generateClauses(Clause* premise)
 
   auto it4 = getFilteredIterator(it3,NonzeroFn());
 
-  //cout << "out of arg cong" << std::endl;
+  //std::cout << "out of arg cong" << std::endl;
   return pvi( it4 );
 }
 

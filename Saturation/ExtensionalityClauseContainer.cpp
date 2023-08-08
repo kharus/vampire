@@ -32,7 +32,7 @@ using namespace Shell;
 Literal* ExtensionalityClauseContainer::addIfExtensionality(Clause* c) {
   // Clause is already in extensionality container. We only have to search X=Y.
   if (c->isExtensionality()) {
-    //cout << "Using " << c->toString() << std::endl;
+    //std::cout << "Using " << c->toString() << std::endl;
     return getSingleVarEq(c);
   }
 

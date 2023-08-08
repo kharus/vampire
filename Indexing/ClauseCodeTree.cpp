@@ -126,7 +126,7 @@ void ClauseCodeTree::optimizeLiteralOrder(DArray<Literal*>& lits)
       }
 
       if(sharedLen>bestSharedLen && (!bestGround || lits[i]->ground()) ) {
-//	cout<<lits[i]->toString()<<" is better than "<<lits[bestIndex]->toString()<<std::endl;
+//	std::cout<<lits[i]->toString()<<" is better than "<<lits[bestIndex]->toString()<<std::endl;
 	bestSharedLen=sharedLen;
 	bestIndex=i;
 	bestGround=lits[i]->ground();
@@ -790,7 +790,7 @@ bool ClauseCodeTree::ClauseMatcher::matchGlobalVars(int& resolvedQueryLit)
   //TODO: perform _set_, not _multiset_ subsumption for subsumption resolution
 
 //  bool verbose=query->number()==58746;
-//#define VERB_OUT(x) if(verbose) {cout<<x<<std::endl;}
+//#define VERB_OUT(x) if(verbose) {std::cout<<x<<std::endl;}
 
   unsigned clen=lms.size()-1;
 

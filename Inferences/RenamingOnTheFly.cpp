@@ -112,12 +112,12 @@ ClauseIterator RenamingOnTheFly::produceClauses(Clause* c)
       } 
 
       if(nameExists){
-        //cout << "the clause is " + c->toString() << std::endl;
-        //cout << "the formula is " + formula.toString() << std::endl;
-        //cout << "the name is " + name.toString() << std::endl;
-        //cout << "the lit is " + tqr.literal->toString() << std::endl;
-        //cout << "other clause is " + tqr.clause->toString() << std::endl;
-        //cout << "the sub is " + tqr.substitution->toString() << std::endl;
+        //std::cout << "the clause is " + c->toString() << std::endl;
+        //std::cout << "the formula is " + formula.toString() << std::endl;
+        //std::cout << "the name is " + name.toString() << std::endl;
+        //std::cout << "the lit is " + tqr.literal->toString() << std::endl;
+        //std::cout << "other clause is " + tqr.clause->toString() << std::endl;
+        //std::cout << "the sub is " + tqr.substitution->toString() << std::endl;
         Literal* newLit = Literal::createEquality(positive, nameS, troo, boolSort);
         if(needToAddDefClause){
           Clause* defClause = tqr.clause;

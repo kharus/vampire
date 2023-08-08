@@ -204,7 +204,7 @@ void CLTBModeLearning::solveBatch(istream& batchFile, bool first,vstring inputDi
       try {
         prob.searchForProof(problemTerminationTime,nextProblemTimeLimit,strats,true);
       } catch (Exception& exc) {
-        cerr << "% Exception at proof search level" << std::endl;
+        std::cerr << "% Exception at proof search level" << std::endl;
         exc.cry(cerr);
         System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
       }
@@ -223,7 +223,7 @@ void CLTBModeLearning::solveBatch(istream& batchFile, bool first,vstring inputDi
       );
     }
     catch(SystemFailException& ex) {
-      cerr << "% SystemFailException at batch level" << std::endl;
+      std::cerr << "% SystemFailException at batch level" << std::endl;
       ex.cry(cerr);
     }
 
@@ -354,7 +354,7 @@ void CLTBModeLearning::doTraining(int time, bool startup)
       );
     }
     catch(SystemFailException& ex) {
-      cerr << "% SystemFailException at batch level" << std::endl;
+      std::cerr << "% SystemFailException at batch level" << std::endl;
       ex.cry(cerr);
     }
     if(!resValue){
@@ -788,7 +788,7 @@ void CLTBModeLearning::fillSchedule(CLTBModeLearning::Schedule& sched) {
  */
 void CLTBProblemLearning::performStrategy(int terminationTime,int timeLimit,  Shell::Property* property,Schedule& quick, bool stopOnProof)
 {
-  cout << "% Hi Geoff, go and have some cold beer while I am trying to solve this very hard problem!\n";
+  std::cout << "% Hi Geoff, go and have some cold beer while I am trying to solve this very hard problem!\n";
 
    Schedule fallback;
    //CASC::CASCMode::getSchedules(*property,fallback,fallback);
@@ -965,7 +965,7 @@ bool CLTBProblemLearning::runSchedule(Schedule& schedule,StrategySet& used,bool 
         try {
           runSlice(sliceCode,sliceTime,stopOnProof); //start proving
         } catch (Exception& exc) {
-          cerr << "% Exception at run slice level" << std::endl;
+          std::cerr << "% Exception at run slice level" << std::endl;
           exc.cry(cerr);
           System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
         }
@@ -1033,9 +1033,9 @@ void CLTBProblemLearning::terminatingSignalHandler(int sigNum)
       writerFileStream->close();
     }
   } catch (Lib::SystemFailException& ex) {
-    cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
+    std::cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
     ex.cry(cerr);
-    cerr << " and will now die" << std::endl;
+    std::cerr << " and will now die" << std::endl;
   }
   System::terminateImmediately(0);
 }
@@ -1197,6 +1197,6 @@ ostream& CLTBModeLearning::lineOutput()
  */
 ostream& CLTBModeLearning::coutLineOutput()
 {
-  return cout << "% (" << getpid() << ',' << (env.timer->elapsedMilliseconds()/100)/10.0 << ") ";
+  return std::cout << "% (" << getpid() << ',' << (env.timer->elapsedMilliseconds()/100)/10.0 << ") ";
 } // CLTBModeLearning::coutLineOutput
 

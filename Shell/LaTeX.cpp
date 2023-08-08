@@ -732,7 +732,7 @@ vstring LaTeX::varToString (unsigned num) const
 //   }
 //   vstring refutation = toString(ref);
 //   if (fileName == "on") {
-//     cout << refutation;
+//     std::cout << refutation;
 //     return;
 //   }
 //   ofstream stream(fileName.c_str());
@@ -740,7 +740,7 @@ vstring LaTeX::varToString (unsigned num) const
 //     stream << refutation;
 //   }
 //   else {
-//     cerr << "Cannot open file " << fileName << " for LaTeX output\n";
+//     std::cerr << "Cannot open file " << fileName << " for LaTeX output\n";
 //   }
 // } // LaTeX::output
 

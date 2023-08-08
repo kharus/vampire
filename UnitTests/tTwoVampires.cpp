@@ -135,7 +135,7 @@ TEST_FUN(two_vampires1)
   //the children wouldn't be able to write either.)
   childOutputPipe.neverWrite();
 
-  cout<<std::endl;
+  std::cout<<std::endl;
 
   childOutputPipe.acquireRead();  //start reading from the pipe
   vstring str;
@@ -145,7 +145,7 @@ TEST_FUN(two_vampires1)
   //destroying the SyncPipe object or terminating the process.
   while(!childOutputPipe.in().eof()) {
     getline(childOutputPipe.in(), str); //read line
-    cout<<str<<std::endl; //and write it to the output
+    std::cout<<str<<std::endl; //and write it to the output
   }
   childOutputPipe.releaseRead(); //declare we have stopped reading from the pipe
 

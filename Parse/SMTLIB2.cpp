@@ -41,10 +41,10 @@
 #define LOGGING 0
 
 #if LOGGING
-#define LOG1(arg) cout << arg << std::endl;
-#define LOG2(a1,a2) cout << a1 << a2 << std::endl;
-#define LOG3(a1,a2,a3) cout << a1 << a2 << a3 << std::endl;
-#define LOG4(a1,a2,a3,a4) cout << a1 << a2 << a3 << a4 << std::endl;
+#define LOG1(arg) std::cout << arg << std::endl;
+#define LOG2(a1,a2) std::cout << a1 << a2 << std::endl;
+#define LOG3(a1,a2,a3) std::cout << a1 << a2 << a3 << std::endl;
+#define LOG4(a1,a2,a3,a4) std::cout << a1 << a2 << a3 << a4 << std::endl;
 #else
 #define LOG1(arg)
 #define LOG2(a1,a2)
@@ -2581,11 +2581,11 @@ SMTLIB2::ParseResult SMTLIB2::parseTermOrFormula(LExpr* body, bool isSort)
 
   while (_todo.isNonEmpty()) {
     /*
-    cout << "Results:" << std::endl;
+    std::cout << "Results:" << std::endl;
     for (unsigned i = 0; i < results.size(); i++) {
-      cout << results[i].toString() << std::endl;
+      std::cout << results[i].toString() << std::endl;
     }
-    cout << "---" << std::endl;
+    std::cout << "---" << std::endl;
     */
 
     std::pair<ParseOperation,LExpr*> cur = _todo.pop();

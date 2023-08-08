@@ -27,12 +27,12 @@ using namespace Api;
 
 void printProblem(Problem p)
 {
-  cout<<"____"<<std::endl;
+  std::cout<<"____"<<std::endl;
   AnnotatedFormulaIterator fit=p.formulas();
   while(fit.hasNext()) {
-    cout<<fit.next()<<std::endl;
+    std::cout<<fit.next()<<std::endl;
   }
-  cout<<"^^^^"<<std::endl;
+  std::cout<<"^^^^"<<std::endl;
 }
 
 void clausifyTest(const char* fname)
@@ -77,9 +77,9 @@ void inlineTest(const char* fname)
   m_PreprocessOpts.predicateDefinitionMerging = false;
   m_PreprocessOpts.variableEqualityPropagation = false;
 
-  cout << "\nFirst stage of clausification... "<<std::endl;
+  std::cout << "\nFirst stage of clausification... "<<std::endl;
   p = p.preprocess(m_PreprocessOpts);
- cout << "  ...done\n";
+ std::cout << "  ...done\n";
 //
 // return;
 
@@ -99,9 +99,9 @@ void inlineTest(const char* fname)
   m_PreprocessOpts.equivalenceDiscoverySatConflictLimit = 0;
   m_PreprocessOpts.variableEqualityPropagation = true;
 
-  cout << "\nSecond stage of clausification... "<<std::endl;
+  std::cout << "\nSecond stage of clausification... "<<std::endl;
   p = p.preprocess(m_PreprocessOpts);
-  cout << "  ...done\n";
+  std::cout << "  ...done\n";
 
   p.output(cout, true, false);
 }
@@ -129,23 +129,23 @@ void testSubst()
     AnnotatedFormula af1neg = api.annotatedFormula(f1neg, FormulaBuilder::ASSUMPTION);
     AnnotatedFormula af1conj = api.annotatedFormula(f1neg, FormulaBuilder::CONJECTURE);
 
-    cout<<f1neg.toString()<<std::endl;
-    cout<<api.substitute(f1neg, xv, fx).toString()<<std::endl;
-    cout<<api.substitute(api.substitute(f1neg, xv, fx), xv, fx).toString()<<std::endl;
-    cout<<api.substitute(api.substitute(af1neg, xv, fx), xv, fx).toString()<<std::endl;
-    cout<<api.substitute(api.substitute(fx, xv, fx), xv, fx).toString()<<std::endl;
+    std::cout<<f1neg.toString()<<std::endl;
+    std::cout<<api.substitute(f1neg, xv, fx).toString()<<std::endl;
+    std::cout<<api.substitute(api.substitute(f1neg, xv, fx), xv, fx).toString()<<std::endl;
+    std::cout<<api.substitute(api.substitute(af1neg, xv, fx), xv, fx).toString()<<std::endl;
+    std::cout<<api.substitute(api.substitute(fx, xv, fx), xv, fx).toString()<<std::endl;
 
     Formula f2neg = api.negation(f2);
     AnnotatedFormula af2neg = api.annotatedFormula(f2neg, FormulaBuilder::ASSUMPTION);
     AnnotatedFormula af2conj = api.annotatedFormula(f2neg, FormulaBuilder::CONJECTURE);
-    cout<<af2neg.toString()<<std::endl;
-    cout<<api.replaceConstant(af2neg, c, fx).toString()<<std::endl;
-    cout<<api.replaceConstant(ffc, c, y).toString()<<std::endl;
+    std::cout<<af2neg.toString()<<std::endl;
+    std::cout<<api.replaceConstant(af2neg, c, fx).toString()<<std::endl;
+    std::cout<<api.replaceConstant(ffc, c, y).toString()<<std::endl;
 
   }
   catch (ApiException e)
   {
-    cout<< "Exception: "<<e.msg()<<std::endl;
+    std::cout<< "Exception: "<<e.msg()<<std::endl;
     throw;
   }
 }
@@ -208,7 +208,7 @@ int main(int argc, char* argv [])
   AnnotatedFormula af = api.annotatedFormula(form, FormulaBuilder::CONJECTURE);
 //  AnnotatedFormula af = api.annotatedFormula(form, FormulaBuilder::AXIOM);
 
-  cout<<af<<std::endl;
+  std::cout<<af<<std::endl;
 
   Problem p1;
   p1.addFormula(af);
@@ -216,7 +216,7 @@ int main(int argc, char* argv [])
 
   AnnotatedFormulaIterator fit1=p1.formulas();
   fit1.hasNext();
-  cout<<fit1.next().toString()<<std::endl;
+  std::cout<<fit1.next().toString()<<std::endl;
 
 
 //  vstring fs=af.toString();
@@ -232,14 +232,14 @@ int main(int argc, char* argv [])
 
   AnnotatedFormulaIterator fit2=p3.formulas();
   fit2.hasNext();
-  cout<<fit2.next().toString()<<std::endl;
+  std::cout<<fit2.next().toString()<<std::endl;
 
 
   return 0;
 
   AnnotatedFormulaIterator fit=p3.formulas();
   fit.hasNext();
-  cout<<"deleting "<<fit.next()<<std::endl;
+  std::cout<<"deleting "<<fit.next()<<std::endl;
   fit.del();
 
   printProblem(p3);

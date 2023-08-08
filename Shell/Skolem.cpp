@@ -51,7 +51,7 @@ FormulaUnit* Skolem::skolemise (FormulaUnit* unit, bool appify)
   ASS(! unit->isClause());
 
   unit = Rectify::rectify(unit);
-  //cout << "skolemising " + unit->toString() << std::endl; 
+  //std::cout << "skolemising " + unit->toString() << std::endl; 
 
  Formula* f = unit->formula();
   switch (f->connective()) {

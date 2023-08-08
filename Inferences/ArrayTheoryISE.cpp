@@ -125,7 +125,7 @@ Literal* ArrayTermTransformer::rewriteNegEqByExtensionality(Literal* l)
     unsigned select = theory->getSymbolForStructuredSort(sort, Theory::StructuredSortInterpretation::ARRAY_SELECT);
     unsigned valSort = theory->getArrayOperationSort(theory->interpretFunction(select));
 
-    //cout << l->toString() << std::endl;
+    //std::cout << l->toString() << std::endl;
     TermList* lhs = l->nthArgument(0);
     TermList* rhs = l->nthArgument(1);
     
@@ -169,9 +169,9 @@ Clause* ArrayTheoryISE::simplify(Clause* c)
     // recursive simplification also on the arguments of already simplified
     // terms.
     while (!done) {
-      //cout << "before: " << l->toString() << std::endl;
+      //std::cout << "before: " << l->toString() << std::endl;
       transformed = _transformer.transform(l);
-      //cout << "after:  " << transformed->toString() << std::endl;
+      //std::cout << "after:  " << transformed->toString() << std::endl;
       
       if (l != transformed) {
         modified = true;
@@ -200,8 +200,8 @@ Clause* ArrayTheoryISE::simplify(Clause* c)
     }
     d->setAge(c->age());
     // BK: should we keep some statistics?
-    //cout << "before: " << c->toString() << std::endl;
-    //cout << "after:  " << d->toString() << std::endl;
+    //std::cout << "before: " << c->toString() << std::endl;
+    //std::cout << "after:  " << d->toString() << std::endl;
     return d;
   }
   

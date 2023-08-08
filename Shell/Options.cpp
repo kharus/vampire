@@ -2628,7 +2628,7 @@ vstring Options::includeFileName (const vstring& relativeName)
 void Options::output (std::ostream& str) const
 {
   if(printAllTheoryAxioms()){
-    cout << "Sorry, not implemented yet!" << std::endl;
+    std::cout << "Sorry, not implemented yet!" << std::endl;
 
     return;
   }
@@ -2820,11 +2820,11 @@ bool Options::OptionValue<T>::checkConstraints(){
            case BadOption::HARD :
                USER_ERROR("\nBroken Constraint: "+con->msg(*this));
            case BadOption::SOFT :
-               cout << "WARNING Broken Constraint: "+con->msg(*this) << std::endl;
+               std::cout << "WARNING Broken Constraint: "+con->msg(*this) << std::endl;
                return false;
            case BadOption::FORCED :
                if(con->force(this)){
-                 cout << "Forced constraint " + con->msg(*this) << std::endl;
+                 std::cout << "Forced constraint " + con->msg(*this) << std::endl;
                  break;
                }else{
                  USER_ERROR("\nCould not force Constraint: "+con->msg(*this));
@@ -2854,7 +2854,7 @@ bool Options::OptionValue<T>::checkProblemConstraints(Property* prop){
          switch(env.options->getBadOptionChoice()){
          case BadOption::OFF: break;
          default:
-           cout << "WARNING: " << longName << con->msg() << std::endl;
+           std::cout << "WARNING: " << longName << con->msg() << std::endl;
          }
          return false;
       }
@@ -3135,12 +3135,12 @@ void Options::randomizeStrategy(Property* prop)
           valid = checkGlobalOptionConstraints(true) && (!prop || checkProblemOptionConstraints(prop,true));
         }
         if(!valid){
-           //cout << "Failed for " << option->longName << std::endl;
+           //std::cout << "Failed for " << option->longName << std::endl;
            option->set(def);
            option->is_set=false;
         }
-        //else cout << "Randomized " << option->longName << std::endl;
-      }// else cout << "cannot randomize " << option->longName << std::endl;
+        //else std::cout << "Randomized " << option->longName << std::endl;
+      }// else std::cout << "cannot randomize " << option->longName << std::endl;
     }
   }
 
@@ -3148,7 +3148,7 @@ void Options::randomizeStrategy(Property* prop)
   _badOption.actualValue = saved_bad_option;
   Random::setSeed(saved_seed);
 
-  if(prop) cout << "Random strategy: " + generateEncodedOptions() << std::endl;
+  if(prop) std::cout << "Random strategy: " + generateEncodedOptions() << std::endl;
 }
 
 /**

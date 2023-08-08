@@ -694,7 +694,7 @@ int main(int argc, char* argv[])
         vampireReturnValue = VAMP_RESULT_STATUS_SUCCESS;
       }
       else {
-        cout << "unknown" << std::endl;
+        std::cout << "unknown" << std::endl;
       }
       break;
 
@@ -716,9 +716,9 @@ int main(int argc, char* argv[])
           CASC::CLTBMode::perform();
         }
       } catch (Lib::SystemFailException& ex) {
-        cerr << "Process " << getpid() << " received SystemFailException" << std::endl;
+        std::cerr << "Process " << getpid() << " received SystemFailException" << std::endl;
         ex.cry(cerr);
-        cerr << " and will now die" << std::endl;
+        std::cerr << " and will now die" << std::endl;
       }
       //we have processed the ltb batch file, so we can return zero
       vampireReturnValue = VAMP_RESULT_STATUS_SUCCESS;
@@ -763,7 +763,7 @@ int main(int argc, char* argv[])
     BYPASSING_ALLOCATOR;
     vampireReturnValue = VAMP_RESULT_STATUS_UNHANDLED_EXCEPTION;
     if (outputAllowed()) {
-      cout << "Z3 exception:\n" << exception.msg() << std::endl;
+      std::cout << "Z3 exception:\n" << exception.msg() << std::endl;
     }
     reportSpiderFail();
   }

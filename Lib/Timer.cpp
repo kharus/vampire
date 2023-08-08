@@ -109,7 +109,7 @@ timer_sigalrm_handler (int sig)
 {
 #if DEBUG_TIMER_CHANGES
   if(timer_sigalrm_counter<0) {
-    cout << "Timer value became negative in timer_sigalrm_handler: " << timer_sigalrm_counter <<std::endl;
+    std::cout << "Timer value became negative in timer_sigalrm_handler: " << timer_sigalrm_counter <<std::endl;
     System::terminateImmediately(1);
   }
 #endif
@@ -142,7 +142,7 @@ timer_sigalrm_handler (int sig)
     } else if (perf_fd == -1 && error_to_report) {
       // however, we definitely want this to be guarded by env.options->instructionLimit()
       // not to bother with the error people who don't even know about instruction limiting
-      cerr << "perf_event_open failed (instruction limiting will be disabled): " << error_to_report << std::endl;
+      std::cerr << "perf_event_open failed (instruction limiting will be disabled): " << error_to_report << std::endl;
       error_to_report = nullptr;
     }
   }
@@ -150,7 +150,7 @@ timer_sigalrm_handler (int sig)
 
 #if DEBUG_TIMER_CHANGES
   if(timer_sigalrm_counter<0) {
-    cout << "Timer value became negative after increase: " << timer_sigalrm_counter <<std::endl;
+    std::cout << "Timer value became negative after increase: " << timer_sigalrm_counter <<std::endl;
     System::terminateImmediately(1);
   }
 #endif
@@ -171,7 +171,7 @@ int Timer::guaranteedMilliseconds()
   clock_t ticks=times(&aux);
 #if DEBUG_TIMER_CHANGES
   if(ticks==((clock_t)-1)) {
-    cout << "clock value -1 returned by times()" <<std::endl;
+    std::cout << "clock value -1 returned by times()" <<std::endl;
     System::terminateImmediately(1);
   }
 #endif

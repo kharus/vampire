@@ -725,11 +725,11 @@ bool SubstitutionTree::UnificationsIterator::enter(Node* n, BacktrackData& bd)
 {
 #if VDEBUG
   if(_tag){
-    cout << "=========================================" << std::endl;
-    cout << "entering..." << *n << std::endl;
-    cout << "subst is " << _subst << std::endl;
-    cout << "svstack is " << _svStack << std::endl;
-    cout << "=========================================" << std::endl;
+    std::cout << "=========================================" << std::endl;
+    std::cout << "entering..." << *n << std::endl;
+    std::cout << "subst is " << _subst << std::endl;
+    std::cout << "svstack is " << _svStack << std::endl;
+    std::cout << "=========================================" << std::endl;
   } 
 #endif
 

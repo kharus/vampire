@@ -46,7 +46,7 @@ SATClause* Grounder::ground(Clause* cl)
   }
 
   SATClause* gndNonProp = groundNonProp(cl);
-//  cout<<gndNonProp->toString()<<std::endl;
+//  std::cout<<gndNonProp->toString()<<std::endl;
 
   SATInference* inf = new FOConversionInference(cl);
   gndNonProp->setInference(inf);

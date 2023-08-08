@@ -261,7 +261,7 @@ bool ConjunctionGoalAnswerExractor::tryGetAnswer(Clause* refutation, Stack<TermL
   }
 
   if(!SubstBuilder(goalLits, lemmas, subst).run()) {
-    cout << "Answer not found in proof" << std::endl;
+    std::cout << "Answer not found in proof" << std::endl;
     return false;
   }
 

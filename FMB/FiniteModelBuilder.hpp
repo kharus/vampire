@@ -102,10 +102,10 @@ private:
       ASS(_sortedSignature);
     
     for(unsigned s=0;s<_sortedSignature->sorts;s++){
-      //cout << "SORT " << s << std::endl;
+      //std::cout << "SORT " << s << std::endl;
       unsigned modelSize = _sortModelSizes[s];
       for(unsigned m=1;m<=modelSize;m++){
-        //cout << "MSIZE " << m << std::endl;
+        //std::cout << "MSIZE " << m << std::endl;
         addNewSymmetryOrderingAxioms(m,_sortedGroundedTerms[s]);
         addNewSymmetryCanonicityAxioms(m,_sortedGroundedTerms[s],modelSize);
       }

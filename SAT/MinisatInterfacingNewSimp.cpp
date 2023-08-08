@@ -113,12 +113,12 @@ void MinisatInterfacingNewSimp::solveModuloAssumptionsAndSetStatus(unsigned conf
    
   try{
     //int bef = _solver.nVars();
-    //cout << "Before: vars " << bef << ", non-unit clauses " << _solver.nClauses() << std::endl;
+    //std::cout << "Before: vars " << bef << ", non-unit clauses " << _solver.nClauses() << std::endl;
 
     _solver.setConfBudget(conflictCountLimit); // treating UINT_MAX as \infty
     lbool res = _solver.solveLimited(_assumptions,true,true);
 
-    //cout << "After: vars " << bef - _solver.eliminated_vars << ", non-unit clauses " << _solver.nClauses() << std::endl;
+    //std::cout << "After: vars " << bef - _solver.eliminated_vars << ", non-unit clauses " << _solver.nClauses() << std::endl;
   
     if (res == l_True) {
       _status = SATISFIABLE;

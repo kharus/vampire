@@ -93,12 +93,12 @@ class TestCase
 
   template<class Is, class Expected>
   void testFail(Is const& is, Expected const& expected) {
-      cout  << std::endl;
-      cout << "[  context ]: " << pretty(_context) << std::endl;
-      cout << "[  options ]: " << pretty(_options) << std::endl;
-      cout << "[     case ]: " << pretty(*_input) << std::endl;
-      cout << "[       is ]: " << pretty(is) << std::endl;
-      cout << "[ expected ]: " << pretty(expected) << std::endl;
+      std::cout  << std::endl;
+      std::cout << "[  context ]: " << pretty(_context) << std::endl;
+      std::cout << "[  options ]: " << pretty(_options) << std::endl;
+      std::cout << "[     case ]: " << pretty(*_input) << std::endl;
+      std::cout << "[       is ]: " << pretty(is) << std::endl;
+      std::cout << "[ expected ]: " << pretty(expected) << std::endl;
       exit(-1);
   }
 

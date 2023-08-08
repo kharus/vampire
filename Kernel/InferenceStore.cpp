@@ -462,7 +462,7 @@ protected:
 
     // TODO we could make clauses track this information, but I am not sure that that's worth it
     if(us->isClause() && us->isPureTheoryDescendant()){
-      //cout << "HERE with " << us->toString() << std::endl;
+      //std::cout << "HERE with " << us->toString() << std::endl;
       Inference* inf = &us->inference();
       while(inf->rule() == InferenceRule::EVALUATION){
         Inference::Iterator piit = inf->iterator();
@@ -472,7 +472,7 @@ protected:
       current.push(inf);
       unsigned level = 0;
       while(!current.isEmpty()){
-        //cout << current.size() << std::endl;
+        //std::cout << current.size() << std::endl;
         Stack<Inference*> next;
         Stack<Inference*>::Iterator it(current);
         while(it.hasNext()){
@@ -487,7 +487,7 @@ protected:
               premInf = &premUnit->inference();
             }
 
-//for(unsigned i=0;i<level;i++){ cout << ">";}; cout << premUnit->toString() << std::endl;
+//for(unsigned i=0;i<level;i++){ std::cout << ">";}; std::cout << premUnit->toString() << std::endl;
             next.push(premInf);
           }
         }
@@ -495,7 +495,7 @@ protected:
         current = next;
       }
       level--;
-      //cout << "level is " << level << std::endl;
+      //std::cout << "level is " << level << std::endl;
       
       if(level > max_theory_clause_depth){
         max_theory_clause_depth=level;
@@ -992,11 +992,11 @@ void InferenceStore::outputUnsatCore(std::ostream& out, Unit* refutation)
         else{
           ASS(env.options->ignoreMissingInputsInUnsatCore() || u->getFormula()->hasLabel());
           if(!(env.options->ignoreMissingInputsInUnsatCore() || u->getFormula()->hasLabel())){
-            cout << "ERROR: There is a problem with the unsat core. There is an input formula in the proof" <<  std::endl;
-            cout << "that does not have a label. We expect all  input formulas to have labels as this  is what" << std::endl;
-            cout << "smtcomp does. If you don't want this then use the ignore_missing_inputs_in_unsat_core option" << std::endl;
-            cout << "The unlabelled  input formula is " << std::endl;
-            cout << u->toString() << std::endl;
+            std::cout << "ERROR: There is a problem with the unsat core. There is an input formula in the proof" <<  std::endl;
+            std::cout << "that does not have a label. We expect all  input formulas to have labels as this  is what" << std::endl;
+            std::cout << "smtcomp does. If you don't want this then use the ignore_missing_inputs_in_unsat_core option" << std::endl;
+            std::cout << "The unlabelled  input formula is " << std::endl;
+            std::cout << u->toString() << std::endl;
           }
         }
       }

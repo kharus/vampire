@@ -738,7 +738,7 @@ vstring Literal::toString() const
   }
   s += predicateName();
 
-  //cerr << "predicate: "<< predicateName()<<std::endl;
+  //std::cerr << "predicate: "<< predicateName()<<std::endl;
   if (_arity) {
     s += '(' + args()->asArgsToString(); // will also print the ')'
   }
@@ -1736,7 +1736,7 @@ bool operator<(const TermList& lhs, const TermList& rhs)
 
 bool Kernel::positionIn(TermList& subterm,TermList* term,vstring& position)
 {
-   //cout << "positionIn " << subterm.toString() << " in " << term->toString() << std::endl;
+   //std::cout << "positionIn " << subterm.toString() << " in " << term->toString() << std::endl;
 
   if(!term->isTerm()){
     if(subterm.isTerm()) return false;
@@ -1751,7 +1751,7 @@ bool Kernel::positionIn(TermList& subterm,TermList* term,vstring& position)
 
 bool Kernel::positionIn(TermList& subterm,Term* term,vstring& position)
 {
-  //cout << "positionIn " << subterm.toString() << " in " << term->toString() << std::endl;
+  //std::cout << "positionIn " << subterm.toString() << " in " << term->toString() << std::endl;
 
   if(subterm.isTerm() && subterm.term()==term){
     position = "1";

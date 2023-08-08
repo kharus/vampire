@@ -45,9 +45,9 @@ void NewCNF::clausify(FormulaUnit* unit,Stack<Clause*>& output)
   Formula* f = unit->formula();
 
 #if LOGGING
-  cout << std::endl << "----------------- INPUT ------------------" << std::endl;
-  cout << f->toString() << std::endl;
-  cout << "----------------- INPUT ------------------" << std::endl;
+  std::cout << std::endl << "----------------- INPUT ------------------" << std::endl;
+  std::cout << f->toString() << std::endl;
+  std::cout << "----------------- INPUT ------------------" << std::endl;
 #endif
 
   switch (f->connective()) {
@@ -80,11 +80,11 @@ void NewCNF::clausify(FormulaUnit* unit,Stack<Clause*>& output)
     dequeue(g, occurrences);
 
 #if LOGGING
-    cout << std::endl << "---------------------------------------------" << std::endl;
+    std::cout << std::endl << "---------------------------------------------" << std::endl;
     for (SPGenClause gc : _genClauses) {
       LOG1(gc->toString());
     }
-    cout << "---------------------------------------------" << std::endl << std::endl;
+    std::cout << "---------------------------------------------" << std::endl << std::endl;
 #endif
 
     if ((_namingThreshold > 1) && occurrences.size() > _namingThreshold) {
@@ -96,11 +96,11 @@ void NewCNF::clausify(FormulaUnit* unit,Stack<Clause*>& output)
   }
 
 #if LOGGING
-  cout << std::endl << "----------------- OUTPUT -----------------" << std::endl;
+  std::cout << std::endl << "----------------- OUTPUT -----------------" << std::endl;
   for (SPGenClause gc : _genClauses) {
     LOG1(gc->toString());
   }
-  cout << "----------------- OUTPUT -----------------" << std::endl;
+  std::cout << "----------------- OUTPUT -----------------" << std::endl;
 #endif
 
   for (SPGenClause gc : _genClauses) {
@@ -1424,7 +1424,7 @@ void NewCNF::toClauses(SPGenClause gc, Stack<Clause*>& output)
   }
 
 #if LOGGING
-  cout << std::endl << "----------------- CNF ------------------" << std::endl;
+  std::cout << std::endl << "----------------- CNF ------------------" << std::endl;
 #endif
   while (List<List<GenLit>*>::isNonEmpty(genClauses)) {
     List<GenLit>* gls = List<List<GenLit>*>::pop(genClauses);
@@ -1438,7 +1438,7 @@ void NewCNF::toClauses(SPGenClause gc, Stack<Clause*>& output)
     }
   }
 #if LOGGING
-  cout << "----------------- CNF ------------------" << std::endl << std::endl;
+  std::cout << "----------------- CNF ------------------" << std::endl << std::endl;
 #endif
 }
 

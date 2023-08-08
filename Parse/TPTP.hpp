@@ -669,7 +669,7 @@ private:
   {
     while (_cend <= pos) {
       int c = _in->get();
-      //      if (c == -1) { cout << "<EOF>"; } else {cout << char(c);}
+      //      if (c == -1) { std::cout << "<EOF>"; } else {std::cout << char(c);}
       _chars[_cend++] = c == -1 ? 0 : c;
     }
     return _chars[pos];

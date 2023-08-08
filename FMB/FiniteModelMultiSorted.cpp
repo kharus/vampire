@@ -116,8 +116,8 @@ void FiniteModelMultiSorted::addFunctionDefinition(unsigned f, const DArray<unsi
     TermList srt = env.signature->getFunction(f)->fnType()->result();
     unsigned srtU = srt.term()->functor();
     if(sortRepr[srtU][res] == -1){
-      //cout << "Rep " << env.signature->functionName(f) << " for ";
-      //cout << env.sorts->sortName(srt) << " and " << res << std::endl;
+      //std::cout << "Rep " << env.signature->functionName(f) << " for ";
+      //std::cout << env.sorts->sortName(srt) << " and " << res << std::endl;
       sortRepr[srtU][res]=f;
     }
   } 
@@ -153,7 +153,7 @@ void FiniteModelMultiSorted::addPredicateDefinition(unsigned p, const DArray<uns
 {
   ASS_EQ(env.signature->predicateArity(p),args.size());
 
-  //cout << "addPredicateDefinition for " << p << "(" << env.signature->predicateName(p) << ")" << std::endl;
+  //std::cout << "addPredicateDefinition for " << p << "(" << env.signature->predicateName(p) << ")" << std::endl;
 
   unsigned var = p_offsets[p];
   unsigned mult = 1;
@@ -447,8 +447,8 @@ unsigned FiniteModelMultiSorted::evaluateGroundTerm(Term* term)
   ASS(term->ground());
 
 #if DEBUG_MODEL
-  cout << "evaluating ground term " << term->toString() << std::endl;
-  cout << "domain constant status " << isDomainConstant(term) << std::endl;
+  std::cout << "evaluating ground term " << term->toString() << std::endl;
+  std::cout << "domain constant status " << isDomainConstant(term) << std::endl;
 #endif  
   if(isDomainConstant(term)) return getDomainConstant(term).first;
 
@@ -480,7 +480,7 @@ bool FiniteModelMultiSorted::evaluateGroundLiteral(Literal* lit)
   ASS(lit->ground());
 
 #if DEBUG_MODEL
-  cout << "Evaluating ground literal " << lit->toString() << std::endl;
+  std::cout << "Evaluating ground literal " << lit->toString() << std::endl;
 #endif
 
   // evaluate all arguments
@@ -496,8 +496,8 @@ bool FiniteModelMultiSorted::evaluateGroundLiteral(Literal* lit)
   if(lit->isEquality()){
     bool res = args[0]==args[1];
 #if DEBUG_MODEL
-    cout << "Evaluate equality, args " << args[0] << " and " << args[1] << std::endl;
-    cout << "res is " << (lit->polarity() ? res : !res) << std::endl;
+    std::cout << "Evaluate equality, args " << args[0] << " and " << args[1] << std::endl;
+    std::cout << "res is " << (lit->polarity() ? res : !res) << std::endl;
 #endif
     if(lit->polarity()) return res;
     else return !res;
@@ -519,7 +519,7 @@ bool FiniteModelMultiSorted::evaluateGroundLiteral(Literal* lit)
 
   unsigned res = p_interpretation[var];
 #if DEBUG_MODEL
-    cout << "res is " << res << " and polarity is " << lit->polarity() << std::endl; 
+    std::cout << "res is " << res << " and polarity is " << lit->polarity() << std::endl; 
 #endif
 
   if(res==0) 
@@ -557,8 +557,8 @@ bool FiniteModelMultiSorted::evaluate(Unit* unit)
 bool FiniteModelMultiSorted::evaluate(Formula* formula,unsigned depth)
 {
 #if DEBUG_MODEL
-  for(unsigned i=0;i<depth;i++){ cout << "."; }
-  cout << "Evaluating..." << formula->toString() << std::endl; 
+  for(unsigned i=0;i<depth;i++){ std::cout << "."; }
+  std::cout << "Evaluating..." << formula->toString() << std::endl; 
 #endif
 
   bool isAnd = false;
@@ -611,7 +611,7 @@ bool FiniteModelMultiSorted::evaluate(Formula* formula,unsigned depth)
       bool right_res = evaluate(right,depth+1);
       
 #if DEBUG_MODEL
-      cout << "left_res is " << left_res << ", right_res is " << right_res << std::endl;
+      std::cout << "left_res is " << left_res << ", right_res is " << right_res << std::endl;
 #endif
 
       if(isImp) return !left_res || right_res;
@@ -627,7 +627,7 @@ bool FiniteModelMultiSorted::evaluate(Formula* formula,unsigned depth)
      VList* vs = formula->vars();
      int var = vs->head();
 
-     //cout << "Quant " << isForall << " with " << var << std::endl;
+     //std::cout << "Quant " << isForall << " with " << var << std::endl;
 
      Formula* next = 0;
      if(vs->tail()) next = new QuantifiedFormula(formula->connective(),vs->tail(),0,formula->qarg());
@@ -675,8 +675,8 @@ bool FiniteModelMultiSorted::evaluate(Formula* formula,unsigned depth)
     Formula* FiniteModelMultiSorted::partialEvaluate(Formula* formula)
     {
 #if DEBUG_MODEL
-        for(unsigned i=0;i<depth;i++){ cout << "."; }
-        cout << "Evaluating..." << formula->toString() << std::endl;
+        for(unsigned i=0;i<depth;i++){ std::cout << "."; }
+        std::cout << "Evaluating..." << formula->toString() << std::endl;
 #endif
         
         switch(formula->connective()){

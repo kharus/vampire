@@ -188,13 +188,13 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
 #if VDEBUG
 /*
   if(withConstraints && constraints->size() > 0){
-    cout << "Other: " << qr.clause->toString() << std::endl;
-    cout << "queryLit: " << queryLit->toString() << std::endl;
-    cout << "resLit: " << qr.literal->toString() << std::endl;
-    cout << "SUB:" << std::endl << qr.substitution->toString() << std::endl;
+    std::cout << "Other: " << qr.clause->toString() << std::endl;
+    std::cout << "queryLit: " << queryLit->toString() << std::endl;
+    std::cout << "resLit: " << qr.literal->toString() << std::endl;
+    std::cout << "SUB:" << std::endl << qr.substitution->toString() << std::endl;
 */
 /*
-    cout << "SUB(deref):" << std::endl << qr.substitution->toString(true) << std::endl;
+    std::cout << "SUB(deref):" << std::endl << qr.substitution->toString(true) << std::endl;
 */
   //}
 #endif
@@ -205,7 +205,7 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
       std::pair<std::pair<TermList,unsigned>,std::pair<TermList,unsigned>> con = (*constraints)[i];
 
 #if VDEBUG
-      //cout << "con pair " << con.first.toString() << " , " << con.second.toString() << std::endl;
+      //std::cout << "con pair " << con.first.toString() << " , " << con.second.toString() << std::endl;
 #endif
   
       TermList qT = qr.substitution->applyTo(con.first.first,con.first.second);
@@ -307,14 +307,14 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
     env.statistics->resolution++;
   }
 
-  //cout << "RESULT " << res->toString() << std::endl;
+  //std::cout << "RESULT " << res->toString() << std::endl;
 
   return res;
 }
 
 ClauseIterator BinaryResolution::generateClauses(Clause* premise)
 {
-  //cout << "BinaryResolution for " << premise->toString() << std::endl;
+  //std::cout << "BinaryResolution for " << premise->toString() << std::endl;
 
   PassiveClauseContainer* passiveClauseContainer = _salg->getPassiveClauseContainer();
 

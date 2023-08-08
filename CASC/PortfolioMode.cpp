@@ -88,7 +88,7 @@ bool PortfolioMode::perform(float slowness)
   try {
       resValue = pm.searchForProof();
   } catch (Exception& exc) {
-      cerr << "% Exception at proof search level" << std::endl;
+      std::cerr << "% Exception at proof search level" << std::endl;
       exc.cry(cerr);
       System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
   }
@@ -449,7 +449,7 @@ bool PortfolioMode::runSchedule(Schedule schedule) {
     pid_t process = Multiprocessing::instance()->poll_children(exited, signalled, code);
 
     /*
-    cout << "Child " << process
+    std::cout << "Child " << process
         << " exit " << exited
         << " sig " << signalled << " code " << code << std::endl;
         */
