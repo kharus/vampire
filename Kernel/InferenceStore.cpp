@@ -249,7 +249,7 @@ struct InferenceStore::ProofPrinter
   CLASS_NAME(InferenceStore::ProofPrinter);
   USE_ALLOCATOR(InferenceStore::ProofPrinter);
   
-  ProofPrinter(ostream& out, InferenceStore* is)
+  ProofPrinter(std::ostream& out, InferenceStore* is)
   : _is(is), out(out)
   {
     outputAxiomNames=env.options->outputAxiomNames();
@@ -430,7 +430,7 @@ struct InferenceStore::ProofPropertyPrinter
   CLASS_NAME(InferenceStore::ProofPropertyPrinter);
   USE_ALLOCATOR(InferenceStore::ProofPropertyPrinter);
 
-  ProofPropertyPrinter(ostream& out, InferenceStore* is) : ProofPrinter(out,is)
+  ProofPropertyPrinter(std::ostream& out, InferenceStore* is) : ProofPrinter(out,is)
   {
     max_theory_clause_depth = 0;
     for(unsigned i=0;i<11;i++){ buckets.push(0); }
@@ -516,7 +516,7 @@ struct InferenceStore::TPTPProofPrinter
   CLASS_NAME(InferenceStore::TPTPProofPrinter);
   USE_ALLOCATOR(InferenceStore::TPTPProofPrinter);
   
-  TPTPProofPrinter(ostream& out, InferenceStore* is)
+  TPTPProofPrinter(std::ostream& out, InferenceStore* is)
   : ProofPrinter(out, is) {
     splitPrefix = Saturation::Splitter::splPrefix; 
     // Don't delay printing in TPTP proof mode
@@ -873,7 +873,7 @@ struct InferenceStore::ProofCheckPrinter
   CLASS_NAME(InferenceStore::ProofCheckPrinter);
   USE_ALLOCATOR(InferenceStore::ProofCheckPrinter);
   
-  ProofCheckPrinter(ostream& out, InferenceStore* is)
+  ProofCheckPrinter(std::ostream& out, InferenceStore* is)
   : ProofPrinter(out, is) {}
 
 protected:
@@ -948,7 +948,7 @@ protected:
   }
 };
 
-InferenceStore::ProofPrinter* InferenceStore::createProofPrinter(ostream& out)
+InferenceStore::ProofPrinter* InferenceStore::createProofPrinter(std::ostream& out)
 {
   switch(env.options->proof()) {
   case Options::Proof::ON:
@@ -971,7 +971,7 @@ InferenceStore::ProofPrinter* InferenceStore::createProofPrinter(ostream& out)
  *
  *
  */
-void InferenceStore::outputUnsatCore(ostream& out, Unit* refutation)
+void InferenceStore::outputUnsatCore(std::ostream& out, Unit* refutation)
 {
   out << "(" << endl;
 
@@ -1026,7 +1026,7 @@ void InferenceStore::outputUnsatCore(ostream& out, Unit* refutation)
  *
  *
  */
-void InferenceStore::outputProof(ostream& out, Unit* refutation)
+void InferenceStore::outputProof(std::ostream& out, Unit* refutation)
 {
   ProofPrinter* p = createProofPrinter(out);
   if (!p) {
@@ -1041,7 +1041,7 @@ void InferenceStore::outputProof(ostream& out, Unit* refutation)
  * Output a proof of units to out
  *
  */
-void InferenceStore::outputProof(ostream& out, UnitList* units)
+void InferenceStore::outputProof(std::ostream& out, UnitList* units)
 {
   ProofPrinter* p = createProofPrinter(out);
   if (!p) {

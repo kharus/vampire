@@ -223,7 +223,7 @@ void Problem::PreprocessingOptions::setDefaults()
   _ods.setDefaults();
 }
 
-void Problem::PreprocessingOptions::printOptionValues(ostream& out)
+void Problem::PreprocessingOptions::printOptionValues(std::ostream& out)
 {
   OptionsReader curRdr;
   prepareOptionsReader(curRdr);
@@ -1554,7 +1554,7 @@ Problem Problem::performAsymetricRewriting(size_t cnt, Formula* lhsArray, Formul
   return res;
 }
 
-void outputAttributes(ostream& out, FBHelperCore::AttribStack* attribs)
+void outputAttributes(std::ostream& out, FBHelperCore::AttribStack* attribs)
 {
   if(!attribs) {
     return;
@@ -1566,7 +1566,7 @@ void outputAttributes(ostream& out, FBHelperCore::AttribStack* attribs)
   }
 }
 
-void outputSymbolTypeDefinitions(ostream& out, unsigned symNumber, bool function, bool outputAllTypeDefs,
+void outputSymbolTypeDefinitions(std::ostream& out, unsigned symNumber, bool function, bool outputAllTypeDefs,
     FBHelperCore::AttribStack* attribs, bool dummyNames)
 {
   Signature::Symbol* sym = function ?
@@ -1616,7 +1616,7 @@ void outputSymbolTypeDefinitions(ostream& out, unsigned symNumber, bool function
 
 }
 
-void Problem::outputTypeDefinitions(ostream& out, bool outputAllTypeDefs)
+void Problem::outputTypeDefinitions(std::ostream& out, bool outputAllTypeDefs)
 {
   DefaultHelperCore* core0 = _data->getCore();
   bool dummyNames = core0 && core0->outputDummyNames();
@@ -1641,7 +1641,7 @@ void Problem::outputTypeDefinitions(ostream& out, bool outputAllTypeDefs)
   }
 }
 
-void Problem::output(ostream& out, bool outputTypeDefs, bool outputAllTypeDefs)
+void Problem::output(std::ostream& out, bool outputTypeDefs, bool outputAllTypeDefs)
 {
   if(outputTypeDefs) {
     outputTypeDefinitions(out, outputAllTypeDefs);
@@ -1652,7 +1652,7 @@ void Problem::output(ostream& out, bool outputTypeDefs, bool outputAllTypeDefs)
   }
 }
 
-void Problem::outputStatistics(ostream& out)
+void Problem::outputStatistics(std::ostream& out)
 {
   env.statistics->print(out);
 }

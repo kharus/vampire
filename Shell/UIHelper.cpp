@@ -120,7 +120,7 @@ bool szsOutputMode() {
   return (Lib::env.options && Lib::env.options->outputMode() == Shell::Options::Output::SZS);
 }
 
-ostream& addCommentSignForSZS(ostream& out)
+ostream& addCommentSignForSZS(std::ostream& out)
 {
   if (szsOutputMode()) {
     out << "% ";
@@ -142,7 +142,7 @@ bool UIHelper::satisfiableStatusWasAlreadyOutput=false;
 
 bool UIHelper::spiderOutputDone = false;
   
-void UIHelper::outputAllPremises(ostream& out, UnitList* units, vstring prefix)
+void UIHelper::outputAllPremises(std::ostream& out, UnitList* units, vstring prefix)
 {
 #if 1
   InferenceStore::instance()->outputProof(cerr, units);
@@ -182,7 +182,7 @@ void UIHelper::outputAllPremises(ostream& out, UnitList* units, vstring prefix)
 #endif
 }
 
-void UIHelper::outputSaturatedSet(ostream& out, UnitIterator uit)
+void UIHelper::outputSaturatedSet(std::ostream& out, UnitIterator uit)
 {
   addCommentSignForSZS(out);
   out << "# SZS output start Saturation." << endl;
@@ -376,7 +376,7 @@ Problem* UIHelper::getInputProblem(const Options& opts)
  *
  * If interpolant output is enabled, it is output in this function.
  */
-void UIHelper::outputResult(ostream& out)
+void UIHelper::outputResult(std::ostream& out)
 {
   switch (env.statistics->terminationReason) {
   case Statistics::REFUTATION:
@@ -521,7 +521,7 @@ void UIHelper::outputResult(ostream& out)
   env.statistics->print(out);
 }
 
-void UIHelper::outputSatisfiableResult(ostream& out)
+void UIHelper::outputSatisfiableResult(std::ostream& out)
 {
   //out << "Satisfiable!\n";
   if (szsOutputMode() && !satisfiableStatusWasAlreadyOutput) {
@@ -552,7 +552,7 @@ void UIHelper::outputSatisfiableResult(ostream& out)
  * @author Andrei Voronkov
  * @since 03/07/2013 Manchester
  */
-void UIHelper::outputSymbolDeclarations(ostream& out)
+void UIHelper::outputSymbolDeclarations(std::ostream& out)
 {
   Signature& sig = *env.signature;
 
@@ -581,7 +581,7 @@ void UIHelper::outputSymbolDeclarations(ostream& out)
  * @author Andrei Voronkov
  * @since 03/07/2013 Manchester
  */
-void UIHelper::outputSymbolTypeDeclarationIfNeeded(ostream& out, bool function, bool typeCon, unsigned symNumber)
+void UIHelper::outputSymbolTypeDeclarationIfNeeded(std::ostream& out, bool function, bool typeCon, unsigned symNumber)
 {
   Signature::Symbol* sym;
 

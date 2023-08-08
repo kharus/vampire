@@ -62,7 +62,7 @@ bool ModelPrinter::isEprProblem()
   return true;
 }
 
-bool ModelPrinter::tryOutput(ostream& stm)
+bool ModelPrinter::tryOutput(std::ostream& stm)
 {
   if(!isEprProblem() || !haveNonDefaultSorts()) {
     return false;
@@ -359,7 +359,7 @@ void ModelPrinter::rewriteLits(LiteralStack& lits)
   }
 }
 
-void ModelPrinter::outputDomainSpec(ostream& out)
+void ModelPrinter::outputDomainSpec(std::ostream& out)
 {
   ASS(_domain.isNonEmpty());
 
@@ -378,7 +378,7 @@ void ModelPrinter::outputDomainSpec(ostream& out)
   out << " ) )." << endl;
 }
 
-void ModelPrinter::outputFunInterpretations(ostream& out)
+void ModelPrinter::outputFunInterpretations(std::ostream& out)
 {
   if(_rewrites.isEmpty()) { return; }
 
@@ -410,7 +410,7 @@ struct ModelPrinter::PredNumComparator
   }
 };
 
-void ModelPrinter::outputPredInterpretations(ostream& out)
+void ModelPrinter::outputPredInterpretations(std::ostream& out)
 {
   LiteralStack model;
   getInstances(_trueLits, _domain, model);

@@ -1077,7 +1077,7 @@ TPTP::ParseErrorException::ParseErrorException(vstring message,Token& tok, unsig
  * Exception printing a message. Currently computing a position is simplified
  * @since 08/04/2011 Manchester
  */
-void TPTP::ParseErrorException::cry(ostream& str) const
+void TPTP::ParseErrorException::cry(std::ostream& str) const
 {
   str << "Parsing Error on line " << _ln << "\n";
   str << _message << "\n";

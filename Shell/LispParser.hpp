@@ -96,7 +96,7 @@ public:
   {
   public:                                
     Exception (vstring message,const Token&);
-    void cry (ostream&) const;
+    void cry (std::ostream&) const;
     ~Exception () {}
   protected:
     vstring _message;

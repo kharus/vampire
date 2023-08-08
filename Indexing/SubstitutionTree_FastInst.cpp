@@ -25,7 +25,7 @@
 namespace Indexing
 {
 
-std::ostream& operator<< (ostream& out, SubstitutionTree::InstMatcher::TermSpec ts )
+std::ostream& operator<< (std::ostream& out, SubstitutionTree::InstMatcher::TermSpec ts )
 {
   out<<ts.toString();
   return out;

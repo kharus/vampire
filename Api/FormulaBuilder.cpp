@@ -1127,12 +1127,12 @@ std::ostream& operator<< (std::ostream& str,const Api::Sort& sort)
   return str<<env.sorts->sortName(sort);
 }
 
-ostream& operator<< (ostream& str,const Api::Formula& f)
+ostream& operator<< (std::ostream& str,const Api::Formula& f)
 {
   return str<<f.toString();
 }
 
-ostream& operator<< (ostream& str,const Api::AnnotatedFormula& af)
+ostream& operator<< (std::ostream& str,const Api::AnnotatedFormula& af)
 {
   return str<<af.toString();
 }
