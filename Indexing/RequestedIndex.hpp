@@ -90,7 +90,7 @@ class RequestedIndex final
       return _index;
     }
 
-    void std::swap(RequestedIndex& other)
+    void swap(RequestedIndex& other)
     {
       using std::swap;
       std::swap(_index, other._index);

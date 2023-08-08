@@ -202,7 +202,7 @@ Clause* BinaryResolution::generateClause(Clause* queryCl, Literal* queryLit, SLQ
   unsigned next = 0;
   if(withConstraints){
   for(unsigned i=0;i<constraints->size();i++){
-      std::pair<pair<TermList,unsigned>,std::pair<TermList,unsigned>> con = (*constraints)[i]; 
+      std::pair<std::pair<TermList,unsigned>,std::pair<TermList,unsigned>> con = (*constraints)[i];
 
 #if VDEBUG
       //cout << "con pair " << con.first.toString() << " , " << con.second.toString() << std::endl;

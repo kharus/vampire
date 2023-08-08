@@ -178,7 +178,7 @@ private:
     }
 
     // Position of a gen literal in _genClauses
-    list<SmartPtr<GenClause>,STLAllocator<SmartPtr<GenClause>>>::iterator iter;
+    std::list<SmartPtr<GenClause>,STLAllocator<SmartPtr<GenClause>>>::iterator iter;
 
     vstring toString() {
       vstring res = "GC("+Int::toString(size())+")";
@@ -211,7 +211,7 @@ private:
   bool mapSubstitution(List<GenLit>* gc, Substitution subst, bool onlyFormulaLevel, List<GenLit>* &output);
   Clause* toClause(SPGenClause gc);
 
-  typedef list<SPGenClause,STLAllocator<SPGenClause>> GenClauses;
+  typedef std::list<SPGenClause,STLAllocator<SPGenClause>> GenClauses;
 
   /**
    * pushLiteral is responsible for tautology elimination. Whenever it sees two

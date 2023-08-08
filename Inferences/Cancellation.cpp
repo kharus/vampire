@@ -104,7 +104,7 @@ CancelAddResult<Number> cancelAdd(Polynom<Number> const& oldl, Polynom<Number> c
   using NumeralVec   = Stack<Monom>;
   unsigned itl = 0;
   unsigned itr = 0;
-  auto std::endl = oldl.nSummands();
+  auto endl = oldl.nSummands();
   auto endr = oldr.nSummands();
 
   auto safeMinus = [](Numeral l, Numeral r) 
@@ -126,7 +126,7 @@ CancelAddResult<Number> cancelAdd(Polynom<Number> const& oldl, Polynom<Number> c
 
   NumeralVec newl;
   NumeralVec newr;
-  while(itl != std::endl && itr !=  endr) {
+  while(itl != endl && itr !=  endr) {
     auto l = oldl.summandAt(itl);
     auto r = oldr.summandAt(itr);
     if (l.factors == r.factors) {
@@ -188,7 +188,7 @@ CancelAddResult<Number> cancelAdd(Polynom<Number> const& oldl, Polynom<Number> c
       itr++;
     }
   }
-  for(; itl != std::endl; itl++) {
+  for(; itl != endl; itl++) {
     newl.push(oldl.summandAt(itl));
   }
   for(; itr != endr; itr++) {
