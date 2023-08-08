@@ -268,7 +268,7 @@ bool SubstitutionTree::InstMatcher::matchNextAux(TermList queryTerm, TermList no
     goto finish;
   }
 
-  static Stack<pair<TermSpec,TermSpec> > toDo;
+  static Stack<std::pair<TermSpec,TermSpec> > toDo;
   static DisagreementSetIterator dsit;
 
   toDo.reset();
@@ -281,7 +281,7 @@ bool SubstitutionTree::InstMatcher::matchNextAux(TermList queryTerm, TermList no
 
     dsit.reset(ts1.t, ts2.t, ts1.q!=ts2.q);
     while(dsit.hasNext()) {
-      pair<TermList,TermList> disarg=dsit.next();
+      std::pair<TermList,TermList> disarg=dsit.next();
       TermList dt1=disarg.first;
       TermList dt2=disarg.second;
 

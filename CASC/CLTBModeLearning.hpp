@@ -66,7 +66,7 @@ private:
 
   typedef List<vstring> StringList;
   typedef Stack<vstring> StringStack;
-  typedef pair<vstring,vstring> StringPair;
+  typedef std::pair<vstring,vstring> StringPair;
   typedef Stack<StringPair> StringPairStack;
   typedef Stack<vstring> Schedule;
   static void fillSchedule(Schedule& strats);

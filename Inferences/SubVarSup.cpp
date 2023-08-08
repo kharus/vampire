@@ -79,7 +79,7 @@ void SubVarSup::detach()
 struct SubVarSup::RewritableResultsFn
 {
   RewritableResultsFn(SubVarSupSubtermIndex* index) : _index(index) {}
-  VirtualIterator<pair<pair<Literal*, TypedTermList>, TermQueryResult> > operator()(pair<Literal*, TypedTermList> arg)
+  VirtualIterator<std::pair<pair<Literal*, TypedTermList>, TermQueryResult> > operator()(std::pair<Literal*, TypedTermList> arg)
   {
     return pvi( pushPairIntoRightIterator(arg, _index->getUnifications(arg.second, /* retrieveSubstitutions */ true)) );
   }
@@ -93,7 +93,7 @@ struct SubVarSup::RewriteableSubtermsFn
     prem->collectUnstableVars(_unstableVars);
   }
 
-  VirtualIterator<pair<Literal*, TypedTermList> > operator()(Literal* lit)
+  VirtualIterator<std::pair<Literal*, TypedTermList> > operator()(Literal* lit)
   {
     return pvi( pushPairIntoRightIterator(lit, EqHelper::getRewritableVarsIterator(&_unstableVars, lit, _ord)) );
   }
@@ -106,7 +106,7 @@ private:
 struct SubVarSup::ApplicableRewritesFn
 {
   ApplicableRewritesFn(SubVarSupLHSIndex* index) : _index(index) {}
-  VirtualIterator<pair<pair<Literal*, TypedTermList>, TermQueryResult> > operator()(pair<Literal*, TypedTermList> arg)
+  VirtualIterator<std::pair<pair<Literal*, TypedTermList>, TermQueryResult> > operator()(std::pair<Literal*, TypedTermList> arg)
   {
     return pvi( pushPairIntoRightIterator(arg, _index->getUnifications(arg.second, /* retrieveSubst */ false)) );
   }
@@ -118,7 +118,7 @@ private:
 struct SubVarSup::ForwardResultFn
 {
   ForwardResultFn(Clause* cl, SubVarSup& parent) : _cl(cl), _parent(parent) {}
-  Clause* operator()(pair<pair<Literal*, TermList>, TermQueryResult> arg)
+  Clause* operator()(std::pair<pair<Literal*, TermList>, TermQueryResult> arg)
   {
     TermQueryResult& qr = arg.second;
     return _parent.performSubVarSup(_cl, arg.first.first, arg.first.second,
@@ -133,7 +133,7 @@ private:
 struct SubVarSup::BackwardResultFn
 {
   BackwardResultFn(Clause* cl, SubVarSup& parent) : _cl(cl), _parent(parent) {}
-  Clause* operator()(pair<pair<Literal*, TermList>, TermQueryResult> arg)
+  Clause* operator()(std::pair<pair<Literal*, TermList>, TermQueryResult> arg)
   {
     if(_cl==arg.second.clause) {
       return 0;

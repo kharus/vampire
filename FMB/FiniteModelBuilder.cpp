@@ -2324,7 +2324,7 @@ void FiniteModelBuilder::HackyDSAE::learnNogood(Constraint_Generator_Vals& nogoo
 bool FiniteModelBuilder::HackyDSAE::checkConstriant(DArray<unsigned>& newSortSizes, Constraint_Generator_Vals& constraint)
 {
   for (unsigned j = 0; j < newSortSizes.size(); j++) {
-    pair<ConstraintSign,unsigned>& cc = constraint[j];
+    std::pair<ConstraintSign,unsigned>& cc = constraint[j];
     if (cc.first == EQ && cc.second != newSortSizes[j]) {
       return false;
     }

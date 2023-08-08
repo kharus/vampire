@@ -280,7 +280,7 @@ vstring FormulaBuilder::getAttributeValue(Sort p, vstring attributeName)
 {
   FBHelperCore::AttribStack::BottomFirstIterator it(_aux->getSortAttributes(p));
   while(it.hasNext()) {
-    pair<vstring,vstring> curr = it.next();
+    std::pair<vstring,vstring> curr = it.next();
     if(curr.first==attributeName) {
       return curr.second;
     }
@@ -318,7 +318,7 @@ vstring FormulaBuilder::getAttributeValue(Predicate p, vstring attributeName)
 {
   FBHelperCore::AttribStack::BottomFirstIterator it(_aux->getPredicateAttributes(p));
   while(it.hasNext()) {
-    pair<vstring,vstring> curr = it.next();
+    std::pair<vstring,vstring> curr = it.next();
     if(curr.first==attributeName) {
       return curr.second;
     }
@@ -356,7 +356,7 @@ vstring FormulaBuilder::getAttributeValue(Function p, vstring attributeName)
 {
   FBHelperCore::AttribStack::BottomFirstIterator it(_aux->getFunctionAttributes(p));
   while(it.hasNext()) {
-    pair<vstring,vstring> curr = it.next();
+    std::pair<vstring,vstring> curr = it.next();
     if(curr.first==attributeName) {
       return curr.second;
     }

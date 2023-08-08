@@ -84,7 +84,7 @@ private:
    */
   Deque<Formula*> _queue;
 
-  typedef pair<unsigned, Term*> Binding; // used for skolem bindings of the form <existential variable z, corresponding Skolem term f_z(U,V,...) >
+  typedef std::pair<unsigned, Term*> Binding; // used for skolem bindings of the form <existential variable z, corresponding Skolem term f_z(U,V,...) >
 
   typedef List<Binding> BindingList;
 
@@ -124,8 +124,8 @@ private:
   #define RIGHT 1u
 
   // generalized literal
-  typedef pair<Formula*, SIGN> GenLit;
-  typedef pair<Literal*, List<GenLit>*> LPair;
+  typedef std::pair<Formula*, SIGN> GenLit;
+  typedef std::pair<Literal*, List<GenLit>*> LPair;
 
   inline static Formula* &formula(GenLit &gl) {
     return gl.first;

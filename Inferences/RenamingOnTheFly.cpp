@@ -153,7 +153,7 @@ ClauseIterator RenamingOnTheFly::produceClauses(Clause* c)
    
         VariableIterator2 vit(formula.term());
         while(vit.hasNext()){
-          pair<TermList, TermList> varTypePair = vit.next();
+          std::pair<TermList, TermList> varTypePair = vit.next();
           if(!varSorts.find(varTypePair.first.var())){
             varSorts.insert(varTypePair.first.var(), varTypePair.second);
           }

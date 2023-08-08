@@ -139,7 +139,7 @@ void assymmetricRewriteTest(const char* fname)
   Api::Predicate rng7 = api.predicate("aaa__range_7_0", 1, &bs);
   Api::Predicate rng33 = api.predicate("aaa__range_33_0", 1, &bs);
 
-  typedef pair<Api::Predicate,Api::Predicate> ARPair;
+  typedef std::pair<Api::Predicate,Api::Predicate> ARPair;
   Stack<ARPair> pairs;
   pairs.push(ARPair(lf2,rng1));
   pairs.push(ARPair(lf3,rng2));

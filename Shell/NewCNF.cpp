@@ -908,9 +908,9 @@ TermList NewCNF::inlineLetBinding(unsigned symbol, VList* bindingVariables, Term
   SymbolDefinitionInlining inlining(symbol, bindingVariables, binding, _maxVar);
   TermList inlinedContents = inlining.process(contents);
 
-  List<pair<unsigned, unsigned>>::Iterator renamings(inlining.variableRenamings());
+  List<std::pair<unsigned, unsigned>>::Iterator renamings(inlining.variableRenamings());
   while (renamings.hasNext()) {
-    pair<unsigned, unsigned> renaming = renamings.next();
+    std::pair<unsigned, unsigned> renaming = renamings.next();
     createFreshVariableRenaming(renaming.first, renaming.second);
   }
 

@@ -545,7 +545,7 @@ void FunctionDefinition::assignArgOccursData(Def* updDef)
 
 
 
-typedef pair<unsigned,unsigned> BindingSpec;
+typedef std::pair<unsigned,unsigned> BindingSpec;
 typedef DHMap<BindingSpec, TermList> BindingMap;
 typedef DHMap<BindingSpec, bool> UnfoldedSet;
 

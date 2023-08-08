@@ -295,7 +295,7 @@ struct HashingClauseVariantIndex::VariableIgnoringComparator {
     static DisagreementSetIterator dsit;
     dsit.reset(t1, t2, false);
     while(dsit.hasNext()) {
-      pair<TermList, TermList> dis=dsit.next();
+      std::pair<TermList, TermList> dis=dsit.next();
       if(dis.first.isTerm()) {
         if(dis.second.isTerm()) {
           ASS_NEQ(dis.first.term()->functor(), dis.second.term()->functor());

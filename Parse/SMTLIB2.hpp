@@ -319,7 +319,7 @@ private:
   unsigned _nextVar;
 
   /** < termlist, vampire sort id > */
-  typedef pair<TermList,TermList> SortedTerm;
+  typedef std::pair<TermList,TermList> SortedTerm;
   /** mast an identifier to SortedTerm */
   typedef DHMap<vstring,SortedTerm> TermLookup;
   typedef Stack<TermLookup*> Scopes;
@@ -361,7 +361,7 @@ private:
   /**
    * Main smtlib term parsing stack.
    */
-  Stack<pair<ParseOperation,LExpr*> > _todo;
+  Stack<std::pair<ParseOperation,LExpr*> > _todo;
 
   // global parsing data structures -- END
 

@@ -357,7 +357,7 @@ vstring TPTPPrinter::toString(const Formula* formula)
   vstring res;
 
   // render a connective if specified, and then a Formula (or ")" of formula is nullptr)
-  typedef pair<Connective,const Formula*> Todo;
+  typedef std::pair<Connective,const Formula*> Todo;
   Stack<Todo> stack;
 
   stack.push(make_pair(NOCONN,formula));

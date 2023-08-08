@@ -2588,7 +2588,7 @@ SMTLIB2::ParseResult SMTLIB2::parseTermOrFormula(LExpr* body, bool isSort)
     cout << "---" << endl;
     */
 
-    pair<ParseOperation,LExpr*> cur = _todo.pop();
+    std::pair<ParseOperation,LExpr*> cur = _todo.pop();
     ParseOperation op = cur.first;
     LExpr* exp = cur.second;
 

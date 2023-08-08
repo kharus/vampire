@@ -79,7 +79,7 @@ public:
 class TestCase
 {
   using Clause = Kernel::Clause;
-  using OptionMap = Stack<pair<vstring,vstring>>;
+  using OptionMap = Stack<std::pair<vstring,vstring>>;
   using Condition = std::function<bool(vstring&, vstring&)>;
   Option<SimplifyingGeneratingInference*> _rule;
   Clause* _input;

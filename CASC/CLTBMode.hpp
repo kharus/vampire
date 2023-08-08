@@ -65,7 +65,7 @@ private:
 
   typedef List<vstring> StringList;
   typedef Stack<vstring> StringStack;
-  typedef pair<vstring,vstring> StringPair;
+  typedef std::pair<vstring,vstring> StringPair;
   typedef Stack<StringPair> StringPairStack;
 
   Category getCategory(vstring& categoryStr) {

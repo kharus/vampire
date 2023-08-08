@@ -313,7 +313,7 @@ struct MatchingData final {
   /**
    * Compute the "intersect info" of base literals bases[b1] and bases[b2], i.e.,
    * the variables that the literals have in common.
-   * In particular, the result is an array of pair<int,int>.
+   * In particular, the result is an array of std::pair<int,int>.
    * Each element represents a variable that is common in bases[b1] and bases[b2];
    * the first and second components of the pair give the index i of the variable
    * in the array altBindings[bi][ai][i] for bi=b1 and bi=b2, respectively.

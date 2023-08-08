@@ -118,7 +118,7 @@ bool GeneralSplitting::apply(Clause*& cl, UnitList*& resultStack)
 
   Set<unsigned> vars;
   //only edges from lower to higher variable are included
-  DHMultiset<pair<unsigned, unsigned> > connections;
+  DHMultiset<std::pair<unsigned, unsigned> > connections;
   DHMultiset<unsigned> degrees;
 
 

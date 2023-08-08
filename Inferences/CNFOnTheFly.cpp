@@ -624,7 +624,7 @@ TermList sigmaRemoval(TermList sigmaTerm, TermList expsrt){
   if(sigmaTerm.isTerm()){
     VariableWithSortIterator vit(sigmaTerm.term());
     while(vit.hasNext()){
-      pair<TermList, TermList> varTypePair = vit.next();
+      std::pair<TermList, TermList> varTypePair = vit.next();
       varSorts.insert(varTypePair.first.var(), varTypePair.second);
     }
   } else {
@@ -632,7 +632,7 @@ TermList sigmaRemoval(TermList sigmaTerm, TermList expsrt){
     if(expsrt.isTerm()){
       VariableWithSortIterator vit(expsrt.term());
       while(vit.hasNext()){
-        pair<TermList, TermList> varTypePair = vit.next();
+        std::pair<TermList, TermList> varTypePair = vit.next();
         varSorts.insert(varTypePair.first.var(), varTypePair.second);
       }
     } else {

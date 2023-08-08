@@ -77,7 +77,7 @@ void Superposition::detach()
 struct Superposition::ForwardResultFn
 {
   ForwardResultFn(Clause* cl, PassiveClauseContainer* passiveClauseContainer, Superposition& parent) : _cl(cl), _passiveClauseContainer(passiveClauseContainer), _parent(parent) {}
-  Clause* operator()(pair<pair<Literal*, TypedTermList>, TermQueryResult> arg)
+  Clause* operator()(std::pair<pair<Literal*, TypedTermList>, TermQueryResult> arg)
   {
     TermQueryResult& qr = arg.second;
     return _parent.performSuperposition(_cl, arg.first.first, arg.first.second,
@@ -93,7 +93,7 @@ private:
 struct Superposition::BackwardResultFn
 {
   BackwardResultFn(Clause* cl, PassiveClauseContainer* passiveClauseContainer, Superposition& parent) : _cl(cl), _passiveClauseContainer(passiveClauseContainer), _parent(parent) {}
-  Clause* operator()(pair<pair<Literal*, TermList>, TermQueryResult> arg)
+  Clause* operator()(std::pair<pair<Literal*, TermList>, TermQueryResult> arg)
   {
     if(_cl==arg.second.clause) {
       return 0;
@@ -133,7 +133,7 @@ ClauseIterator Superposition::generateClauses(Clause* premise)
   // Get clauses with a literal whose complement unifies with the rewritable subterm,
   // returns a pair with the original pair and the unification result (includes substitution)
   auto itf3 = getMapAndFlattenIterator(itf2,
-      [this](pair<Literal*, TypedTermList> arg)
+      [this](std::pair<Literal*, TypedTermList> arg)
       { return pushPairIntoRightIterator(arg, _lhsIndex->getUnifications(arg.second, /*retrieveSubstitutions*/ true, withConstraints)); });
 
   //Perform forward superposition
@@ -142,7 +142,7 @@ ClauseIterator Superposition::generateClauses(Clause* premise)
   auto itb1 = premise->getSelectedLiteralIterator();
   auto itb2 = getMapAndFlattenIterator(itb1,EqHelper::SuperpositionLHSIteratorFn(_salg->getOrdering(), _salg->getOptions()));
   auto itb3 = getMapAndFlattenIterator(itb2, 
-      [this] (pair<Literal*, TermList> arg)
+      [this] (std::pair<Literal*, TermList> arg)
       { return pushPairIntoRightIterator(
               arg, 
               _subtermIndex->getUnifications(TypedTermList(arg.second, SortHelper::getEqualityArgumentSort(arg.first)), 
