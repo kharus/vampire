@@ -157,7 +157,7 @@ ClauseIterator SubVarSup::generateClauses(Clause* premise)
 
   // Get an iterator of pairs of selected literals and rewritable subterms of those literals
   // A subterm is rewritable (see EqHelper) if
-  //  a) The literal is a positive equality t1=t2 and the subterm is max(t1,t2) wrt ordering
+  //  a) The literal is a positive equality t1=t2 and the subterm is std::max(t1,t2) wrt ordering
   //  b) The subterm is not a variable
   auto itf2 = getMapAndFlattenIterator(itf1,RewriteableSubtermsFn(_salg->getOrdering(), premise));
 

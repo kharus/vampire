@@ -592,7 +592,7 @@ ClauseStack InductionClauseIterator::produceClauses(Formula* hypothesis, Inferen
   Inference inf = NonspecificInference0(UnitInputType::AXIOM,rule);
   unsigned maxInductionDepth = 0;
   for (const auto& kv : context._cls) {
-    maxInductionDepth = max(maxInductionDepth,kv.first->inference().inductionDepth());
+    maxInductionDepth = std::max(maxInductionDepth,kv.first->inference().inductionDepth());
   }
   inf.setInductionDepth(maxInductionDepth+1);
   FormulaUnit* fu = new FormulaUnit(hypothesis,inf);

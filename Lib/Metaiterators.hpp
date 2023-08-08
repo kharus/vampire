@@ -1473,7 +1473,7 @@ T sumFn(T a1, T a2) { return a1+a2; }
 
 /** max function, useful for fold */
 template<typename T>
-T maxFn(T a1, T a2) { return max(a1,a2); }
+T maxFn(T a1, T a2) { return std::max(a1,a2); }
 
 /** min function, useful for fold */
 template<typename T>

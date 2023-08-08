@@ -43,7 +43,7 @@ unsigned ELiteralSelector::lit_standard_diff(Literal* lit)
   if (lit->isEquality()) {
     unsigned w0 = lit->nthArgument(0)->weight();
     unsigned w1 = lit->nthArgument(1)->weight();
-    return max(w0,w1)-min(w0,w1);
+    return std::max(w0,w1)-min(w0,w1);
   } else {
     return lit->weight() - 1;
   }

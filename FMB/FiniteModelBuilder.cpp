@@ -708,7 +708,7 @@ void FiniteModelBuilder::init()
             unsigned child = children.next();
             if(child==parent) continue;
             //cout << "max of " << parent << " inherets child " << child << endl;
-            _distinctSortMaxs[parent] = max(_distinctSortMaxs[parent],_distinctSortMaxs[child]);
+            _distinctSortMaxs[parent] = std::max(_distinctSortMaxs[parent],_distinctSortMaxs[child]);
           }
         }
       }
@@ -1088,7 +1088,7 @@ instanceLabel:
             unsigned cur = grounding[var];
             // cout << " cur" << cur;
 
-            varDistinctSortsMaxes.set(dsr,max(cur,prev));
+            varDistinctSortsMaxes.set(dsr,std::max(cur,prev));
 
             // cout << endl;
           }
@@ -1585,7 +1585,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
   _sortModelSizes.ensure(_sortedSignature->sorts);
   _distinctSortSizes.ensure(_sortedSignature->distinctSorts);
   for(unsigned i=0;i<_distinctSortSizes.size();i++){
-     _distinctSortSizes[i]=max(_startModelSize,_distinctSortMins[i]);
+     _distinctSortSizes[i]=std::max(_startModelSize,_distinctSortMins[i]);
   }
   for(unsigned s=0;s<_sortedSignature->sorts;s++) {
     _sortModelSizes[s] = _distinctSortSizes[_sortedSignature->parents[s]];

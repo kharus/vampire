@@ -379,7 +379,7 @@ void IGAlgorithm::finishGeneratingClause(Clause* orig, ResultSubstitution& subst
 {
   Clause* res = Clause::fromStack(genLits, GeneratingInference1(InferenceRule::INSTANCE_GENERATION, orig));
   // make age also depend on the age of otherCl
-  res->setAge(max(orig->age(), otherCl->age())+1);
+  res->setAge(std::max(orig->age(), otherCl->age())+1);
 
   env.statistics->instGenGeneratedClauses++;
   bool added = addClause(res);
@@ -798,7 +798,7 @@ MainLoopResult IGAlgorithm::runImpl()
       processUnprocessed();
       // ASS_EQ(_satSolver->getStatus(), SATSolver::SATISFIABLE);
 
-      unsigned activatedCnt = max(10u, _passive.size()/4);
+      unsigned activatedCnt = std::max(10u, _passive.size()/4);
       for(unsigned i=0; i<activatedCnt && !_passive.isEmpty() && _instGenResolutionRatio.shouldDoFirst(); i++) {
 	Clause* given = _passive.popSelected();
 	activate(given);
