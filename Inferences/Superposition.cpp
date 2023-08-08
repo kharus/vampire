@@ -77,7 +77,7 @@ void Superposition::detach()
 struct Superposition::ForwardResultFn
 {
   ForwardResultFn(Clause* cl, PassiveClauseContainer* passiveClauseContainer, Superposition& parent) : _cl(cl), _passiveClauseContainer(passiveClauseContainer), _parent(parent) {}
-  Clause* operator()(std::pair<pair<Literal*, TypedTermList>, TermQueryResult> arg)
+  Clause* operator()(std::pair<std::pair<Literal*, TypedTermList>, TermQueryResult> arg)
   {
     TermQueryResult& qr = arg.second;
     return _parent.performSuperposition(_cl, arg.first.first, arg.first.second,
@@ -93,7 +93,7 @@ private:
 struct Superposition::BackwardResultFn
 {
   BackwardResultFn(Clause* cl, PassiveClauseContainer* passiveClauseContainer, Superposition& parent) : _cl(cl), _passiveClauseContainer(passiveClauseContainer), _parent(parent) {}
-  Clause* operator()(std::pair<pair<Literal*, TermList>, TermQueryResult> arg)
+  Clause* operator()(std::pair<std::pair<Literal*, TermList>, TermQueryResult> arg)
   {
     if(_cl==arg.second.clause) {
       return 0;
