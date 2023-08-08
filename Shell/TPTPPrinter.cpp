@@ -360,7 +360,7 @@ vstring TPTPPrinter::toString(const Formula* formula)
   typedef std::pair<Connective,const Formula*> Todo;
   Stack<Todo> stack;
 
-  stack.push(make_pair(NOCONN,formula));
+  stack.push(std::make_pair(NOCONN,formula));
 
   while (stack.isNonEmpty()) {
     Todo todo = stack.pop();
@@ -395,12 +395,12 @@ vstring TPTPPrinter::toString(const Formula* formula)
 
         const FormulaList* fs = f->args();
         res += "(";
-        stack.push(make_pair(NOCONN,nullptr)); // render the final closing bracket
+        stack.push(std::make_pair(NOCONN,nullptr)); // render the final closing bracket
         while (FormulaList::isNonEmpty(fs)) {
           const Formula* arg = fs->head();
           fs = fs->tail();
           // the last argument, which will be printed first, is the only one not preceded by a rendering of con
-          stack.push(make_pair(FormulaList::isNonEmpty(fs) ? c : NOCONN,arg));
+          stack.push(std::make_pair(FormulaList::isNonEmpty(fs) ? c : NOCONN,arg));
         }
 
         continue;
@@ -412,20 +412,20 @@ vstring TPTPPrinter::toString(const Formula* formula)
 
       res += "(";
 
-      stack.push(make_pair(NOCONN,nullptr)); // render the final closing bracket
+      stack.push(std::make_pair(NOCONN,nullptr)); // render the final closing bracket
 
-      stack.push(make_pair(c,f->right())); // second argument with con
+      stack.push(std::make_pair(c,f->right())); // second argument with con
 
-      stack.push(make_pair(NOCONN,f->left())); // first argument without con
+      stack.push(std::make_pair(NOCONN,f->left())); // first argument without con
 
       continue;
 
     case NOT:
       res += "(";
 
-      stack.push(make_pair(NOCONN,nullptr)); // render the final closing bracket
+      stack.push(std::make_pair(NOCONN,nullptr)); // render the final closing bracket
 
-      stack.push(make_pair(c,f->uarg()));
+      stack.push(std::make_pair(c,f->uarg()));
 
       continue;
 
@@ -461,10 +461,10 @@ vstring TPTPPrinter::toString(const Formula* formula)
         }
         res += result + "] : (";
 
-        stack.push(make_pair(NOCONN,nullptr));
-        stack.push(make_pair(NOCONN,nullptr)); // here we close two brackets
+        stack.push(std::make_pair(NOCONN,nullptr));
+        stack.push(std::make_pair(NOCONN,nullptr)); // here we close two brackets
 
-        stack.push(make_pair(NOCONN,f->qarg()));
+        stack.push(std::make_pair(NOCONN,f->qarg()));
 
         continue;
       }

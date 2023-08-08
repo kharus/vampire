@@ -164,7 +164,7 @@ void FunctionRelationshipInference::findFunctionRelationships(ClauseIterator cla
       unsigned frst = uf.root(con.first);
       unsigned snd = uf.root(con.second);
       if(frst==snd) continue;
-      nonstrict_cons.insert(make_pair(frst,snd));
+      nonstrict_cons.insert(std::make_pair(frst,snd));
 */
       nonstrict_cons.insert(con);
     }
@@ -182,7 +182,7 @@ void FunctionRelationshipInference::findFunctionRelationships(ClauseIterator cla
       unsigned frst = uf.root(con.first);
       unsigned snd = uf.root(con.second);
       if(frst==snd) continue;
-      strict_cons.insert(make_pair(frst,snd));
+      strict_cons.insert(std::make_pair(frst,snd));
 */
       ASS(con.first != con.second);
       if(con.first == con.second){
@@ -343,9 +343,9 @@ Formula* FunctionRelationshipInference::getName(TermList fromSrt, TermList toSrt
     unsigned tsT = toSrt.term()->functor();
 
     if(strict)
-      _labelMap_strict.insert(label,make_pair(fsT, tsT));
+      _labelMap_strict.insert(label,std::make_pair(fsT, tsT));
     else
-      _labelMap_nonstrict.insert(label,make_pair(fsT,tsT));
+      _labelMap_nonstrict.insert(label,std::make_pair(fsT,tsT));
 
     return new AtomicFormula(Literal::create(label,0,true,false,0)); 
 }

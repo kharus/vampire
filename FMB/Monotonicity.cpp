@@ -251,7 +251,7 @@ void Monotonicity::addSortPredicates(bool withMon, ClauseList*& clauses, DArray<
        TermList vsrt;
        if(varSorts.find(v,vsrt)){
         unsigned vsrtU = vsrt.term()->functor();
-         if(!isMonotonic[vsrtU]) sortedVariables.push(make_pair(v,vsrtU));
+         if(!isMonotonic[vsrtU]) sortedVariables.push(std::make_pair(v,vsrtU));
        }
        // else the var isn't used in the clause...they're not normalised
      }

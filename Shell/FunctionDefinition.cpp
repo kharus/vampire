@@ -633,7 +633,7 @@ Term* FunctionDefinition::applyDefinitions(Literal* lit, Stack<Def*>* usedDefs)
 
       if(defIndexes.top()) {
         modified.setTop(true);
-        BindingSpec spec=make_pair(defIndexes.top(), tl.var());
+        BindingSpec spec=std::make_pair(defIndexes.top(), tl.var());
         TermList bound=bindings.get(spec);
         if(bound.isVar() || unfolded.find(spec)) {
           args.push(bound);
@@ -673,7 +673,7 @@ Term* FunctionDefinition::applyDefinitions(Literal* lit, Stack<Def*>* usedDefs)
       TermList* targs=t->args();
       while(dargs->isNonEmpty()) {
         ASS(targs->isNonEmpty());
-        ALWAYS(bindings.insert(make_pair(defIndex, dargs->var()), *targs));
+        ALWAYS(bindings.insert(std::make_pair(defIndex, dargs->var()), *targs));
         dargs=dargs->next();
         targs=targs->next();
       }

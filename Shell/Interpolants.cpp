@@ -263,7 +263,7 @@ namespace Shell
             outputNodes.insert(refutation);
         }
 
-        return make_pair(std::move(inputNodes), std::move(outputNodes));
+        return std::make_pair(std::move(inputNodes), std::move(outputNodes));
     }
     
     /*

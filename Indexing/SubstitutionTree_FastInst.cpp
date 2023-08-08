@@ -272,7 +272,7 @@ bool SubstitutionTree::InstMatcher::matchNextAux(TermList queryTerm, TermList no
   static DisagreementSetIterator dsit;
 
   toDo.reset();
-  toDo.push(make_pair(tsBinding, tsNode));
+  toDo.push(std::make_pair(tsBinding, tsNode));
 
   while(toDo.isNonEmpty()) {
     TermSpec ts1=toDo.top().first;
@@ -329,7 +329,7 @@ bool SubstitutionTree::InstMatcher::matchNextAux(TermList queryTerm, TermList no
 	deref2=deref(dt2);
       }
 
-      toDo.push(make_pair(deref1, deref2));
+      toDo.push(std::make_pair(deref1, deref2));
     }
   }
   success=true;

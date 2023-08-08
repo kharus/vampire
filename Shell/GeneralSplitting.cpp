@@ -145,9 +145,9 @@ bool GeneralSplitting::apply(Clause*& cl, UnitList*& resultStack)
   ASS_NEQ(v1,v2);
   bool inserted;
   if(v1>v2) {
-    inserted= connections.insert(make_pair(v2,v1))==1;
+    inserted= connections.insert(std::make_pair(v2,v1))==1;
   } else {
-    inserted= connections.insert(make_pair(v1,v2))==1;
+    inserted= connections.insert(std::make_pair(v1,v2))==1;
   }
   if(inserted) {
     degrees.insert(v1);
@@ -215,9 +215,9 @@ bool GeneralSplitting::apply(Clause*& cl, UnitList*& resultStack)
     }
     bool found;
     if(var>minDegVar) {
-      found=connections.find(make_pair(minDegVar, var));
+      found=connections.find(std::make_pair(minDegVar, var));
     } else {
-      found=connections.find(make_pair(var, minDegVar));
+      found=connections.find(std::make_pair(var, minDegVar));
     }
     if(found) {
       args.push(TermList(var, false));

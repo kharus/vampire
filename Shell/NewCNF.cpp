@@ -152,7 +152,7 @@ void NewCNF::process(Literal* literal, Occurrences &occurrences) {
   Literal* processedLiteral = Literal::create(literal, arguments.begin());
 
   List<LPair>* literals(0);
-  List<LPair>::push(make_pair(processedLiteral, List<GenLit>::empty()),
+  List<LPair>::push(std::make_pair(processedLiteral, List<GenLit>::empty()),
                     literals);
 
   LOG4("Found", variables.size(), "variable(s) for ITEs inside", literal->toString());
@@ -187,8 +187,8 @@ void NewCNF::process(Literal* literal, Occurrences &occurrences) {
         Literal* thenLiteral = SubstHelper::apply(literal, thenSubst);
         Literal* elseLiteral = SubstHelper::apply(literal, elseSubst);
 
-        LPair thenPair = make_pair(thenLiteral, List<GenLit>::cons(negativeCondition, gls));
-        LPair elsePair = make_pair(elseLiteral, List<GenLit>::cons(positiveCondition, gls));
+        LPair thenPair = std::make_pair(thenLiteral, List<GenLit>::cons(negativeCondition, gls));
+        LPair elsePair = std::make_pair(elseLiteral, List<GenLit>::cons(positiveCondition, gls));
 
         List<LPair>::push(thenPair, processedLiterals);
         List<LPair>::push(elsePair, processedLiterals);
@@ -220,7 +220,7 @@ void NewCNF::process(Literal* literal, Occurrences &occurrences) {
         Literal* literal = p.first;
         List<GenLit>* gls = p.second;
 
-        LPair namePair = make_pair(literal, List<GenLit>::cons(GenLit(naming, NEGATIVE), gls));
+        LPair namePair = std::make_pair(literal, List<GenLit>::cons(GenLit(naming, NEGATIVE), gls));
 
         List<LPair>::push(namePair, processedLiterals);
       }
@@ -267,7 +267,7 @@ void NewCNF::process(Literal* literal, Occurrences &occurrences) {
 
         Literal *branchLiteral = SubstHelper::apply(literal, subst);
 
-        List<LPair>::push(make_pair(
+        List<LPair>::push(std::make_pair(
                               branchLiteral, List<GenLit>::cons(negCondition, gls)),
                           processedLiterals);
       }

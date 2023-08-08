@@ -600,7 +600,7 @@ int CLTBModeLearning::readInput(istream& in, bool first)
     }
     vstring inp=line.substr(0,spc);
     vstring outp=line.substr(spc+1, lastSpc-spc-1);
-    _problemFiles.push(make_pair(inp, outp));
+    _problemFiles.push(std::make_pair(inp, outp));
   }
 
   while (!in.eof() && line == "") {

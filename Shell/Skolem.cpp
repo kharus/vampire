@@ -485,7 +485,7 @@ Formula* Skolem::skolemise (Formula* f)
           skolemTerm = ApplicativeHelper::createAppTerm(
             SortHelper::getResultSort(head.term()), head, termVars).term();      
         }
-        _introducedSkolemSyms.push(make_pair(skolemisingTypeVar, sym));
+        _introducedSkolemSyms.push(std::make_pair(skolemisingTypeVar, sym));
 
         env.statistics->skolemFunctions++;
 

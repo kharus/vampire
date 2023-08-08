@@ -195,7 +195,7 @@ bool handle(RobSubstitution* subst, TermList query, unsigned index1, TermList no
     unsigned x = _var++;
     TermList nodeVar = TermList(x,true);
     subst->bindSpecialVar(x,node,index2);
-    auto constraint = make_pair(make_pair(query,index1),make_pair(nodeVar,index2));
+    auto constraint = std::make_pair(std::make_pair(query,index1),std::make_pair(nodeVar,index2));
     _constraints->push(constraint);
     return true;
 }

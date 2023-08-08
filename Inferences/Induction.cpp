@@ -455,7 +455,7 @@ void InductionClauseIterator::processLiteral(Clause* premise, Literal* lit)
     if (_opt.nonUnitInduction()) {
       sideLitsIt = pvi(iterTraits(Set<Term*>::Iterator(ta_terms))
         .map([this](Term* arg) {
-          return make_pair(arg, _structInductionTermIndex->getGeneralizations(TypedTermList(arg), true));
+          return std::make_pair(arg, _structInductionTermIndex->getGeneralizations(TypedTermList(arg), true));
         }));
     }
     // put clauses from queries into contexts alongside with the given clause and induction term

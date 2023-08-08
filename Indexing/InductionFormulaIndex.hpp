@@ -54,7 +54,7 @@ public:
       for (const auto& cl : cls) {
         cl->incRefCnt();
       }
-      _st.push(make_pair(cls, subst));
+      _st.push(std::make_pair(cls, subst));
     }
     const Stack<std::pair<ClauseStack,Substitution>>& get() const {
       return _st;

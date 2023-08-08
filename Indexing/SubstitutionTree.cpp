@@ -770,7 +770,7 @@ bool SubstitutionTree::UnificationsIterator::enter(Node* n, BacktrackData& bd)
 
 bool SubstitutionTree::SubstitutionTreeMismatchHandler::introduceConstraint(TermList query,unsigned index1, TermList node,unsigned index2)
 {
-  auto constraint = make_pair(make_pair(query,index1),make_pair(node,index2));
+  auto constraint = std::make_pair(std::make_pair(query,index1),std::make_pair(node,index2));
   _constraints.backtrackablePush(constraint,_bd);
   return true;
 }
@@ -778,7 +778,7 @@ bool SubstitutionTree::SubstitutionTreeMismatchHandler::introduceConstraint(Term
 bool SubstitutionTree::STHOMismatchHandler::handle
      (RobSubstitution* subst,TermList query,unsigned index1, TermList node,unsigned index2)
 {
-  auto constraint = make_pair(make_pair(query,index1),make_pair(node,index2));
+  auto constraint = std::make_pair(std::make_pair(query,index1),std::make_pair(node,index2));
   _constraints.backtrackablePush(constraint,_bd);
   return true;
 }

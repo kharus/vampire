@@ -191,7 +191,7 @@ unsigned SimpleCongruenceClosure::getFreshConst()
 unsigned SimpleCongruenceClosure::getSignatureConst(unsigned symbol, SignatureKind kind)
 {
   unsigned* pRes;
-  if(!_sigConsts.getValuePtr(make_pair(symbol, kind), pRes)) {
+  if(!_sigConsts.getValuePtr(std::make_pair(symbol, kind), pRes)) {
     return *pRes;
   }
   unsigned res = getFreshConst();

@@ -802,7 +802,7 @@ void SortInference::doInference()
 #if DEBUG_SORT_INFERENCE 
         cout << "Child " << child << " for " << env.signature->typeConName(s) << endl;
 #endif
-        _sort_constraints.push(make_pair(parent,child));
+        _sort_constraints.push(std::make_pair(parent,child));
       }
     }
   }

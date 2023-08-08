@@ -87,7 +87,7 @@ public:
  Term* getDomainConstant(unsigned c, unsigned srt)
  {
    Term* t;
-   std::pair<unsigned,unsigned> pair = make_pair(c,srt);
+   std::pair<unsigned,unsigned> pair = std::make_pair(c,srt);
    if(_domainConstants.find(pair,t)) return t;
    vstring name = "domCon_"+env.signature->typeConName(srt)+"_"+Lib::Int::toString(c);
    unsigned f = env.signature->addFreshFunction(0,name.c_str()); 

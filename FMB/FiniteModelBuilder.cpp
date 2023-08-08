@@ -630,7 +630,7 @@ void FiniteModelBuilder::init()
         unsigned s1 = _sortedSignature->vampireToDistinctParent.get(vconstraint.first);
         unsigned s2 = _sortedSignature->vampireToDistinctParent.get(vconstraint.second);
         //cout << "is " << s1 << " , " << s2 << endl;
-        _distinct_sort_constraints.push(make_pair(s1,s2));
+        _distinct_sort_constraints.push(std::make_pair(s1,s2));
       }
     }
     {
@@ -643,7 +643,7 @@ void FiniteModelBuilder::init()
         unsigned s1 = _sortedSignature->vampireToDistinctParent.get(vconstraint.first);
         unsigned s2 = _sortedSignature->vampireToDistinctParent.get(vconstraint.second);
         //cout << "is " << s1 << " , " << s2 << endl;
-        _strict_distinct_sort_constraints.push(make_pair(s1,s2));
+        _strict_distinct_sort_constraints.push(std::make_pair(s1,s2));
       }
     }
 
@@ -1815,7 +1815,7 @@ MainLoopResult FiniteModelBuilder::runImpl()
         nogood.ensure(_distinctSortSizes.size());
 
         for (unsigned i = 0; i < _distinctSortSizes.size(); i++) {
-          nogood[i] = make_pair(STAR,_distinctSortSizes[i]);
+          nogood[i] = std::make_pair(STAR,_distinctSortSizes[i]);
         }
 
         for (unsigned i = 0; i < failed.size(); i++) {
@@ -2397,7 +2397,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
             Constraint_Generator* gen_p = new Constraint_Generator(newSortSizes.size(), ++_maxWeightSoFar);
             Constraint_Generator_Vals& gen = gen_p->_vals;
             for (unsigned j = 0; j < newSortSizes.size(); j++) {
-              gen[j] = make_pair(EQ,newSortSizes[j]);
+              gen[j] = std::make_pair(EQ,newSortSizes[j]);
             }
 
             _constraints_generators.insert(gen_p);
@@ -2421,7 +2421,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
             Constraint_Generator* gen_p = new Constraint_Generator(newSortSizes.size(), ++_maxWeightSoFar /*effectively a fallback to FIFO for artificial children*/);
             Constraint_Generator_Vals& gen = gen_p->_vals;
             for (unsigned j = 0; j < newSortSizes.size(); j++) {
-              gen[j] = make_pair(STAR,newSortSizes[j]);
+              gen[j] = std::make_pair(STAR,newSortSizes[j]);
             }
             gen[constr.first].first = EQ;
             gen[constr.second].first = GEQ;
@@ -2442,7 +2442,7 @@ bool FiniteModelBuilder::HackyDSAE::increaseModelSizes(DArray<unsigned>& newSort
             Constraint_Generator* gen_p = new Constraint_Generator(newSortSizes.size(), ++_maxWeightSoFar /*effectively a fallback to FIFO for artificial children*/);
             Constraint_Generator_Vals& gen = gen_p->_vals;
             for (unsigned j = 0; j < newSortSizes.size(); j++) {
-              gen[j] = make_pair(STAR,newSortSizes[j]);
+              gen[j] = std::make_pair(STAR,newSortSizes[j]);
             }
             gen[constr.first].first = EQ;
             gen[constr.second].first = GEQ;
