@@ -89,10 +89,10 @@ unsigned Timer::elapsedMegaInstructions() {
         env.out() << " nor after " << last_instruction_count_read << " (user) instruction executed.";
       }
 #endif
-      env.out() << endl;
+      env.out() << std::endl;
 
       if (szsOutputMode()) {
-        env.out() << STATUS[whichLimit] << (env.options ? env.options->problemName().c_str() : "unknown") << endl;
+        env.out() << STATUS[whichLimit] << (env.options ? env.options->problemName().c_str() : "unknown") << std::endl;
       }
     } else // the actual child
       if (env.statistics) {
@@ -307,7 +307,7 @@ void Timer::syncClock()
     //we're unable to sync clock as we weren't able to obtain number of ticks in the beginning
     if(!reportedProblem) {
       reportedProblem = true;
-      cerr << "cannot syncronize clock as times() initially returned -1" << endl;
+      std::cerr << "cannot syncronize clock as times() initially returned -1" << std::endl;
     }
     return;
   }
@@ -316,7 +316,7 @@ void Timer::syncClock()
     //we're unable to sync clock as we cannot get the current time
     if(!reportedProblem) {
       reportedProblem = true;
-      cerr << "could not syncronize clock as times() returned -1" << endl;
+      std::cerr << "could not syncronize clock as times() returned -1" << std::endl;
     }
     return;
   }
@@ -335,7 +335,7 @@ vstring Timer::msToSecondsString(int ms)
 /**
  * Print string representing @b ms of milliseconds to @b str
  */
-void Timer::printMSString(ostream& str, int ms)
+void Timer::printMSString(std::ostream& str, int ms)
 {
   if(ms<0) {
     str << '-';

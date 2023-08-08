@@ -529,7 +529,7 @@ public:
 };
 
 template<typename T>
-std::ostream& operator<< (ostream& out, const SharedSet<T>& s )
+std::ostream& operator<< (std::ostream& out, const SharedSet<T>& s )
 {
   typename SharedSet<T>::Iterator it(s);
   while(it.hasNext()) {

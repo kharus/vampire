@@ -115,7 +115,7 @@ void handleSignal (int sigNum)
 	  env.out() << "Aborted by signal " << signalDescription << " on " << env.options->inputFile() << "\n";
 	  env.endOutput();
 	} else {
-	  cout << "Aborted by signal " << signalDescription << "\n";
+	  std::cout << "Aborted by signal " << signalDescription << "\n";
 	}
       }
       return;
@@ -126,7 +126,7 @@ void handleSignal (int sigNum)
 	  env.out() << "External time out (SIGXCPU) on " << env.options->inputFile() << "\n";
 	  env.endOutput();
 	} else {
-	  cout << "External time out (SIGXCPU)\n";
+          std::cout << "External time out (SIGXCPU)\n";
 	}
       }
       System::terminateImmediately(VAMP_RESULT_STATUS_OTHER_SIGNAL);
@@ -169,8 +169,8 @@ void handleSignal (int sigNum)
 	    Debug::Tracer::printStack(env.out());
 	    env.endOutput();
 	  } else {
-	    cout << getpid() << "Aborted by signal " << signalDescription << "\n";
-	    Debug::Tracer::printStack(cout);
+            std::cout << getpid() << "Aborted by signal " << signalDescription << "\n";
+	    Debug::Tracer::printStack(std::cout);
 	  }
 	}
 	System::terminateImmediately(haveSigInt ? VAMP_RESULT_STATUS_SIGINT : VAMP_RESULT_STATUS_OTHER_SIGNAL);
@@ -307,7 +307,7 @@ bool System::fileExists(vstring fname)
 {
   BYPASSING_ALLOCATOR;
 
-  ifstream ifile(fname.c_str());
+  std::ifstream ifile(fname.c_str());
   return ifile.good();
 }
 

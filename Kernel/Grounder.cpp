@@ -172,7 +172,7 @@ struct GlobalSubsumptionGrounder::OrderNormalizingComparator
     static DisagreementSetIterator dsit;
     dsit.reset(la, lb, false);
     ALWAYS(dsit.hasNext());
-    pair<TermList,TermList> da = dsit.next();
+    std::pair<TermList,TermList> da = dsit.next();
     if(da.first.isVar()!=da.second.isVar()) {
       return da.first.isVar();
     }

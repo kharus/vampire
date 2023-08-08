@@ -252,7 +252,7 @@ TermList SortHelper::getTermSort(TermList trm, Literal* lit)
     return getResultSort(trm.term());
   }
   if(!trm.isVar()){
-    cout << "ERROR with " << trm.toString() << " in " << lit->toString() << endl;
+    std::cout << "ERROR with " << trm.toString() << " in " << lit->toString() << std::endl;
   }
   ASS(trm.isVar());
   return getVariableSort(trm, lit);

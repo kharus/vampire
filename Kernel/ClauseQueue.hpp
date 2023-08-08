@@ -47,7 +47,7 @@ public:
   bool isEmpty() const
   { return _left->nodes[0] == 0; }
 #if VDEBUG
-  void output(ostream&) const;
+  void output(std::ostream&) const;
 #endif
 
   friend class Iterator;

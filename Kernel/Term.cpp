@@ -993,14 +993,14 @@ Term* Term::createTupleLet(unsigned tupleFunctor, VList* symbols, TermList bindi
   ASS_EQ(tupleSymbol->arity(), VList::length(symbols));
   ASS_REP(tupleSymbol->fnType()->result().isTupleSort(), tupleFunctor);
 
-  Set<pair<int,bool> > distinctSymbols;
+  Set<std::pair<int,bool> > distinctSymbols;
   VList::Iterator sit(symbols);
   unsigned arg = 0;
   while (sit.hasNext()) {
     unsigned symbol = sit.next();
     bool isPredicate = tupleSymbol->fnType()->arg(arg) == AtomicSort::boolSort();
-    if (!distinctSymbols.contains(make_pair(symbol, isPredicate))) {
-      distinctSymbols.insert(make_pair(symbol, isPredicate));
+    if (!distinctSymbols.contains(std::make_pair(symbol, isPredicate))) {
+      distinctSymbols.insert(std::make_pair(symbol, isPredicate));
     } else {
       ASSERTION_VIOLATION_REP(symbol);
     }
@@ -1700,7 +1700,7 @@ void TermList::assertValid() const
 
 #endif
 
-std::ostream& Kernel::operator<< (ostream& out, TermList tl )
+std::ostream& Kernel::operator<< (std::ostream& out, TermList tl )
 {
   if (tl.isEmpty()) {
     return out<<"<empty TermList>";
@@ -1711,11 +1711,11 @@ std::ostream& Kernel::operator<< (ostream& out, TermList tl )
   return out<<tl.term()->toString();
 }
 
-std::ostream& Kernel::operator<< (ostream& out, const Term& t )
+std::ostream& Kernel::operator<< (std::ostream& out, const Term& t )
 {
   return out<<t.toString();
 }
-std::ostream& Kernel::operator<< (ostream& out, const Literal& l )
+std::ostream& Kernel::operator<< (std::ostream& out, const Literal& l )
 {
   return out<<l.toString();
 }
