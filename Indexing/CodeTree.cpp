@@ -279,7 +279,7 @@ void CodeTree::ILStruct::deleteMatch(unsigned matchIndex)
   ASS_L(matchIndex, matchCnt);
 
   matchCnt--;
-  swap(matches[matchIndex], matches[matchCnt]);
+  std::swap(matches[matchIndex], matches[matchCnt]);
 }
 
 CodeTree::MatchInfo*& CodeTree::ILStruct::getMatch(unsigned matchIndex)

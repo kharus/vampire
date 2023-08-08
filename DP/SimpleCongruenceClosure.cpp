@@ -454,7 +454,7 @@ void SimpleCongruenceClosure::makeProofRepresentant(unsigned c)
   do{
     unsigned newC = _cInfos[c].proofPredecessor;
     _cInfos[c].proofPredecessor = prevC;
-    swap(_cInfos[c].predecessorPremise, transfPrem);
+    std::swap(_cInfos[c].predecessorPremise, transfPrem);
     prevC = c;
     c = newC;
   } while(c!=0);
@@ -697,8 +697,8 @@ void SimpleCongruenceClosure::collectUnifyingPath(unsigned c1, unsigned c2, Stac
   unsigned depth2 = getProofDepth(c2);
 
   if(depth1<depth2) {
-    swap(c1,c2);
-    swap(depth1,depth2);
+    std::swap(c1,c2);
+    std::swap(depth1,depth2);
   }
 
   while(depth1>depth2) {

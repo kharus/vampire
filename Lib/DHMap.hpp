@@ -79,7 +79,7 @@ public:
     }
   }
 
-  friend void swap(DHMap& l, DHMap& r) 
+  friend void swap(DHMap& l, DHMap& r)
   {
     std::swap(l._timestamp, r._timestamp);
     std::swap(l._size, r._size);

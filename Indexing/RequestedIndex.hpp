@@ -43,7 +43,7 @@ class RequestedIndex final
     // Moving transfers ownership of the index
     RequestedIndex& operator=(RequestedIndex&& other) noexcept
     {
-      this->swap(other);
+      this->std::swap(other);
       return *this;
     }
 
@@ -90,12 +90,12 @@ class RequestedIndex final
       return _index;
     }
 
-    void swap(RequestedIndex& other)
+    void std::swap(RequestedIndex& other)
     {
       using std::swap;
-      swap(_index, other._index);
-      swap(_type, other._type);
-      swap(_indexManager, other._indexManager);
+      std::swap(_index, other._index);
+      std::swap(_type, other._type);
+      std::swap(_indexManager, other._indexManager);
     }
 
   private:

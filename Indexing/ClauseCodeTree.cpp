@@ -134,7 +134,7 @@ void ClauseCodeTree::optimizeLiteralOrder(DArray<Literal*>& lits)
     }
 
   have_best:
-    swap(lits[startIndex],lits[bestIndex]);
+    std::swap(lits[startIndex],lits[bestIndex]);
 
     if(unshared) {
       //we haven't matched the whole literal, so we won't proceed with the next one
@@ -854,7 +854,7 @@ bool ClauseCodeTree::ClauseMatcher::matchGlobalVars(int& resolvedQueryLit)
 	MatchInfo* nq=ni->getMatch(k);		//next query literal
 	if(!compatible(bi,bq,ni,nq)) {
 	  rem--;
-	  swap(ni->getMatch(k),ni->getMatch(rem));
+	  std::swap(ni->getMatch(k),ni->getMatch(rem));
 	  continue;
 	}
 	k++;

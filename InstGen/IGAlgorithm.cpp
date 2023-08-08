@@ -521,7 +521,7 @@ unsigned IGAlgorithm::lookaheadSelection(Clause* cl, unsigned selCnt)
   for (unsigned i=0; i < candidates.size(); i++) {
     unsigned idx = candidates[i];
     if(selIdx!=idx) {
-      swap((*cl)[idx], (*cl)[selIdx]);
+      std::swap((*cl)[idx], (*cl)[selIdx]);
     }
     selIdx++;
   }
@@ -544,7 +544,7 @@ void IGAlgorithm::selectAndAddToIndex(Clause* cl)
 
     if(selIdx!=i) {
       modified = true;
-      swap((*cl)[i], (*cl)[selIdx]);
+      std::swap((*cl)[i], (*cl)[selIdx]);
     }
     selIdx++;
   }

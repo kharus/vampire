@@ -378,13 +378,13 @@ struct HashingClauseVariantIndex::VariableIgnoringComparator {
       TermList* l1l = l1->nthArgument(0);
       TermList* l1r = l1->nthArgument(1);
       if (compare(l1l,l1r) == LESS) {
-        swap(l1l,l1r);
+        std::swap(l1l,l1r);
       }
 
       TermList* l2l = l2->nthArgument(0);
       TermList* l2r = l2->nthArgument(1);
       if (compare(l2l,l2r) == LESS) {
-        swap(l2l,l2r);
+        std::swap(l2l,l2r);
       }
 
       Comparison res = compare(l1l,l2l);
@@ -463,7 +463,7 @@ unsigned HashingClauseVariantIndex::computeHashAndCountVariables(Literal* l, Var
     TermList* ll = l->nthArgument(0);
     TermList* lr = l->nthArgument(1);
     if (VariableIgnoringComparator::compare(ll,lr) == LESS) {
-      swap(ll,lr);
+      std::swap(ll,lr);
     }
 
     hash = computeHashAndCountVariables(ll,varCnts,hash);
