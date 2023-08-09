@@ -39,7 +39,7 @@ inline void __weights(Map<unsigned, KboWeight>& ws) {
 
 template<class A, class... As>
 inline void __weights(Map<unsigned, KboWeight>& ws, std::pair<A, KboWeight> a, std::pair<As, KboWeight>... as) {
-  ws.insert(get<0>(a).functor(), get<1>(a));
+  ws.insert(std::get<0>(a).functor(), std::get<1>(a));
   __weights(ws, as...);
 }
 
