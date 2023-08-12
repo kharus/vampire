@@ -92,11 +92,11 @@ public:
   }
 
   DHMap& operator=(DHMap&& obj)
-  { swap(*this, obj); return *this; }
+  { std::swap(*this, obj); return *this; }
 
 
   DHMap(DHMap&& obj) : DHMap()
-  { swap(*this, obj); }
+  { std::swap(*this, obj); }
 
   /** Deallocate the DHMap */
   ~DHMap()
@@ -511,7 +511,7 @@ private:
   void ensureExpanded()
   {
     if(_size+_deleted>=_nextExpansionOccupancy) {
-      //cout << this << ", " << _size << ", " << _deleted << ", " << _nextExpansionOccupancy << endl;
+      //std::cout << this << ", " << _size << ", " << _deleted << ", " << _nextExpansionOccupancy << std::endl;
       expand();
     }
   }

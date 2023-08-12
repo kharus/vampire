@@ -28,7 +28,7 @@ bool testGlobal(Options& o)
 
 bool testOption(bool bad, vstring name,vstring value)
 {
-    //cout << (bad ? "Should be bad" : "Should be good") << endl;
+    //std::cout << (bad ? "Should be bad" : "Should be good") << std::endl;
     Options options;
     options.set(name,value);
     bool res = testGlobal(options);
