@@ -170,7 +170,7 @@ void handleSignal (int sigNum)
 	    env.endOutput();
 	  } else {
 	    std::cout << getpid() << "Aborted by signal " << signalDescription << "\n";
-	    Debug::Tracer::printStack(cout);
+	    Debug::Tracer::printStack(std::cout);
 	  }
 	}
 	System::terminateImmediately(haveSigInt ? VAMP_RESULT_STATUS_SIGINT : VAMP_RESULT_STATUS_OTHER_SIGNAL);
