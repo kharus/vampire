@@ -188,7 +188,7 @@ void CLTBMode::solveBatch(std::istream& batchFile, bool first,vstring inputDirec
         prob.searchForProof(problemTerminationTime,nextProblemTimeLimit,_category);
       } catch (Exception& exc) {
         std::cerr << "% Exception at proof search level" << std::endl;
-        exc.cry(cerr);
+        exc.cry(std::cerr);
         System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
       }
       // searchForProof() function should never return
@@ -207,7 +207,7 @@ void CLTBMode::solveBatch(std::istream& batchFile, bool first,vstring inputDirec
     }
     catch(SystemFailException& ex) {
       std::cerr << "% SystemFailException at batch level" << std::endl;
-      ex.cry(cerr);
+      ex.cry(std::cerr);
     }
 
     // output the result depending on the termination code
@@ -300,7 +300,7 @@ void CLTBMode::learnFromSolutionFile(vstring& solnFileName)
       solnUnits = parser.units();
     } catch (Lib::Exception& ex) {
       std::cout << "Couldn't parse " << "solnFileName" << std::endl;
-      ex.cry(cout);
+      ex.cry(std::cout);
 
       //save memory by deleting the already loaded units:
       UnitList* units = parser.units();
@@ -825,7 +825,7 @@ bool CLTBProblem::runSchedule(Schedule& schedule,StrategySet& used,int terminati
           runSlice(sliceCode,sliceTime); //start proving
         } catch (Exception& exc) {
           std::cerr << "% Exception at run slice level" << std::endl;
-          exc.cry(cerr);
+          exc.cry(std::cerr);
           System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
         }
         ASSERTION_VIOLATION; //the runSlice function should never return
@@ -893,7 +893,7 @@ void CLTBProblem::terminatingSignalHandler(int sigNum)
     }
   } catch (Lib::SystemFailException& ex) {
     std::cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
-    ex.cry(cerr);
+    ex.cry(std::cerr);
     std::cerr << " and will now die" << std::endl;
   }
   System::terminateImmediately(0);

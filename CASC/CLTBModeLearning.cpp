@@ -205,7 +205,7 @@ void CLTBModeLearning::solveBatch(std::istream& batchFile, bool first,vstring in
         prob.searchForProof(problemTerminationTime,nextProblemTimeLimit,strats,true);
       } catch (Exception& exc) {
         std::cerr << "% Exception at proof search level" << std::endl;
-        exc.cry(cerr);
+        exc.cry(std::cerr);
         System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
       }
       // searchForProof() function should never return
@@ -224,7 +224,7 @@ void CLTBModeLearning::solveBatch(std::istream& batchFile, bool first,vstring in
     }
     catch(SystemFailException& ex) {
       std::cerr << "% SystemFailException at batch level" << std::endl;
-      ex.cry(cerr);
+      ex.cry(std::cerr);
     }
 
     // output the result depending on the termination code
@@ -355,7 +355,7 @@ void CLTBModeLearning::doTraining(int time, bool startup)
     }
     catch(SystemFailException& ex) {
       std::cerr << "% SystemFailException at batch level" << std::endl;
-      ex.cry(cerr);
+      ex.cry(std::cerr);
     }
     if(!resValue){
       coutLineOutput() << "solved in training" << std::endl;
@@ -966,7 +966,7 @@ bool CLTBProblemLearning::runSchedule(Schedule& schedule,StrategySet& used,bool 
           runSlice(sliceCode,sliceTime,stopOnProof); //start proving
         } catch (Exception& exc) {
           std::cerr << "% Exception at run slice level" << std::endl;
-          exc.cry(cerr);
+          exc.cry(std::cerr);
           System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
         }
         ASSERTION_VIOLATION; //the runSlice function should never return
@@ -1034,7 +1034,7 @@ void CLTBProblemLearning::terminatingSignalHandler(int sigNum)
     }
   } catch (Lib::SystemFailException& ex) {
     std::cerr << "Process " << getpid() << " received SystemFailException in terminatingSignalHandler" << std::endl;
-    ex.cry(cerr);
+    ex.cry(std::cerr);
     std::cerr << " and will now die" << std::endl;
   }
   System::terminateImmediately(0);

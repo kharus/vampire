@@ -89,7 +89,7 @@ bool PortfolioMode::perform(float slowness)
       resValue = pm.searchForProof();
   } catch (Exception& exc) {
       std::cerr << "% Exception at proof search level" << std::endl;
-      exc.cry(cerr);
+      exc.cry(std::cerr);
       System::terminateImmediately(1); //we didn't find the proof, so we return nonzero status code
   }
 

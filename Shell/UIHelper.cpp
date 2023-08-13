@@ -96,7 +96,7 @@ void reportSpiderStatus(char status)
   vstring commitNumber = version.substr(versionPosition,afterVersionPosition - versionPosition);
   vstring z3Version = Z3Interfacing::z3_full_version();
   size_t spacePosition = z3Version.find(" ");
-  if (spacePosition != string::npos) {
+  if (spacePosition != std::string::npos) {
     z3Version = z3Version.substr(0,spacePosition);
   }
 

@@ -717,7 +717,7 @@ int main(int argc, char* argv[])
         }
       } catch (Lib::SystemFailException& ex) {
         std::cerr << "Process " << getpid() << " received SystemFailException" << std::endl;
-        ex.cry(cerr);
+        ex.cry(std::cerr);
         std::cerr << " and will now die" << std::endl;
       }
       //we have processed the ltb batch file, so we can return zero

@@ -3298,7 +3298,7 @@ void Options::readFromEncodedOptions (vstring testId)
   index = testId.find('_');
   vstring awr = testId.substr(0,index);
   _ageWeightRatio.set(awr.c_str());
-  if (index==string::npos) {
+  if (index==std::string::npos) {
     //there are no extra options
     return;
   }

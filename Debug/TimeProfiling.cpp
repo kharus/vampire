@@ -164,7 +164,7 @@ struct MaybeSetw {
   int width;
   friend std::ostream& operator<<(std::ostream& out, MaybeSetw const& self)
   { 
-    if (self.enabled) return out << setw(self.width);
+    if (self.enabled) return out << std::setw(self.width);
     else return out;
   }
 };
@@ -189,13 +189,13 @@ void TimeTrace::Node::printPrettyRec(std::ostream& out, NodeFormatOpts& opts)
   auto total = totalDuration();
   auto cnt = measurements.cnt();
   if (opts.parentDuration.isSome()) {
-    out << "[" << setw(2) << percent(total, opts.parentDuration.unwrap()) << "%] ";
+    out << "[" << std::setw(2) << percent(total, opts.parentDuration.unwrap()) << "%] ";
   }
   BYPASSING_ALLOCATOR
   if (opts.nameWidth.isSome()) {
-    out << msetw(opts.nameWidth.unwrap()) << left;
+    out << msetw(opts.nameWidth.unwrap()) << std::left;
   }
-  out << name << right;
+  out << name << std::right;
 
   out << " (total: "<< msetw(4) << total
       << ", avg: "  << msetw(4) << total / cnt

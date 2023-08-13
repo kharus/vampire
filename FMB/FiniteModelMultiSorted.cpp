@@ -611,7 +611,7 @@ bool FiniteModelMultiSorted::evaluate(Formula* formula,unsigned depth)
       bool right_res = evaluate(right,depth+1);
       
 #if DEBUG_MODEL
-      std::cout << "left_res is " << left_res << ", right_res is " << right_res << std::endl;
+      std::cout << "left_res is " << std::left_res << ", right_res is " << std::right_res << std::endl;
 #endif
 
       if(isImp) return !left_res || right_res;

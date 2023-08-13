@@ -77,7 +77,7 @@ namespace FMB {
               left--;
             }
           }
-          //std::cout << "In this case with " << left << " left" << std::endl;
+          //std::cout << "In this case with " << std::left << " left" << std::endl;
         }
       }
 

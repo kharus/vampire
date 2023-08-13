@@ -21,7 +21,7 @@ bool testGlobal(Options& o)
     return o.checkGlobalOptionConstraints();
   }
   catch(Lib::UserErrorException& e){
-    e.cry(cout);
+    e.cry(std::cout);
     return false;
   }
 }
