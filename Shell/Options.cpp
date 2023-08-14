@@ -3334,7 +3334,7 @@ vstring Options::generateEncodedOptions() const
   res << sat; 
 
   //selection function
-  res << (selection() < 0 ? "-" : "+") << abs(selection());
+  res << (selection() < 0 ? "-" : "+") << std::abs(selection());
   res << "_";
 
   //age-weight ratio

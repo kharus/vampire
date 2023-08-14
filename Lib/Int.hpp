@@ -136,7 +136,7 @@ class Int
       return (unsigned)num; // = 2147483648
     }
     // abs works for all other values
-    return abs(num);
+    return std::abs(num);
   }
 
   /**

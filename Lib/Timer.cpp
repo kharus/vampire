@@ -322,7 +322,7 @@ void Timer::syncClock()
   }
 
   int newVal=newMilliseconds-s_initGuarantedMiliseconds;
-  if(abs(newVal-timer_sigalrm_counter)>20) {
+  if(std::abs(newVal-timer_sigalrm_counter)>20) {
     timer_sigalrm_counter=newVal;
   }
 }

@@ -101,7 +101,7 @@ LiteralSelector* LiteralSelector::getSelector(const Ordering& ordering, const Op
 	    Composite<MaximalSize,
 	    Composite<Negative, LexComparator> > > > Comparator10;
 
-  int absNum = abs(selectorNumber);
+  int absNum = std::abs(selectorNumber);
 
   LiteralSelector* res;
   switch(absNum) {
