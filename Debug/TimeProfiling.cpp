@@ -17,6 +17,7 @@
 
 namespace Shell {
 
+using namespace std;
 using namespace Lib;
 
 // TODO: these should be dispensable with C++17 onwards
