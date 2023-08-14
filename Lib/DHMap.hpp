@@ -92,11 +92,11 @@ public:
   }
 
   DHMap& operator=(DHMap&& obj)
-  { std::swap(*this, obj); return *this; }
+  { swap(*this, obj); return *this; }
 
 
   DHMap(DHMap&& obj) : DHMap()
-  { std::swap(*this, obj); }
+  { swap(*this, obj); }
 
   /** Deallocate the DHMap */
   ~DHMap()
