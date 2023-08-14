@@ -644,7 +644,7 @@ vstring LaTeX::splittingToString(InferenceStore::SplittingRecord* sr)
   res += getClauseLatexId(sr->premise);
 
 
-  Stack<pair<int,Clause*> >::Iterator ncit(sr->namedComps);
+  Stack<std::pair<int,Clause*> >::Iterator ncit(sr->namedComps);
   while(ncit.hasNext()) {
     res += vstring(",")+Int::toString(ncit.next().second->number())+"_D";
   }
@@ -659,9 +659,9 @@ vstring LaTeX::splittingToString(InferenceStore::SplittingRecord* sr)
   res += toString(sr->premise.cl());
   res += "\n\\end{VampirePremise}\n";
 
-  Stack<pair<int,Clause*> >::Iterator ncit2(sr->namedComps);
+  Stack<std::pair<int,Clause*> >::Iterator ncit2(sr->namedComps);
   while(ncit2.hasNext()) {
-    pair<int,Clause*> nrec=ncit2.next();
+    std::pair<int,Clause*> nrec=ncit2.next();
     res += "\\VPremiseSeparator\n";
     res += "\\begin{VampirePremise}%\n~~";
     if(nrec.first>0) {
@@ -732,7 +732,7 @@ vstring LaTeX::varToString (unsigned num) const
 //   }
 //   vstring refutation = toString(ref);
 //   if (fileName == "on") {
-//     cout << refutation;
+//     std::cout << refutation;
 //     return;
 //   }
 //   ofstream stream(fileName.c_str());
@@ -740,7 +740,7 @@ vstring LaTeX::varToString (unsigned num) const
 //     stream << refutation;
 //   }
 //   else {
-//     cerr << "Cannot open file " << fileName << " for LaTeX output\n";
+//     std::cerr << "Cannot open file " << fileName << " for LaTeX output\n";
 //   }
 // } // LaTeX::output
 

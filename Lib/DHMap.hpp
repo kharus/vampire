@@ -79,7 +79,7 @@ public:
     }
   }
 
-  friend void swap(DHMap& l, DHMap& r) 
+  friend void swap(DHMap& l, DHMap& r)
   {
     std::swap(l._timestamp, r._timestamp);
     std::swap(l._size, r._size);
@@ -511,7 +511,7 @@ private:
   void ensureExpanded()
   {
     if(_size+_deleted>=_nextExpansionOccupancy) {
-      //cout << this << ", " << _size << ", " << _deleted << ", " << _nextExpansionOccupancy << endl;
+      //std::cout << this << ", " << _size << ", " << _deleted << ", " << _nextExpansionOccupancy << std::endl;
       expand();
     }
   }

@@ -89,10 +89,10 @@ unsigned Timer::elapsedMegaInstructions() {
         env.out() << " nor after " << last_instruction_count_read << " (user) instruction executed.";
       }
 #endif
-      env.out() << endl;
+      env.out() << std::endl;
 
       if (szsOutputMode()) {
-        env.out() << STATUS[whichLimit] << (env.options ? env.options->problemName().c_str() : "unknown") << endl;
+        env.out() << STATUS[whichLimit] << (env.options ? env.options->problemName().c_str() : "unknown") << std::endl;
       }
     } else // the actual child
       if (env.statistics) {
@@ -109,7 +109,7 @@ timer_sigalrm_handler (int sig)
 {
 #if DEBUG_TIMER_CHANGES
   if(timer_sigalrm_counter<0) {
-    cout << "Timer value became negative in timer_sigalrm_handler: " << timer_sigalrm_counter <<endl;
+    std::cout << "Timer value became negative in timer_sigalrm_handler: " << timer_sigalrm_counter <<std::endl;
     System::terminateImmediately(1);
   }
 #endif
@@ -142,7 +142,7 @@ timer_sigalrm_handler (int sig)
     } else if (perf_fd == -1 && error_to_report) {
       // however, we definitely want this to be guarded by env.options->instructionLimit()
       // not to bother with the error people who don't even know about instruction limiting
-      cerr << "perf_event_open failed (instruction limiting will be disabled): " << error_to_report << endl;
+      std::cerr << "perf_event_open failed (instruction limiting will be disabled): " << error_to_report << std::endl;
       error_to_report = nullptr;
     }
   }
@@ -150,7 +150,7 @@ timer_sigalrm_handler (int sig)
 
 #if DEBUG_TIMER_CHANGES
   if(timer_sigalrm_counter<0) {
-    cout << "Timer value became negative after increase: " << timer_sigalrm_counter <<endl;
+    std::cout << "Timer value became negative after increase: " << timer_sigalrm_counter <<std::endl;
     System::terminateImmediately(1);
   }
 #endif
@@ -171,7 +171,7 @@ int Timer::guaranteedMilliseconds()
   clock_t ticks=times(&aux);
 #if DEBUG_TIMER_CHANGES
   if(ticks==((clock_t)-1)) {
-    cout << "clock value -1 returned by times()" <<endl;
+    std::cout << "clock value -1 returned by times()" <<std::endl;
     System::terminateImmediately(1);
   }
 #endif
@@ -307,7 +307,7 @@ void Timer::syncClock()
     //we're unable to sync clock as we weren't able to obtain number of ticks in the beginning
     if(!reportedProblem) {
       reportedProblem = true;
-      cerr << "cannot syncronize clock as times() initially returned -1" << endl;
+      std::cerr << "cannot syncronize clock as times() initially returned -1" << std::endl;
     }
     return;
   }
@@ -316,7 +316,7 @@ void Timer::syncClock()
     //we're unable to sync clock as we cannot get the current time
     if(!reportedProblem) {
       reportedProblem = true;
-      cerr << "could not syncronize clock as times() returned -1" << endl;
+      std::cerr << "could not syncronize clock as times() returned -1" << std::endl;
     }
     return;
   }
@@ -335,7 +335,7 @@ vstring Timer::msToSecondsString(int ms)
 /**
  * Print string representing @b ms of milliseconds to @b str
  */
-void Timer::printMSString(ostream& str, int ms)
+void Timer::printMSString(std::ostream& str, int ms)
 {
   if(ms<0) {
     str << '-';

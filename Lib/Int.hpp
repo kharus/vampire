@@ -24,7 +24,7 @@
 
 #include <iostream>
 
-using namespace std;
+using std::numeric_limits;
 
 #ifdef _MSC_VER // VC++
 #  undef max

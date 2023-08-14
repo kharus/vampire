@@ -59,7 +59,7 @@ void TheoryAxioms::addAndOutputTheoryUnit(Unit* unit, unsigned level)
       f = Formula::fromClause(static_cast<Clause*>(unit));
       qunit = new FormulaUnit(f,unit->inference());
     }
-    cout << "% Theory " << (unit->isClause() ? "clause" : "formula" ) << ": " << qunit->toString() << "\n";
+    std::cout << "% Theory " << (unit->isClause() ? "clause" : "formula" ) << ": " << qunit->toString() << "\n";
     if(f){ f->destroy(); } 
   }
   if(!unit->isClause()){
