@@ -41,7 +41,7 @@
 
 namespace Kernel {
 
-typedef Map<std::string, unsigned> SymbolMap;
+typedef Lib::Map<std::string, unsigned> SymbolMap;
 
 /**
  * Class implementing signatures
@@ -388,7 +388,7 @@ class Signature
 
   public:
     RealSymbol(const RealConstantType& val)
-    : Symbol((env.options->proof() == Shell::Options::Proof::PROOFCHECK) ? "$to_real("+val.toString()+")" : val.toNiceString(), 0, true), _realValue(val)
+    : Symbol((Lib::env.options->proof() == Shell::Options::Proof::PROOFCHECK) ? "$to_real("+val.toString()+")" : val.toNiceString(), 0, true), _realValue(val)
     {
       setType(OperatorType::getConstantsType(AtomicSort::realSort()));
     }
@@ -645,7 +645,7 @@ class Signature
   unsigned getFunctionNumber(const std::string& name, unsigned arity) const;
   unsigned getPredicateNumber(const std::string& name, unsigned arity) const;
 
-  typedef SmartPtr<Lib::Stack<unsigned>> DistinctGroupMembers;
+  typedef Lib::SmartPtr<Lib::Stack<unsigned>> DistinctGroupMembers;
   
   Unit* getDistinctGroupPremise(unsigned group);
   unsigned createDistinctGroup(Unit* premise = 0);

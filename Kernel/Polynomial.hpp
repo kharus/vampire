@@ -368,7 +368,7 @@ public:
 
   /** returns an iterator over all factors */
   auto iter() const&
-  { return arrayIter(_factors); }
+  { return Lib::arrayIter(_factors); }
 
   explicit MonomFactors(const MonomFactors&) = default;
   explicit MonomFactors(MonomFactors&) = default;
@@ -463,7 +463,7 @@ public:
 
   /** returns iterator over all summands of this Polyom */
   auto iterSummands() const&
-  { return arrayIter(_summands); }
+  { return Lib::arrayIter(_summands); }
 
   Lib::Stack<Monom>& raw();
 

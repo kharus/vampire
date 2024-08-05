@@ -43,7 +43,7 @@ class LiteralSubstitutionTree
 
 public:
   LiteralSubstitutionTree()
-    : _trees(env.signature->predicates() * 2)
+    : _trees(Lib::env.signature->predicates() * 2)
     { }
 
   void handle(LeafData ld, bool insert) final override

@@ -277,7 +277,7 @@ private:
    * Equality that caused unsatisfiability; if CEq::isInvalid(), there isn't such.
    */
   Lib::Stack<CEq> _unsatEqs;
-  Deque<CEq> _pendingEqualities;
+  Lib::Deque<CEq> _pendingEqualities;
   Lib::Stack<CEq> _negEqualities;
 
   struct DistinctEntry

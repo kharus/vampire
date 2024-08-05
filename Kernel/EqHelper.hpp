@@ -39,7 +39,7 @@ public:
   static Lib::VirtualIterator<Term*> getFoSubtermIterator(Literal* lit, const Ordering& ord);
   static TermIterator getBooleanSubtermIterator(Literal* lit, const Ordering& ord);  
   static TermIterator getNarrowableSubtermIterator(Literal* lit, const Ordering& ord);  
-  static Lib::VirtualIterator<TypedTermList> getRewritableVarsIterator(DHSet<unsigned>* unstableVars, Literal* lit, const Ordering& ord);
+  static Lib::VirtualIterator<TypedTermList> getRewritableVarsIterator(Lib::DHSet<unsigned>* unstableVars, Literal* lit, const Ordering& ord);
   static Lib::VirtualIterator<TypedTermList> getLHSIterator(Literal* lit, const Ordering& ord);
   static Lib::VirtualIterator<TypedTermList> getSuperpositionLHSIterator(Literal* lit, const Ordering& ord, const Options& opt);
   static Lib::VirtualIterator<TypedTermList> getSubVarSupLHSIterator(Literal* lit, const Ordering& ord);

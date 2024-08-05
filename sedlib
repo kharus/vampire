@@ -26,3 +26,9 @@ s/\(Stack</\(Lib::Stack</g
 s/<DArray</<Lib::DArray</g
 s/(\s)Int::/\1Lib::Int::/g
 s/(\s|\()ValueNotFoundException/\1Lib::ValueNotFoundException/g
+s/(\s)SmartPtr</\1Lib::SmartPtr</g
+s/\(DHSet</\(Lib::DHSet</g
+s/(\s)arrayIter\(/\1Lib::arrayIter\(/g
+s/(\s)Deque</\1Lib::Deque</g
+s/\(env\.signature/\(Lib::env\.signature/g
+s/(\s)IteratorCore</\1Lib::IteratorCore</g

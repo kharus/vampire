@@ -81,7 +81,7 @@ private:
    * However, not merging distinct occurrences of a single subformula
    * from the input does not compromise correctness.
    */
-  Deque<Formula*> _queue;
+  Lib::Deque<Formula*> _queue;
 
   typedef std::pair<unsigned, Term*> Binding; // used for skolem bindings of the form <existential variable z, corresponding Skolem term f_z(U,V,...) >
 
@@ -203,7 +203,7 @@ private:
     }
   };
 
-  typedef SmartPtr<GenClause> SPGenClause;
+  typedef Lib::SmartPtr<GenClause> SPGenClause;
 
   void toClauses(SPGenClause gc, Lib::Stack<Clause*>& output);
   bool mapSubstitution(List<GenLit>* gc, Substitution subst, bool onlyFormulaLevel, Lib::List<GenLit>* &output);
@@ -402,7 +402,7 @@ private:
             _iterator.del();
             continue;
           }
-          _current = SmartPtr<Occurrence>(new Occurrence(occ.gc, occ.position));
+          _current = Lib::SmartPtr<Occurrence>(new Occurrence(occ.gc, occ.position));
           return true;
         }
         return false;
@@ -412,7 +412,7 @@ private:
       }
     private:
       Lib::List<Occurrence>::DelIterator _iterator;
-      SmartPtr<Occurrence> _current;
+      Lib::SmartPtr<Occurrence> _current;
     };
   };
 

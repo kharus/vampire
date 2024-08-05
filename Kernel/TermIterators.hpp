@@ -38,7 +38,7 @@ namespace Kernel {
  *   use VariableIterator2 below, having read its documentation.
  */
 class VariableIterator
-: public IteratorCore<TermList>
+: public Lib::IteratorCore<TermList>
 {
 public:
   DECL_ELEMENT_TYPE(TermList);
@@ -158,7 +158,7 @@ struct OrdVarNumberExtractorFn
  *   with SortHelper::collectVariableSorts as it is more efficient.
  */
 class VariableWithSortIterator
-: public IteratorCore<std::pair<TermList,TermList>>
+: public Lib::IteratorCore<std::pair<TermList,TermList>>
 {
 public:
 
@@ -193,7 +193,7 @@ private:
  * of @b term in DFS left to right order.
  */
 class SubtermIterator
-  : public IteratorCore<TermList>
+  : public Lib::IteratorCore<TermList>
 {
 public:
   SubtermIterator(const Term* term) : _used(false)
@@ -246,7 +246,7 @@ protected:
  * of @b applicative term
  */
 class ApplicativeArgsIt
-  : public IteratorCore<TermList>
+  : public Lib::IteratorCore<TermList>
 {
 public:
   ApplicativeArgsIt(const TermList term, bool returnTypeArgs = true)
@@ -305,7 +305,7 @@ protected:
 };
 
 class TopLevelVarLikeTermIterator
-  : public IteratorCore<Term*>
+  : public Lib::IteratorCore<Term*>
 {
 public:
   TopLevelVarLikeTermIterator(Term* term)
@@ -332,7 +332,7 @@ private:
 };
 
 class TopLevelVarIterator
-  : public IteratorCore<TermList>
+  : public Lib::IteratorCore<TermList>
 {
 public:
   TopLevelVarIterator(TermList t);
@@ -357,7 +357,7 @@ class RewritableVarsIt
 {
 public: //includeSelf for compatibility
   DECL_ELEMENT_TYPE(TypedTermList);
-  RewritableVarsIt(DHSet<unsigned>* unstableVars, Term* t, bool includeSelf = false) :  _next(), _stack(8)
+  RewritableVarsIt(Lib::DHSet<unsigned>* unstableVars, Term* t, bool includeSelf = false) :  _next(), _stack(8)
   {
     _unstableVars = unstableVars;
     if(t->isLiteral()){
@@ -391,7 +391,7 @@ private:
 };
 
 class UnstableVarIt
-  : public IteratorCore<TermList>
+  : public Lib::IteratorCore<TermList>
 {
 public: 
   UnstableVarIt(Term* t) : _stable(8), _stack(8)
@@ -424,7 +424,7 @@ private:
 };
 
 class FirstOrderSubtermIt
-: public IteratorCore<Term*>
+: public Lib::IteratorCore<Term*>
 {
 public:
   FirstOrderSubtermIt(Term* term, bool includeSelf=false) 
@@ -454,7 +454,7 @@ private:
 
 
 class NarrowableSubtermIt
-: public IteratorCore<TermList>
+: public Lib::IteratorCore<TermList>
 {
 public:
   NarrowableSubtermIt(Term* term, bool includeSelf=false) 
@@ -488,7 +488,7 @@ private:
  *  Returns Boolean subterms of a term.
  */
 class BooleanSubtermIt
-: public IteratorCore<TermList>
+: public Lib::IteratorCore<TermList>
 {
 public:
   BooleanSubtermIt(Term* term, bool includeSelf=false) 
@@ -555,7 +555,7 @@ private:
  * its arguments left to right, and then the function itself.
  */
 class PolishSubtermIterator
-: public IteratorCore<TermList>
+: public Lib::IteratorCore<TermList>
 {
 public:
   PolishSubtermIterator(const Term* term) : _stack(8), _used(false)
@@ -598,7 +598,7 @@ private:
  *   are required. 
  */
 class NonVariableIterator
-  : public IteratorCore<TermList>
+  : public Lib::IteratorCore<TermList>
 {
 public:
   NonVariableIterator(const NonVariableIterator&);
@@ -643,7 +643,7 @@ private:
  *     another
  */
 class NonVariableNonTypeIterator
-  : public IteratorCore<Term*>
+  : public Lib::IteratorCore<Term*>
 {
 public:
   NonVariableNonTypeIterator(const NonVariableNonTypeIterator&);
@@ -677,7 +677,7 @@ private:
  * or literals in DFS left to right order.
  */
 class DisagreementSetIterator
-: public IteratorCore<std::pair<TermList, TermList> >
+: public Lib::IteratorCore<std::pair<TermList, TermList> >
 {
 public:
   /**
@@ -779,7 +779,7 @@ private:
  * @since 26/05/2007 Manchester, made from class TermVarIterator
  */
 class TermFunIterator
-: public IteratorCore<unsigned>
+: public Lib::IteratorCore<unsigned>
 {
 public:
   TermFunIterator (const Term*);
@@ -802,7 +802,7 @@ private:
  * @since 26/05/2007 Manchester, reimplemented for different data structures
  */
 class TermVarIterator
-: public IteratorCore<unsigned>
+: public Lib::IteratorCore<unsigned>
 {
 public:
   TermVarIterator (const Term*);

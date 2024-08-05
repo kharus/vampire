@@ -90,7 +90,7 @@ struct NumTraits;
     static constexpr Theory::Interpretation name ## I = Theory::SORT_SHORT ## _INTERPRETATION;                \
                                                                                                               \
     static unsigned name ## F() {                                                                             \
-      static const unsigned functor = env.signature->getInterpretingSymbol(name ## I);                        \
+      static const unsigned functor = Lib::env.signature->getInterpretingSymbol(name ## I);                        \
       return functor;                                                                                         \
     }                                                                                                         \
 

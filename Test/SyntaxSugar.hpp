@@ -95,13 +95,13 @@
 #define DECL_VAR(x, i) auto x = TermSugar(TermList::var(i));
 #define DECL_SORT_VAR(x, i) auto x = SortSugar(TermList::var(i));    
 #define DECL_VAR_SORTED(x, i, s) auto x = TermSugar(TermList::var(i), s);
-#define DECL_I_COMB(i) auto i = FuncSugar(env.signature->getCombinator(Signature::I_COMB));
-#define DECL_K_COMB(k) auto k = FuncSugar(env.signature->getCombinator(Signature::K_COMB));
-#define DECL_B_COMB(b) auto b = FuncSugar(env.signature->getCombinator(Signature::B_COMB));
-#define DECL_C_COMB(c) auto c = FuncSugar(env.signature->getCombinator(Signature::C_COMB));
-#define DECL_S_COMB(s) auto s = FuncSugar(env.signature->getCombinator(Signature::S_COMB));
-#define DECL_FUN_DEF(d, t)  auto d = PredSugar(env.signature->getFnDef(t.sugaredExpr().term()->functor()));
-#define DECL_PRED_DEF(d, t) auto d = PredSugar(env.signature->getBoolDef(((Literal*)t)->functor()));
+#define DECL_I_COMB(i) auto i = FuncSugar(Lib::env.signature->getCombinator(Signature::I_COMB));
+#define DECL_K_COMB(k) auto k = FuncSugar(Lib::env.signature->getCombinator(Signature::K_COMB));
+#define DECL_B_COMB(b) auto b = FuncSugar(Lib::env.signature->getCombinator(Signature::B_COMB));
+#define DECL_C_COMB(c) auto c = FuncSugar(Lib::env.signature->getCombinator(Signature::C_COMB));
+#define DECL_S_COMB(s) auto s = FuncSugar(Lib::env.signature->getCombinator(Signature::S_COMB));
+#define DECL_FUN_DEF(d, t)  auto d = PredSugar(Lib::env.signature->getFnDef(t.sugaredExpr().term()->functor()));
+#define DECL_PRED_DEF(d, t) auto d = PredSugar(Lib::env.signature->getBoolDef(((Literal*)t)->functor()));
 
 #define DECL_DEFAULT_VARS                                                                           \
   __ALLOW_UNUSED(                                                                                   \
@@ -538,7 +538,7 @@ class FuncSugar {
 public:
   explicit FuncSugar(unsigned functor) 
     : _functor(functor)
-    , _arity(env.signature->getFunction(functor)->arity()) {}
+    , _arity(Lib::env.signature->getFunction(functor)->arity()) {}
 
   FuncSugar(std::string const& name, std::initializer_list<SortSugar> as_, 
     ExpressionSugar result, unsigned taArity = 0) 
@@ -703,7 +703,7 @@ inline Lib::Stack<Clause*> clauses(std::initializer_list<std::initializer_list<L
 
 inline void createTermAlgebra(SortSugar sort, std::initializer_list<FuncSugar> fs) {
   // avoid redeclaration
-  if (env.signature->isTermAlgebraSort(sort.sugaredExpr())) {
+  if (Lib::env.signature->isTermAlgebraSort(sort.sugaredExpr())) {
     return;
   }
 

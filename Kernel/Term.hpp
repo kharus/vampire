@@ -1106,7 +1106,7 @@ public:
   {
     return Literal::literalHash(functor(), polarity() ^ flip, 
         [&](auto i) -> TermList const& { return *nthArgument(i); }, arity(),
-        someIf(isTwoVarEquality(), [&](){ return twoVarEqSort(); }),
+        Lib::someIf(isTwoVarEquality(), [&](){ return twoVarEqSort(); }),
         commutative());
   }
 
@@ -1119,7 +1119,7 @@ public:
       ASS(rightArgOrder(getArg(0), getArg(1)))
       ASS(rightArgOrder(*lit->nthArgument(0), *lit->nthArgument(1)))
 
-      if (someIf(lit->isTwoVarEquality(), [&](){ return lit->twoVarEqSort(); }) != twoVarEqSort) {
+      if (Lib::someIf(lit->isTwoVarEquality(), [&](){ return lit->twoVarEqSort(); }) != twoVarEqSort) {
         return false;
       }
       return std::make_tuple(*lit->nthArgument(0), *lit->nthArgument(1)) == std::make_tuple(getArg(0), getArg(1));

@@ -167,7 +167,7 @@ private:
   void handleEmptyClause(Clause* cl);
   Clause* doImmediateSimplification(Clause* cl);
   MainLoopResult saturateImpl();
-  SmartPtr<IndexManager> _imgr;
+  Lib::SmartPtr<IndexManager> _imgr;
 
   class TotalSimplificationPerformer;
   class PartialSimplificationPerformer;

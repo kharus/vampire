@@ -58,7 +58,7 @@ public:
 
   virtual ~SKIKBO();
 
-  typedef SmartPtr<ApplicativeArgsIt> ArgsIt_ptr;
+  typedef Lib::SmartPtr<ApplicativeArgsIt> ArgsIt_ptr;
 
   using PrecedenceOrdering::compare;
   Result compare(TermList tl1, TermList tl2) const override;

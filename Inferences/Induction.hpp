@@ -57,7 +57,7 @@ using namespace Shell;
  * instance.
  */
 class ActiveOccurrenceIterator
-  : public IteratorCore<Term*>
+  : public Lib::IteratorCore<Term*>
 {
 public:
   ActiveOccurrenceIterator(Literal* lit, FunctionDefinitionHandler& fnDefHandler)
@@ -193,7 +193,7 @@ private:
  * induction terms replaced with placeholders.
  */
 class ContextReplacement
-  : public TermReplacement, public IteratorCore<InductionContext> {
+  : public TermReplacement, public Lib::IteratorCore<InductionContext> {
 public:
   ContextReplacement(const InductionContext& context);
 

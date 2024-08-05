@@ -38,7 +38,7 @@ class SATClause
 public:
   DECL_ELEMENT_TYPE(SATLiteral);
 
-  auto iter() const { return arrayIter(*this); }
+  auto iter() const { return Lib::arrayIter(*this); }
 
   /** New clause */
   SATClause(unsigned length);

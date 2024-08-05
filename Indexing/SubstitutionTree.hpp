@@ -423,11 +423,11 @@ public:
       bool isEmpty() const { return !_size; }
       int size() const { return _size; }
       NodeIterator allChildren()
-      { return pvi( arrayIter(_nodes,_size).map([](Node *& n) { return &n; }) ); }
+      { return pvi( Lib::arrayIter(_nodes,_size).map([](Node *& n) { return &n; }) ); }
 
       NodeIterator variableChildren()
       {
-        return pvi( arrayIter(_nodes, _size)
+        return pvi( Lib::arrayIter(_nodes, _size)
               .filter([](auto& n) { return n->term().isVar(); })
               .map([](Node *& n) { return &n; }));
       }
@@ -1509,7 +1509,7 @@ public:
               auto syms = unif.unifiableSymbols(*top.functor());
               if (syms) {
                 return pvi(concatIters(
-                      arrayIter(std::move(*syms))
+                      Lib::arrayIter(std::move(*syms))
                         .map   ([=](auto f) { return n->childByTop(top, /* canCreate */ false); })
                         .filter([ ](auto n) { return n != nullptr; }),
                       n->variableChildren()

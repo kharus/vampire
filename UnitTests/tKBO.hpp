@@ -9,7 +9,7 @@
  */
 
 inline Lib::DArray<int> predLevels() {
-  Lib::DArray<int> out(env.signature->predicates());
+  Lib::DArray<int> out(Lib::env.signature->predicates());
   out.init(out.size(), 1);
   return out;
 }

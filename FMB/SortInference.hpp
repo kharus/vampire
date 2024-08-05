@@ -80,7 +80,7 @@ public:
                 Lib::Stack<DHSet<unsigned>*> equiv_v_sorts,
                 Lib::Stack<std::pair<unsigned,unsigned>>& cons) :
                 _clauses(clauses), _del_f(del_f), _del_p(del_p),
-                _equiv_v_sorts(equiv_v_sorts), _equiv_vs(env.signature->typeCons()),
+                _equiv_v_sorts(equiv_v_sorts), _equiv_vs(Lib::env.signature->typeCons()),
                 _sort_constraints(cons) {
 
                   _sig = new SortedSignature();

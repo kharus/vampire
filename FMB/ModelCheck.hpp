@@ -179,7 +179,7 @@ static void checkIsDomainLiteral(Literal* l, int& single_var, Lib::Set<Term*>& d
             // store and check the ground constant used
             Term* constant = right->term();
             unsigned f = constant->functor();
-            if(env.signature->functionArity(f)!=0) USER_ERROR("finite_domain is not a domain axiom");
+            if(Lib::env.signature->functionArity(f)!=0) USER_ERROR("finite_domain is not a domain axiom");
             if(domainConstants.contains(constant)) USER_ERROR("finite_domain is not a domain axiom");
 
             domainConstants.insert(constant);

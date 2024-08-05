@@ -99,7 +99,7 @@ private:
     Renaming* _parent;
   };
 
-  typedef Lib::DHMap<unsigned, unsigned, IdentityHash, DefaultHash> VariableMap;
+  typedef Lib::DHMap<unsigned, unsigned, Lib::IdentityHash, Lib::DefaultHash> VariableMap;
   VariableMap _data;
   unsigned _nextVar;
   bool _identity;
