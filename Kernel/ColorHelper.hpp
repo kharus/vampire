@@ -57,13 +57,13 @@ public:
   static void tryUnblock(Clause* c, SaturationAlgorithm* salg);
 
 private:
-  typedef DHMap<Term*, Term*> TermMap;
+  typedef Lib::DHMap<Term*, Term*> TermMap;
 
   static void ensureSkolemReplacement(Term* t, TermMap& map);
   static void collectSkolemReplacements(Clause* c, TermMap& map);
 
   static Term* applyReplacement(Term* t, TermMap& map);
-  static void collectColoredConstants(Clause* c, Stack<Term*>& acc);
+  static void collectColoredConstants(Clause* c, Lib::Stack<Term*>& acc);
 };
 
 }

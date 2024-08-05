@@ -327,12 +327,12 @@ public:
     ASS(srt.isVar() || srt.term()->isSort());    
   }
 
-  SortSugar(const char* name, Stack<SortSugar> as_) 
+  SortSugar(const char* name, Lib::Stack<SortSugar> as_) 
   {
     if(as_.isEmpty()){
       _sugaredExpr = TermList(AtomicSort::createConstant(name));
     } else {
-      Stack<SortId> as;     
+      Lib::Stack<SortId> as;     
       for (auto a : as_){ as.push(a.sugaredExpr()); }
       _sugaredExpr = AtomicSort::arrowSort(as, as.pop());      
     }
@@ -543,7 +543,7 @@ public:
   FuncSugar(std::string const& name, std::initializer_list<SortSugar> as_, 
     ExpressionSugar result, unsigned taArity = 0) 
   {
-    Stack<SortId> as;
+    Lib::Stack<SortId> as;
     for (auto a : as_) 
       as.push(a.sugaredExpr());
 
@@ -578,7 +578,7 @@ public:
 
   template<class... As>
   TermSugar operator()(As... args) const {
-    Stack<TermList> as { TermSugar(args).sugaredExpr()... };
+    Lib::Stack<TermList> as { TermSugar(args).sugaredExpr()... };
     return TermList(Term::create(_functor, 
         as.size(), 
         as.begin()));
@@ -618,7 +618,7 @@ public:
 
   template<class... As>
   SortSugar operator()(As... args) const {
-    Stack<TermList> as { SortSugar(args).sugaredExpr()... };
+    Lib::Stack<TermList> as { SortSugar(args).sugaredExpr()... };
     return TermList(AtomicSort::create(_functor, 
         as.size(), 
         as.begin() ));
@@ -645,7 +645,7 @@ public:
 
   PredSugar(const char* name, std::initializer_list<SortSugar> args, unsigned taArity = 0)
   {
-    Stack<SortId> as;
+    Lib::Stack<SortId> as;
     for (auto a : args) {
       as.push(a.sugaredExpr());
     }
@@ -664,7 +664,7 @@ public:
 
   template<class... As>
   Lit operator()(As... args) const {
-    Stack<TermList> as { TermSugar(args).sugaredExpr()... };
+    Lib::Stack<TermList> as { TermSugar(args).sugaredExpr()... };
     return Literal::create(_functor, 
         as.size(), 
         /* polarity */ true, 
@@ -693,8 +693,8 @@ inline Clause* clause(Stack<Lit> ls) {
 inline Clause* clause(std::initializer_list<Lit> ls) 
 { return clause(Stack<Lit>(ls)); }
 
-inline Stack<Clause*> clauses(std::initializer_list<std::initializer_list<Lit>> cls) { 
-  auto out = Stack<Clause*>();
+inline Lib::Stack<Clause*> clauses(std::initializer_list<std::initializer_list<Lit>> cls) { 
+  auto out = Lib::Stack<Clause*>();
   for (auto cl : cls) {
     out.push(clause(cl));
   }
@@ -709,8 +709,8 @@ inline void createTermAlgebra(SortSugar sort, std::initializer_list<FuncSugar> f
 
   using namespace Shell;
 
-  Stack<FuncSugar> funcs = fs;
-  Stack<TermAlgebraConstructor*> cons;
+  Lib::Stack<FuncSugar> funcs = fs;
+  Lib::Stack<TermAlgebraConstructor*> cons;
 
   for (auto f : funcs) {
     env.signature->getFunction(f.functor())

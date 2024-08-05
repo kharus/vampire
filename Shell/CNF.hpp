@@ -47,7 +47,7 @@ private:
   /** The unit currently being processed */
   FormulaUnit* _unit;
   /** stack to collect the results */
-  Stack<Clause*>* _result;
+  Lib::Stack<Clause*>* _result;
   /** stack of literals collected so far */
   Stack <Literal*> _literals;
   /** stack of formulas  */

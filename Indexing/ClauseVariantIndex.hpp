@@ -62,9 +62,9 @@ public:
 private:
   Literal* getMainLiteral(Literal* const * lits, unsigned length);
 
-  DHMap<Literal*, ClauseList*> _groundUnits;
+  Lib::DHMap<Literal*, ClauseList*> _groundUnits;
 
-  ZIArray<LiteralSubstitutionTree*> _strees;
+  Lib::ZIArray<LiteralSubstitutionTree*> _strees;
 
   ClauseList* _emptyClauses;
 };
@@ -81,7 +81,7 @@ public:
 private:
   struct VariableIgnoringComparator;
 
-  typedef DHMap<unsigned, unsigned char> VarCounts; // overflows allowed
+  typedef Lib::DHMap<unsigned, unsigned char> VarCounts; // overflows allowed
 
   unsigned termFunctorHash(Term* t, unsigned hash_begin) {
     unsigned func = t->functor();
@@ -108,7 +108,7 @@ private:
 
   unsigned computeHash(Literal* const * lits, unsigned length);
 
-  DHMap<unsigned, ClauseList*> _entries;
+  Lib::DHMap<unsigned, ClauseList*> _entries;
 };
 
 };

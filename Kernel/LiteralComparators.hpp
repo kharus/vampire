@@ -49,9 +49,9 @@ template<class Comp1, class Comp2>
 class Composite : public LiteralComparator
 {
 public:
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
-    Comparison res1=_c1.compare(l1,l2);
+    Lib::Comparison res1=_c1.compare(l1,l2);
     return (res1==EQUAL)?_c2.compare(l1,l2):res1;
   }
 
@@ -70,7 +70,7 @@ template<class Comp>
 class Inverse : public LiteralComparator
 {
 public:
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     return _c.compare(l2,l1);
   }
@@ -86,7 +86,7 @@ private:
 
 struct ColoredFirst : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     if(l1->color()!=COLOR_TRANSPARENT && l2->color()==COLOR_TRANSPARENT) {
       return GREATER;
@@ -100,7 +100,7 @@ struct ColoredFirst : public LiteralComparator
 
 struct NoPositiveEquality : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     bool l1PE=l1->isEquality()&&l1->isPositive();
     bool l2PE=l2->isEquality()&&l2->isPositive();
@@ -116,7 +116,7 @@ struct NoPositiveEquality : public LiteralComparator
 
 struct Negative : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     ASS(_selector);
 
@@ -134,7 +134,7 @@ struct Negative : public LiteralComparator
 
 struct NegativeEquality : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     bool l1NE=l1->isEquality()&&l1->isNegative();
     bool l2NE=l2->isEquality()&&l2->isNegative();
@@ -150,7 +150,7 @@ struct NegativeEquality : public LiteralComparator
 
 struct MaximalSize : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     return Int::compare(l1->weight(), l2->weight());
   }
@@ -158,7 +158,7 @@ struct MaximalSize : public LiteralComparator
 
 struct LeastVariables : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     return Int::compare(l2->numVarOccs(), l1->numVarOccs());
   }
@@ -166,7 +166,7 @@ struct LeastVariables : public LiteralComparator
 
 struct LeastDistinctVariables : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     return Int::compare(l2->getDistinctVars(), l1->getDistinctVars());
   }
@@ -174,7 +174,7 @@ struct LeastDistinctVariables : public LiteralComparator
 
 struct LeastTopLevelVariables : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     return Int::compare(getTLVarCnt(l2), getTLVarCnt(l1));
   }
@@ -193,7 +193,7 @@ private:
 
 struct LexComparator : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     ASS(l1->shared());
     ASS(l2->shared());
@@ -242,7 +242,7 @@ struct LexComparator : public LiteralComparator
 template<bool ignorePolarity=false>
 struct NormalizedLinearComparatorByWeight : public LiteralComparator
 {
-  Comparison compare(Term* t1, Term* t2)
+  Lib::Comparison compare(Term* t1, Term* t2)
   {
     ASS_EQ(t1->isLiteral(), t2->isLiteral());
 
@@ -271,8 +271,8 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
       }
     }
 
-    static DHMap<unsigned, unsigned> firstNums;
-    static DHMap<unsigned, unsigned> secondNums;
+    static Lib::DHMap<unsigned, unsigned> firstNums;
+    static Lib::DHMap<unsigned, unsigned> secondNums;
     firstNums.reset();
     secondNums.reset();
 
@@ -299,7 +299,7 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
     return EQUAL;
   }
 
-  Comparison compare(TermList t1, TermList t2)
+  Lib::Comparison compare(TermList t1, TermList t2)
   {
     if(t1.isVar()) {
       if(t2.isVar()) {

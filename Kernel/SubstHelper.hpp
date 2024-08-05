@@ -629,7 +629,7 @@ FormulaList* SubstHelper::applyImpl(FormulaList* fs, Applicator& applicator, boo
     return fs;
   }
 
-  Stack<FormulaList*> args;
+  Lib::Stack<FormulaList*> args;
   while (FormulaList::isNonEmpty(fs)) {
     args.push(fs);
     fs = fs->tail();

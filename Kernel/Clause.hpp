@@ -89,13 +89,13 @@ public:
   { return fromLiterals({}, inf); }
 
 
-  static Clause* fromStack(const Stack<Literal*>& lits, Inference inf)
+  static Clause* fromStack(const Lib::Stack<Literal*>& lits, Inference inf)
   { return new(lits.size()) Clause(lits.begin(), lits.size(), std::move(inf)); }
 
   template<class Iter>
   static Clause* fromIterator(Iter litit, const Inference& inf)
   {
-    static Stack<Literal*> st;
+    static Lib::Stack<Literal*> st;
     st.reset();
     st.loadFromIterator(litit);
     return fromStack(st, inf);
@@ -243,7 +243,7 @@ public:
   bool isPropositional();
   bool isHorn();
 
-  VirtualIterator<unsigned> getVariableIterator();
+  Lib::VirtualIterator<unsigned> getVariableIterator();
 
   bool contains(Literal* lit);
 #if VDEBUG
@@ -270,7 +270,7 @@ public:
   void incNumActiveSplits() { _numActiveSplits++; }
   void decNumActiveSplits() { _numActiveSplits--; }
 
-  VirtualIterator<std::string> toSimpleClauseStrings();
+  Lib::VirtualIterator<std::string> toSimpleClauseStrings();
 
   void setAux()
   {

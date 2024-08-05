@@ -34,7 +34,7 @@ using namespace Kernel;
  *
  */
 class FiniteModelMultiSorted {
- DHMap<unsigned,unsigned> _sizes;
+ Lib::DHMap<unsigned,unsigned> _sizes;
 
 public:
 
@@ -66,8 +66,8 @@ private:
  // The model is partial if there is a operation with arity n that does not have
  // coverage size^n in its related coverage map
  bool _isPartial;
- DHMap<unsigned,unsigned> _functionCoverage;
- DHMap<unsigned,unsigned> _predicateCoverage;
+ Lib::DHMap<unsigned,unsigned> _functionCoverage;
+ Lib::DHMap<unsigned,unsigned> _predicateCoverage;
 
  DArray<DArray<int>> sortRepr;
 
@@ -77,8 +77,8 @@ private:
  DArray<unsigned> p_interpretation; // 0 is undef, 1 false, 2 true
 
  // the pairs of <constant number, sort>
- DHMap<std::pair<unsigned,unsigned>,Term*> _domainConstants;
- DHMap<Term*,std::pair<unsigned,unsigned>> _domainConstantsRev;
+ Lib::DHMap<std::pair<unsigned,unsigned>,Term*> _domainConstants;
+ Lib::DHMap<Term*,std::pair<unsigned,unsigned>> _domainConstantsRev;
 public:
  Term* getDomainConstant(unsigned c, unsigned srt)
  {

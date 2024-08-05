@@ -69,9 +69,9 @@ private:
   unsigned getCoreSize(const LiteralStack& core);
 
 
-  Stack<LiteralStack> _unsatCores;
+  Lib::Stack<LiteralStack> _unsatCores;
 
-  ScopedPtr<DecisionProcedure> _inner;
+  Lib::ScopedPtr<DecisionProcedure> _inner;
   SAT2FO& _sat2fo;
   SATSolver& _solver;
 };

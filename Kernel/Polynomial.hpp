@@ -156,11 +156,11 @@ struct Monom
 class FuncTerm 
 {
   FuncId _fun;
-  Stack<PolyNf> _args;
+  Lib::Stack<PolyNf> _args;
 public:
   USE_ALLOCATOR(FuncTerm)
 
-  FuncTerm(FuncId f, Stack<PolyNf>&& args);
+  FuncTerm(FuncId f, Lib::Stack<PolyNf>&& args);
   FuncTerm(FuncId f, PolyNf* args);
 
   unsigned numTermArguments() const;
@@ -308,7 +308,7 @@ class MonomFactors
   using Monom       = Kernel::Monom<Number>;
   using Polynom     = Kernel::Polynom<Number>;
   using Numeral = typename Number::ConstantType;
-  Stack<MonomFactor> _factors;
+  Lib::Stack<MonomFactor> _factors;
   friend struct std::hash<MonomFactors>;
 
 public:
@@ -382,7 +382,7 @@ public:
   /** helper function for PolyNf::denormalize() */
   TermList denormalize(TermList* results)  const;
 
-  Stack<MonomFactor>& raw();
+  Lib::Stack<MonomFactor>& raw();
 };
 
 template<class Number>
@@ -394,7 +394,7 @@ class Polynom
   using MonomFactors = Kernel::MonomFactors<Number>;
   using Monom        = Kernel::Monom<Number>;
 
-  Stack<Monom> _summands;
+  Lib::Stack<Monom> _summands;
 
 public:
   USE_ALLOCATOR(Polynom)
@@ -465,7 +465,7 @@ public:
   auto iterSummands() const&
   { return arrayIter(_summands); }
 
-  Stack<Monom>& raw();
+  Lib::Stack<Monom>& raw();
 
   template<class N> friend bool operator==(const Polynom<N>& lhs, const Polynom<N>& rhs);
   template<class N> friend std::ostream& operator<<(std::ostream& out, const Polynom<N>& self);
@@ -497,7 +497,7 @@ IterTraits<IterArgsPnf> iterArgsPnf(Literal* lit);
 namespace Kernel {
 
 class PolyNf::SubtermIter {
-  Stack<BottomUpChildIter<PolyNf>> _stack;
+  Lib::Stack<BottomUpChildIter<PolyNf>> _stack;
 public:
   DECL_ELEMENT_TYPE(PolyNf);
 
@@ -960,14 +960,14 @@ template<class Number>
 Polynom<Number>::Polynom(Stack<Monom>&& summands) 
   : _summands(
       summands.isEmpty() 
-        ? Stack<Monom>{Monom::zero()} 
+        ? Lib::Stack<Monom>{Monom::zero()} 
         : std::move(summands)) 
 { }
 
 template<class Number>
 Polynom<Number>::Polynom(Monom m) 
   : Polynom(
-      Stack<Monom>{m})
+      Lib::Stack<Monom>{m})
 {  }
 
 template<class Number>
@@ -1084,7 +1084,7 @@ template<class Number>
 Polynom<Number> Polynom<Number>::replaceTerms(PolyNf* simplifiedTerms) const 
 {
   int offs = 0;
-  Stack<Monom> out;
+  Lib::Stack<Monom> out;
   out.reserve(nSummands());
 
   for (auto& monom : _summands) {

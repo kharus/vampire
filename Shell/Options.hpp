@@ -782,8 +782,8 @@ public:
     // The details are explained in comments below
 private:
     // helper function of sampleStrategy
-    void strategySamplingAssign(std::string optname, std::string value, DHMap<std::string,std::string>& fakes);
-    std::string strategySamplingLookup(std::string optname, DHMap<std::string,std::string>& fakes);
+    void strategySamplingAssign(std::string optname, std::string value, Lib::DHMap<std::string,std::string>& fakes);
+    std::string strategySamplingLookup(std::string optname, Lib::DHMap<std::string,std::string>& fakes);
 
     /**
      * These store the names of the choices for an option.
@@ -822,7 +822,7 @@ private:
         const std::string operator[](int i) const{ return _names[i];}
 
     private:
-        Stack<std::string> _names;
+        Lib::Stack<std::string> _names;
     };
 
     // Declare constraints here so they can be referred to, but define them below
@@ -957,7 +957,7 @@ private:
     };
 
     struct AbstractOptionValueCompatator{
-      Comparison compare(AbstractOptionValue* o1, AbstractOptionValue* o2)
+      Lib::Comparison compare(AbstractOptionValue* o1, AbstractOptionValue* o2)
       {
         int value = strcmp(o1->longName.c_str(),o2->longName.c_str());
         return value < 0 ? LESS : (value==0 ? EQUAL : GREATER);
@@ -1892,7 +1892,7 @@ bool _hard;
 
       bool check(Property*p){
         bool res = is_and;
-        Stack<OptionProblemConstraintUP>::RefIterator it(cons);
+        Lib::Stack<OptionProblemConstraintUP>::RefIterator it(cons);
         while(it.hasNext()){
           bool n=it.next()->check(p);res = is_and ? (res && n) : (res || n);}
         return res;
@@ -1900,14 +1900,14 @@ bool _hard;
 
       std::string msg(){
         std::string res="";
-        Stack<OptionProblemConstraintUP>::RefIterator it(cons);
+        Lib::Stack<OptionProblemConstraintUP>::RefIterator it(cons);
         if(it.hasNext()){ res=it.next()->msg();}
         while(it.hasNext()){ res+=",and\n"+it.next()->msg();}
         return res;
       }
 
       void add(OptionProblemConstraintUP& c){ cons.push(std::move(c));}
-      Stack<OptionProblemConstraintUP> cons;
+      Lib::Stack<OptionProblemConstraintUP> cons;
       bool is_and;
     };
 
@@ -2343,13 +2343,13 @@ private:
             return _shortMap.get(shortName);
         }
 
-        VirtualIterator<AbstractOptionValue*> values() const {
+        Lib::VirtualIterator<AbstractOptionValue*> values() const {
             return _longMap.range();
         }
 
     private:
-        DHMap<std::string,AbstractOptionValue*> _longMap;
-        DHMap<std::string,AbstractOptionValue*> _shortMap;
+        Lib::DHMap<std::string,AbstractOptionValue*> _longMap;
+        Lib::DHMap<std::string,AbstractOptionValue*> _shortMap;
     };
 
     LookupWrapper _lookup;
@@ -2369,11 +2369,11 @@ private:
         }
     }
   
-    Stack<std::string> getSimilarOptionNames(std::string name, bool is_short) const{
+    Lib::Stack<std::string> getSimilarOptionNames(std::string name, bool is_short) const{
 
-      Stack<std::string> similar_names;
+      Lib::Stack<std::string> similar_names;
 
-      VirtualIterator<AbstractOptionValue*> options = _lookup.values();
+      Lib::VirtualIterator<AbstractOptionValue*> options = _lookup.values();
       while(options.hasNext()){
         AbstractOptionValue* opt = options.next();
         std::string opt_name = is_short ? opt->shortName : opt->longName;

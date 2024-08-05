@@ -65,7 +65,7 @@ private:
    * Note that in the current process this child object is the only one that
    * will be using the problem object.
    */
-  ScopedPtr<Problem> _prb;
+  Lib::ScopedPtr<Problem> _prb;
   float _slowness;
 };
 

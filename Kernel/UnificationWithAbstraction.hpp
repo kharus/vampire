@@ -32,7 +32,7 @@ namespace Kernel
 
 class UnificationConstraintStack
 {
-  Stack<UnificationConstraint> _cont;
+  Lib::Stack<UnificationConstraint> _cont;
 public:
   USE_ALLOCATOR(UnificationConstraintStack)
   UnificationConstraintStack() : _cont() {}

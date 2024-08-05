@@ -478,7 +478,7 @@ public:
   explicit Term(const Term& t) throw();
   static Term* create(unsigned function, unsigned arity, const TermList* args);
   static Term* create(unsigned fn, std::initializer_list<TermList> args);
-  static Term* create(unsigned fn, Stack<TermList> const& args) { return Term::create(fn, args.length(), args.begin()); }
+  static Term* create(unsigned fn, Lib::Stack<TermList> const& args) { return Term::create(fn, args.length(), args.begin()); }
   template<class Iter>
   static Term* createFromIter(unsigned fn, Iter args) 
   { 

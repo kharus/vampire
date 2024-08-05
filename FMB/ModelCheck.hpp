@@ -88,7 +88,7 @@ static void doCheck(UnitList* units)
   std::cout << "Distinct domain assumed, domain elements are:" << std::endl;
 
   // number the domain constants
-  DHMap<Term*,unsigned> domainConstantNumber;
+  Lib::DHMap<Term*,unsigned> domainConstantNumber;
   Set<Term*>::Iterator dit(domainConstants);
   unsigned count=1;
   while(dit.hasNext()){ 
@@ -189,7 +189,7 @@ static void checkIsDomainLiteral(Literal* l, int& single_var, Set<Term*>& domain
 
 static void addDefinition(FiniteModel& model,Literal* lit,bool negated,
                           Set<Term*>& domainConstants,
-                          DHMap<Term*,unsigned>& domainConstantNumber)
+                          Lib::DHMap<Term*,unsigned>& domainConstantNumber)
 {
   if(lit->isEquality()){
           if(!lit->polarity() || negated) USER_ERROR("Cannot have negated function definition");

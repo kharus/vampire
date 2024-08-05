@@ -66,9 +66,9 @@ private:
     
   TermList sortOf(TermList t);
 
-  void addToProcessed(TermList ts, TermList sort, Stack<unsigned> &_argNums);
+  void addToProcessed(TermList ts, TermList sort, Lib::Stack<unsigned> &_argNums);
   void dealWithApp(Term* app, const unsigned lambdaVar, 
-    TermStack &toBeProcessed, TermStack &sorts, Stack<unsigned> &argNums);
+    TermStack &toBeProcessed, TermStack &sorts, Lib::Stack<unsigned> &argNums);
 
   TermList createKTerm(TermList s1, TermList s2, TermList arg1);
   TermList createSCorBTerm(TermList arg1, TermList arg1sort, 
@@ -80,7 +80,7 @@ private:
   /** Lexical scope of the current unit */
   TermStack _processed;
   TermStack _processedSorts;
-  Stack<Signature::Combinator> _combinators;
+  Lib::Stack<Signature::Combinator> _combinators;
 };
 
 #endif // __LambdaElimination__

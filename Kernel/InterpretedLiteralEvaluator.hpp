@@ -48,7 +48,7 @@ protected:
   class RatEvaluator;
   class RealEvaluator;
 
-  typedef Stack<Evaluator*> EvalStack;
+  typedef Lib::Stack<Evaluator*> EvalStack;
   virtual TermList transformSubterm(TermList trm);
   Evaluator* getFuncEvaluator(unsigned func);
   Evaluator* getPredEvaluator(unsigned pred);

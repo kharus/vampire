@@ -38,7 +38,7 @@ class InferenceStore
 public:
   static InferenceStore* instance();
 
-  typedef List<int> IntList;
+  typedef Lib::List<int> IntList;
 
   struct FullInference
   {
@@ -85,14 +85,14 @@ private:
 
   DHMultiset<Clause*> _nextClIds;
 
-  DHMap<Unit*, Literal*> _splittingNameLiterals;
+  Lib::DHMap<Unit*, Literal*> _splittingNameLiterals;
 
 
   /** first records the type of the symbol (PRED,FUNC or TYPE_CON), second is symbol number */
   typedef std::pair<SymbolType,unsigned> SymbolId;
-  typedef Stack<SymbolId> SymbolStack;
-  DHMap<unsigned,SymbolStack> _introducedSymbols;
-  DHMap<unsigned,std::string> _introducedSplitNames;
+  typedef Lib::Stack<SymbolId> SymbolStack;
+  Lib::DHMap<unsigned,SymbolStack> _introducedSymbols;
+  Lib::DHMap<unsigned,std::string> _introducedSplitNames;
 
 };
 

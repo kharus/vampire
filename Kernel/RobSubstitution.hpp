@@ -279,12 +279,12 @@ class RobSubstitution
   friend class AbstractingUnifier;
   friend class UnificationConstraint;
  
-  DHMap<VarSpec, TermSpec> _bindings;
-  mutable DHMap<VarSpec, unsigned> _outputVarBindings;
+  Lib::DHMap<VarSpec, TermSpec> _bindings;
+  mutable Lib::DHMap<VarSpec, unsigned> _outputVarBindings;
   mutable bool _startedBindingOutputVars;
   mutable unsigned _nextUnboundAvailable;
   mutable unsigned _nextGlueAvailable;
-  DHMap<TermSpec, unsigned> _gluedTerms;
+  Lib::DHMap<TermSpec, unsigned> _gluedTerms;
   mutable OnlyMemorizeNonVar<TermList> _applyMemo;
 
 public:
@@ -380,7 +380,7 @@ public:
   TermList apply(TermList t, int index) const;
   Literal* apply(Literal* lit, int index) const;
   TypedTermList apply(TypedTermList t, int index) const { return TypedTermList(apply(TermList(t), index), apply(t.sort(), index)); }
-  Stack<Literal*> apply(Stack<Literal*> cl, int index) const;
+  Lib::Stack<Literal*> apply(Stack<Literal*> cl, int index) const;
   size_t getApplicationResultWeight(TermList t, int index) const;
   size_t getApplicationResultWeight(Literal* lit, int index) const;
 

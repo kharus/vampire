@@ -57,19 +57,19 @@ struct SortedSignature{
 
     // Map the distinct sorts back to their vampire parents
     // A distinct sort may merge multipe vampire sorts (due to monotonicity)
-    DHMap<unsigned,Stack<unsigned>*> distinctToVampire;
+    Lib::DHMap<unsigned,Stack<unsigned>*> distinctToVampire;
     // A vampire sort can only be mapped to more than one distinct sort under certain conditions i.e. when
     // (i) the option for fmbSortInference = expand
     // (ii) at most one sort has non-monotonic subsorts and that is called parent
     // (iii) additional constraints have been added making expanded <= parent
-    DHMap<unsigned,Stack<unsigned>*> vampireToDistinct;
+    Lib::DHMap<unsigned,Stack<unsigned>*> vampireToDistinct;
     // This maps to the distinct parent
     // invariant: domain of the two maps are the same and the second maps to something in the stack of the first
-    DHMap<unsigned,unsigned> vampireToDistinctParent;
+    Lib::DHMap<unsigned,unsigned> vampireToDistinctParent;
 
     // has size distinctSorts
     // is 1 if that distinct sort is monotonic
-    ZIArray<bool> monotonicSorts;
+    Lib::ZIArray<bool> monotonicSorts;
 };
 
 class SortInference {
@@ -77,8 +77,8 @@ public:
   SortInference(ClauseList* clauses,
                 DArray<unsigned> del_f,
                 DArray<unsigned> del_p,
-                Stack<DHSet<unsigned>*> equiv_v_sorts,
-                Stack<std::pair<unsigned,unsigned>>& cons) :
+                Lib::Stack<DHSet<unsigned>*> equiv_v_sorts,
+                Lib::Stack<std::pair<unsigned,unsigned>>& cons) :
                 _clauses(clauses), _del_f(del_f), _del_p(del_p),
                 _equiv_v_sorts(equiv_v_sorts), _equiv_vs(env.signature->typeCons()),
                 _sort_constraints(cons) {
@@ -121,16 +121,16 @@ private:
   unsigned _distinctSorts;
   unsigned _collapsed;
   DHSet<unsigned> monotonicVampireSorts;
-  ZIArray<unsigned> posEqualitiesOnSort;
+  Lib::ZIArray<unsigned> posEqualitiesOnSort;
 
   SortedSignature* _sig;
   ClauseList* _clauses;
   DArray<unsigned> _del_f;
   DArray<unsigned> _del_p;
-  Stack<DHSet<unsigned>*> _equiv_v_sorts;
+  Lib::Stack<DHSet<unsigned>*> _equiv_v_sorts;
   IntUnionFind _equiv_vs;
 
-  Stack<std::pair<unsigned,unsigned>>& _sort_constraints;
+  Lib::Stack<std::pair<unsigned,unsigned>>& _sort_constraints;
 
 };
 

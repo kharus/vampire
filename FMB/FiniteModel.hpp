@@ -64,16 +64,16 @@ private:
  // The model is partial if there is a operation with arity n that does not have
  // coverage size^n in its related coverage map
  bool _isPartial;
- DHMap<unsigned,unsigned> _functionCoverage;
- DHMap<unsigned,unsigned> _predicateCoverage;
+ Lib::DHMap<unsigned,unsigned> _functionCoverage;
+ Lib::DHMap<unsigned,unsigned> _predicateCoverage;
 
  DArray<unsigned> f_offsets;
  DArray<unsigned> p_offsets;
  DArray<unsigned> f_interpretation;
  DArray<unsigned> p_interpretation; // 0 is undef, 1 false, 2 true
 
- DHMap<unsigned,Term*> _domainConstants;
- DHMap<Term*,unsigned> _domainConstantsRev;
+ Lib::DHMap<unsigned,Term*> _domainConstants;
+ Lib::DHMap<Term*,unsigned> _domainConstantsRev;
 public:
  Term* getDomainConstant(unsigned c)
  {

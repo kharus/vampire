@@ -114,18 +114,18 @@ public:
     return *_stack.top();
   }
 private:
-  Stack<const TermList*> _stack;
+  Lib::Stack<const TermList*> _stack;
   bool _used;
   TermList _aux[2];
 };
 
 struct VariableIteratorFn
 {
-  VirtualIterator<TermList> operator()(Term* t)
+  Lib::VirtualIterator<TermList> operator()(Term* t)
   {
     return vi( new VariableIterator(t) );
   }
-  VirtualIterator<TermList> operator()(TermList t)
+  Lib::VirtualIterator<TermList> operator()(TermList t)
   {
     if(t.isVar()) {
       return pvi( getSingletonIterator(t) );
@@ -182,9 +182,9 @@ public:
     return std::make_pair(*_stack.top(),  SortHelper::getArgSort(const_cast<Term*>(_terms.top()), _argNums.top()));
   }
 private:
-  Stack<const TermList*> _stack;
-  Stack<const Term*> _terms;
-  Stack<unsigned> _argNums;
+  Lib::Stack<const TermList*> _stack;
+  Lib::Stack<const Term*> _terms;
+  Lib::Stack<unsigned> _argNums;
   bool _used;
 };
 
@@ -327,7 +327,7 @@ public:
   }
 
 private:
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
   Term* _next;
 };
 
@@ -385,8 +385,8 @@ public: //includeSelf for compatibility
   }
 private:
   Option<TypedTermList> _next;
-  Stack<TermList> _stack;
-  Stack<TermList> _sorts;
+  Lib::Stack<TermList> _stack;
+  Lib::Stack<TermList> _sorts;
   DHSet<unsigned>* _unstableVars;
 };
 
@@ -419,8 +419,8 @@ public:
 
 private:
   TermList _next;
-  Stack<bool> _stable;
-  Stack<TermList> _stack;
+  Lib::Stack<bool> _stable;
+  Lib::Stack<TermList> _stack;
 };
 
 class FirstOrderSubtermIt
@@ -448,7 +448,7 @@ public:
   void right();
 
 private:
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
   int _added;
 };
 
@@ -481,7 +481,7 @@ public:
 private:
   bool _used;
   TermList _next;
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
 };
 
 /*
@@ -514,7 +514,7 @@ public:
 private:
   bool _used;
   TermList _next;
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -584,7 +584,7 @@ private:
       t=t->term()->args();
     }
   }
-  Stack<const TermList*> _stack;
+  Lib::Stack<const TermList*> _stack;
   bool _used;
 };
 
@@ -625,7 +625,7 @@ public:
   void right();
 private:
   /** available non-variable subterms */
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
   /** the number of non-variable subterms added at the last iteration, used by right() */
   int _added;
 }; // NonVariableIterator
@@ -667,7 +667,7 @@ public:
   void right();
 private:
   /** available non-variable subterms */
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
   /** the number of non-variable subterms added at the last iteration, used by right() */
   int _added;
 }; // NonVariableIterator
@@ -764,7 +764,7 @@ public:
     return res;
   }
 private:
-  Stack<TermList*> _stack;
+  Lib::Stack<TermList*> _stack;
   bool _disjunctVariables;
   TermList _arg1;
   TermList _arg2;
@@ -792,7 +792,7 @@ private:
   /** next symbol, previously found */
   unsigned _next;
   /** Stack of term lists (not terms!) */
-  Stack<const TermList*> _stack;
+  Lib::Stack<const TermList*> _stack;
 }; // class TermFunIterator
 
 
@@ -816,7 +816,7 @@ private:
   /** next variable, previously found */
   unsigned _next;
   /** Stack of term lists (not terms!) */
-  Stack<const TermList*> _stack;
+  Lib::Stack<const TermList*> _stack;
 }; // class TermVarIterator
 
 

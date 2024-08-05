@@ -35,7 +35,7 @@ class FunctionRelationshipInference {
 public:
 
 void findFunctionRelationships(ClauseIterator clauses, 
-                               Stack<DHSet<unsigned>*>& eq_classes, 
+                               Lib::Stack<DHSet<unsigned>*>& eq_classes, 
                                DHSet<std::pair<unsigned,unsigned>>& nonstrict_cons,
                                DHSet<std::pair<unsigned,unsigned>>& strict_cons); 
 

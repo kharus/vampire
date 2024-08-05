@@ -79,7 +79,7 @@ private:
 
   bool isDefined(Term* t);
 
-  Term* applyDefinitions(Literal* t, Stack<Def*>* usedDefs);
+  Term* applyDefinitions(Literal* t, Lib::Stack<Def*>* usedDefs);
   Clause* applyDefinitions(Clause* cl);
 
   void checkDefinitions(Def* t);
@@ -96,13 +96,13 @@ private:
 //   void apply (TermList& ls,UnitList& parents);
 //   void apply (Term& l,UnitList& parents);
 
-  typedef DHMap<int, Def*, IdentityHash, DefaultHash> Fn2DefMap;
+  typedef Lib::DHMap<int, Def*, IdentityHash, DefaultHash> Fn2DefMap;
   Fn2DefMap _defs;
 
   /** stack where definitions are put when they're marked as blocked */
-  Stack<Def*> _blockedDefs;
+  Lib::Stack<Def*> _blockedDefs;
 
-  Stack<Def*> _safeDefs;
+  Lib::Stack<Def*> _safeDefs;
   /** Counters for occurrences of function symbols */
   MultiCounter _counter;
   /** The number of found definitions */

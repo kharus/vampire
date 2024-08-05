@@ -42,7 +42,7 @@ private:
     SMTLIBLogic _smtLibLogic = SMT_UNDEFINED;
     bool _hasConjecture = false;
   };
-  static Stack<LoadedPiece> _loadedPieces;
+  static Lib::Stack<LoadedPiece> _loadedPieces;
 
   static void tryParseTPTP(std::istream& input);
   static void tryParseSMTLIB2(std::istream& input);

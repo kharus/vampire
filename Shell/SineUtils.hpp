@@ -28,7 +28,7 @@ class SineSymbolExtractor
 {
 public:
   typedef unsigned SymId;
-  typedef VirtualIterator<SymId> SymIdIterator;
+  typedef Lib::VirtualIterator<SymId> SymIdIterator;
 
   SymId getSymIdBound();
 
@@ -98,7 +98,7 @@ private:
    *
    * These formulas are always selected.
    */
-  Stack<Unit*> _unitsWithoutSymbols;
+  Lib::Stack<Unit*> _unitsWithoutSymbols;
 };
 
 
@@ -140,7 +140,7 @@ private:
     unsigned short minTolerance;
     Unit* unit;
   };
-  typedef List<DEntry> DEntryList;
+  typedef Lib::List<DEntry> DEntryList;
 
   /** Stored the D-relation */
   DArray<DEntryList*> _def;
@@ -150,7 +150,7 @@ private:
    *
    * These formulas are always selected.
    */
-  Stack<Unit*> _unitsWithoutSymbols;
+  Lib::Stack<Unit*> _unitsWithoutSymbols;
 
   const Options& _opt;
 };

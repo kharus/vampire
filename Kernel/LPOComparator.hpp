@@ -108,7 +108,7 @@ private:
   const LPO& _lpo;
 
   /** This is non-empty if @b _res is @b BranchTag::T_JUMP */
-  Stack<Instruction> _instructions;
+  Lib::Stack<Instruction> _instructions;
 
   /** It contains the result of the comparison if the terms
    * are comparable, otherwise it contains @b BranchTag::T_JUMP

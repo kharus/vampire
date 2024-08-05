@@ -71,7 +71,7 @@ public:
   bool hasNext() override { return !_stack.isEmpty(); }
   Term* next() override;
 private:
-  Stack<Term*> _stack;
+  Lib::Stack<Term*> _stack;
   FunctionDefinitionHandler& _fnDefHandler;
 };
 
@@ -119,7 +119,7 @@ public:
   SkolemSquashingTermReplacement(const std::map<Term*, TermList>& m, unsigned& var)
     : TermReplacement(m), _v(var) {}
   TermList transformSubterm(TermList trm) override;
-  DHMap<Term*, unsigned, SharedTermHash> _tv; // maps terms to their variable replacement
+  Lib::DHMap<Term*, unsigned, SharedTermHash> _tv; // maps terms to their variable replacement
 private:
   unsigned& _v; // fresh variable counter supported by caller
 };
@@ -272,7 +272,7 @@ public:
   ClauseIterator generateClauses(Clause* premise) override;
 
 #if VDEBUG
-  void setTestIndices(const Stack<Index*>& indices) override {
+  void setTestIndices(const Lib::Stack<Index*>& indices) override {
     _comparisonIndex = static_cast<LiteralIndex<LiteralClause>*>(indices[0]);
     _inductionTermIndex = static_cast<TermIndex*>(indices[1]);
     _structInductionTermIndex = static_cast<TermIndex*>(indices[2]);
@@ -360,7 +360,7 @@ private:
   bool isValidBound(const InductionContext& context, const TermLiteralClause& bound)
   { return isValidBound(context, Bound(bound)); }
 
-  Stack<Clause*> _clauses;
+  Lib::Stack<Clause*> _clauses;
   InductionHelper _helper;
   const Options& _opt;
   TermIndex* _structInductionTermIndex;

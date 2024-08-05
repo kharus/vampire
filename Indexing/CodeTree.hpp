@@ -108,7 +108,7 @@ public:
    */
   struct alignas(8) ILStruct
   {
-    ILStruct(const Literal* lit, unsigned varCnt, Stack<unsigned>& gvnStack);
+    ILStruct(const Literal* lit, unsigned varCnt, Lib::Stack<unsigned>& gvnStack);
     ~ILStruct();
     void putIntoSequence(ILStruct* previous_);
 
@@ -325,7 +325,7 @@ public:
   using GroundTermSearchStruct = SearchStructImpl<SearchStruct::GROUND_TERM_STRUCT>;
 
   typedef Vector<CodeOp> CodeBlock;
-  typedef Stack<CodeOp> CodeStack;
+  typedef Lib::Stack<CodeOp> CodeStack;
 
   struct BaseMatcher
   {
@@ -371,7 +371,7 @@ public:
 
   //////////// insertion //////////////
 
-  typedef DHMap<unsigned,unsigned> VarMap;
+  typedef Lib::DHMap<unsigned,unsigned> VarMap;
 
   /** Context for code compilation */
   struct CompileContext
@@ -412,7 +412,7 @@ public:
 
   protected:
     void init(CodeOp* entry_, LitInfo* linfos_, size_t linfoCnt_,
-	CodeTree* tree_, Stack<CodeOp*>* firstsInBlocks_);
+	CodeTree* tree_, Lib::Stack<CodeOp*>* firstsInBlocks_);
 
 
     bool prepareLiteral();
@@ -436,8 +436,8 @@ public:
     /** Variable bindings */
     DArray<unsigned> bindings;
 
-    Stack<BTPoint> btStack;
-    Stack<CodeOp*>* firstsInBlocks;
+    Lib::Stack<BTPoint> btStack;
+    Lib::Stack<CodeOp*>* firstsInBlocks;
     bool fresh;
     size_t curLInfo;
 
@@ -467,7 +467,7 @@ public:
     CodeOp* op;
   };
 
-  typedef Stack<BTPoint> BTStack;
+  typedef Lib::Stack<BTPoint> BTStack;
   typedef DArray<TermList> BindingArray;
 
   /**

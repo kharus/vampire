@@ -207,12 +207,12 @@ public:
   friend std::ostream& operator<<(std::ostream& out, SubstitutionTree<T> const& self);
   template<class T>
   friend std::ostream& operator<<(std::ostream& out, OutputMultiline<SubstitutionTree<T>> const& self);
-  typedef VirtualIterator<LeafData*> LDIterator;
+  typedef Lib::VirtualIterator<LeafData*> LDIterator;
 
-  template<class I> using QueryResultIter = VirtualIterator<QueryRes<LeafData, typename I::Unifier>>;
+  template<class I> using QueryResultIter = Lib::VirtualIterator<QueryRes<LeafData, typename I::Unifier>>;
   template<class I, class TermOrLit, class... Args>
   auto iterator(TermOrLit query, bool retrieveSubstitutions, bool reversed, Args... args)
-  { return isEmpty() ? VirtualIterator<ELEMENT_TYPE(I)>::getEmpty()
+  { return isEmpty() ? Lib::VirtualIterator<ELEMENT_TYPE(I)>::getEmpty()
                      : pvi(iterPointer(Recycled<I>(this, _root, query, retrieveSubstitutions, reversed, std::move(args)...)));
   }
 
@@ -220,7 +220,7 @@ public:
   {
   public:
     template<class LD>
-    static Comparison compare(const LD& ld1, const LD& ld2)
+    static Lib::Comparison compare(const LD& ld1, const LD& ld2)
     {
       return ld1 < ld2 ? Comparison::LESS 
            : ld1 > ld2 ? Comparison::GREATER
@@ -299,7 +299,7 @@ public:
   };
 
 
-    typedef VirtualIterator<Node**> NodeIterator;
+    typedef Lib::VirtualIterator<Node**> NodeIterator;
 
     class IntermediateNode
           : public Node
@@ -502,7 +502,7 @@ public:
       class NodePtrComparator
       {
       public:
-        inline static Comparison compare(TermList::Top& l, Node* r)
+        inline static Lib::Comparison compare(TermList::Top& l, Node* r)
         { 
           if(l.var()) {
             return r->term().isVar() ? Int::compare(*l.var(), r->term().var())
@@ -513,7 +513,7 @@ public:
           }
         }
       };
-      typedef SkipList<Node*,NodePtrComparator> NodeSkipList;
+      typedef Lib::SkipList<Node*,NodePtrComparator> NodeSkipList;
       NodeSkipList _nodes;
     };
 
@@ -528,8 +528,8 @@ public:
       Binding(int v,TermList t) : var(v), term(t) {}
     }; // class SubstitutionTree::Binding
 
-    typedef DHMap<unsigned,TermList,IdentityHash,DefaultHash> BindingMap;
-    typedef Stack<unsigned> VarStack;
+    typedef Lib::DHMap<unsigned,TermList,IdentityHash,DefaultHash> BindingMap;
+    typedef Lib::Stack<unsigned> VarStack;
 
     Leaf* findLeaf(BindingMap& svBindings)
     { return _root ? findLeaf(_root, svBindings) : nullptr; }
@@ -618,7 +618,7 @@ public:
     }
 
     template<class Query>
-    VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getVariants(Query query, bool retrieveSubstitutions)
+    Lib::VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getVariants(Query query, bool retrieveSubstitutions)
     {
       auto renaming = retrieveSubstitutions ? std::make_unique<RenamingSubstitution>() : std::unique_ptr<RenamingSubstitution>(nullptr);
       ResultSubstitutionSP resultSubst = retrieveSubstitutions ? ResultSubstitutionSP(&*renaming) : ResultSubstitutionSP();
@@ -638,7 +638,7 @@ public:
           } });
       Leaf* leaf = findLeaf(*svBindings);
       if(leaf==0) {
-        return VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>>::getEmpty();
+        return Lib::VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>>::getEmpty();
       } else {
         return pvi(iterTraits(leaf->allChildren())
           .map([retrieveSubstitutions, renaming = std::move(renaming), resultSubst](LeafData* ld) 
@@ -667,7 +667,7 @@ public:
     private:
       void skipToNextLeaf();
       Node* _curr;
-      Stack<NodeIterator> _nodeIterators;
+      Lib::Stack<NodeIterator> _nodeIterators;
     };
 
 
@@ -882,9 +882,9 @@ public:
 
       Node* _root;
 
-      Stack<void*> _alternatives;
-      Stack<unsigned> _specVarNumbers;
-      Stack<NodeAlgorithm> _nodeTypes;
+      Lib::Stack<void*> _alternatives;
+      Lib::Stack<unsigned> _specVarNumbers;
+      Lib::Stack<NodeAlgorithm> _nodeTypes;
       InstanceCntr _iterCntr;
     public:
       bool keepRecycled() const 
@@ -1014,8 +1014,8 @@ public:
 
       TermSpec deref(TermList var);
 
-      typedef DHMap<TermList, TermSpec> BindingMap;
-      typedef Stack<TermList> TermStack;
+      typedef Lib::DHMap<TermList, TermSpec> BindingMap;
+      typedef Lib::Stack<TermList> TermStack;
 
       /** Stacks of bindings made on each backtrack level. Backtrack
        * levels are separated by empty terms. */
@@ -1028,7 +1028,7 @@ public:
        *
        * The map is reset whenever we enter a new leaf
        */
-      DHMap<TermList,TermList> _derefBindings;
+      Lib::DHMap<TermList,TermList> _derefBindings;
 
       struct DerefTask
       {
@@ -1127,9 +1127,9 @@ public:
       Renaming _resultDenormalizer;
       Node* _root;
 
-      Stack<void*> _alternatives;
-      Stack<unsigned> _specVarNumbers;
-      Stack<NodeAlgorithm> _nodeTypes;
+      Lib::Stack<void*> _alternatives;
+      Lib::Stack<unsigned> _specVarNumbers;
+      Lib::Stack<NodeAlgorithm> _nodeTypes;
       InstanceCntr _iterCntr;
 
     public:
@@ -1336,8 +1336,8 @@ public:
       VarStack _svStack;
       bool _retrieveSubstitution;
       Option<LDIterator> _leafData;
-      Stack<NodeIterator> _nodeIterators;
-      Stack<BacktrackData> _bdStack;
+      Lib::Stack<NodeIterator> _nodeIterators;
+      Lib::Stack<BacktrackData> _bdStack;
       bool _normalizationRecording;
       BacktrackData _normalizationBacktrackData;
       InstanceCntr _iterCntr;

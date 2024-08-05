@@ -87,7 +87,7 @@ private:
   void updateAssignment();
 
   unsigned _varCnt;
-  ScopedPtr<SATSolver> _inner;
+  Lib::ScopedPtr<SATSolver> _inner;
 
   /**
    * If true, _asgn assignment corresponds to the assignment in
@@ -136,7 +136,7 @@ private:
   {
     CntComparator(CntArray& ctr) : _ctr(ctr) {}
 
-    Comparison compare(unsigned v1, unsigned v2)
+    Lib::Comparison compare(unsigned v1, unsigned v2)
     {
       // DynamicHeap is minimal and we want maximum, 
       // so we need to swap the arguments

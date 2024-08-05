@@ -78,7 +78,7 @@ namespace Kernel {
     template<class C> class BalanceIter {
 
       /* "call-stack". top of the stack is the term that is currently being traversed. */
-      Stack<Node> _path;
+      Lib::Stack<Node> _path;
       /* index of the side of the equality that is to be investigated next. i.e.:
        */
       unsigned _litIndex;

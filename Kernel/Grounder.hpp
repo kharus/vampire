@@ -52,7 +52,7 @@ private:
   SATLiteral groundNormalized(Literal*);
 
   /** Map from positive literals to SAT variable numbers */
-  DHMap<Literal*, unsigned> _asgn;
+  Lib::DHMap<Literal*, unsigned> _asgn;
   
   /** Pointer to a SATSolver instance for which the grounded clauses
    * are being prepared. Used to request new variables from the Solver.

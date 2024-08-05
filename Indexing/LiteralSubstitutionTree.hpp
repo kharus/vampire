@@ -49,7 +49,7 @@ public:
   void handle(LeafData ld, bool insert) final override
   { getTree(ld.key(), /* complementary */ false).handle(std::move(ld), insert); }
 
-  VirtualIterator<LeafData> getAll() final override
+  Lib::VirtualIterator<LeafData> getAll() final override
   {
     return pvi(
           iterTraits(getRangeIterator((unsigned long)0, _trees.size()))
@@ -60,16 +60,16 @@ public:
         );
   }
 
-  VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData_>> getUnifications(Literal* lit, bool complementary, bool retrieveSubstitutions) final override
+  Lib::VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData_>> getUnifications(Literal* lit, bool complementary, bool retrieveSubstitutions) final override
   { return pvi(getResultIterator<typename SubstitutionTree::template Iterator<RetrievalAlgorithms::RobUnification>>(lit, complementary, retrieveSubstitutions)); }
 
-  VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getGeneralizations(Literal* lit, bool complementary, bool retrieveSubstitutions) final override
+  Lib::VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getGeneralizations(Literal* lit, bool complementary, bool retrieveSubstitutions) final override
   { return pvi(getResultIterator<FastGeneralizationsIterator>(lit, complementary, retrieveSubstitutions)); }
 
-  VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getInstances(Literal* lit, bool complementary, bool retrieveSubstitutions) final override
+  Lib::VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getInstances(Literal* lit, bool complementary, bool retrieveSubstitutions) final override
   { return pvi(getResultIterator<FastInstancesIterator>(lit, complementary, retrieveSubstitutions)); }
 
-  VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getVariants(Literal* query, bool complementary, bool retrieveSubstitutions) final override
+  Lib::VirtualIterator<QueryRes<ResultSubstitutionSP, LeafData>> getVariants(Literal* query, bool complementary, bool retrieveSubstitutions) final override
   {
     return pvi(iterTraits(getTree(query, complementary).getVariants(query, retrieveSubstitutions)));
   }
@@ -94,7 +94,7 @@ private:
       { return tree->template iterator<Iterator>(lit, retrieveSubstitutions, reversed, args...); };
 
     return ifElseIter(
-        tree->isEmpty(), [&]() { return VirtualIterator<ELEMENT_TYPE(Iterator)>::getEmpty(); }, 
+        tree->isEmpty(), [&]() { return Lib::VirtualIterator<ELEMENT_TYPE(Iterator)>::getEmpty(); }, 
                          [&]() { return ifElseIter(!lit->commutative(), 
                                  [&]() { return iter(/* reverse */ false); },
                                  [&]() { return concatIters(iter(/* reverse */ false), iter(/* reverse */ true)); }); }
@@ -115,7 +115,7 @@ private:
 
 public:
 
-  VirtualIterator<QueryRes<AbstractingUnifier*, LeafData>> getUwa(Literal* lit, bool complementary, Options::UnificationWithAbstraction uwa, bool fixedPointIteration) final override
+  Lib::VirtualIterator<QueryRes<AbstractingUnifier*, LeafData>> getUwa(Literal* lit, bool complementary, Options::UnificationWithAbstraction uwa, bool fixedPointIteration) final override
   { return pvi(getResultIterator<typename SubstitutionTree::template Iterator<RetrievalAlgorithms::UnificationWithAbstraction>>(lit, complementary, /* retrieveSubstitutions */ true, AbstractionOracle(uwa), fixedPointIteration)); }
 
   friend std::ostream& operator<<(std::ostream& out, LiteralSubstitutionTree const& self)
@@ -167,7 +167,7 @@ private:
     return *_trees[idx];
   }
 
-  Stack<std::unique_ptr<SubstitutionTree>> _trees;
+  Lib::Stack<std::unique_ptr<SubstitutionTree>> _trees;
 };
 
 };

@@ -530,20 +530,20 @@ private:
  */
   Set<std::string>* _allowedNames;
   /** stacks of allowed names when include is used */
-  Stack<Set<std::string>*> _allowedNamesStack;
+  Lib::Stack<Set<std::string>*> _allowedNamesStack;
   /** set of files whose inclusion should be ignored */
   Set<std::string> _forbiddenIncludes;
   /** the input stream */
   std::istream* _in;
   /** in the case include() is used, previous streams will be saved here */
-  Stack<std::istream*> _inputs;
+  Lib::Stack<std::istream*> _inputs;
   /** the current include directory */
   std::string _includeDirectory;
   /** in the case include() is used, previous sequence of directories will be
    * saved here, this is required since TPTP requires the directory to be
    * relative to the "current directory, that is, the directory used by the last include()
    */
-  Stack<std::string> _includeDirectories;
+  Lib::Stack<std::string> _includeDirectories;
   /** input characters */
   Array<char> _chars;
   /** position in the input stream of the 0th character in _chars[] */
@@ -559,7 +559,7 @@ private:
   /** The list of units read (with additions directed to the end) */
   UnitList::FIFO _units;
   /** stack of unprocessed states */
-  Stack<State> _states;
+  Lib::Stack<State> _states;
   /** input type of the last read unit */ // it must be int since -1 can be used as a value
   UnitInputType _lastInputType;
   /** true if the last read unit is a question */
@@ -572,37 +572,37 @@ private:
   /** */
   bool _containsPolymorphism;
   /** various strings saved during parsing */
-  Stack<std::string> _strings;
+  Lib::Stack<std::string> _strings;
   /** various connectives saved during parsing */ // they must be int, since non-existing value -1 can be used
-  Stack<int> _connectives;
+  Lib::Stack<int> _connectives;
   /** various boolean values saved during parsing */
-  Stack<bool> _bools;
+  Lib::Stack<bool> _bools;
   /** various integer values saved during parsing */
-  Stack<int> _ints;
+  Lib::Stack<int> _ints;
   /** variable lists for building formulas */
-  Stack<VList*> _varLists;
+  Lib::Stack<VList*> _varLists;
   /** sort lists for building formulas */
-  Stack<SList*> _sortLists;
+  Lib::Stack<SList*> _sortLists;
   /** variable lists for binding variables */
-  Stack<VList*> _bindLists;
+  Lib::Stack<VList*> _bindLists;
   /** various tokens to consume */
-  Stack<Tag> _tags;
+  Lib::Stack<Tag> _tags;
   /** various formulas */
-  Stack<Formula*> _formulas;
+  Lib::Stack<Formula*> _formulas;
   /** various literals */
-  Stack<Literal*> _literals;
+  Lib::Stack<Literal*> _literals;
   /** term lists */
-  Stack<TermList> _termLists;
+  Lib::Stack<TermList> _termLists;
   /** name table for variable names */
   IntNameTable _vars;
   /** When parsing a question, make note of the inverse mapping to _vars, i.e. from the ints back to the vstrings, for better user reporting */
   Map<int,std::string> _curQuestionVarNames;
   /** parsed types */
-  Stack<Type*> _types;
+  Lib::Stack<Type*> _types;
   /** various type tags saved during parsing */
-  Stack<TypeTag> _typeTags;
+  Lib::Stack<TypeTag> _typeTags;
   /**  */
-  Stack<TheoryFunction> _theoryFunctions;
+  Lib::Stack<TheoryFunction> _theoryFunctions;
   /** bindings of variables to sorts */
   Map<unsigned,SList*> _variableSorts;
   /** overflown arithmetical constants for which uninterpreted constants are introduced */
@@ -624,11 +624,11 @@ private:
   typedef std::pair<LetSymbolName, LetSymbolReference> LetSymbol;
 
   /** a scope of function definitions */
-  typedef Stack<LetSymbol> LetSymbols;
+  typedef Lib::Stack<LetSymbol> LetSymbols;
 
   /** a stack of scopes */
-  Stack<LetSymbols> _letSymbols;
-  Stack<LetSymbols> _letTypedSymbols;
+  Lib::Stack<LetSymbols> _letSymbols;
+  Lib::Stack<LetSymbols> _letTypedSymbols;
 
   /** Record wheter a formula or term has been pushed more recently */
   LastPushed _lastPushed;
@@ -637,8 +637,8 @@ private:
   bool findLetSymbol(LetSymbolName symbolName, LetSymbolReference& symbolReference);
   bool findLetSymbol(LetSymbolName symbolName, LetSymbols scope, LetSymbolReference& symbolReference);
 
-  typedef Stack<LetSymbolReference> LetDefinitions;
-  Stack<LetDefinitions> _letDefinitions;
+  typedef Lib::Stack<LetSymbolReference> LetDefinitions;
+  Lib::Stack<LetDefinitions> _letDefinitions;
 
   /** model definition formula */
   bool _modelDefinition;
@@ -841,7 +841,7 @@ public:
   };
   struct InferenceSourceRecord : SourceRecord{
     const std::string name;
-    Stack<std::string> premises;
+    Lib::Stack<std::string> premises;
     bool isFile(){ return false; }
     InferenceSourceRecord(std::string n) : name(n) {}
   };
@@ -854,11 +854,11 @@ public:
   void setFilterReserved(){ _filterReserved=true; }
 
 private:
-  DHMap<Unit*,SourceRecord*>* _unitSources;
+  Lib::DHMap<Unit*,SourceRecord*>* _unitSources;
 
   /** This field stores names of input units if the
    * output_axiom_names option is enabled */
-  static DHMap<unsigned, std::string> _axiomNames;
+  static Lib::DHMap<unsigned, std::string> _axiomNames;
 
   /**
    * During question parsing, we store the mapping from int variables
@@ -869,11 +869,11 @@ private:
    *
    * (Can there be more than one question? Yes, e.g., in the interactive mode.)
    */
-  static DHMap<unsigned, Map<int,std::string>*> _questionVariableNames;
+  static Lib::DHMap<unsigned, Map<int,std::string>*> _questionVariableNames;
 
   /** Stores the type arities of function symbols */
-  DHMap<std::string, unsigned> _typeArities;
-  DHMap<std::string, unsigned> _typeConstructorArities;
+  Lib::DHMap<std::string, unsigned> _typeArities;
+  Lib::DHMap<std::string, unsigned> _typeConstructorArities;
 
   bool _filterReserved;
   bool _seenConjecture;

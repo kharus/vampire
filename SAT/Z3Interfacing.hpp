@@ -220,10 +220,10 @@ private:
 
   struct Representation
   {
-    Representation(z3::expr expr, Stack<z3::expr> defs) : expr(expr), defs(defs) {}
+    Representation(z3::expr expr, Lib::Stack<z3::expr> defs) : expr(expr), defs(defs) {}
     Representation(Representation&&) = default;
     z3::expr expr;
-    Stack<z3::expr> defs;
+    Lib::Stack<z3::expr> defs;
   };
 
   Representation getRepresentation(Term* trm);
@@ -241,7 +241,7 @@ private:
   z3::context _context;
   z3::solver _solver;
   z3::model _model;
-  Stack<z3::expr> _assumptions;
+  Lib::Stack<z3::expr> _assumptions;
   BiMap<SATLiteral, z3::expr, DefaultHash, Z3Hash> _assumptionLookup;
   const bool _showZ3;
   const bool _unsatCore;

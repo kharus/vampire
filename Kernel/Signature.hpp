@@ -106,7 +106,7 @@ class Signature
     /** Either a FunctionType of a PredicateType object */
     mutable OperatorType* _type;
     /** List of distinct groups the constant is a member of, all members of a distinct group should be distinct from each other */
-    List<unsigned>* _distinctGroups;
+    Lib::List<unsigned>* _distinctGroups;
     /** number of times it is used in the problem */
     unsigned _usageCount;
     /** number of units it is used in in the problem */
@@ -314,7 +314,7 @@ class Signature
     inline RealConstantType realValue() const
     { ASS(realConstant()); return static_cast<const RealSymbol*>(this)->_realValue; }
 
-    const List<unsigned>* distinctGroups() const { return _distinctGroups; }
+    const Lib::List<unsigned>* distinctGroups() const { return _distinctGroups; }
     /** This takes the symbol number of this symbol as the symbol doesn't know it
         Note that this should only be called on a constant **/
     void addToDistinctGroup(unsigned group,unsigned this_number);
@@ -652,7 +652,7 @@ class Signature
   void addToDistinctGroup(unsigned constantSymbol, unsigned groupId);
   bool hasDistinctGroups(){ return _distinctGroupsAddedTo; }
   void noDistinctGroupsLeft(){ _distinctGroupsAddedTo=false; }
-  Stack<DistinctGroupMembers> &distinctGroupMembers(){ return _distinctGroupMembers; }
+  Lib::Stack<DistinctGroupMembers> &distinctGroupMembers(){ return _distinctGroupMembers; }
 
   bool hasTermAlgebras() { return !_termAlgebras.isEmpty(); }
   bool hasDefPreds() const { return !_fnDefPreds.isEmpty() || !_boolDefPreds.isEmpty(); }
@@ -903,19 +903,19 @@ class Signature
     return _termAlgebras.get(sort.term()->functor());
   }
   void addTermAlgebra(Shell::TermAlgebra *ta) { _termAlgebras.insert(ta->sort().term()->functor(), ta); }
-  VirtualIterator<Shell::TermAlgebra*> termAlgebrasIterator() const { return _termAlgebras.range(); }
+  Lib::VirtualIterator<Shell::TermAlgebra*> termAlgebrasIterator() const { return _termAlgebras.range(); }
   Shell::TermAlgebraConstructor* getTermAlgebraConstructor(unsigned functor);
 
   void recordDividesNvalue(TermList n){
     _dividesNvalues.push(n);
   }
-  Stack<TermList>& getDividesNvalues(){ return _dividesNvalues; }
+  Lib::Stack<TermList>& getDividesNvalues(){ return _dividesNvalues; }
 
   static bool symbolNeedsQuoting(std::string name, bool interpreted, unsigned arity);
 
 private:
-  Stack<TermList> _dividesNvalues;
-  DHMap<Term*, int> _formulaCounts;
+  Lib::Stack<TermList> _dividesNvalues;
+  Lib::DHMap<Term*, int> _formulaCounts;
 
   bool _foolConstantsDefined;
   unsigned _foolTrue;
@@ -924,11 +924,11 @@ private:
   static bool isProtectedName(std::string name);
   static bool charNeedsQuoting(char c, bool first);
   /** Stack of function symbols */
-  Stack<Symbol*> _funs;
+  Lib::Stack<Symbol*> _funs;
   /** Stack of predicate symbols */
-  Stack<Symbol*> _preds;
+  Lib::Stack<Symbol*> _preds;
   /** Stack of type constructor symbols */  
-  Stack<Symbol*> _typeCons;
+  Lib::Stack<Symbol*> _typeCons;
 
   DHSet<unsigned> _choiceSymbols;
   /**
@@ -954,10 +954,10 @@ private:
   SymbolMap _varNames;
   
   // Store the premise of a distinct group for proof printing, if 0 then group is input
-  Stack<Unit*> _distinctGroupPremises;
+  Lib::Stack<Unit*> _distinctGroupPremises;
 
   // We only store members up until a hard-coded limit i.e. the limit at which we will expand the group
-  Stack<DistinctGroupMembers> _distinctGroupMembers;
+  Lib::Stack<DistinctGroupMembers> _distinctGroupMembers;
   // Flag to indicate if any distinct groups have members
   bool _distinctGroupsAddedTo;
 
@@ -968,7 +968,7 @@ private:
    * the MonomorphisedInterpretation value already determines whether we deal with a function
    * or a predicate.
    */
-  DHMap<Theory::MonomorphisedInterpretation, unsigned> _iSymbols;
+  Lib::DHMap<Theory::MonomorphisedInterpretation, unsigned> _iSymbols;
 
   /** the number of string constants */
   unsigned _strings;
@@ -983,7 +983,7 @@ private:
   unsigned _arrowCon;
   unsigned _appFun;
   DHSet<unsigned> _fnDefPreds;
-  DHMap<unsigned,unsigned> _boolDefPreds;
+  Lib::DHMap<unsigned,unsigned> _boolDefPreds;
 
   /**
    * Map from type constructor functor to the associated term algebra, if applicable for the sort.
@@ -991,7 +991,7 @@ private:
    * For a term algebra instance, this map gives the general term algebra based on the top-level
    * functor of its sort, the ctors and dtors still have to be instantiated to the right instances.
    */ 
-  DHMap<unsigned, Shell::TermAlgebra*> _termAlgebras;
+  Lib::DHMap<unsigned, Shell::TermAlgebra*> _termAlgebras;
 
   //TODO Why are these here? They are not used anywhere. AYB
   //void defineOptionTermAlgebra(unsigned optionSort);

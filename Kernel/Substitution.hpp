@@ -60,7 +60,7 @@ public:
 #endif
   friend std::ostream& operator<<(std::ostream& out, Substitution const&);
 private:
-  DHMap<unsigned,TermList> _map;
+  Lib::DHMap<unsigned,TermList> _map;
 }; // class Substitution
 
 

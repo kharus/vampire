@@ -1,0 +1,12 @@
+s/(\s)List</\1Lib::List</g
+s/(\s)Stack</\1Lib::Stack</g
+s/(\s)VirtualIterator</\1Lib::VirtualIterator</g
+s/(\s)SharedSet</\1Lib::SharedSet</g
+s/(\s)SingleParamEvent</\1Lib::SingleParamEvent</g
+s/(\s)SingleParamEvent</\1Lib::SingleParamEvent</g
+s/(\s)ZIArray</\1Lib::ZIArray</g
+s/(\s)SkipList</\1Lib::SkipList</g
+s/(\s)Comparison(\s)/\1Lib::Comparison\2/g
+s/(\s)DHMap</\1Lib::DHMap</g
+s/(\s)ScopedPtr</\1Lib::ScopedPtr</g
+s/(\s)MaybeBool(\s)/\1Lib::MaybeBool\2/g

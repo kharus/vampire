@@ -31,7 +31,7 @@ class SymbolDefinitionInlining {
     FormulaList* process(FormulaList* formulas);
     TermList process(TermList ts);
 
-    List<std::pair<unsigned, unsigned>>* variableRenamings() { return _varRenames; };
+    Lib::List<std::pair<unsigned, unsigned>>* variableRenamings() { return _varRenames; };
 
   private:
     const bool _isPredicate;
@@ -46,7 +46,7 @@ class SymbolDefinitionInlining {
 
     unsigned _counter;
     unsigned _freshVarOffset;
-    List<std::pair<unsigned, unsigned>>* _varRenames;
+    Lib::List<std::pair<unsigned, unsigned>>* _varRenames;
 
     void collectBoundVariables(TermList);
     void collectBoundVariables(Term*);

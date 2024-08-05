@@ -145,7 +145,7 @@ struct PrettyPrinter<A*> {
 
 template<class A>
 struct PrettyPrinter<Stack<A>> {
-  void operator()(std::ostream& out, Stack<A> const& self)
+  void operator()(std::ostream& out, Lib::Stack<A> const& self)
   {
     auto iter = self.iterFifo();
     out << "[ ";

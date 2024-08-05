@@ -50,7 +50,7 @@ private:
   };
 
   struct CandidateComparator {
-    static Comparison compare(Candidate* c1, Candidate* c2) {
+    static Lib::Comparison compare(Candidate* c1, Candidate* c2) {
       return Int::compare(c1->weight,c2->weight);
     }
   };
@@ -60,7 +60,7 @@ private:
 
     Clause* cl;            // the actual clause
     bool blocked;          // if already blocked, don't need to try again
-    Stack<Candidate*> toResurrect; // when getting block (effectively deleted, all these have a chance again)
+    Lib::Stack<Candidate*> toResurrect; // when getting block (effectively deleted, all these have a chance again)
 
     ClWrapper(Clause* cl) : cl(cl), blocked(false) {}
   };

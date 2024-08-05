@@ -80,7 +80,7 @@ public:
 
   unsigned sizeEstimate() const override { return _size; }
 
-  static Comparison compareWeight(Clause* cl1, Clause* cl2, const Shell::Options& opt);
+  static Lib::Comparison compareWeight(Clause* cl1, Clause* cl2, const Shell::Options& opt);
 
 private:
   /** The age queue, empty if _ageRatio=0 */
@@ -179,7 +179,7 @@ public:
 
   unsigned size() const { return _size; }
 
-  static Comparison compareWeight(Clause* cl1, Clause* cl2);
+  static Lib::Comparison compareWeight(Clause* cl1, Clause* cl2);
 
 private:
   /** The age queue, empty if _ageRatio=0 */

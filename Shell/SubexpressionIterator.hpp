@@ -92,7 +92,7 @@ namespace Shell {
       SubexpressionIterator(TermList ts);
 
     private:
-      Stack<Expression> _subexpressions;
+      Lib::Stack<Expression> _subexpressions;
   };
 }
 

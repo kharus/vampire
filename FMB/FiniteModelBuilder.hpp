@@ -127,15 +127,15 @@ private:
 
   unsigned _curMaxVar;
   // SAT solver used to solve constraints (a new one is used for each model size)
-  ScopedPtr<SATSolverWithAssumptions> _solver;
+  Lib::ScopedPtr<SATSolverWithAssumptions> _solver;
 
   // Structures to record symbols removed during preprocessing i.e. via definition elimination
   // These are ignored throughout finite model building and then the definitions (recorded here)
   // are used to give the interpretation of the function/predicate if a model is found
-  DHMap<unsigned,Literal*> _deletedFunctions;
-  DHMap<unsigned,Unit*> _deletedPredicates;
-  DHMap<unsigned,Unit*> _partiallyDeletedPredicates; 
-  DHMap<unsigned,bool> _trivialPredicates;
+  Lib::DHMap<unsigned,Literal*> _deletedFunctions;
+  Lib::DHMap<unsigned,Unit*> _deletedPredicates;
+  Lib::DHMap<unsigned,Unit*> _partiallyDeletedPredicates; 
+  Lib::DHMap<unsigned,bool> _trivialPredicates;
   // if del_f[i] (resp del_p[i]) is true then that function (resp predicate) should be ignored
   DArray<unsigned> del_f;
   DArray<unsigned> del_p;
@@ -162,7 +162,7 @@ private:
   DArray<unsigned> _fminbound;
   // Record for each clause the sorts of the variables 
   // As clauses are normalized variables will be numbered 0,1,...
-  DHMap<Clause*,DArray<unsigned>*> _clauseVariableSorts;
+  Lib::DHMap<Clause*,DArray<unsigned>*> _clauseVariableSorts;
 
   // There is a implicit mapping from ground terms to SAT variables
   // These offsets give the SAT variable for the *first* grounding of each function or predicate symbol
@@ -237,7 +237,7 @@ private:
 
   class DSAEnumerator { // Domain Size Assignment Enumerator - for the point-wise encoding case
   public:
-    virtual bool init(unsigned, DArray<unsigned>&, Stack<std::pair<unsigned,unsigned>>&, Stack<std::pair<unsigned,unsigned>>&) { return true; }
+    virtual bool init(unsigned, DArray<unsigned>&, Lib::Stack<std::pair<unsigned,unsigned>>&, Lib::Stack<std::pair<unsigned,unsigned>>&) { return true; }
     virtual void learnNogood(Constraint_Generator_Vals& nogood, unsigned weight) = 0;
     virtual bool increaseModelSizes(DArray<unsigned>& newSortSizes, DArray<unsigned>& sortMaxes) = 0;
     virtual bool isFmbComplete(unsigned noDomains) { return false; }
@@ -258,14 +258,14 @@ private:
     };
 
     struct Constraint_Generator_Compare {
-      static Comparison compare (Constraint_Generator* c1, Constraint_Generator* c2)
+      static Lib::Comparison compare (Constraint_Generator* c1, Constraint_Generator* c2)
       { return c1->_weight < c2->_weight ? LESS : c1->_weight == c2->_weight ? EQUAL : GREATER; }
     };
 
     typedef Lib::BinaryHeap<Constraint_Generator*,Constraint_Generator_Compare> Constraint_Generator_Heap;
 
-    Stack<std::pair<unsigned,unsigned>>* _distinct_sort_constraints;
-    Stack<std::pair<unsigned,unsigned>>* _strict_distinct_sort_constraints;
+    Lib::Stack<std::pair<unsigned,unsigned>>* _distinct_sort_constraints;
+    Lib::Stack<std::pair<unsigned,unsigned>>* _strict_distinct_sort_constraints;
 
     /**
      * Constraints are at the same time used as generators.
@@ -277,14 +277,14 @@ private:
     bool _skippedSomeSizes;
 
     bool _keepOldGenerators;
-    Stack<Constraint_Generator*> _old_generators; // keeping old generators degraded performance on average ...
+    Lib::Stack<Constraint_Generator*> _old_generators; // keeping old generators degraded performance on average ...
   protected:
     bool checkConstriant(DArray<unsigned>& newSortSizes, Constraint_Generator_Vals& constraint);
 
   public:
     HackyDSAE(bool keepOldGenerators) : _maxWeightSoFar(0), _keepOldGenerators(keepOldGenerators) {}
 
-    bool init(unsigned _startSize, DArray<unsigned>&, Stack<std::pair<unsigned,unsigned>>& dsc, Stack<std::pair<unsigned,unsigned>>& sdsc) override {
+    bool init(unsigned _startSize, DArray<unsigned>&, Lib::Stack<std::pair<unsigned,unsigned>>& dsc, Lib::Stack<std::pair<unsigned,unsigned>>& sdsc) override {
       _skippedSomeSizes = (_startSize > 1);
       _distinct_sort_constraints = &dsc;
       _strict_distinct_sort_constraints = &sdsc;
@@ -309,7 +309,7 @@ private:
   public:
     SmtBasedDSAE() : _smtSolver(_context) {}
 
-    bool init(unsigned, DArray<unsigned>&, Stack<std::pair<unsigned,unsigned>>&, Stack<std::pair<unsigned,unsigned>>&) override;
+    bool init(unsigned, DArray<unsigned>&, Lib::Stack<std::pair<unsigned,unsigned>>&, Lib::Stack<std::pair<unsigned,unsigned>>&) override;
     void learnNogood(Constraint_Generator_Vals& nogood, unsigned weight) override;
     bool increaseModelSizes(DArray<unsigned>& newSortSizes, DArray<unsigned>& sortMaxes) override;
     bool isFmbComplete(unsigned) override { return !_skippedSomeSizes; }
@@ -318,9 +318,9 @@ private:
 
   // the sort constraints from injectivity/surjectivity
   // pairs of distinct sorts where pair.first >= pair.second
-  Stack<std::pair<unsigned,unsigned>> _distinct_sort_constraints;
+  Lib::Stack<std::pair<unsigned,unsigned>> _distinct_sort_constraints;
   // pairs of distinct sorts where pair.first > pair.second
-  Stack<std::pair<unsigned,unsigned>> _strict_distinct_sort_constraints;
+  Lib::Stack<std::pair<unsigned,unsigned>> _strict_distinct_sort_constraints;
 
   // Record the number of constants in the problem per distinct sort
   DArray<unsigned> _distinctSortConstantCount;

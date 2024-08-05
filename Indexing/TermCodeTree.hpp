@@ -54,7 +54,7 @@ private:
   : public RemovingMatcher
   {
   public:
-    void init(FlatTerm* ft_, TermCodeTree* tree_, Stack<CodeOp*>* firstsInBlocks_);
+    void init(FlatTerm* ft_, TermCodeTree* tree_, Lib::Stack<CodeOp*>* firstsInBlocks_);
 
   };
 

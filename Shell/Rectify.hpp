@@ -50,7 +50,7 @@ public:
   static void rectify(UnitList*& units);
 private:
   typedef std::pair<unsigned,bool> VarWithUsageInfo;
-  typedef List<VarWithUsageInfo> VarUsageTrackingList;
+  typedef Lib::List<VarWithUsageInfo> VarUsageTrackingList;
   /** Renaming stores bindings for free and bound variables */
   class Renaming
     : public Array<VarUsageTrackingList*>

@@ -189,7 +189,7 @@ protected:
       c->setSelected(eligible);
     } else if(!singleSelected) {
       //select multiple maximal literals
-      static Stack<Literal*> replaced(16);
+      static Lib::Stack<Literal*> replaced(16);
       Set<Literal*> maxSet;
       unsigned selCnt=0;
 

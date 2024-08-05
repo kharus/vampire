@@ -70,7 +70,7 @@ public:
   static TermList reduce(TermStack& args, TermList& head);
 
 protected:
-  typedef DHMap<unsigned, DArray<DArray<unsigned>*>*> VarOccMap;
+  typedef Lib::DHMap<unsigned, DArray<DArray<unsigned>*>*> VarOccMap;
 
   //Result comparePredicates(Literal* l1, Literal* l2) const override;
 

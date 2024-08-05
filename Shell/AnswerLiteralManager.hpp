@@ -66,7 +66,7 @@ public:
 
   virtual ~AnswerLiteralManager() {}
 
-  virtual bool tryGetAnswer(Clause* refutation, Stack<Clause*>& answer);
+  virtual bool tryGetAnswer(Clause* refutation, Lib::Stack<Clause*>& answer);
 
   void addAnswerLiterals(Problem& prb);
   bool addAnswerLiterals(UnitList*& units);
@@ -112,11 +112,11 @@ private:
    * (which, in particular, has the variables for arguments
    * as they were in the conecture).
    */
-  DHMap<unsigned, std::pair<Unit*,Literal*>> _originUnitsAndInjectedLiterals;
+  Lib::DHMap<unsigned, std::pair<Unit*,Literal*>> _originUnitsAndInjectedLiterals;
 
-  DHMap<unsigned, Clause*> _resolverClauses;
+  Lib::DHMap<unsigned, Clause*> _resolverClauses;
 
-  DHMap<unsigned,std::pair<unsigned,Unit*>> _skolemsOrigin;
+  Lib::DHMap<unsigned,std::pair<unsigned,Unit*>> _skolemsOrigin;
 };
 
 class PlainALManager : public AnswerLiteralManager
@@ -127,13 +127,13 @@ protected:
   void optionalAnswerPrefix(std::ostream& out) override;
   std::string postprocessAnswerString(std::string answer) override;
 private:
-  Stack<std::pair<Term*, std::string>> _skolemNames;
+  Lib::Stack<std::pair<Term*, std::string>> _skolemNames;
 };
 
 class SynthesisALManager : public AnswerLiteralManager
 {
 public:
-  bool tryGetAnswer(Clause* refutation, Stack<Clause*>& answer) override;
+  bool tryGetAnswer(Clause* refutation, Lib::Stack<Clause*>& answer) override;
   void onNewClause(Clause* cl) override;
 
   Clause* recordAnswerAndReduce(Clause* cl) override;
@@ -144,7 +144,7 @@ protected:
   void recordSkolemBinding(Term*,unsigned,std::string) override;
 
 private:
-  void getNeededUnits(Clause* refutation, ClauseStack& premiseClauses, Stack<Unit*>& conjectures, DHSet<Unit*>& allProofUnits);
+  void getNeededUnits(Clause* refutation, ClauseStack& premiseClauses, Lib::Stack<Unit*>& conjectures, DHSet<Unit*>& allProofUnits);
 
   class ConjectureSkolemReplacement : public TermTransformer {
    public:
@@ -157,7 +157,7 @@ private:
    private:
     std::map<Term*, unsigned> _skolemToVar;
     // Map from functions to predicates they represent in answer literal conditions
-    DHMap<unsigned, unsigned> _condFnToPred;
+    Lib::DHMap<unsigned, unsigned> _condFnToPred;
   };
 
   Formula* getConditionFromClause(Clause* cl);
@@ -179,7 +179,7 @@ private:
 
   ConjectureSkolemReplacement _skolemReplacement;
 
-  List<std::pair<unsigned,std::pair<Clause*, Literal*>>>* _answerPairs = nullptr;
+  Lib::List<std::pair<unsigned,std::pair<Clause*, Literal*>>>* _answerPairs = nullptr;
 
   Literal* _lastAnsLit = nullptr;
 };

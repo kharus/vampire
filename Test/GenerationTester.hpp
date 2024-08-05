@@ -49,12 +49,12 @@ namespace Test {
 template<class... As>
 Stack<ClausePattern> exactly(As... as) 
 {
-  Stack<ClausePattern> out { as... };
+  Lib::Stack<ClausePattern> out { as... };
   return out;
 }
 
-inline Stack<ClausePattern> none() {
-  return Stack<ClausePattern>();
+inline Lib::Stack<ClausePattern> none() {
+  return Lib::Stack<ClausePattern>();
 }
 
 namespace Generation {
@@ -80,18 +80,18 @@ public:
 class TestCase
 {
   using Clause = Kernel::Clause;
-  using OptionMap = Stack<std::pair<std::string,std::string>>;
+  using OptionMap = Lib::Stack<std::pair<std::string,std::string>>;
   using Condition = std::function<bool(std::string&, std::string&)>;
   Option<SimplifyingGeneratingInference*> _rule;
   Clause* _input;
-  Stack<ClausePattern> _expected;
-  Stack<Clause*> _context;
+  Lib::Stack<ClausePattern> _expected;
+  Lib::Stack<Clause*> _context;
   bool _premiseRedundant;
-  Stack<Indexing::Index*> _indices;
+  Lib::Stack<Indexing::Index*> _indices;
   std::function<void(SaturationAlgorithm&)> _setup = [](SaturationAlgorithm&){};
   OptionMap _options;
-  Stack<Condition> _preConditions;
-  Stack<Condition> _postConditions;
+  Lib::Stack<Condition> _preConditions;
+  Lib::Stack<Condition> _postConditions;
 
   template<class Is, class Expected>
   void testFail(Is const& is, Expected const& expected) {
@@ -175,7 +175,7 @@ public:
 
     // run checks
     auto& sExp = this->_expected;
-    auto  sRes = Stack<Kernel::Clause*>::fromIterator(res.clauses);
+    auto  sRes = Lib::Stack<Kernel::Clause*>::fromIterator(res.clauses);
 
     if (!TestUtils::permEq(sExp, sRes, [&](auto exp, auto res) { return exp.matches(simpl, res); })) {
       testFail(sRes, sExp);
