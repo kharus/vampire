@@ -27,7 +27,6 @@
 namespace Indexing
 {
 
-using namespace Lib;
 using namespace Saturation;
 
 enum IndexType {

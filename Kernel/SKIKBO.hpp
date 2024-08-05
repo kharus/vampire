@@ -31,7 +31,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 /**
  * Class for instances of the Knuth-Bendix orderings

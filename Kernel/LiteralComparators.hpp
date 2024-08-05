@@ -27,7 +27,6 @@
 namespace Kernel {
 namespace LiteralComparators {
 
-using namespace Lib;
 
 
 //typedef CompositeComaprator Composite;

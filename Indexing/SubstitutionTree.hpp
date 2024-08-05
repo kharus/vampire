@@ -60,7 +60,6 @@
 static constexpr int QUERY_BANK=0;
 static constexpr int RESULT_BANK=1;
 static constexpr int NORM_RESULT_BANK=3;
-using namespace Lib;
 using namespace Kernel;
 
 #define UARR_INTERMEDIATE_NODE_MAX_SIZE 4

@@ -41,7 +41,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 typedef Map<std::string, unsigned> SymbolMap;
 
 /**

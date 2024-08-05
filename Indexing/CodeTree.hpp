@@ -38,7 +38,6 @@
 
 namespace Indexing {
 
-using namespace Lib;
 using namespace Kernel;
 
 class CodeTree

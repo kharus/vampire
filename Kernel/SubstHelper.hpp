@@ -25,7 +25,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 struct SubstApplicator {
   virtual ~SubstApplicator() = default;

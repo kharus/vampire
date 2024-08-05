@@ -25,7 +25,6 @@
 
 namespace Shell {
 
-using namespace Lib;
 using namespace Kernel;
 
 // Monomorphic version of equality proxy transformation.

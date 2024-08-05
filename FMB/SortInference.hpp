@@ -29,7 +29,6 @@
 namespace FMB {
 using namespace Kernel;
 using namespace Shell;
-using namespace Lib;
 
 struct SortedSignature{
     unsigned sorts;

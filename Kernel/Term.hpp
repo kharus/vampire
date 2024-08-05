@@ -56,7 +56,6 @@ namespace Kernel {
   std::ostream& operator<<(std::ostream& out, Literal const& self);
   bool operator<(TermList const&,TermList const&);
 
-using namespace Lib;
 
 /** Tag denoting the kind of this term
  * @since 19/02/2008 Manchester, moved outside of the Term class

@@ -25,7 +25,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 class Renaming {
 public:

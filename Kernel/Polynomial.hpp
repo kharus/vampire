@@ -1142,7 +1142,6 @@ struct std::hash<Kernel::Polynom<NumTraits>>
 {
   size_t operator()(Kernel::Polynom<NumTraits> const& x) const noexcept 
   {
-    using namespace Lib;
     using namespace Kernel;
 
     unsigned out = HashUtils::combine(0,0);

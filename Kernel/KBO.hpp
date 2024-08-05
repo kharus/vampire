@@ -34,7 +34,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 #if __KBO__CUSTOM_PREDICATE_WEIGHTS__
 struct PredSigTraits;

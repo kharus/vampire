@@ -27,7 +27,6 @@
 #include "Kernel/Term.hpp"
 #include "Kernel/Formula.hpp"
 
-using namespace Lib;
 
 namespace Kernel {
 

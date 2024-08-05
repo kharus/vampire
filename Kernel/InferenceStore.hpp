@@ -32,7 +32,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 class InferenceStore
 {

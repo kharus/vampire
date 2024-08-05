@@ -37,7 +37,6 @@
 namespace FMB {
   using namespace Kernel;
   using namespace SAT;
-  using namespace Lib;
 
 class Monotonicity{
 public:

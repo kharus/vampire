@@ -22,7 +22,6 @@
 
 #include "Lib/Allocator.hpp"
 
-using namespace Lib;
 using namespace Kernel;
 
 namespace Indexing {

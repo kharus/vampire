@@ -17,7 +17,6 @@
 #include "Lib/Environment.hpp"
 #include "Lib/Set.hpp"
 
-using namespace Lib;
 using namespace Kernel;
 using namespace Shell;
 

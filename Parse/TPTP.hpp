@@ -33,7 +33,6 @@
 
 //#define DEBUG_SHOW_STATE
 
-using namespace Lib;
 using namespace Kernel;
 
 namespace Kernel {

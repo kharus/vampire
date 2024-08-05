@@ -30,7 +30,6 @@ namespace Shell {
 
 namespace Kernel {
 
-using namespace Lib;
 using namespace Inferences;
 using namespace Shell;
 

@@ -26,7 +26,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 /**
  * Class for instances of the lexicographic path orderings

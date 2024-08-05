@@ -24,7 +24,6 @@ namespace Shell {
 
 using namespace Indexing;
 using namespace Kernel;
-using namespace Lib;
 
 /**
  * Corresponds to the branches of a function definition,

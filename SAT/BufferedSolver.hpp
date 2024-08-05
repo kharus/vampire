@@ -31,7 +31,6 @@
 
 namespace SAT {
 
-using namespace Lib;
 
 class BufferedSolver : public SATSolver {
 public:

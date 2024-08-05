@@ -44,7 +44,6 @@ namespace Shell { class AnswerLiteralManager; }
 namespace Saturation
 {
 
-using namespace Lib;
 using namespace Kernel;
 using namespace Indexing;
 using namespace Inferences;

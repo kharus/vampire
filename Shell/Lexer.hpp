@@ -24,7 +24,6 @@
 
 #include "Token.hpp"
 
-using namespace Lib;
 
 
 namespace Shell {

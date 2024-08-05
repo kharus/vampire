@@ -87,7 +87,6 @@ square's last digit:
 
 namespace Debug {
 
-using namespace Lib;
 
 class RSObject
 {

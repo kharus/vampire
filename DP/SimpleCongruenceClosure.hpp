@@ -29,7 +29,6 @@
 
 namespace DP {
 
-using namespace Lib;
 using namespace Kernel;
 
 /**

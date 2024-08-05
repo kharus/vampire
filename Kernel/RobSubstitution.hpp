@@ -269,7 +269,6 @@ public:
   { return out << self._t1 << " ?= " << self._t2; }
 };
 
-using namespace Lib;
 
 class AbstractingUnifier;
 class UnificationConstraint;

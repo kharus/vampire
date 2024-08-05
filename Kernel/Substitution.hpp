@@ -28,7 +28,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 /**
  * The class Substitution implementing substitutions.

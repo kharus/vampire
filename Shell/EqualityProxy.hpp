@@ -26,7 +26,6 @@
 
 namespace Shell {
 
-using namespace Lib;
 using namespace Kernel;
 
 // Polymorphic version of equality proxy transformation.

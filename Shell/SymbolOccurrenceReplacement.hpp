@@ -15,7 +15,6 @@
 #include "Kernel/Signature.hpp"
 #include "Lib/Environment.hpp"
 
-using namespace Lib;
 using namespace Kernel;
 using namespace Shell;
 

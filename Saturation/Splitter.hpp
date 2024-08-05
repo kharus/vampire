@@ -41,7 +41,6 @@
 
 namespace Saturation {
 
-using namespace Lib;
 using namespace Kernel;
 using namespace Shell;
 using namespace SAT;

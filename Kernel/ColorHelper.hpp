@@ -24,7 +24,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 using namespace Saturation;
 
 class ColorHelper {

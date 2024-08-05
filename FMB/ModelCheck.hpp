@@ -32,7 +32,6 @@
 
 namespace FMB{
 
-using namespace Lib;
 using namespace Kernel;
 
 class ModelCheck{

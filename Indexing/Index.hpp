@@ -37,7 +37,6 @@
 namespace Indexing
 {
 using namespace Kernel;
-using namespace Lib;
 using namespace Saturation;
 
 struct LiteralClause 

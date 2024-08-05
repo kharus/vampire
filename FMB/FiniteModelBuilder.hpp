@@ -29,7 +29,6 @@
 #include "Lib/BinaryHeap.hpp"
 
 namespace FMB {
-using namespace Lib;
 using namespace Kernel;
 using namespace Inferences;
 using namespace Shell;

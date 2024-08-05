@@ -23,7 +23,6 @@
 
 namespace SAT {
 
-using namespace Lib;
 using namespace Kernel;
 
 /**

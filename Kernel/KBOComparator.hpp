@@ -23,7 +23,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 /**
  * Runtime specialized KBO ordering check, based on the linear KBO check

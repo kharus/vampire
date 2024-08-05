@@ -22,7 +22,6 @@
 
 namespace Shell {
 
-using namespace Lib;
 using namespace Kernel;
 
 class SineSymbolExtractor

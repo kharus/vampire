@@ -30,7 +30,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 class MatchingUtils
 {

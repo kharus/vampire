@@ -53,7 +53,6 @@ class Timer;
 
 namespace Kernel
 {
-using namespace Lib;
 
 class Signature;
 
@@ -176,7 +175,6 @@ class BackwardSimplificationEngine;
 
 namespace SAT
 {
-using namespace Lib;
 
 class SATClause;
 class SATLiteral;

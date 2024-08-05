@@ -32,7 +32,6 @@
 
 namespace SAT {
 
-using namespace Lib;
 
 class MinimizingSolver : public SATSolver {
 public:

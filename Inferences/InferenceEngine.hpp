@@ -36,7 +36,6 @@
 namespace Inferences
 {
 
-using namespace Lib;
 using namespace Kernel;
 using namespace Saturation;
 using namespace Shell;

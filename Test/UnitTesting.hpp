@@ -24,7 +24,6 @@
 
 namespace Test {
 
-using namespace Lib;
 
 typedef void (*TestProc)();
 

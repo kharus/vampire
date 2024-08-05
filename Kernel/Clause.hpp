@@ -33,7 +33,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 /**
  * Class to represent clauses.

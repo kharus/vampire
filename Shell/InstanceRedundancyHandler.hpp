@@ -26,7 +26,6 @@
 namespace Indexing {
 
 using namespace Inferences;
-using namespace Lib;
 using namespace Shell;
 
 class InstanceRedundancyHandler

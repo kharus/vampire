@@ -30,7 +30,6 @@ namespace Indexing
 {
 
 using namespace Kernel;
-using namespace Lib;
 
 
 /**

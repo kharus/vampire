@@ -27,7 +27,6 @@ namespace Kernel {
   class Literal;
 };
 
-using namespace Lib;
 using namespace Kernel;
 
 namespace Shell {

@@ -37,7 +37,6 @@
 
 namespace Kernel {
 
-using namespace Lib;
 
 /**
  * A literal selector class template that selects the best literal

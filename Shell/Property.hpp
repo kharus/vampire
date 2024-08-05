@@ -39,7 +39,6 @@ namespace Kernel {
 namespace Shell {
 
 using namespace Kernel;
-using namespace Lib;
 
 /**
  * Represents syntactic properties of problems.

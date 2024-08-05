@@ -33,7 +33,6 @@
 
 namespace SAT {
 
-using namespace Lib;
 
 class FallbackSolverWrapper : public SATSolver {
 public:

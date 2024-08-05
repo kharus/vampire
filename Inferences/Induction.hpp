@@ -48,7 +48,6 @@ namespace Inferences
 using namespace Kernel;
 using namespace Saturation;
 using namespace Shell;
-using namespace Lib;
 
 /**
  * This class is similar to @b NonVariableNonTypeIterator and is
