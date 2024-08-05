@@ -65,18 +65,18 @@ private:
     Substitution subst;
   };
   template<class IterLits> SkolemizedLiterals skolemize(IterLits lits);
-  Lib::VirtualIterator<Solution> getSolutions(Stack<Literal*> const& theoryLiterals, Lib::Stack<Literal*> const& guards, unsigned freshVar);
+  Lib::VirtualIterator<Solution> getSolutions(Lib::Stack<Literal*> const& theoryLiterals, Lib::Stack<Literal*> const& guards, unsigned freshVar);
 
 
-  Option<Substitution> instantiateWithModel(SkolemizedLiterals skolemized);
-  Option<Substitution> instantiateGeneralised(SkolemizedLiterals skolemized, unsigned freshVar);
+  Lib::Option<Substitution> instantiateWithModel(SkolemizedLiterals skolemized);
+  Lib::Option<Substitution> instantiateGeneralised(SkolemizedLiterals skolemized, unsigned freshVar);
 
   Lib::Stack<Literal*> selectTheoryLiterals(Clause* cl);
 
   void originalSelectTheoryLiterals(Clause* cl, Lib::Stack<Literal*>& theoryLits,bool forZ3);
 
-  Lib::Stack<Literal*> applyFilters(Stack<Literal*> theoryLits);
-  void filterUninterpretedPartialFunctionDeep(Stack<Literal*>& theoryLits, Lib::Stack<Literal*>& filteredLits);
+  Lib::Stack<Literal*> applyFilters(Lib::Stack<Literal*> theoryLits);
+  void filterUninterpretedPartialFunctionDeep(Lib::Stack<Literal*>& theoryLits, Lib::Stack<Literal*>& filteredLits);
   
   /** returns the set of literals trivial in cl */
   Lib::Stack<Literal*> selectTrivialLiterals(Clause* cl );

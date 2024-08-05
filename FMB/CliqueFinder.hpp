@@ -26,13 +26,13 @@ namespace FMB {
       //std::cout << "findMaxCliqueSize with " << Ngraph->size() << std::endl;
 
       // at least stores the number of nodes with at least index neighbours
-      DArray<Stack<unsigned>> atleast;
+      Lib::DArray<Lib::Stack<unsigned>> atleast;
       atleast.ensure(Ngraph->size()+1); // the +1 is to protect against a self-loop sneaking in
 
       Lib::DHMap<unsigned,DHSet<unsigned>*>::Iterator miter(*Ngraph);
       while(miter.hasNext()){
         unsigned c;
-        DHSet<unsigned>* nbs;
+        Lib::DHSet<unsigned>* nbs;
         miter.next(c,nbs);
         unsigned size = nbs->size();
         //std::cout << ">> " << c << ": " << size << std::endl;

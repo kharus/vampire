@@ -252,7 +252,7 @@ private:
    * of constants in special cases, such as to indicate that there is
    * no constant.
    */
-  DArray<ConstInfo> _cInfos;
+  Lib::DArray<ConstInfo> _cInfos;
 
   /** Positive literals are made equivalent to this constant */
   unsigned _posLitConst;

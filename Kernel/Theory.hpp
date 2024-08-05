@@ -37,7 +37,7 @@ class RealConstantType;
  * Exception to be thrown when the requested operation cannot be performed,
  * e.g. because of overflow of a native type.
  */
-class ArithmeticException : public Exception {
+class ArithmeticException : public Lib::Exception {
 protected:
   ArithmeticException(const char* msg) : Exception(msg) {}
 };

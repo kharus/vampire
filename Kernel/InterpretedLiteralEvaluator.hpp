@@ -53,8 +53,8 @@ protected:
   Evaluator* getFuncEvaluator(unsigned func);
   Evaluator* getPredEvaluator(unsigned pred);
   EvalStack _evals;
-  DArray<Evaluator*> _funEvaluators;
-  DArray<Evaluator*> _predEvaluators;
+  Lib::DArray<Evaluator*> _funEvaluators;
+  Lib::DArray<Evaluator*> _predEvaluators;
 
   bool balancable(Literal* lit);
   bool balance(Literal* lit,Literal*& res);
@@ -80,7 +80,7 @@ protected:
   
 private:
   template<class Fn>
-  Evaluator* getEvaluator(unsigned func, DArray<Evaluator*>& evaluators, Fn canEval);
+  Evaluator* getEvaluator(unsigned func, Lib::DArray<Evaluator*>& evaluators, Fn canEval);
   const bool _normalize;
 };
 

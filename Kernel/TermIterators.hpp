@@ -228,7 +228,7 @@ protected:
     }
   }
 
-  Recycled<Stack<const TermList*>> _stack;
+  Lib::Recycled<Lib::Stack<const TermList*>> _stack;
   bool _used;
 };
 
@@ -384,10 +384,10 @@ public: //includeSelf for compatibility
     return *_next.take();
   }
 private:
-  Option<TypedTermList> _next;
+  Lib::Option<TypedTermList> _next;
   Lib::Stack<TermList> _stack;
   Lib::Stack<TermList> _sorts;
-  DHSet<unsigned>* _unstableVars;
+  Lib::DHSet<unsigned>* _unstableVars;
 };
 
 class UnstableVarIt

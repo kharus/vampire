@@ -563,7 +563,7 @@ public:
     void handle(LeafData ld, bool doInsert)
     {
       auto norm = Renaming::normalize(ld.key());
-      Recycled<BindingMap> bindings;
+      Lib::Recycled<BindingMap> bindings;
       createBindings(norm, /* reversed */ false,
           [&](int var, auto term) { 
             _nextVar = std::max(_nextVar, var + 1);
@@ -588,8 +588,8 @@ public:
     : public ResultSubstitution 
     {
     public:
-      Recycled<Renaming> _query;
-      Recycled<Renaming> _result;
+      Lib::Recycled<Renaming> _query;
+      Lib::Recycled<Renaming> _result;
       RenamingSubstitution(): _query(), _result() {}
       virtual ~RenamingSubstitution() override {}
       virtual TermList applyToQuery(TermList t) final override { return _query->apply(t); }
@@ -631,7 +631,7 @@ public:
         normQuery = Renaming::normalize(query);
       }
 
-      Recycled<BindingMap> svBindings;
+      Lib::Recycled<BindingMap> svBindings;
       createBindings(normQuery, /* reversed */ false,
           [&](auto v, auto t) { {
             svBindings->insert(v, t);
@@ -754,7 +754,7 @@ public:
       class Substitution;
 
       VarStack _boundVars;
-      DArray<TermList> _specVars;
+      Lib::DArray<TermList> _specVars;
       /**
        * Inheritors must assign the maximal possible number of an ordinary
        * variable that can be bound during the retrievall process.
@@ -1335,7 +1335,7 @@ public:
       RetrievalAlgorithm _algo;
       VarStack _svStack;
       bool _retrieveSubstitution;
-      Option<LDIterator> _leafData;
+      Lib::Option<LDIterator> _leafData;
       Lib::Stack<NodeIterator> _nodeIterators;
       Lib::Stack<BacktrackData> _bdStack;
       bool _normalizationRecording;

@@ -35,7 +35,7 @@ using namespace Kernel;
 class Shuffling
 {
 private:
-  typedef Coproduct<Formula*, Literal*, TermList> Shufflable;
+  typedef Lib::Coproduct<Formula*, Literal*, TermList> Shufflable;
 
   static void shuffleIter(Shufflable sh);
 
@@ -76,7 +76,7 @@ public:
       return;
     }
 
-    DArray<List<T>*> aux(len);
+    Lib::DArray<List<T>*> aux(len);
     unsigned idx = 0;
 
     Lib::List<T>* els = list;
@@ -107,7 +107,7 @@ public:
       return;
     }
 
-    DArray<std::pair<List<T>*,List<S>*>> aux(len);
+    Lib::DArray<std::pair<List<T>*,List<S>*>> aux(len);
     unsigned idx = 0;
 
     Lib::List<T>* els1 = list1;

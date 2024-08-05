@@ -528,11 +528,11 @@ private:
    * This is to support the feature formula_selection of the include
    * directive of the TPTP format.
  */
-  Set<std::string>* _allowedNames;
+  Lib::Set<std::string>* _allowedNames;
   /** stacks of allowed names when include is used */
   Lib::Stack<Set<std::string>*> _allowedNamesStack;
   /** set of files whose inclusion should be ignored */
-  Set<std::string> _forbiddenIncludes;
+  Lib::Set<std::string> _forbiddenIncludes;
   /** the input stream */
   std::istream* _in;
   /** in the case include() is used, previous streams will be saved here */
@@ -545,13 +545,13 @@ private:
    */
   Lib::Stack<std::string> _includeDirectories;
   /** input characters */
-  Array<char> _chars;
+  Lib::Array<char> _chars;
   /** position in the input stream of the 0th character in _chars[] */
   int _gpos;
   /** the position beyond the last read characters */
   int _cend;
   /** tokens currently at work */
-  Array<Token> _tokens;
+  Lib::Array<Token> _tokens;
   /** the position beyond the last processed token */
   int _tend;
   /** line number */
@@ -606,7 +606,7 @@ private:
   /** bindings of variables to sorts */
   Map<unsigned,SList*> _variableSorts;
   /** overflown arithmetical constants for which uninterpreted constants are introduced */
-  Set<std::string> _overflow;
+  Lib::Set<std::string> _overflow;
   /** current color, if the input contains colors */
   Color _currentColor;
   /** a robsubstitution object to be used temporarily that is kept around to safe memory allocation time  */
@@ -817,10 +817,10 @@ private:
 
 public:
   // make the tptp routines for dealing with overflown constants available to other parsers
-  static unsigned addIntegerConstant(const std::string&, Set<std::string>& overflow, bool defaultSort);
-  static unsigned addRationalConstant(const std::string&, Set<std::string>& overflow, bool defaultSort);
-  static unsigned addRealConstant(const std::string&, Set<std::string>& overflow, bool defaultSort);
-  static unsigned addUninterpretedConstant(const std::string& name, Set<std::string>& overflow, bool& added);
+  static unsigned addIntegerConstant(const std::string&, Lib::Set<std::string>& overflow, bool defaultSort);
+  static unsigned addRationalConstant(const std::string&, Lib::Set<std::string>& overflow, bool defaultSort);
+  static unsigned addRealConstant(const std::string&, Lib::Set<std::string>& overflow, bool defaultSort);
+  static unsigned addUninterpretedConstant(const std::string& name, Lib::Set<std::string>& overflow, bool& added);
 
   // also here, simply made public static to share the code with another use site
   static Unit* processClaimFormula(Unit* unit, Formula* f, const std::string& nm);

@@ -129,7 +129,7 @@ template<class C>
 Balancer<C>::Balancer(const Literal& l) : _lit(l) { }
 
 template<class C> BalanceIter<C>::BalanceIter(const Balancer<C>& balancer, bool end) 
-  : _path(Stack<Node>())
+  : _path(Lib::Stack<Node>())
   , _litIndex(end ? 2 : 0)
   , _balancer(balancer)
 {

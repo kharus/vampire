@@ -48,8 +48,8 @@ private:
     Term *term;
     unsigned weight;
   };
-  DHSet<Term *> _defined;
-  Lib::Stack<Stack<Entry>> _entries;
+  Lib::DHSet<Term *> _defined;
+  Lib::Stack<Lib::Stack<Entry>> _entries;
   Lib::Stack<Clause *> _definitions;
 };
 

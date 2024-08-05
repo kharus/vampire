@@ -147,7 +147,7 @@ public:
     return out << "} ";
   }
 
-  virtual void output(std::ostream& out, Option<unsigned> multilineIndent) const override {
+  virtual void output(std::ostream& out, Lib::Option<unsigned> multilineIndent) const override {
     if (multilineIndent) {
       out << multiline(*this, *multilineIndent);
     } else {

@@ -199,7 +199,7 @@ private:
   };
   Map<z3::func_decl, FuncOrPredId , Z3Hash > _fromZ3;
   Map<FuncOrPredId,  z3::func_decl, StlHash> _toZ3;
-  Set<SortId> _createdTermAlgebras;
+  Lib::Set<SortId> _createdTermAlgebras;
 
   z3::func_decl const& findConstructor(Term* t);
   void createTermAlgebra(TermList sort);
@@ -245,7 +245,7 @@ private:
   BiMap<SATLiteral, z3::expr, DefaultHash, Z3Hash> _assumptionLookup;
   const bool _showZ3;
   const bool _unsatCore;
-  Option<std::ofstream> _out;
+  Lib::Option<std::ofstream> _out;
   Map<unsigned, z3::expr> _varNames;
   Map<TermList, z3::expr> _termIndexedConstants;
   Map<Signature::Symbol*, z3::expr> _constantNames;

@@ -326,7 +326,7 @@ private:
   void performInfIntInduction(const InductionContext& context, bool increasing, const TermLiteralClause& bound);
 
   struct DefaultBound { TypedTermList term; };
-  using Bound = Coproduct<TermLiteralClause, DefaultBound>;
+  using Bound = Lib::Coproduct<TermLiteralClause, DefaultBound>;
   void performIntInduction(const InductionContext& context, InductionFormulaIndex::Entry* e, bool increasing, Bound bound1, const TermLiteralClause* optionalBound2);
 
   void performIntInduction(const InductionContext& context, InductionFormulaIndex::Entry* e, bool increasing, TermLiteralClause const& bound1, const TermLiteralClause* optionalBound2)

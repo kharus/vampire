@@ -42,10 +42,10 @@ public:
  // Assume def is an equality literal with a
  // function application on lhs and constant on rhs
  void addConstantDefinition(unsigned f, unsigned res);
- void addFunctionDefinition(unsigned f, const DArray<unsigned>& args, unsigned res); 
+ void addFunctionDefinition(unsigned f, const Lib::DArray<unsigned>& args, unsigned res); 
  // Assume def is non-equality ground literal
  void addPropositionalDefinition(unsigned f, bool res);
- void addPredicateDefinition(unsigned f, const DArray<unsigned>& args, bool res); 
+ void addPredicateDefinition(unsigned f, const Lib::DArray<unsigned>& args, bool res); 
 
  bool isPartial();
 
@@ -67,10 +67,10 @@ private:
  Lib::DHMap<unsigned,unsigned> _functionCoverage;
  Lib::DHMap<unsigned,unsigned> _predicateCoverage;
 
- DArray<unsigned> f_offsets;
- DArray<unsigned> p_offsets;
- DArray<unsigned> f_interpretation;
- DArray<unsigned> p_interpretation; // 0 is undef, 1 false, 2 true
+ Lib::DArray<unsigned> f_offsets;
+ Lib::DArray<unsigned> p_offsets;
+ Lib::DArray<unsigned> f_interpretation;
+ Lib::DArray<unsigned> p_interpretation; // 0 is undef, 1 false, 2 true
 
  Lib::DHMap<unsigned,Term*> _domainConstants;
  Lib::DHMap<Term*,unsigned> _domainConstantsRev;

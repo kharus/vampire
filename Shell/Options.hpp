@@ -80,7 +80,7 @@ static size_t distance(const std::string &s1, const std::string &s2)
   if( m==0 ) return n;
   if( n==0 ) return m;
 
-  DArray<size_t> costs = DArray<size_t>(n+1);
+  Lib::DArray<size_t> costs = Lib::DArray<size_t>(n+1);
 
   for( size_t k=0; k<=n; k++ ) costs[k] = k;
 
@@ -802,7 +802,7 @@ private:
       }
     public:
         OptionChoiceValues() : _names() { };
-        OptionChoiceValues(Stack<std::string> names) : _names(std::move(names))  
+        OptionChoiceValues(Lib::Stack<std::string> names) : _names(std::move(names))  
         {
           check_names_are_short();
         }
@@ -935,7 +935,7 @@ private:
         bool _should_copy;
         bool shouldCopy() const { return _should_copy; }
        
-        typedef std::unique_ptr<DArray<std::string>> stringDArrayUP;
+        typedef std::unique_ptr<Lib::DArray<std::string>> stringDArrayUP;
 
         typedef std::pair<OptionProblemConstraintUP,stringDArrayUP> RandEntry;
  
@@ -945,7 +945,7 @@ private:
         Lib::Stack<Options::Mode> _modes;
 
         stringDArrayUP toArray(std::initializer_list<std::string>& list){
-          DArray<std::string>* array = new DArray<std::string>(list.size());
+          Lib::DArray<std::string>* array = new Lib::DArray<std::string>(list.size());
           unsigned index=0;
           for(typename std::initializer_list<std::string>::iterator it = list.begin();
            it!=list.end();++it){ (*array)[index++] =*it; }

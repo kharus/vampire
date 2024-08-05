@@ -200,7 +200,7 @@ public:
     ASS(!_destroyed);
 
     LExprList* res = 0;
-    LExprList::pushFromIterator(Stack<LExpr*>::TopFirstIterator(_elements), res);
+    LExprList::pushFromIterator(Lib::Stack<LExpr*>::TopFirstIterator(_elements), res);
     return res;
   }
 

@@ -8,8 +8,8 @@
  * and in the source directory
  */
 
-inline DArray<int> predLevels() {
-  DArray<int> out(env.signature->predicates());
+inline Lib::DArray<int> predLevels() {
+  Lib::DArray<int> out(env.signature->predicates());
   out.init(out.size(), 1);
   return out;
 }
@@ -22,7 +22,7 @@ inline KboWeightMap<SigTraits> toWeightMap(unsigned introducedSymbolWeight, KboS
   auto df = KboWeightMap<SigTraits>::dflt();
   df._specialWeights = ws;
 
-  DArray<KboWeight> out(sz);
+  Lib::DArray<KboWeight> out(sz);
   for (unsigned i = 0; i < sz; i++) {
     auto w = xs.getPtr(i);
     out[i] = w == NULL ? df.symbolWeight(i) : *w;

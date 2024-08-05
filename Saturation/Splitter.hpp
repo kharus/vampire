@@ -310,7 +310,7 @@ private:
 
   // clauses we already added to the SAT solver
   // not just optimisation: also prevents the SAT solver oscillating between two models in some cases
-  Set<SATClause *, DerefPtrHash<DefaultHash>> _already_added;
+  Lib::Set<SATClause *, DerefPtrHash<DefaultHash>> _already_added;
 
 public:
   static std::string splPrefix;

@@ -101,9 +101,9 @@ public:
   };
 
 private:
-  static pair<Stack<Instruction>,Instruction::BranchTag> majoChain(const LPO& lpo, TermList tl1, Term* t, unsigned i);
-  static pair<Stack<Instruction>,Instruction::BranchTag> alphaChain(const LPO& lpo, Term* s, unsigned i, TermList tl2);
-  static pair<Stack<Instruction>,Instruction::BranchTag>* createHelper(TermList tl1, TermList tl2, const LPO& lpo);
+  static pair<Lib::Stack<Instruction>,Instruction::BranchTag> majoChain(const LPO& lpo, TermList tl1, Term* t, unsigned i);
+  static pair<Lib::Stack<Instruction>,Instruction::BranchTag> alphaChain(const LPO& lpo, Term* s, unsigned i, TermList tl2);
+  static pair<Lib::Stack<Instruction>,Instruction::BranchTag>* createHelper(TermList tl1, TermList tl2, const LPO& lpo);
 
   const LPO& _lpo;
 

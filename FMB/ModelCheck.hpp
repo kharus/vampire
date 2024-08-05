@@ -44,7 +44,7 @@ static void doCheck(UnitList* units)
   // Currently assume it is called 'finite_domain'
   // TODO search for something of the right shape
   unsigned modelSize = 0;
-  Set<Term*> domainConstants;
+  Lib::Set<Term*> domainConstants;
   {
     UnitList::Iterator uit(units);
     while(uit.hasNext()){
@@ -89,7 +89,7 @@ static void doCheck(UnitList* units)
 
   // number the domain constants
   Lib::DHMap<Term*,unsigned> domainConstantNumber;
-  Set<Term*>::Iterator dit(domainConstants);
+  Lib::Set<Term*>::Iterator dit(domainConstants);
   unsigned count=1;
   while(dit.hasNext()){ 
     Term* con = dit.next();
@@ -160,7 +160,7 @@ static void doCheck(UnitList* units)
 
 private:
 
-static void checkIsDomainLiteral(Literal* l, int& single_var, Set<Term*>& domainConstants)
+static void checkIsDomainLiteral(Literal* l, int& single_var, Lib::Set<Term*>& domainConstants)
 {
             if(!l->isEquality()) USER_ERROR("finite_domain is not a domain axiom");
 
@@ -188,7 +188,7 @@ static void checkIsDomainLiteral(Literal* l, int& single_var, Set<Term*>& domain
 }
 
 static void addDefinition(FiniteModel& model,Literal* lit,bool negated,
-                          Set<Term*>& domainConstants,
+                          Lib::Set<Term*>& domainConstants,
                           Lib::DHMap<Term*,unsigned>& domainConstantNumber)
 {
   if(lit->isEquality()){
@@ -209,7 +209,7 @@ static void addDefinition(FiniteModel& model,Literal* lit,bool negated,
           unsigned arity = env.signature->functionArity(f);
           if(arity==0) model.addConstantDefinition(f,res);
           else{
-            DArray<unsigned> args(arity);
+            Lib::DArray<unsigned> args(arity);
             for(unsigned i=0;i<arity;i++){
               TermList* arg = fun->nthArgument(i);
               if(arg->isVar() || !domainConstants.contains(arg->term()))
@@ -226,7 +226,7 @@ static void addDefinition(FiniteModel& model,Literal* lit,bool negated,
           unsigned arity = env.signature->predicateArity(p);
           if(arity==0) model.addPropositionalDefinition(p,!negated);
           else{
-            DArray<unsigned> args(arity);
+            Lib::DArray<unsigned> args(arity);
             for(unsigned i=0;i<arity;i++){
               TermList* arg = lit->nthArgument(i);
               if(arg->isVar() || !domainConstants.contains(arg->term()))

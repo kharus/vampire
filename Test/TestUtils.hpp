@@ -144,7 +144,7 @@ struct PrettyPrinter<A*> {
 };
 
 template<class A>
-struct PrettyPrinter<Stack<A>> {
+struct PrettyPrinter<Lib::Stack<A>> {
   void operator()(std::ostream& out, Lib::Stack<A> const& self)
   {
     auto iter = self.iterFifo();
@@ -161,7 +161,7 @@ struct PrettyPrinter<Stack<A>> {
 
 template<class A>
 struct PrettyPrinter<Option<A>> {
-  void operator()(std::ostream& out, Option<A> const& self)
+  void operator()(std::ostream& out, Lib::Option<A> const& self)
   { self.isSome() ? out << pretty(self.unwrap()) : out << "none"; }
 };
 
@@ -297,8 +297,8 @@ struct PrettyPrinter<Kernel::TermList>
 // Helper function for permEq -- checks whether lhs is a permutation of
 // rhs via initial permutation perm with elements [0,idx) fixed.
 template<class L1, class L2, class Eq>
-bool __permEq(L1& lhs, L2& rhs, Eq elemEq, DArray<unsigned>& perm, unsigned idx) {
-  auto checkPerm = [] (L1& lhs, L2& rhs, Eq elemEq, DArray<unsigned>& perm, unsigned idx) {
+bool __permEq(L1& lhs, L2& rhs, Eq elemEq, Lib::DArray<unsigned>& perm, unsigned idx) {
+  auto checkPerm = [] (L1& lhs, L2& rhs, Eq elemEq, Lib::DArray<unsigned>& perm, unsigned idx) {
     ASS_EQ(lhs.size(), perm.size());
     ASS_EQ(rhs.size(), perm.size());
 
@@ -335,7 +335,7 @@ template<class L1, class L2, class Eq>
 bool TestUtils::permEq(L1& lhs, L2& rhs, Eq elemEq)
 {
   if (lhs.size() != rhs.size()) return false;
-  DArray<unsigned> perm(lhs.size());
+  Lib::DArray<unsigned> perm(lhs.size());
   for (unsigned i = 0; i < lhs.size(); i++) {
     perm[i] = i;
   }

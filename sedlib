@@ -10,3 +10,17 @@ s/(\s)Comparison(\s)/\1Lib::Comparison\2/g
 s/(\s)DHMap</\1Lib::DHMap</g
 s/(\s)ScopedPtr</\1Lib::ScopedPtr</g
 s/(\s)MaybeBool(\s)/\1Lib::MaybeBool\2/g
+s/(\s)Coproduct</\1Lib::Coproduct</g
+s/(\s)Option</\1Lib::Option</g
+s/(\s)DefaultHash::/\1Lib::DefaultHash::/g
+s/(\s)BitUtils::/\1Lib::BitUtils::/g
+s/(\s)Recycled</\1Lib::Recycled</g
+s/<Stack</<Lib::Stack</g
+s/(\s)HashUtils::/\1Lib::HashUtils::/g
+s/(\s)Vector</\1Lib::Vector</g
+s/(\s)Set</\1Lib::Set</g
+s/(\s)DHSet</\1Lib::DHSet</g
+s/(\s)Array</\1Lib::Array</g
+s/(\s)DArray</\1Lib::DArray</g
+s/\(Stack</\(Lib::Stack</g
+s/<DArray</<Lib::DArray</g

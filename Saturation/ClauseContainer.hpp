@@ -178,7 +178,7 @@ public:
 protected:
   void onLimitsUpdated() override;
 private:
-  Set<Clause*> _clauses;
+  Lib::Set<Clause*> _clauses;
   // const Shell::Options& _opt;
 };
 

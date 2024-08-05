@@ -40,7 +40,7 @@ public:
    */
   TermList elimLambda(Term* lambdaTerm);
   TermList elimLambda(TermList term);
-  TermList elimLambda(Stack<int>& vars, TermStack& sorts, TermList body, TermList sort);
+  TermList elimLambda(Lib::Stack<int>& vars, TermStack& sorts, TermList body, TermList sort);
   TermList elimLambda(int var, TermList varSort, TermList body, TermList sort);
   TermList elimLambda(Formula*);
   
@@ -74,7 +74,7 @@ private:
   TermList createSCorBTerm(TermList arg1, TermList arg1sort, 
         TermList arg2, TermList arg2sort, Signature::Combinator comb);
   
-  void process(Stack<int> &vars, TermStack &varSorts, 
+  void process(Lib::Stack<int> &vars, TermStack &varSorts, 
                TermStack &toBeProcessed, TermStack &sorts);
   
   /** Lexical scope of the current unit */

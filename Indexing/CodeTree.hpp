@@ -86,7 +86,7 @@ public:
     TermList bindings[1];
 
   private:
-    void init(ILStruct* ils, unsigned liIndex, DArray<TermList>& bindingArray);
+    void init(ILStruct* ils, unsigned liIndex, Lib::DArray<TermList>& bindingArray);
 
     static MatchInfo* alloc(unsigned bindCnt);
 
@@ -139,7 +139,7 @@ public:
     unsigned timestamp;
     //from here on, the values are valid only if the timestamp is current
 
-    void addMatch(unsigned liIndex, DArray<TermList>& bindingArray);
+    void addMatch(unsigned liIndex, Lib::DArray<TermList>& bindingArray);
     void deleteMatch(unsigned matchIndex);
     MatchInfo*& getMatch(unsigned matchIndex);
 
@@ -150,7 +150,7 @@ public:
     bool finished;
     bool noNonOppositeMatches;
   private:
-    DArray<MatchInfo*> matches;
+    Lib::DArray<MatchInfo*> matches;
   };
 
   enum Instruction
@@ -245,7 +245,7 @@ public:
     template<class T> T* _data() const
     { return reinterpret_cast<T*>(BitUtils::getBits<DATA_BITS_START, DATA_BITS_END>(this->_content)); }
     template<class T> void _setData(T* data)
-    { BitUtils::setBits<DATA_BITS_START, DATA_BITS_END>(this->_content, reinterpret_cast<uint64_t>(data)); }
+    { Lib::BitUtils::setBits<DATA_BITS_START, DATA_BITS_END>(this->_content, reinterpret_cast<uint64_t>(data)); }
     // end bitfield
 
   private:
@@ -324,7 +324,7 @@ public:
   using FnSearchStruct = SearchStructImpl<SearchStruct::FN_STRUCT>;
   using GroundTermSearchStruct = SearchStructImpl<SearchStruct::GROUND_TERM_STRUCT>;
 
-  typedef Vector<CodeOp> CodeBlock;
+  typedef Lib::Vector<CodeOp> CodeBlock;
   typedef Lib::Stack<CodeOp> CodeStack;
 
   struct BaseMatcher
@@ -397,7 +397,7 @@ public:
 
   //////////// removal //////////////
 
-  void optimizeMemoryAfterRemoval(Stack<CodeOp*>* firstsInBlocks, CodeOp* removedOp);
+  void optimizeMemoryAfterRemoval(Lib::Stack<CodeOp*>* firstsInBlocks, CodeOp* removedOp);
 
   struct RemovingMatcher
   : public BaseMatcher
@@ -434,7 +434,7 @@ public:
     };
 
     /** Variable bindings */
-    DArray<unsigned> bindings;
+    Lib::DArray<unsigned> bindings;
 
     Lib::Stack<BTPoint> btStack;
     Lib::Stack<CodeOp*>* firstsInBlocks;
@@ -468,7 +468,7 @@ public:
   };
 
   typedef Lib::Stack<BTPoint> BTStack;
-  typedef DArray<TermList> BindingArray;
+  typedef Lib::DArray<TermList> BindingArray;
 
   /**
    * Context for finding matches of literals

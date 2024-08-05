@@ -125,8 +125,8 @@ protected:
 
     static bool combSup = env.options->combinatorySup();
 
-    static DArray<Literal*> litArr(64);
-    static Set<unsigned> maxTermHeads;
+    static Lib::DArray<Literal*> litArr(64);
+    static Lib::Set<unsigned> maxTermHeads;
     maxTermHeads.reset();
     litArr.initFromArray(eligible,*c);
     litArr.sortInversed(_comp);
@@ -190,7 +190,7 @@ protected:
     } else if(!singleSelected) {
       //select multiple maximal literals
       static Lib::Stack<Literal*> replaced(16);
-      Set<Literal*> maxSet;
+      Lib::Set<Literal*> maxSet;
       unsigned selCnt=0;
 
       for(LiteralList* mit=maximals; mit; mit=mit->tail()) {
@@ -230,9 +230,9 @@ protected:
     ensureSomeColoredSelected(c, eligible);
   }
 
-  void fillMaximals(LiteralList*& maximals, DArray<Literal*>& litArr)
+  void fillMaximals(LiteralList*& maximals, Lib::DArray<Literal*>& litArr)
   {
-    DArray<Literal*>::ReversedIterator rlit(litArr);
+    Lib::DArray<Literal*>::ReversedIterator rlit(litArr);
     while(rlit.hasNext()) {
       Literal* lit=rlit.next();
       LiteralList::push(lit,maximals);

@@ -178,7 +178,7 @@ public:
   /** set the content manually - hazardous, such terms should then only be used as integers */
   void setContent(uint64_t content) { _content = content; }
   /** default hash is to hash the content */
-  unsigned defaultHash() const { return DefaultHash::hash(content()); }
+  unsigned defaultHash() const { return Lib::DefaultHash::hash(content()); }
   unsigned defaultHash2() const { return content(); }
 
   std::string toString(bool topLevel = true) const;
@@ -198,7 +198,7 @@ public:
 
   /** the top of a term is either a function symbol or a variable id. this class is model this */
   class Top {
-    using Inner = Coproduct<unsigned, SymbolId>;
+    using Inner = Lib::Coproduct<unsigned, SymbolId>;
     static constexpr unsigned VAR = 0;
     static constexpr unsigned FUN = 1;
     Inner _inner;
@@ -209,8 +209,8 @@ public:
     // static Top functor(unsigned f) { return Top(Inner::variant<FUN>(f)); }
     template<class T>
     static Top functor(T const* t) { return Top(Inner::variant<FUN>({ t->functor(), t->kind(), })); }
-    Option<unsigned> var()     const { return _inner.as<VAR>().toOwned(); }
-    Option<SymbolId> functor() const { return _inner.as<FUN>().toOwned(); }
+    Lib::Option<unsigned> var()     const { return _inner.as<VAR>().toOwned(); }
+    Lib::Option<SymbolId> functor() const { return _inner.as<FUN>().toOwned(); }
     Lib::Comparison compare(Top const& other) const 
     { return _inner.compare(other._inner); }
     IMPL_COMPARISONS_FROM_COMPARE(Top);
@@ -482,7 +482,7 @@ public:
   template<class Iter>
   static Term* createFromIter(unsigned fn, Iter args) 
   { 
-    Recycled<Stack<TermList>> stack;
+    Lib::Recycled<Lib::Stack<TermList>> stack;
     stack->loadFromIterator(args);
     return Term::create(fn, *stack); 
   }
@@ -613,15 +613,16 @@ public:
 
   template<class GetArg>
   static unsigned termHash(unsigned functor, GetArg getArg, unsigned arity) {
-    return DefaultHash::hashIter(
+    using namespace Lib;
+    return Lib::DefaultHash::hashIter(
         range(0, arity).map([&](auto i) {
           TermList t = getArg(i);
-          return DefaultHash::hashBytes(
+          return Lib::DefaultHash::hashBytes(
               reinterpret_cast<const unsigned char*>(&t),
               sizeof(TermList)
               );
           }),
-        DefaultHash::hash(functor));
+        Lib::DefaultHash::hash(functor));
   }
 
   /**
@@ -1110,7 +1111,7 @@ public:
   }
 
   template<class GetArg>
-  static unsigned literalEquals(const Literal* lit, unsigned functor, bool polarity, GetArg getArg, unsigned arity, Option<TermList> twoVarEqSort, bool commutative) {
+  static unsigned literalEquals(const Literal* lit, unsigned functor, bool polarity, GetArg getArg, unsigned arity, Lib::Option<TermList> twoVarEqSort, bool commutative) {
     if (functor != lit->functor() || polarity != lit->polarity()) return false;
 
     if (commutative) {
@@ -1125,27 +1126,27 @@ public:
 
     } else {
       ASS(twoVarEqSort.isNone())
-      return range(0, arity).all([&](auto i) { return *lit->nthArgument(i) == getArg(i); });
+      return Lib::range(0, arity).all([&](auto i) { return *lit->nthArgument(i) == getArg(i); });
     }
   }
 
   static bool rightArgOrder(TermList const& lhs, TermList const& rhs);
 
   template<class GetArg>
-  static unsigned literalHash(unsigned functor, bool polarity, GetArg getArg, unsigned arity, Option<TermList> twoVarEqSort, bool commutative) {
+  static unsigned literalHash(unsigned functor, bool polarity, GetArg getArg, unsigned arity, Lib::Option<TermList> twoVarEqSort, bool commutative) {
     if (commutative) {
       ASS_EQ(arity, 2)
       ASS(rightArgOrder(getArg(0), getArg(1)))
-      return HashUtils::combine(
-          DefaultHash::hash(polarity),
-          DefaultHash::hash(functor),
-          DefaultHash::hash(twoVarEqSort),
+      return Lib::HashUtils::combine(
+          Lib::DefaultHash::hash(polarity),
+          Lib::DefaultHash::hash(functor),
+          Lib::DefaultHash::hash(twoVarEqSort),
           getArg(0).defaultHash(),
           getArg(1).defaultHash());
     } else {
       ASS(twoVarEqSort.isNone())
-      return HashUtils::combine(
-          DefaultHash::hash(polarity),
+      return Lib::HashUtils::combine(
+          Lib::DefaultHash::hash(polarity),
           Term::termHash(functor, getArg, arity));
     }
   }
@@ -1231,7 +1232,7 @@ public:
 
 private:
   template<class GetArg>
-  static Literal* create(unsigned predicate, unsigned arity, bool polarity, bool commutative, GetArg args, Option<TermList> twoVarEqSort = Option<TermList>());
+  static Literal* create(unsigned predicate, unsigned arity, bool polarity, bool commutative, GetArg args, Lib::Option<TermList> twoVarEqSort = Lib::Option<TermList>());
 }; // class Literal
 
 // TODO used in some proofExtra output

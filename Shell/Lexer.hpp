@@ -68,7 +68,7 @@ protected:
   /** Last read character */
   int  _lastCharacter;
   /** Character buffer, used to store currently read token */
-  Array<char> _charBuffer;
+  Lib::Array<char> _charBuffer;
   /** cursor to the current character */
   int _charCursor;
   /** the input stream */

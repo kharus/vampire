@@ -55,8 +55,8 @@ struct VarSpec
   auto asTuple() const { return std::tie(var, index); }
   IMPL_COMPARISONS_FROM_TUPLE(VarSpec)
 
-  unsigned defaultHash () const { return HashUtils::combine(var  , index); }
-  unsigned defaultHash2() const { return HashUtils::combine(index, var  ); }
+  unsigned defaultHash () const { return Lib::HashUtils::combine(var  , index); }
+  unsigned defaultHash2() const { return Lib::HashUtils::combine(index, var  ); }
 };
 
 struct TermSpec {
@@ -160,7 +160,7 @@ struct TermSpec {
 
   template<class Deref>
   static int compare(TermSpec const& lhs, TermSpec const& rhs, Deref deref) {
-    Recycled<Stack<std::pair<TermSpec, TermSpec>>> todo;
+    Lib::Recycled<Lib::Stack<std::pair<TermSpec, TermSpec>>> todo;
     todo->push(std::make_pair(lhs,rhs));
     while (todo->isNonEmpty()) {
       auto lhs_ = std::move(todo->top().first);
@@ -218,7 +218,7 @@ public:
   OnlyMemorizeNonVar& operator=(OnlyMemorizeNonVar &&) = default;
   OnlyMemorizeNonVar() : _memo() {}
 
-  auto memoKey(AutoDerefTermSpec const& arg) -> Option<TermSpec>
+  auto memoKey(AutoDerefTermSpec const& arg) -> Lib::Option<TermSpec>
   { 
     if (arg.term.term.isTerm()) {
       return some(arg.term);
@@ -227,12 +227,12 @@ public:
     }
   }
 
-  Option<Result> get(AutoDerefTermSpec const& arg)
+  Lib::Option<Result> get(AutoDerefTermSpec const& arg)
   { 
     auto key = memoKey(arg);
     return key.isSome()
        ? _memo.tryGet(*key).toOwned()
-       : Option<Result>(); 
+       : Lib::Option<Result>(); 
   }
 
   template<class Init> Result getOrInit(AutoDerefTermSpec const& orig, Init init)
@@ -260,7 +260,7 @@ public:
   : _t1(std::move(t1)), _t2(std::move(t2)), _sort(std::move(sort))
   {}
 
-  Option<Literal*> toLiteral(RobSubstitution& s);
+  Lib::Option<Literal*> toLiteral(RobSubstitution& s);
 
   TermSpec const& lhs() const { return _t1; }
   TermSpec const& rhs() const { return _t2; }
@@ -380,7 +380,7 @@ public:
   TermList apply(TermList t, int index) const;
   Literal* apply(Literal* lit, int index) const;
   TypedTermList apply(TypedTermList t, int index) const { return TypedTermList(apply(TermList(t), index), apply(t.sort(), index)); }
-  Lib::Stack<Literal*> apply(Stack<Literal*> cl, int index) const;
+  Lib::Stack<Literal*> apply(Lib::Stack<Literal*> cl, int index) const;
   size_t getApplicationResultWeight(TermList t, int index) const;
   size_t getApplicationResultWeight(Literal* lit, int index) const;
 

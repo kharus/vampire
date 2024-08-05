@@ -52,7 +52,7 @@ public:
   unsigned defaultHash() const {
     unsigned hash = 0;
     for(unsigned i = 0; i < length(); i++)
-      hash ^= DefaultHash::hash(_literals[i]);
+      hash ^= Lib::DefaultHash::hash(_literals[i]);
     return hash;
   }
 

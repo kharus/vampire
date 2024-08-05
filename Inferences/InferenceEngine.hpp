@@ -81,7 +81,7 @@ public:
    * machinery for unit testing a single rule if that rule uses a term index. In order to circumvent this
    * issue we add this method in debug mode.
    * */
-  virtual void setTestIndices(Stack<Indexing::Index*> const&) {}
+  virtual void setTestIndices(Lib::Stack<Indexing::Index*> const&) {}
 #endif // VDEBUG
 protected:
   SaturationAlgorithm* _salg;

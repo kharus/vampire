@@ -215,7 +215,7 @@ public:
   template<class Subst>
   static Literal* applyToLiteral(Literal* lit, Subst subst)
   {
-    static DArray<TermList> ts(32);
+    static Lib::DArray<TermList> ts(32);
 
     int arity = lit->arity();
     ts.ensure(arity);
@@ -386,7 +386,7 @@ Term* SubstHelper::applyImpl(Term* trm, Applicator& applicator, bool noSharing)
       // TODO in principle this should not be so difficult to handle
       ASSERTION_VIOLATION;
     case SpecialFunctor::MATCH: {
-      DArray<TermList> terms(trm->arity());
+      Lib::DArray<TermList> terms(trm->arity());
       for (unsigned i = 0; i < trm->arity(); i++) {
         terms[i] = applyImpl<ProcessSpecVars>(*trm->nthArgument(i), applicator, noSharing);
       }
@@ -396,10 +396,10 @@ Term* SubstHelper::applyImpl(Term* trm, Applicator& applicator, bool noSharing)
     ASSERTION_VIOLATION;
   }
 
-  Recycled<Stack<TermList*>> toDo;
-  Recycled<Stack<Term*>> terms;
-  Recycled<Stack<bool>> modified;
-  Recycled<Stack<TermList>> args;
+  Lib::Recycled<Lib::Stack<TermList*>> toDo;
+  Lib::Recycled<Lib::Stack<Term*>> terms;
+  Lib::Recycled<Lib::Stack<bool>> modified;
+  Lib::Recycled<Lib::Stack<TermList>> args;
 
   modified->push(false);
   toDo->push(trm->args());

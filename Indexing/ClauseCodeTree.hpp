@@ -133,7 +133,7 @@ public:
      * [if sres] Ground literals negated
      * [if sres] Non-ground literals negated
      */
-    DArray<LitInfo> lInfos;
+    Lib::DArray<LitInfo> lInfos;
 
     Lib::Stack<Recycled<LiteralMatcher, NoReset>> lms;
   };

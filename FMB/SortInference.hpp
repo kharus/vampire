@@ -32,28 +32,28 @@ using namespace Shell;
 
 struct SortedSignature{
     unsigned sorts;
-    DArray<Stack<unsigned>> sortedConstants;
-    DArray<Stack<unsigned>> sortedFunctions;
+    Lib::DArray<Lib::Stack<unsigned>> sortedConstants;
+    Lib::DArray<Lib::Stack<unsigned>> sortedFunctions;
 
     // for f(x,y) = z this will store sort(z),sort(x),sort(y)
-    DArray<DArray<unsigned>> functionSignatures;
+    Lib::DArray<Lib::DArray<unsigned>> functionSignatures;
     // for p(x,y) this will store sort(x),sort(y)
-    DArray<DArray<unsigned>> predicateSignatures;
+    Lib::DArray<Lib::DArray<unsigned>> predicateSignatures;
 
     // gives the maximum size of a sort
-    DArray<unsigned> sortBounds;
+    Lib::DArray<unsigned> sortBounds;
     
     // the number of distinct sorts that might have different sizes
     unsigned distinctSorts;
 
     // for each distinct sort gives a sort that can be used for variable equalities that are otherwise unsorted
     // some of these will not be used, we could detect these cases... but it is not interesting
-    DArray<unsigned> varEqSorts;
+    Lib::DArray<unsigned> varEqSorts;
 
     // the distinct parents of sorts
     // has length sorts with contents from distinctSorts
     // invariant: all monotonic sorts will have parent 0, the first non-monotonic sort
-    DArray<unsigned> parents;
+    Lib::DArray<unsigned> parents;
 
     // Map the distinct sorts back to their vampire parents
     // A distinct sort may merge multipe vampire sorts (due to monotonicity)
@@ -75,8 +75,8 @@ struct SortedSignature{
 class SortInference {
 public:
   SortInference(ClauseList* clauses,
-                DArray<unsigned> del_f,
-                DArray<unsigned> del_p,
+                Lib::DArray<unsigned> del_f,
+                Lib::DArray<unsigned> del_p,
                 Lib::Stack<DHSet<unsigned>*> equiv_v_sorts,
                 Lib::Stack<std::pair<unsigned,unsigned>>& cons) :
                 _clauses(clauses), _del_f(del_f), _del_p(del_p),
@@ -120,13 +120,13 @@ private:
 
   unsigned _distinctSorts;
   unsigned _collapsed;
-  DHSet<unsigned> monotonicVampireSorts;
+  Lib::DHSet<unsigned> monotonicVampireSorts;
   Lib::ZIArray<unsigned> posEqualitiesOnSort;
 
   SortedSignature* _sig;
   ClauseList* _clauses;
-  DArray<unsigned> _del_f;
-  DArray<unsigned> _del_p;
+  Lib::DArray<unsigned> _del_f;
+  Lib::DArray<unsigned> _del_p;
   Lib::Stack<DHSet<unsigned>*> _equiv_v_sorts;
   IntUnionFind _equiv_vs;
 

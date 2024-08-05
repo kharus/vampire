@@ -82,7 +82,7 @@ class TestCase
   using Clause = Kernel::Clause;
   using OptionMap = Lib::Stack<std::pair<std::string,std::string>>;
   using Condition = std::function<bool(std::string&, std::string&)>;
-  Option<SimplifyingGeneratingInference*> _rule;
+  Lib::Option<SimplifyingGeneratingInference*> _rule;
   Clause* _input;
   Lib::Stack<ClausePattern> _expected;
   Lib::Stack<Clause*> _context;
@@ -117,14 +117,14 @@ public:
 
   BUILDER_METHOD(Clause*, input)
   BUILDER_METHOD(ClauseStack, context)
-  BUILDER_METHOD(Stack<ClausePattern>, expected)
+  BUILDER_METHOD(Lib::Stack<ClausePattern>, expected)
   BUILDER_METHOD(bool, premiseRedundant)
   BUILDER_METHOD(SimplifyingGeneratingInference*, rule)
-  BUILDER_METHOD(Stack<Indexing::Index*>, indices)
+  BUILDER_METHOD(Lib::Stack<Indexing::Index*>, indices)
   BUILDER_METHOD(std::function<void(SaturationAlgorithm&)>, setup)
   BUILDER_METHOD(OptionMap, options)
-  BUILDER_METHOD(Stack<Condition>, preConditions)
-  BUILDER_METHOD(Stack<Condition>, postConditions)
+  BUILDER_METHOD(Lib::Stack<Condition>, preConditions)
+  BUILDER_METHOD(Lib::Stack<Condition>, postConditions)
 
   template<class Rule>
   void run(GenerationTester<Rule>& simpl) {

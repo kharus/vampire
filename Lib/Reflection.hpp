@@ -42,7 +42,7 @@
 
 #define __IMPL_COMPARISONS_FROM_COMPARE(Class, op, ...)                                   \
   friend bool operator op(Class const& l, Class const& r) {                               \
-    switch (DefaultComparator::compare(l,r)) {                                            \
+    switch (Lib::DefaultComparator::compare(l,r)) {                                            \
       __VA_ARGS__ return true;                                                            \
       default:    return false;                                                           \
     }                                                                                     \
@@ -50,16 +50,16 @@
 
 #define IMPL_EQ_FROM_COMPARE(Class)                                                       \
   friend bool operator==(Class const& l, Class const& r)                                  \
-  { return DefaultComparator::compare(l,r) == Comparison::EQUAL; }                        \
+  { return Lib::DefaultComparator::compare(l,r) == Lib::Comparison::EQUAL; }                        \
                                                                                           \
   friend bool operator!=(Class const& l, Class const& r)                                  \
   { return !(l == r); }                                                                   \
 
 #define IMPL_COMPARISONS_FROM_COMPARE(Class)                                              \
-    __IMPL_COMPARISONS_FROM_COMPARE(Class, > , case GREATER:             )                \
-    __IMPL_COMPARISONS_FROM_COMPARE(Class, < , case LESS   :             )                \
-    __IMPL_COMPARISONS_FROM_COMPARE(Class, >=, case GREATER: case EQUAL: )                \
-    __IMPL_COMPARISONS_FROM_COMPARE(Class, <=, case LESS   : case EQUAL: )                \
+    __IMPL_COMPARISONS_FROM_COMPARE(Class, > , case Lib::Comparison::GREATER:             )                \
+    __IMPL_COMPARISONS_FROM_COMPARE(Class, < , case Lib::Comparison::LESS   :             )                \
+    __IMPL_COMPARISONS_FROM_COMPARE(Class, >=, case Lib::Comparison::GREATER: case Lib::Comparison::EQUAL: )                \
+    __IMPL_COMPARISONS_FROM_COMPARE(Class, <=, case Lib::Comparison::LESS   : case Lib::Comparison::EQUAL: )                \
 
 
 #define IMPL_COMPARISONS_FROM_LESS_AND_EQUALS(Class)                                      \

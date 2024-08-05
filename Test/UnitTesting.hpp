@@ -86,8 +86,8 @@ public:
 
   bool add(std::string const& testUnit, TestUnit::Test test);
   TestUnit* findUnit(std::string const& id);
-  bool listTests(Stack<std::string>const& args);
-  bool run(Stack<std::string>const& args);
+  bool listTests(Lib::Stack<std::string>const& args);
+  bool run(Lib::Stack<std::string>const& args);
   bool runUnit(std::string const& args);
   bool runTest(std::string const& unit, std::string const& testCase);
 };

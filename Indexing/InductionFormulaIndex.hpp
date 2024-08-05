@@ -32,7 +32,7 @@ namespace Inferences {
 namespace Indexing {
 
 using namespace Kernel;
-using Key = std::pair<Stack<LiteralStack>,std::pair<Literal*,Literal*>>;
+using Key = std::pair<Lib::Stack<LiteralStack>,std::pair<Literal*,Literal*>>;
 
 class InductionFormulaIndex
 {

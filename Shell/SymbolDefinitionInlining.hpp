@@ -52,7 +52,7 @@ class SymbolDefinitionInlining {
     void collectBoundVariables(Term*);
     void collectBoundVariables(Formula*);
 
-    Set<Formula*> _superformulas;
+    Lib::Set<Formula*> _superformulas;
 };
 
 #endif // __SymbolDefinitionInlining__

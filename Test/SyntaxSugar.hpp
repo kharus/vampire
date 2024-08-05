@@ -528,7 +528,7 @@ __IMPL_NUMBER_BIN_FUN(operator>=, Lit)
 inline SortSugar arrow(TermList args, TermList res) 
 { return AtomicSort::arrowSort({ args }, res);      }
 
-inline SortSugar arrow(Stack<TermList> args, TermList res) 
+inline SortSugar arrow(Lib::Stack<TermList> args, TermList res) 
 { return AtomicSort::arrowSort(args, res);      }
   
 class FuncSugar {
@@ -674,7 +674,7 @@ public:
   unsigned functor() const { return _functor; }
 };
 
-inline Clause* clause(Stack<Lit> ls) { 
+inline Clause* clause(Lib::Stack<Lit> ls) { 
   static Inference testInf = Kernel::NonspecificInference0(UnitInputType::ASSUMPTION, InferenceRule::INPUT); 
 
   std::stable_sort(ls.begin(), ls.end(), [](Lit const& l1, Lit const& l2){ return l1.selected() > l2.selected(); });
@@ -691,7 +691,7 @@ inline Clause* clause(Stack<Lit> ls) {
 }
 
 inline Clause* clause(std::initializer_list<Lit> ls) 
-{ return clause(Stack<Lit>(ls)); }
+{ return clause(Lib::Stack<Lit>(ls)); }
 
 inline Lib::Stack<Clause*> clauses(std::initializer_list<std::initializer_list<Lit>> cls) { 
   auto out = Lib::Stack<Clause*>();
@@ -725,7 +725,7 @@ inline void createTermAlgebra(SortSugar sort, std::initializer_list<FuncSugar> f
       return d;
     };
 
-    Array<unsigned> dtors(f.arity()); 
+    Lib::Array<unsigned> dtors(f.arity()); 
     for (unsigned i = 0; i < f.arity(); i++) {
       dtors[i] = dtor(i).functor();
     }

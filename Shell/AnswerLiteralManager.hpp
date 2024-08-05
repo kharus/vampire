@@ -144,7 +144,7 @@ protected:
   void recordSkolemBinding(Term*,unsigned,std::string) override;
 
 private:
-  void getNeededUnits(Clause* refutation, ClauseStack& premiseClauses, Lib::Stack<Unit*>& conjectures, DHSet<Unit*>& allProofUnits);
+  void getNeededUnits(Clause* refutation, ClauseStack& premiseClauses, Lib::Stack<Unit*>& conjectures, Lib::DHSet<Unit*>& allProofUnits);
 
   class ConjectureSkolemReplacement : public TermTransformer {
    public:

@@ -53,11 +53,11 @@ private:
   typedef Lib::List<VarWithUsageInfo> VarUsageTrackingList;
   /** Renaming stores bindings for free and bound variables */
   class Renaming
-    : public Array<VarUsageTrackingList*>
+    : public Lib::Array<VarUsageTrackingList*>
   {
   public:
     Renaming()
-      : Array<VarUsageTrackingList*>(15),
+      : Lib::Array<VarUsageTrackingList*>(15),
 	_nextVar(0)
     {
       fillInterval(0,15);

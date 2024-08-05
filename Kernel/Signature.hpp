@@ -551,7 +551,7 @@ class Signature
     return _choiceSymbols.contains(fun);
   }
 
-  DHSet<unsigned>* getChoiceOperators(){
+  Lib::DHSet<unsigned>* getChoiceOperators(){
     return &_choiceSymbols;
   }
 
@@ -645,7 +645,7 @@ class Signature
   unsigned getFunctionNumber(const std::string& name, unsigned arity) const;
   unsigned getPredicateNumber(const std::string& name, unsigned arity) const;
 
-  typedef SmartPtr<Stack<unsigned>> DistinctGroupMembers;
+  typedef SmartPtr<Lib::Stack<unsigned>> DistinctGroupMembers;
   
   Unit* getDistinctGroupPremise(unsigned group);
   unsigned createDistinctGroup(Unit* premise = 0);
@@ -930,7 +930,7 @@ private:
   /** Stack of type constructor symbols */  
   Lib::Stack<Symbol*> _typeCons;
 
-  DHSet<unsigned> _choiceSymbols;
+  Lib::DHSet<unsigned> _choiceSymbols;
   /**
    * Map from std::string "name_arity" to their numbers
    *
@@ -982,7 +982,7 @@ private:
   unsigned _arrayCon;
   unsigned _arrowCon;
   unsigned _appFun;
-  DHSet<unsigned> _fnDefPreds;
+  Lib::DHSet<unsigned> _fnDefPreds;
   Lib::DHMap<unsigned,unsigned> _boolDefPreds;
 
   /**

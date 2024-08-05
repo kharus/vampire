@@ -52,7 +52,7 @@ protected:
   void initGeneralityFunction(UnitList* units);
 
   /** Stores symbol generality */
-  DArray<unsigned> _gen;
+  Lib::DArray<unsigned> _gen;
 
   SineSymbolExtractor _symExtr;
 };
@@ -72,7 +72,7 @@ public:
   void perform(Problem& prb);
 
   ~SineSelector() {
-    DArray<UnitList*>::Iterator it(_def);
+    Lib::DArray<UnitList*>::Iterator it(_def);
     while (it.hasNext()) {
       UnitList::destroy(it.next());
     }
@@ -91,7 +91,7 @@ private:
   bool _justForSineLevels;
 
   /** Stored the D-relation */
-  DArray<UnitList*> _def;
+  Lib::DArray<UnitList*> _def;
 
   /**
    * Stored formulas that don't contain any symbols
@@ -143,7 +143,7 @@ private:
   typedef Lib::List<DEntry> DEntryList;
 
   /** Stored the D-relation */
-  DArray<DEntryList*> _def;
+  Lib::DArray<DEntryList*> _def;
 
   /**
    * Stored formulas that don't contain any symbols

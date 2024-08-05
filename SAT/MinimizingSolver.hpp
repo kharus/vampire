@@ -110,7 +110,7 @@ private:
    * We define a literal "corresponding to variable var in _asgn"
    * as SATLiteral(var,_asgn[var]). Used below.
    */
-  DArray<bool> _asgn;
+  Lib::DArray<bool> _asgn;
 
   /**
    * Array of clauses made satisfied by giving up the don't-care value
@@ -118,9 +118,9 @@ private:
    *
    * The length of the array is _varCnt.
    */
-  DArray<SATClauseStack> _watcher;
+  Lib::DArray<SATClauseStack> _watcher;
 
-  typedef DArray<unsigned> CntArray;
+  typedef Lib::DArray<unsigned> CntArray;
   
   /**
    * Number of unsatisfied clauses for each literal
@@ -161,14 +161,14 @@ private:
    *
    * The length of the array is _varCnt.
    */
-  DArray<SATClauseStack> _clIdx;
+  Lib::DArray<SATClauseStack> _clIdx;
 
   /**
    * A set of satisfied clauses. To correctly maintain
    * _unsClCnt, when there is more than one way to make clause
    * satisfied.
    */  
-  DHSet<SATClause*> _satisfiedClauses;
+  Lib::DHSet<SATClause*> _satisfiedClauses;
   
 };
 

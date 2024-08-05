@@ -53,7 +53,7 @@ private:
   [[noreturn]] void runSlice(Options& strategyOpt);
 
 #if VDEBUG
-  DHSet<pid_t> childIds;
+  Lib::DHSet<pid_t> childIds;
 #endif
   unsigned _numWorkers;
   // file that will contain a proof

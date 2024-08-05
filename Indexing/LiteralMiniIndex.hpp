@@ -53,7 +53,7 @@ private:
   static bool literalHeaderComparator(const Entry& e1, const Entry& e2);
 
   unsigned _cnt = 0;
-  DArray<Entry> _entries;
+  Lib::DArray<Entry> _entries;
 
   struct IteratorBase
   {

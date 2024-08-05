@@ -46,12 +46,12 @@ public:
         KboWeightMap<FuncSigTraits> symbolWeights, 
 
         // precedence ordering params
-        DArray<int> funcPrec, 
-        DArray<int> typeConPrec,
+        Lib::DArray<int> funcPrec, 
+        Lib::DArray<int> typeConPrec,
         // pred prec and pred levels are useless
         // as in higher-order we treat all symbol as function symbols (or type cons)
-        DArray<int> predPrec, 
-        DArray<int> predLevels,
+        Lib::DArray<int> predPrec, 
+        Lib::DArray<int> predLevels,
 
         // other
         bool reverseLCM);
@@ -70,7 +70,7 @@ public:
   static TermList reduce(TermStack& args, TermList& head);
 
 protected:
-  typedef Lib::DHMap<unsigned, DArray<DArray<unsigned>*>*> VarOccMap;
+  typedef Lib::DHMap<unsigned, Lib::DArray<Lib::DArray<unsigned>*>*> VarOccMap;
 
   //Result comparePredicates(Literal* l1, Literal* l2) const override;
 

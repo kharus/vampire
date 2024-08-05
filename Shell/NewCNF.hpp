@@ -146,7 +146,7 @@ private:
     BindingList* foolBindings;
     // we could/should carry bindings on the GenLits-level; but GenClause seems sufficient as long as we are rectified
 
-    DArray<GenLit> _literals; // TODO: remove the extra indirection and allocate inside GenClause
+    Lib::DArray<GenLit> _literals; // TODO: remove the extra indirection and allocate inside GenClause
     unsigned _size;
 
     struct Iterator {
@@ -163,7 +163,7 @@ private:
       }
 
       private:
-        DArray<GenLit>::Iterator _iter;
+        Lib::DArray<GenLit>::Iterator _iter;
         unsigned _left;
     };
 
