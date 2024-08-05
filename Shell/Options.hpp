@@ -959,6 +959,7 @@ private:
     struct AbstractOptionValueCompatator{
       Lib::Comparison compare(AbstractOptionValue* o1, AbstractOptionValue* o2)
       {
+        using namespace Lib;
         int value = strcmp(o1->longName.c_str(),o2->longName.c_str());
         return value < 0 ? LESS : (value==0 ? EQUAL : GREATER);
       }
@@ -1147,7 +1148,7 @@ private:
         IntOptionValue(){}
         IntOptionValue(std::string l,std::string s, int d) : OptionValue(l,s,d){}
         bool setValue(const std::string& value){
-            return Int::stringToInt(value.c_str(),actualValue);
+            return Lib::Int::stringToInt(value.c_str(),actualValue);
         }
         std::string getStringOfValue(int value) const{ return Lib::Int::toString(value); }
     };
@@ -1157,7 +1158,7 @@ private:
         UnsignedOptionValue(std::string l,std::string s, unsigned d) : OptionValue(l,s,d){}
 
         bool setValue(const std::string& value){
-            return Int::stringToUnsignedInt(value.c_str(),actualValue);
+            return Lib::Int::stringToUnsignedInt(value.c_str(),actualValue);
         }
         std::string getStringOfValue(unsigned value) const{ return Lib::Int::toString(value); }
     };
@@ -1179,7 +1180,7 @@ private:
         LongOptionValue(){}
         LongOptionValue(std::string l,std::string s, long d) : OptionValue(l,s,d){}
         bool setValue(const std::string& value){
-            return Int::stringToLong(value.c_str(),actualValue);
+            return Lib::Int::stringToLong(value.c_str(),actualValue);
         }
         std::string getStringOfValue(long value) const{ return Lib::Int::toString(value); }
     };
@@ -1188,7 +1189,7 @@ struct FloatOptionValue : public OptionValue<float>{
 FloatOptionValue(){}
 FloatOptionValue(std::string l,std::string s, float d) : OptionValue(l,s,d){}
 bool setValue(const std::string& value){
-    return Int::stringToFloat(value.c_str(),actualValue);
+    return Lib::Int::stringToFloat(value.c_str(),actualValue);
 }
 std::string getStringOfValue(float value) const{ return Lib::Int::toString(value); }
 };
@@ -2335,11 +2336,11 @@ private:
             ASS(new_long && new_short);
         }
         AbstractOptionValue* findLong(std::string longName) const{
-            if(!_longMap.find(longName)){ throw ValueNotFoundException(); }
+            if(!_longMap.find(longName)){ throw Lib::ValueNotFoundException(); }
             return _longMap.get(longName);
         }
         AbstractOptionValue* findShort(std::string shortName) const{
-            if(!_shortMap.find(shortName)){ throw ValueNotFoundException(); }
+            if(!_shortMap.find(shortName)){ throw Lib::ValueNotFoundException(); }
             return _shortMap.get(shortName);
         }
 
@@ -2359,11 +2360,11 @@ private:
         try{
           return _lookup.findLong(name);
         }
-        catch(ValueNotFoundException&){
+        catch(Lib::ValueNotFoundException&){
           try{
             return _lookup.findShort(name);
           }
-          catch(ValueNotFoundException&){
+          catch(Lib::ValueNotFoundException&){
             return 0;
           }
         }

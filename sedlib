@@ -24,3 +24,5 @@ s/(\s)Array</\1Lib::Array</g
 s/(\s)DArray</\1Lib::DArray</g
 s/\(Stack</\(Lib::Stack</g
 s/<DArray</<Lib::DArray</g
+s/(\s)Int::/\1Lib::Int::/g
+s/(\s|\()ValueNotFoundException/\1Lib::ValueNotFoundException/g

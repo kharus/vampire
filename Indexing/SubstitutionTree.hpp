@@ -505,11 +505,11 @@ public:
         inline static Lib::Comparison compare(TermList::Top& l, Node* r)
         { 
           if(l.var()) {
-            return r->term().isVar() ? Int::compare(*l.var(), r->term().var())
+            return r->term().isVar() ? Lib::Int::compare(*l.var(), r->term().var())
                                      : LESS;
           } else {
             return r->term().isVar() ? GREATER
-                                     : Int::compare(l.functor()->functor, r->term().term()->functor());
+                                     : Lib::Int::compare(l.functor()->functor, r->term().term()->functor());
           }
         }
       };

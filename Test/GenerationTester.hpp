@@ -36,7 +36,7 @@ namespace Test {
   [] (std::string& s1, std::string& s2) {                          \
     bool res = (VAL1 == VAL2);                             \
     if (!res) {                                            \
-      s1 = Int::toString(VAL1);                            \
+      s1 = Lib::Int::toString(VAL1);                            \
       s1.append(" != ");                                   \
       s1.append(Int::toString(VAL2));                      \
       s2 = std::string(#VAL1);                                 \

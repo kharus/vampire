@@ -140,7 +140,7 @@ private:
     {
       // DynamicHeap is minimal and we want maximum, 
       // so we need to swap the arguments
-      return Int::compare(_ctr[v2], _ctr[v1]);
+      return Lib::Int::compare(_ctr[v2], _ctr[v1]);
     }
     CntArray& _ctr;
   };
