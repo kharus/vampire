@@ -96,7 +96,7 @@ public:
 
   void removeNonMaximal(LiteralList*& lits) const;
 
-  static Result fromComparison(Comparison c);
+  static Result fromComparison(Lib::Comparison c);
   static Lib::Comparison intoComparison(Result c);
 
   static Result reverse(Result r)

@@ -1447,7 +1447,7 @@ public:
             auto** match = n->childByTop(top, /* canCreate */ false);
             if(match) {
               return pvi(concatIters(
-                           getSingletonIterator(match),
+                           Lib::getSingletonIterator(match),
                            n->variableChildren()));
             } else {
               return n->variableChildren();
