@@ -9,7 +9,6 @@ s/(\s)Comparison(\s)/\1Lib::Comparison\2/g
 s/(\s)ScopedPtr</\1Lib::ScopedPtr</g
 s/(\s)MaybeBool(\s)/\1Lib::MaybeBool\2/g
 s/(\s)Coproduct</\1Lib::Coproduct</g
-s/(\s)Option</\1Lib::Option</g
 s/(\s)DefaultHash::/\1Lib::DefaultHash::/g
 s/(\s)BitUtils::/\1Lib::BitUtils::/g
 s/(\s)Recycled</\1Lib::Recycled</g
@@ -33,6 +32,7 @@ s/(\s)IteratorCore</\1Lib::IteratorCore</g
 s/([^:])getSingletonIterator\(/\1Lib::getSingletonIterator\(/g
 s/([^:])getRangeIterator</\1Lib::getRangeIterator</g
 s/\(Comparison(\s)/\(Lib::Comparison\1/g
-s/([^[:alnum:]^:])Perfect</\1Lib::Perfect</g
 s/([^[:alnum:]^:])DHMap</\1Lib::DHMap</g
-s/([^[:alnum:]^:])IterTraits</\1Lib::IterTraits</g
+s/(^|([^[:alnum:]^:]))IterTraits</\2Lib::IterTraits</g
+s/(^|([^[:alnum:]^:]))Option</\1Lib::Option</g
+s/(^|([^[:alnum:]^:]))Perfect</\1Lib::Perfect</g

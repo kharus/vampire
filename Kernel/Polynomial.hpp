@@ -487,7 +487,7 @@ public:
 };
 
 /** convienent constructor for IterArgsPnf */
-IterTraits<IterArgsPnf> iterArgsPnf(Literal* lit);
+Lib::IterTraits<IterArgsPnf> iterArgsPnf(Literal* lit);
 
 } // namespace Kernel
 
@@ -497,7 +497,7 @@ IterTraits<IterArgsPnf> iterArgsPnf(Literal* lit);
 namespace Kernel {
 
 class PolyNf::SubtermIter {
-  Lib::Stack<BottomUpChildIter<PolyNf>> _stack;
+  Lib::Stack<Lib::BottomUpChildIter<PolyNf>> _stack;
 public:
   DECL_ELEMENT_TYPE(PolyNf);
 
@@ -537,7 +537,7 @@ Monom<Number> Monom<Number>::zero()
 }
 
 template<class Number>
-Option<Variable> Monom<Number>::tryVar() const 
+Lib::Option<Variable> Monom<Number>::tryVar() const 
 {
   using Opt = Lib::Option<Variable>;
   if (numeral == Numeral(1)) {
@@ -590,7 +590,7 @@ std::ostream& operator<<(std::ostream& out, const Monom<Number>& self)
 namespace Kernel {
 
 template<class Number>
-Option<typename Number::ConstantType> FuncId::tryNumeral() const
+Lib::Option<typename Number::ConstantType> FuncId::tryNumeral() const
 { 
   using Numeral = typename Number::ConstantType;
   Numeral out;
@@ -612,7 +612,7 @@ Option<typename Number::ConstantType> FuncId::tryNumeral() const
 namespace Kernel {
 
 template<class Number>
-Option<typename Number::ConstantType> FuncTerm::tryNumeral() const
+Lib::Option<typename Number::ConstantType> FuncTerm::tryNumeral() const
 { return _fun.template tryNumeral<Number>(); }
 
 } // namespace Kernel
@@ -634,7 +634,7 @@ template<class NumTraits>
 AnyPoly::AnyPoly(Lib::Perfect<Polynom<NumTraits>> x) : Coproduct(std::move(x)) {  }
 
 template<class NumTraits> 
-Option<Lib::Perfect<Polynom<NumTraits>> const&>  AnyPoly::downcast() const& 
+Lib::Option<Lib::Perfect<Polynom<NumTraits>> const&>  AnyPoly::downcast() const& 
 { return as<Lib::Perfect<Polynom<NumTraits>>>(); }
 
 template<class NumTraits> 
@@ -667,7 +667,7 @@ struct PolymorphicToNumeral
 
 
 template<class NumTraits>
-Option<typename NumTraits::ConstantType> AnyPoly::tryNumeral() const&
+Lib::Option<typename NumTraits::ConstantType> AnyPoly::tryNumeral() const&
 { return apply(PolymorphicToNumeral<NumTraits>{}); }
 
 } // namespace Kernel
@@ -688,7 +688,7 @@ namespace Kernel {
 
 
 template<class NumTraits>
-Option<Lib::Perfect<Polynom<NumTraits>>> PolyNf::downcast()  const
+Lib::Option<Lib::Perfect<Polynom<NumTraits>>> PolyNf::downcast()  const
 {
   using Result = Lib::Perfect<Polynom<NumTraits>>;
   return as<AnyPoly>()
@@ -698,7 +698,7 @@ Option<Lib::Perfect<Polynom<NumTraits>>> PolyNf::downcast()  const
 
 
 template<class Number> 
-Perfect<Polynom<Number>> PolyNf::wrapPoly() const
+Lib::Perfect<Polynom<Number>> PolyNf::wrapPoly() const
 {
   if (this->is<AnyPoly>()) {
     return this->unwrap<AnyPoly>()
@@ -709,7 +709,7 @@ Perfect<Polynom<Number>> PolyNf::wrapPoly() const
 }
 
 template<class Number>
-Option<typename Number::ConstantType> PolyNf::tryNumeral() const
+Lib::Option<typename Number::ConstantType> PolyNf::tryNumeral() const
 { 
   using Numeral = typename Number::ConstantType;
   return match(
@@ -760,7 +760,7 @@ std::ostream& operator<<(std::ostream& out, const MonomFactor<Number>& self) {
 }
 
 template<class Number>
-Option<Variable> MonomFactor<Number>::tryVar() const 
+Lib::Option<Variable> MonomFactor<Number>::tryVar() const 
 { return power == 1 ? term.tryVar() : none<Variable>(); }
 
 } // namespace Kernel
@@ -830,7 +830,7 @@ bool MonomFactors<Number>::isPolynom() const
     && _factors[0].term.template is<AnyPoly>(); }
 
 template<class Number>
-Perfect<Polynom<Number>> MonomFactors<Number>::asPolynom() const
+Lib::Perfect<Polynom<Number>> MonomFactors<Number>::asPolynom() const
 { 
   ASS(isPolynom());
   return _factors[0].term
@@ -897,7 +897,7 @@ TermList MonomFactors<Number>::denormalize(TermList* results)  const
 }
 
 template<class Number>
-Option<Variable> MonomFactors<Number>::tryVar() const 
+Lib::Option<Variable> MonomFactors<Number>::tryVar() const 
 {
   using Opt = Lib::Option<Variable>;
   if (nFactors() == 1 ) {
@@ -1018,7 +1018,7 @@ Polynom<Number> Polynom<Number>::zero()
 }
 
 template<class Number>
-Option<typename Number::ConstantType> Polynom<Number>::toNumber() const& 
+Lib::Option<typename Number::ConstantType> Polynom<Number>::toNumber() const& 
 { 
   if ( _summands.size() == 0) {
     return Lib::Option<Numeral>(Numeral(0));

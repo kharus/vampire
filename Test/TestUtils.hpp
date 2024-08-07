@@ -79,7 +79,7 @@ private:
   {
     class Inner {
       unsigned cnt = 0;
-      Map<unsigned, unsigned> _self;
+      Lib::Map<unsigned, unsigned> _self;
     public:
       unsigned get(unsigned var) 
       { return _self.getOrInit(std::move(var), [&](){ return cnt++; }); }
@@ -160,7 +160,7 @@ struct PrettyPrinter<Lib::Stack<A>> {
 };
 
 template<class A>
-struct PrettyPrinter<Option<A>> {
+struct PrettyPrinter<Lib::Option<A>> {
   void operator()(std::ostream& out, Lib::Option<A> const& self)
   { self.isSome() ? out << pretty(self.unwrap()) : out << "none"; }
 };
@@ -227,7 +227,7 @@ struct PrettyPrinter<Kernel::Literal>
 #undef NUM_CASE
         }
       }
-      Signature::Symbol* sym = env.signature->getPredicate(func);
+      Signature::Symbol* sym = Lib::env.signature->getPredicate(func);
       out << sym->name();
       if (sym->arity() > 0) {
         out << "(" << pretty(*lit.nthArgument(0));
@@ -281,7 +281,7 @@ struct PrettyPrinter<Kernel::TermList>
         }
       }
 
-      Signature::Symbol* sym = env.signature->getFunction(func);
+      Signature::Symbol* sym = Lib::env.signature->getFunction(func);
       out << sym->name();
       if (sym->arity() > 0) {
         out << "(" << pretty(*term->nthArgument(0));

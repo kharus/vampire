@@ -32,7 +32,7 @@ using LitSimplResult = Inferences::SimplifyingGeneratingLiteralSimplification::R
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template<class ConstantType, class EvalGround>
-Option<LitSimplResult> tryEvalConstant2(Literal* orig, PolyNf* evaluatedArgs, EvalGround fun) 
+Lib::Option<LitSimplResult> tryEvalConstant2(Literal* orig, PolyNf* evaluatedArgs, EvalGround fun) 
 {
   using Number = NumTraits<ConstantType>;
   auto& lhs = *evaluatedArgs[0].downcast<Number>().unwrap();

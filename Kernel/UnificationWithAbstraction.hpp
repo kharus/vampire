@@ -62,7 +62,7 @@ public:
   { return _cont.isEmpty(); }
 
   void add(UnificationConstraint c, Lib::Option<BacktrackData&> bd);
-  UnificationConstraint pop(Option<BacktrackData&> bd);
+  UnificationConstraint pop(Lib::Option<BacktrackData&> bd);
 };
 
 class AbstractionOracle final
