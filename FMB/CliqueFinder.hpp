@@ -21,7 +21,7 @@ namespace FMB {
 
   class CliqueFinder {
   public:
-    static unsigned findMaxCliqueSize(DHMap<unsigned,DHSet<unsigned>*>* Ngraph)
+    static unsigned findMaxCliqueSize(Lib::DHMap<unsigned,DHSet<unsigned>*>* Ngraph)
     {
       //std::cout << "findMaxCliqueSize with " << Ngraph->size() << std::endl;
 
@@ -89,7 +89,7 @@ namespace FMB {
   private:
 
     // check if a clique is a clique
-    static bool checkClique(DHMap<unsigned,DHSet<unsigned>*>* Ngraph, Lib::Stack<unsigned>& clique)
+    static bool checkClique(Lib::DHMap<unsigned,DHSet<unsigned>*>* Ngraph, Lib::Stack<unsigned>& clique)
     {
       //std::cout << "CHECK "; for(unsigned j=0;j<clique.size();j++){ std::cout << clique[j] << " ";}; std::cout << std::endl;
 

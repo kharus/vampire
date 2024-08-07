@@ -32,7 +32,7 @@ class LambdaElimination {
 public:
 
   LambdaElimination() {};
-//  LambdaElimination(DHMap<unsigned,TermList> varSorts) : _varSorts(varSorts){};
+//  LambdaElimination(Lib::DHMap<unsigned,TermList> varSorts) : _varSorts(varSorts){};
 
   /** Set of recursive functions that rconvert lambda terms to 
    *  combinatory terms and replace logical symbols by proxies.

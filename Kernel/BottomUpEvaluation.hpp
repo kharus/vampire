@@ -518,10 +518,10 @@ struct BottomUpChildIter<Kernel::PolyNf>
   struct FuncTermBottomUpChildIter
   {
 
-    Perfect<Kernel::FuncTerm> _self;
+    Lib::Perfect<Kernel::FuncTerm> _self;
     unsigned _idx;
 
-    FuncTermBottomUpChildIter(Perfect<Kernel::FuncTerm> self) : _self(self), _idx(0) {}
+    FuncTermBottomUpChildIter(Lib::Perfect<Kernel::FuncTerm> self) : _self(self), _idx(0) {}
 
     bool hasNext() const
     { return _idx < _self->numTermArguments(); }
@@ -559,7 +559,7 @@ struct BottomUpChildIter<Kernel::PolyNf>
   Inner _self;
 
   BottomUpChildIter(Kernel::PolyNf self, EmptyContext = EmptyContext()) : _self(self.match(
-        [&](Perfect<Kernel::FuncTerm> self) { return Inner(FuncTermBottomUpChildIter( self ));            },
+        [&](Lib::Perfect<Kernel::FuncTerm> self) { return Inner(FuncTermBottomUpChildIter( self ));            },
         [&](Kernel::Variable                  self) { return Inner(VariableBottomUpChildIter( self ));            },
         [&](Kernel::AnyPoly           self) { return Inner(PolynomialBottomUpChildIter(std::move(self))); }
       ))

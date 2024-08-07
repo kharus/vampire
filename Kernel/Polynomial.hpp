@@ -137,9 +137,9 @@ struct Monom
   using Numeral = typename Number::ConstantType;
 
   Numeral numeral;
-  Perfect<MonomFactors<Number>> factors;
+  Lib::Perfect<MonomFactors<Number>> factors;
 
-  Monom(Numeral numeral, Perfect<MonomFactors<Number>> factors);
+  Monom(Numeral numeral, Lib::Perfect<MonomFactors<Number>> factors);
 
   static Monom zero();
 
@@ -177,19 +177,19 @@ public:
 };
 
 using AnyPolySuper = Lib::Coproduct< 
-    Perfect<Polynom< IntTraits>>
-  , Perfect<Polynom< RatTraits>>
-  , Perfect<Polynom<RealTraits>>
+    Lib::Perfect<Polynom< IntTraits>>
+  , Lib::Perfect<Polynom< RatTraits>>
+  , Lib::Perfect<Polynom<RealTraits>>
   >;
 
 class AnyPoly : public AnyPolySuper
 {
 public:
   /** creates a new dynamically typed polynom from a statically typed one */
-  template<class NumTraits> AnyPoly(Perfect<Polynom<NumTraits>> x);
+  template<class NumTraits> AnyPoly(Lib::Perfect<Polynom<NumTraits>> x);
 
   /** tries to turn this polynom into a polynom of the given NumTraits. */
-  template<class NumTraits> Lib::Option<Perfect<Polynom<NumTraits>> const&> downcast() const&;
+  template<class NumTraits> Lib::Option<Lib::Perfect<Polynom<NumTraits>> const&> downcast() const&;
 
   /** returns wether this is a Polynom of the given NumTraits. */
   template<class NumTraits> bool isType() const;
@@ -217,7 +217,7 @@ public:
   friend struct std::hash<AnyPoly>;
 };
 
-using PolyNfSuper = Lib::Coproduct<Perfect<FuncTerm>, Variable, AnyPoly>;
+using PolyNfSuper = Lib::Coproduct<Lib::Perfect<FuncTerm>, Variable, AnyPoly>;
 
 /**
  * Represents the polynomial normal form of a term, that is used for performing several simplifications and evaluations.
@@ -228,7 +228,7 @@ class PolyNf : public PolyNfSuper
 {
 public:
 
-  PolyNf(Perfect<FuncTerm> t);
+  PolyNf(Lib::Perfect<FuncTerm> t);
   PolyNf(Variable               t);
   PolyNf(AnyPoly                t);
 
@@ -239,7 +239,7 @@ public:
    * otherwise an empty Option is returned
    */
   template<class NumTraits>
-  Lib::Option<Perfect<Polynom<NumTraits>>> downcast() const;
+  Lib::Option<Lib::Perfect<Polynom<NumTraits>>> downcast() const;
 
   /** turns the normal form term PolyNf into an ordenary vampire term TermList. */
   TermList denormalize() const;
@@ -252,7 +252,7 @@ public:
    * wrapped in a polynom.
    */
   template<class Number> 
-  Perfect<Polynom<Number>> wrapPoly() const;
+  Lib::Perfect<Polynom<Number>> wrapPoly() const;
   
 
   /** if this PolyNf is a numeral, the numeral is returned */
@@ -266,7 +266,7 @@ public:
   class SubtermIter;
 
   /** returns an iterator over all PolyNf s that are subterms of this one */
-  IterTraits<SubtermIter> iterSubterms() const;
+  Lib::IterTraits<SubtermIter> iterSubterms() const;
 
   friend struct std::hash<PolyNf>;
   friend bool operator==(PolyNf const& lhs, PolyNf const& rhs);
@@ -347,7 +347,7 @@ public:
   /** turns this monom into a polynom. 
    * \pre isPolynom  must be true
    */
-  Perfect<Polynom> asPolynom() const;
+  Lib::Perfect<Polynom> asPolynom() const;
 
   /** returns the (empty) product one */
   static MonomFactors one();
@@ -525,7 +525,7 @@ public:
 namespace Kernel {
 
 template<class Number>
-Monom<Number>::Monom(Monom<Number>::Numeral numeral, Perfect<MonomFactors<Number>> factors) 
+Monom<Number>::Monom(Monom<Number>::Numeral numeral, Lib::Perfect<MonomFactors<Number>> factors) 
   : numeral(numeral), factors(factors)
 {}
 
@@ -631,21 +631,21 @@ template<> struct std::hash<Kernel::FuncTerm>
 namespace Kernel {
 
 template<class NumTraits>
-AnyPoly::AnyPoly(Perfect<Polynom<NumTraits>> x) : Coproduct(std::move(x)) {  }
+AnyPoly::AnyPoly(Lib::Perfect<Polynom<NumTraits>> x) : Coproduct(std::move(x)) {  }
 
 template<class NumTraits> 
-Option<Perfect<Polynom<NumTraits>> const&>  AnyPoly::downcast() const& 
-{ return as<Perfect<Polynom<NumTraits>>>(); }
+Option<Lib::Perfect<Polynom<NumTraits>> const&>  AnyPoly::downcast() const& 
+{ return as<Lib::Perfect<Polynom<NumTraits>>>(); }
 
 template<class NumTraits> 
 bool AnyPoly::isType() const 
-{ return is<Perfect<Polynom<NumTraits>>>(); }
+{ return is<Lib::Perfect<Polynom<NumTraits>>>(); }
 
 /* helper function for AnyPoly::tryNumeral */
 template<class NumIn, class NumOut>
 struct __ToNumeralHelper 
 {
-  Lib::Option<typename NumOut::ConstantType> operator()(Perfect<Polynom<NumIn>>) const
+  Lib::Option<typename NumOut::ConstantType> operator()(Lib::Perfect<Polynom<NumIn>>) const
   { return Lib::Option<typename NumOut::ConstantType>(); }
 };
 
@@ -653,7 +653,7 @@ struct __ToNumeralHelper
 template<class Num>
 struct __ToNumeralHelper<Num,Num>
 {
-  Lib::Option<typename Num::ConstantType> operator()(Perfect<Polynom<Num>> p) const
+  Lib::Option<typename Num::ConstantType> operator()(Lib::Perfect<Polynom<Num>> p) const
   { return p->toNumber(); }
 };
 
@@ -661,7 +661,7 @@ template<class NumOut>
 struct PolymorphicToNumeral 
 {
   template<class NumIn>
-  Lib::Option<typename NumOut::ConstantType> operator()(Perfect<Polynom<NumIn>> const& p) const
+  Lib::Option<typename NumOut::ConstantType> operator()(Lib::Perfect<Polynom<NumIn>> const& p) const
   { return __ToNumeralHelper<NumIn, NumOut>{}(p); }
 };
 
@@ -688,9 +688,9 @@ namespace Kernel {
 
 
 template<class NumTraits>
-Option<Perfect<Polynom<NumTraits>>> PolyNf::downcast()  const
+Option<Lib::Perfect<Polynom<NumTraits>>> PolyNf::downcast()  const
 {
-  using Result = Perfect<Polynom<NumTraits>>;
+  using Result = Lib::Perfect<Polynom<NumTraits>>;
   return as<AnyPoly>()
     .andThen([](AnyPoly const& p) { return p.as<Result>(); })
     .map([](Result const& p) -> Result { return p; });
@@ -702,7 +702,7 @@ Perfect<Polynom<Number>> PolyNf::wrapPoly() const
 {
   if (this->is<AnyPoly>()) {
     return this->unwrap<AnyPoly>()
-            .unwrap<Perfect<Polynom<Number>>>();
+            .unwrap<Lib::Perfect<Polynom<Number>>>();
   } else {
     return perfect(Polynom<Number>(*this));
   }
@@ -713,7 +713,7 @@ Option<typename Number::ConstantType> PolyNf::tryNumeral() const
 { 
   using Numeral = typename Number::ConstantType;
   return match(
-      [](Perfect<FuncTerm> t) { return (*t).tryNumeral<Number>(); },
+      [](Lib::Perfect<FuncTerm> t) { return (*t).tryNumeral<Number>(); },
       [](Variable               t) { return Lib::Option<Numeral>();              },
       [](AnyPoly                t) { return t.template tryNumeral<Number>(); }
     );
@@ -835,7 +835,7 @@ Perfect<Polynom<Number>> MonomFactors<Number>::asPolynom() const
   ASS(isPolynom());
   return _factors[0].term
     .template unwrap<AnyPoly>()
-    .template unwrap<Perfect<Polynom>>(); 
+    .template unwrap<Lib::Perfect<Polynom>>(); 
 }
 
 template<class Number>
@@ -1121,7 +1121,7 @@ void Polynom<Number>::integrity() const {
     auto iter = this->_summands.begin();
     auto last = iter++;
     while (iter != _summands.end()) {
-      // ASS_REP(std::less<Perfect<MonomFactors>>{}(last->factors, iter->factors), *this);
+      // ASS_REP(std::less<Lib::Perfect<MonomFactors>>{}(last->factors, iter->factors), *this);
       ASS_REP(last->factors <= iter->factors, *this);
       iter->integrity();
       last = iter++;

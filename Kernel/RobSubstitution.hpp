@@ -409,7 +409,7 @@ private:
   RobSubstitution& operator=(const RobSubstitution& obj) = delete;
 
   template<class T, class H1, class H2>
-  void bind(DHMap<VarSpec, T, H1, H2>& map, const VarSpec& v, T b);
+  void bind(Lib::DHMap<VarSpec, T, H1, H2>& map, const VarSpec& v, T b);
   void bind(const VarSpec& v, TermSpec b);
   void bindVar(const VarSpec& var, const VarSpec& to);
   bool match(TermSpec base, TermSpec instance);

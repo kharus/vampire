@@ -39,7 +39,7 @@ class FiniteModelMultiSorted {
 public:
 
  // sortSizes is a map from vampire sorts (defined in Kernel/Sorts) to the size of that sort
- FiniteModelMultiSorted(DHMap<unsigned,unsigned> sortSizes);
+ FiniteModelMultiSorted(Lib::DHMap<unsigned,unsigned> sortSizes);
 
  // Assume def is an equality literal with a
  // function application on lhs and constant on rhs

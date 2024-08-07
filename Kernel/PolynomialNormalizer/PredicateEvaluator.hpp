@@ -48,7 +48,7 @@ Option<LitSimplResult> tryEvalConstant2(Literal* orig, PolyNf* evaluatedArgs, Ev
 /// Equality
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template<class Number> inline Lib::Option<LitSimplResult> interpretEquality(bool polarity, Perfect<Polynom<Number>> lhs, Perfect<Polynom<Number>> rhs) {
+template<class Number> inline Lib::Option<LitSimplResult> interpretEquality(bool polarity, Lib::Perfect<Polynom<Number>> lhs, Lib::Perfect<Polynom<Number>> rhs) {
   if (lhs->isNumber() && rhs->isNumber()) {
     return Lib::Option<LitSimplResult>(LitSimplResult::constant(polarity == (lhs->unwrapNumber() == rhs->unwrapNumber())));
   } else if (lhs == rhs) {

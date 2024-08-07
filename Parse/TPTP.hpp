@@ -846,7 +846,7 @@ public:
     InferenceSourceRecord(std::string n) : name(n) {}
   };
 
-  void setUnitSourceMap(DHMap<Unit*,SourceRecord*>* m){
+  void setUnitSourceMap(Lib::DHMap<Unit*,SourceRecord*>* m){
     _unitSources = m;
   }
   SourceRecord* getSource();
