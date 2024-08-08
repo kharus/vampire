@@ -31,7 +31,7 @@ namespace FMB {
   class DefinitionIntroduction{
   public:
     DefinitionIntroduction(ClauseIterator cit) : _cit(cit) {
-      //_ng = env.options->fmbNonGroundDefs();
+      //_ng = Lib::env.options->fmbNonGroundDefs();
     }
 
 

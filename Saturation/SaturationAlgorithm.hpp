@@ -218,8 +218,8 @@ protected:
   Instantiation* _instantiation;
   FunctionDefinitionHandler& _fnDefHandler;
 
-  SubscriptionData _passiveContRemovalSData;
-  SubscriptionData _activeContRemovalSData;
+  Lib::SubscriptionData _passiveContRemovalSData;
+  Lib::SubscriptionData _activeContRemovalSData;
 
   /**
    * Literal selector for set-of-support.

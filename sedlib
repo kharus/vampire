@@ -1,5 +1,4 @@
 s/(\s)List</\1Lib::List</g
-s/(\s)VirtualIterator</\1Lib::VirtualIterator</g
 s/(\s)SharedSet</\1Lib::SharedSet</g
 s/(\s)SingleParamEvent</\1Lib::SingleParamEvent</g
 s/(\s)ZIArray</\1Lib::ZIArray</g
@@ -39,3 +38,10 @@ s/(^|([^[:alnum:]^:]))env\.signature/\1Lib::env\.signature/g
 s/(^|([^[:alnum:]^:]))ArrayMap</\1Lib::ArrayMap</g
 s/(^|([^[:alnum:]^:]))Recycled</\1Lib::Recycled</g
 s/public ThrowableBase/public Lib::ThrowableBase/g
+s/(^|([^[:alnum:]^:]))Map</\1Lib::Map</g
+s/(^|([^[:alnum:]^:]))BiMap</\1Lib::BiMap</g
+s/(^|([^[:alnum:]^:]))VirtualIterator</\1Lib::VirtualIterator</g
+s/(^|([^[:alnum:]^:]))env\.options/\1Lib::env\.options/g
+s/(^|([^[:alnum:]^:]))DHMultiset</\1Lib::DHMultiset</g
+s/(^|([^[:alnum:]^:]))env\.setMainProblem/\1Lib::env\.setMainProblem/g
+s/(^|([^[:alnum:]^:]))env\.colorUsed/\1Lib::env\.colorUsed/g

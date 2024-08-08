@@ -50,7 +50,7 @@ namespace Memo {
   template<class Arg, class Result, class Hash = DefaultHash>
   class Hashed
   {
-    Map<Arg, Result, Hash> _memo;
+    Lib::Map<Arg, Result, Hash> _memo;
 
   public:
     Hashed() : _memo(decltype(_memo)()) {}

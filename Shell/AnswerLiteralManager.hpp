@@ -56,7 +56,7 @@ public:
   friend class Inferences::AnswerLiteralResolver;
   /**
    * There should be at most one AnswerLiteralManager instance in the whole wide world.
-   * Depending on env.options this will be
+   * Depending on Lib::env.options this will be
    * - either AnswerLiteralManager proper (for QuestionAnsweringMode::PLAIN)
    * - or a SynthesisALManager (for QuestionAnsweringMode::SYNTHESIS)
    */

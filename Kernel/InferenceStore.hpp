@@ -83,7 +83,7 @@ private:
 
   ProofPrinter* createProofPrinter(std::ostream& out);
 
-  DHMultiset<Clause*> _nextClIds;
+  Lib::DHMultiset<Clause*> _nextClIds;
 
   Lib::DHMap<Unit*, Literal*> _splittingNameLiterals;
 

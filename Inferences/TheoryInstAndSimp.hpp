@@ -49,7 +49,7 @@ class TheoryInstAndSimp
 public:
   using SortId = SAT::Z3Interfacing::SortId;
   ~TheoryInstAndSimp();
-  TheoryInstAndSimp() : TheoryInstAndSimp(*env.options) {}
+  TheoryInstAndSimp() : TheoryInstAndSimp(*Lib::env.options) {}
 
   TheoryInstAndSimp(Options& opts);
   TheoryInstAndSimp(Options::TheoryInstSimp mode, bool thiTautologyDeletion, bool showZ3, bool generalisation, std::string const& exportSmtlib);
@@ -121,7 +121,7 @@ private:
     };
 
     const char* _prefix;
-    Map<SortId, SortedConstantCache> _inner;
+    Lib::Map<SortId, SortedConstantCache> _inner;
 
   public:
     ConstantCache(const char* prefix) : _prefix(prefix), _inner() {}
@@ -138,7 +138,7 @@ private:
   volatile char padding00[1024];
   Z3Interfacing* _solver;
   volatile char padding01[1024];
-  Map<SortId, bool> _supportedSorts;
+  Lib::Map<SortId, bool> _supportedSorts;
   bool _generalisation;
   ConstantCache _instantiationConstants;
   ConstantCache _generalizationConstants;

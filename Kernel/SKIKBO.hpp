@@ -94,7 +94,7 @@ protected:
   //VarCondRes compareVariables(VarOccMap&, VarOccMap&, VarCondRes) const;
   VarCondRes compareVariables(TermList tl1, TermList tl2) const;
   unsigned getMaxRedLength(TermList t) const;
-  bool varConditionHolds(DHMultiset<Term*>& tlTerms1, DHMultiset<Term*>& tlTerms2) const;
+  bool varConditionHolds(Lib::DHMultiset<Term*>& tlTerms1, Lib::DHMultiset<Term*>& tlTerms2) const;
   bool safe(Term* t1, Term* t2) const;
 
   /** Weight of variables */

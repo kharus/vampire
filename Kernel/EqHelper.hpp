@@ -43,7 +43,7 @@ public:
   static Lib::VirtualIterator<TypedTermList> getLHSIterator(Literal* lit, const Ordering& ord);
   static Lib::VirtualIterator<TypedTermList> getSuperpositionLHSIterator(Literal* lit, const Ordering& ord, const Options& opt);
   static Lib::VirtualIterator<TypedTermList> getSubVarSupLHSIterator(Literal* lit, const Ordering& ord);
-  static std::pair<VirtualIterator<TypedTermList>,bool> getDemodulationLHSIterator(Literal* lit, bool onlyPreordered, const Ordering& ord);
+  static std::pair<Lib::VirtualIterator<TypedTermList>,bool> getDemodulationLHSIterator(Literal* lit, bool onlyPreordered, const Ordering& ord);
   static TermIterator getEqualityArgumentIterator(Literal* lit);
 
   //WARNING, this function cannot be used when @param t is a sort.

@@ -137,12 +137,12 @@ public:
     auto ul = UnitList::empty();
     UnitList::pushFromIterator(ClauseStack::Iterator(_context), ul);
     p.addUnits(ul);
-    env.setMainProblem(&p);
+    Lib::env.setMainProblem(&p);
 
     Options o;
     for (const auto& kv : _options) {
       o.set(kv.first, kv.second);
-      env.options->set(kv.first, kv.second);
+      Lib::env.options->set(kv.first, kv.second);
     }
     MockedSaturationAlgorithm alg(p, o);
     _setup(alg);

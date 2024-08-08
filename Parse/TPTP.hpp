@@ -301,7 +301,7 @@ public:
    * Implements lexer and parser exceptions.
    */
   class ParseErrorException
-    : public ParsingRelatedException
+    : public Lib::ParsingRelatedException
   {
   public:
     ParseErrorException(std::string message,unsigned ln) : _message(message), _ln(ln) {}
@@ -351,7 +351,7 @@ public:
   static void assignAxiomName(const Unit* unit, std::string& name);
   unsigned lineNumber(){ return _lineNumber; }
 
-  static Map<int,std::string>* findQuestionVars(unsigned questionNumber) {
+  static Lib::Map<int,std::string>* findQuestionVars(unsigned questionNumber) {
     auto res = _questionVariableNames.findPtr(questionNumber);
     return res ? *res : nullptr;
   }
@@ -530,7 +530,7 @@ private:
  */
   Lib::Set<std::string>* _allowedNames;
   /** stacks of allowed names when include is used */
-  Lib::Stack<Set<std::string>*> _allowedNamesStack;
+  Lib::Stack<Lib::Set<std::string>*> _allowedNamesStack;
   /** set of files whose inclusion should be ignored */
   Lib::Set<std::string> _forbiddenIncludes;
   /** the input stream */
@@ -596,7 +596,7 @@ private:
   /** name table for variable names */
   IntNameTable _vars;
   /** When parsing a question, make note of the inverse mapping to _vars, i.e. from the ints back to the vstrings, for better user reporting */
-  Map<int,std::string> _curQuestionVarNames;
+  Lib::Map<int,std::string> _curQuestionVarNames;
   /** parsed types */
   Lib::Stack<Type*> _types;
   /** various type tags saved during parsing */
@@ -604,7 +604,7 @@ private:
   /**  */
   Lib::Stack<TheoryFunction> _theoryFunctions;
   /** bindings of variables to sorts */
-  Map<unsigned,SList*> _variableSorts;
+  Lib::Map<unsigned,SList*> _variableSorts;
   /** overflown arithmetical constants for which uninterpreted constants are introduced */
   Lib::Set<std::string> _overflow;
   /** current color, if the input contains colors */
@@ -869,7 +869,7 @@ private:
    *
    * (Can there be more than one question? Yes, e.g., in the interactive mode.)
    */
-  static Lib::DHMap<unsigned, Map<int,std::string>*> _questionVariableNames;
+  static Lib::DHMap<unsigned, Lib::Map<int,std::string>*> _questionVariableNames;
 
   /** Stores the type arities of function symbols */
   Lib::DHMap<std::string, unsigned> _typeArities;

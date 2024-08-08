@@ -123,7 +123,7 @@ protected:
   {
     ASS_G(eligible, 1); //trivial cases should be taken care of by the base LiteralSelector
 
-    static bool combSup = env.options->combinatorySup();
+    static bool combSup = Lib::env.options->combinatorySup();
 
     static Lib::DArray<Literal*> litArr(64);
     static Lib::Set<unsigned> maxTermHeads;

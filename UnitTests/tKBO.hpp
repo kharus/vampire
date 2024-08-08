@@ -17,7 +17,7 @@ inline Lib::DArray<int> predLevels() {
 using namespace Kernel;
 
 template<class SigTraits>
-inline KboWeightMap<SigTraits> toWeightMap(unsigned introducedSymbolWeight, KboSpecialWeights<SigTraits> ws, const Map<unsigned, KboWeight>& xs, unsigned sz) 
+inline KboWeightMap<SigTraits> toWeightMap(unsigned introducedSymbolWeight, KboSpecialWeights<SigTraits> ws, const Lib::Map<unsigned, KboWeight>& xs, unsigned sz) 
 {
   auto df = KboWeightMap<SigTraits>::dflt();
   df._specialWeights = ws;
@@ -34,18 +34,18 @@ inline KboWeightMap<SigTraits> toWeightMap(unsigned introducedSymbolWeight, KboS
   };
 }
 
-inline void __weights(Map<unsigned, KboWeight>& ws) {
+inline void __weights(Lib::Map<unsigned, KboWeight>& ws) {
 }
 
 template<class A, class... As>
-inline void __weights(Map<unsigned, KboWeight>& ws, std::pair<A, KboWeight> a, std::pair<As, KboWeight>... as) {
+inline void __weights(Lib::Map<unsigned, KboWeight>& ws, std::pair<A, KboWeight> a, std::pair<As, KboWeight>... as) {
   ws.insert(std::get<0>(a).functor(), std::get<1>(a));
   __weights(ws, as...);
 }
 
 template<class... As>
-inline Map<unsigned, KboWeight> weights(std::pair<As, KboWeight>... as) {
-  Map<unsigned, KboWeight> out;
+inline Lib::Map<unsigned, KboWeight> weights(std::pair<As, KboWeight>... as) {
+  Lib::Map<unsigned, KboWeight> out;
   __weights(out, as...);
   return out;
 }

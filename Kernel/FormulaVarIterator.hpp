@@ -73,9 +73,9 @@ private:
   unsigned _nextVar;
 
   /** Counter used to store bound variables, together with the number of times they are bound */
-  MultiCounter _bound;
+  Lib::MultiCounter _bound;
   /** To store previously found free variables */
-  MultiCounter _free;
+  Lib::MultiCounter _free;
   /** Stack of formulas to be processed */
   Lib::Stack<const Formula*> _formulas;
   /** Stack of terms to process */

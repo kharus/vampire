@@ -84,17 +84,17 @@ public:
                 _sort_constraints(cons) {
 
                   _sig = new SortedSignature();
-                  _print = env.options->showFMBsortInfo();
+                  _print = Lib::env.options->showFMBsortInfo();
 
                    // ignore inference if there are no clauses
                   _ignoreInference = !clauses; 
-                  _expandSubsorts = env.options->fmbAdjustSorts() == Options::FMBAdjustSorts::EXPAND;
+                  _expandSubsorts = Lib::env.options->fmbAdjustSorts() == Options::FMBAdjustSorts::EXPAND;
 
                   _usingMonotonicity = true;
-                  _collapsingMonotonicSorts = (env.options->fmbAdjustSorts() != Options::FMBAdjustSorts::OFF && 
-                                               env.options->fmbAdjustSorts() != Options::FMBAdjustSorts::EXPAND);
+                  _collapsingMonotonicSorts = (Lib::env.options->fmbAdjustSorts() != Options::FMBAdjustSorts::OFF && 
+                                               Lib::env.options->fmbAdjustSorts() != Options::FMBAdjustSorts::EXPAND);
                   _assumeMonotonic = _collapsingMonotonicSorts && 
-                                     env.options->fmbAdjustSorts() != Options::FMBAdjustSorts::GROUP;
+                                     Lib::env.options->fmbAdjustSorts() != Options::FMBAdjustSorts::GROUP;
 
                   _distinctSorts=0;
                   _collapsed=0;
