@@ -27,7 +27,6 @@
 namespace Kernel {
 namespace LiteralComparators {
 
-using namespace Lib;
 
 
 //typedef CompositeComaprator Composite;
@@ -50,9 +49,9 @@ template<class Comp1, class Comp2>
 class Composite : public LiteralComparator
 {
 public:
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
-    Comparison res1=_c1.compare(l1,l2);
+    Lib::Comparison res1=_c1.compare(l1,l2);
     return (res1==EQUAL)?_c2.compare(l1,l2):res1;
   }
 
@@ -71,7 +70,7 @@ template<class Comp>
 class Inverse : public LiteralComparator
 {
 public:
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     return _c.compare(l2,l1);
   }
@@ -87,7 +86,7 @@ private:
 
 struct ColoredFirst : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     if(l1->color()!=COLOR_TRANSPARENT && l2->color()==COLOR_TRANSPARENT) {
       return GREATER;
@@ -101,7 +100,7 @@ struct ColoredFirst : public LiteralComparator
 
 struct NoPositiveEquality : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     bool l1PE=l1->isEquality()&&l1->isPositive();
     bool l2PE=l2->isEquality()&&l2->isPositive();
@@ -117,7 +116,7 @@ struct NoPositiveEquality : public LiteralComparator
 
 struct Negative : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     ASS(_selector);
 
@@ -135,7 +134,7 @@ struct Negative : public LiteralComparator
 
 struct NegativeEquality : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     bool l1NE=l1->isEquality()&&l1->isNegative();
     bool l2NE=l2->isEquality()&&l2->isNegative();
@@ -151,33 +150,33 @@ struct NegativeEquality : public LiteralComparator
 
 struct MaximalSize : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
-    return Int::compare(l1->weight(), l2->weight());
+    return Lib::Int::compare(l1->weight(), l2->weight());
   }
 };
 
 struct LeastVariables : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
-    return Int::compare(l2->numVarOccs(), l1->numVarOccs());
+    return Lib::Int::compare(l2->numVarOccs(), l1->numVarOccs());
   }
 };
 
 struct LeastDistinctVariables : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
-    return Int::compare(l2->getDistinctVars(), l1->getDistinctVars());
+    return Lib::Int::compare(l2->getDistinctVars(), l1->getDistinctVars());
   }
 };
 
 struct LeastTopLevelVariables : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
-    return Int::compare(getTLVarCnt(l2), getTLVarCnt(l1));
+    return Lib::Int::compare(getTLVarCnt(l2), getTLVarCnt(l1));
   }
 private:
   unsigned getTLVarCnt(Literal* l)
@@ -194,13 +193,13 @@ private:
 
 struct LexComparator : public LiteralComparator
 {
-  Comparison compare(Literal* l1, Literal* l2)
+  Lib::Comparison compare(Literal* l1, Literal* l2)
   {
     ASS(l1->shared());
     ASS(l2->shared());
 
     if(l1->header()!=l2->header()) {
-      return Int::compare(l1->header(),l2->header());
+      return Lib::Int::compare(l1->header(),l2->header());
     }
 
     SubtermIterator sit1(l1);
@@ -214,7 +213,7 @@ struct LexComparator : public LiteralComparator
 	  unsigned f1=st1.term()->functor();
 	  unsigned f2=st2.term()->functor();
 	  if(f1!=f2) {
-	    return Int::compare(f1,f2);
+	    return Lib::Int::compare(f1,f2);
 	  }
 	} else {
 	  return GREATER;
@@ -224,7 +223,7 @@ struct LexComparator : public LiteralComparator
 	  return LESS;
 	} else {
 	  if(st1.var()!=st2.var()) {
-	    return Int::compare(st1.var(),st2.var());
+	    return Lib::Int::compare(st1.var(),st2.var());
 	  }
 	}
       }
@@ -243,19 +242,19 @@ struct LexComparator : public LiteralComparator
 template<bool ignorePolarity=false>
 struct NormalizedLinearComparatorByWeight : public LiteralComparator
 {
-  Comparison compare(Term* t1, Term* t2)
+  Lib::Comparison compare(Term* t1, Term* t2)
   {
     ASS_EQ(t1->isLiteral(), t2->isLiteral());
 
     if(t1->weight()!=t2->weight()) {
-      return Int::compare(t1->weight(),t2->weight());
+      return Lib::Int::compare(t1->weight(),t2->weight());
     }
     if(t1->functor()!=t2->functor()) {
-      return Int::compare(t1->functor(),t2->functor());
+      return Lib::Int::compare(t1->functor(),t2->functor());
     }
     if(t1->isLiteral() && !ignorePolarity &&
 	    static_cast<Literal*>(t1)->polarity()!=static_cast<Literal*>(t2)->polarity()) {
-      return Int::compare(static_cast<Literal*>(t1)->polarity(),
+      return Lib::Int::compare(static_cast<Literal*>(t1)->polarity(),
 	      static_cast<Literal*>(t2)->polarity());
     }
 
@@ -272,8 +271,8 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
       }
     }
 
-    static DHMap<unsigned, unsigned> firstNums;
-    static DHMap<unsigned, unsigned> secondNums;
+    static Lib::DHMap<unsigned, unsigned> firstNums;
+    static Lib::DHMap<unsigned, unsigned> secondNums;
     firstNums.reset();
     secondNums.reset();
 
@@ -283,7 +282,7 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
       if(dis.first.isTerm()) {
 	if(dis.second.isTerm()) {
 	  ASS_NEQ(dis.first.term()->functor(), dis.second.term()->functor());
-	  return Int::compare(dis.first.term()->functor(), dis.second.term()->functor());
+	  return Lib::Int::compare(dis.first.term()->functor(), dis.second.term()->functor());
 	}
 	return GREATER;
       }
@@ -293,14 +292,14 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
       int firstNorm=firstNums.findOrInsert(dis.first.var(), firstNums.size());
       int secondNorm=secondNums.findOrInsert(dis.second.var(), secondNums.size());
       if(firstNorm!=secondNorm) {
-	return Int::compare(secondNorm, firstNorm);
+	return Lib::Int::compare(secondNorm, firstNorm);
       }
     }
     //they're variants of each other
     return EQUAL;
   }
 
-  Comparison compare(TermList t1, TermList t2)
+  Lib::Comparison compare(TermList t1, TermList t2)
   {
     if(t1.isVar()) {
       if(t2.isVar()) {

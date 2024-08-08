@@ -24,7 +24,6 @@
 
 namespace FMB {
 
-using namespace Lib;
 using namespace Kernel;
 
 /**
@@ -36,9 +35,9 @@ class FunctionRelationshipInference {
 public:
 
 void findFunctionRelationships(ClauseIterator clauses, 
-                               Stack<DHSet<unsigned>*>& eq_classes, 
-                               DHSet<std::pair<unsigned,unsigned>>& nonstrict_cons,
-                               DHSet<std::pair<unsigned,unsigned>>& strict_cons); 
+                               Lib::Stack<DHSet<unsigned>*>& eq_classes, 
+                               Lib::DHSet<std::pair<unsigned,unsigned>>& nonstrict_cons,
+                               Lib::DHSet<std::pair<unsigned,unsigned>>& strict_cons); 
 
 private:
 
