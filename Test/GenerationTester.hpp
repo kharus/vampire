@@ -47,7 +47,7 @@ namespace Test {
   }
 
 template<class... As>
-Stack<ClausePattern> exactly(As... as) 
+Lib::Stack<ClausePattern> exactly(As... as) 
 {
   Lib::Stack<ClausePattern> out { as... };
   return out;

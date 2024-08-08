@@ -88,9 +88,9 @@ private:
   void addNewTotalityDefs();
 
   // Add constraints for symmetry ordering i.e. the first modelSize groundedTerms are ordered
-  void addNewSymmetryOrderingAxioms(unsigned modelSize,Stack<GroundedTerm>& groundedTerms); 
+  void addNewSymmetryOrderingAxioms(unsigned modelSize,Lib::Stack<GroundedTerm>& groundedTerms); 
   // Add constraints for canonicity of symmetry order i.e. if a groundedTerm uses a constant smaller terms use smaller constants
-  void addNewSymmetryCanonicityAxioms(unsigned modelSize,Stack<GroundedTerm>& groundedTerms,unsigned maxModelSize);
+  void addNewSymmetryCanonicityAxioms(unsigned modelSize,Lib::Stack<GroundedTerm>& groundedTerms,unsigned maxModelSize);
 
   // Add all symmetry constraints
   // For each model size up to the maximum add both ordering and canonicity constraints for each (inferred) sort

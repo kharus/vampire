@@ -1,5 +1,4 @@
 s/(\s)List</\1Lib::List</g
-s/(\s)Stack</\1Lib::Stack</g
 s/(\s)VirtualIterator</\1Lib::VirtualIterator</g
 s/(\s)SharedSet</\1Lib::SharedSet</g
 s/(\s)SingleParamEvent</\1Lib::SingleParamEvent</g
@@ -36,3 +35,5 @@ s/([^[:alnum:]^:])DHMap</\1Lib::DHMap</g
 s/(^|([^[:alnum:]^:]))IterTraits</\2Lib::IterTraits</g
 s/(^|([^[:alnum:]^:]))Option</\1Lib::Option</g
 s/(^|([^[:alnum:]^:]))Perfect</\1Lib::Perfect</g
+s/(^|([^[:alnum:]^:]))none</\1Lib::none</g
+s/(^|([^[:alnum:]^:]))Stack</\1Lib::Stack</g

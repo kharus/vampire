@@ -199,8 +199,8 @@ protected:
   //TODO: postponing index modifications during iteration (methods isBeingIterated() etc...)
 
 private:
-  SubscriptionData _addedSD;
-  SubscriptionData _removedSD;
+  Lib::SubscriptionData _addedSD;
+  Lib::SubscriptionData _removedSD;
 };
 
 };

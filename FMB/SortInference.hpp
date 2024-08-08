@@ -57,12 +57,12 @@ struct SortedSignature{
 
     // Map the distinct sorts back to their vampire parents
     // A distinct sort may merge multipe vampire sorts (due to monotonicity)
-    Lib::DHMap<unsigned,Stack<unsigned>*> distinctToVampire;
+    Lib::DHMap<unsigned,Lib::Stack<unsigned>*> distinctToVampire;
     // A vampire sort can only be mapped to more than one distinct sort under certain conditions i.e. when
     // (i) the option for fmbSortInference = expand
     // (ii) at most one sort has non-monotonic subsorts and that is called parent
     // (iii) additional constraints have been added making expanded <= parent
-    Lib::DHMap<unsigned,Stack<unsigned>*> vampireToDistinct;
+    Lib::DHMap<unsigned,Lib::Stack<unsigned>*> vampireToDistinct;
     // This maps to the distinct parent
     // invariant: domain of the two maps are the same and the second maps to something in the stack of the first
     Lib::DHMap<unsigned,unsigned> vampireToDistinctParent;

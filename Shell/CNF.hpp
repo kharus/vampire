@@ -39,7 +39,7 @@ class CNF
 {
 public:
   CNF();
-  void clausify (Unit*,Stack<Clause*>& stack);
+  void clausify (Unit*,Lib::Stack<Clause*>& stack);
 private:
   void clausify(Formula*);
   // the original recurisive version (for documentation and reference)

@@ -35,7 +35,7 @@ public:
   void apply(Problem& prb);
   bool apply(UnitList*& units);
   bool apply(ClauseList*& units);
-  Clause* apply(Clause*& cl,Stack<Literal*>& target);
+  Clause* apply(Clause*& cl,Lib::Stack<Literal*>& target);
   Clause* apply(Clause*& cl){
     static Lib::Stack<Literal*> dummy;
     return apply(cl,dummy);

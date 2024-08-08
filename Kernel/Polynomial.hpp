@@ -761,7 +761,7 @@ std::ostream& operator<<(std::ostream& out, const MonomFactor<Number>& self) {
 
 template<class Number>
 Lib::Option<Variable> MonomFactor<Number>::tryVar() const 
-{ return power == 1 ? term.tryVar() : none<Variable>(); }
+{ return power == 1 ? term.tryVar() : Lib::none<Variable>(); }
 
 } // namespace Kernel
 
@@ -770,6 +770,7 @@ struct std::hash<Kernel::MonomFactor<NumTraits>>
 {
   size_t operator()(Kernel::MonomFactor<NumTraits> const& x) const noexcept 
   {
+    using namespace Lib;
     return Lib::HashUtils::combine(
       StlHash::hash(x.term),
       StlHash::hash(x.power)
@@ -820,7 +821,7 @@ PolyNf const& MonomFactors<Number>::termAt(unsigned i) const
 { return _factors[i].term; }
 
 template<class Number>
-Stack<MonomFactor<Number>> & MonomFactors<Number>::raw()
+Lib::Stack<MonomFactor<Number>> & MonomFactors<Number>::raw()
 { return _factors; }
 
 template<class Number>
@@ -944,6 +945,7 @@ struct std::hash<Kernel::MonomFactors<NumTraits>>
 {
   size_t operator()(Kernel::MonomFactors<NumTraits> const& x) const noexcept 
   {
+    using namespace Lib;
     return StackHash<StlHash>::hash(x._factors);
   }
 };
@@ -1077,7 +1079,7 @@ TermList Polynom<Number>::denormalize(TermList* results) const
 }
 
 template<class Number>
-Stack<Monom<Number>>& Polynom<Number>::raw()
+Lib::Stack<Monom<Number>>& Polynom<Number>::raw()
 { return _summands; }
 
 template<class Number>
@@ -1143,10 +1145,11 @@ struct std::hash<Kernel::Polynom<NumTraits>>
   size_t operator()(Kernel::Polynom<NumTraits> const& x) const noexcept 
   {
     using namespace Kernel;
+    using namespace Lib;
 
-    unsigned out = Lib::HashUtils::combine(0,0);
+    unsigned out = HashUtils::combine(0,0);
     for (auto c : x._summands) {
-      out = Lib::HashUtils::combine(
+      out = HashUtils::combine(
         StlHash::hash(c.factors),
         StlHash::hash(c.numeral),
         out

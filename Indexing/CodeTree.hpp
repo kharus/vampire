@@ -243,7 +243,7 @@ public:
     BITFIELD64_GET_AND_SET(unsigned, instruction, Instruction, INSTRUCTION)
     BITFIELD64_GET_AND_SET(unsigned, arg, Arg, ARG)
     template<class T> T* _data() const
-    { return reinterpret_cast<T*>(BitUtils::getBits<DATA_BITS_START, DATA_BITS_END>(this->_content)); }
+    { return reinterpret_cast<T*>(Lib::BitUtils::getBits<DATA_BITS_START, DATA_BITS_END>(this->_content)); }
     template<class T> void _setData(T* data)
     { Lib::BitUtils::setBits<DATA_BITS_START, DATA_BITS_END>(this->_content, reinterpret_cast<uint64_t>(data)); }
     // end bitfield

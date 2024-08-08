@@ -143,7 +143,7 @@ public:
   };
 
 private:
-  typedef Lib::DHMap<unsigned,TermList,IdentityHash,DefaultHash> BindingMap;
+  typedef Lib::DHMap<unsigned,TermList,Lib::IdentityHash,Lib::DefaultHash> BindingMap;
   struct MapBinder
   {
     bool bind(unsigned var, TermList term)
@@ -218,7 +218,7 @@ private:
 };
 
 class Matcher
-: public Backtrackable
+: public Lib::Backtrackable
 {
 public:
   Matcher() : _binder(*this) {}
@@ -257,7 +257,7 @@ private:
     Matcher& _parent;
 
     class BindingBacktrackObject
-    : public BacktrackObject
+    : public Lib::BacktrackObject
     {
     public:
       BindingBacktrackObject(MapBinder* bnd, unsigned var)

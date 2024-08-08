@@ -107,9 +107,9 @@ struct TermSpec {
   TermSpec typeArg(unsigned i) const { return TermSpec(this->term.term()->typeArg(i), this->index); }
   TermSpec anyArg (unsigned i) const { return TermSpec(*this->term.term()->nthArgument(i), this->index); }
 
-  auto typeArgs() const { return range(0, nTypeArgs()).map([this](auto i) { return typeArg(i); }); }
-  auto termArgs() const { return range(0, nTermArgs()).map([this](auto i) { return termArg(i); }); }
-  auto allArgs()  const { return range(0, nAllArgs()).map([this](auto i) { return anyArg(i); }); }
+  auto typeArgs() const { return Lib::range(0, nTypeArgs()).map([this](auto i) { return typeArg(i); }); }
+  auto termArgs() const { return Lib::range(0, nTermArgs()).map([this](auto i) { return termArg(i); }); }
+  auto allArgs()  const { return Lib::range(0, nAllArgs()).map([this](auto i) { return anyArg(i); }); }
 
   bool deepEqCheck(const TermSpec& t2) const {
     TermSpec const& t1 = *this;
@@ -139,7 +139,7 @@ struct TermSpec {
   bool sortIsBoolOrVar() const
   { 
     if (!isTerm()) return false;
-    auto fun = env.signature->getFunction(functor());
+    auto fun = Lib::env.signature->getFunction(functor());
     auto op = fun->fnType();
     TermList res = op->result();
     return res.isVar() || res == AtomicSort::boolSort();
@@ -212,7 +212,7 @@ struct AutoDerefTermSpec
 template<class Result>
 class OnlyMemorizeNonVar 
 {
-  Map<TermSpec, Result> _memo;
+  Lib::Map<TermSpec, Result> _memo;
 public:
   OnlyMemorizeNonVar(OnlyMemorizeNonVar &&) = default;
   OnlyMemorizeNonVar& operator=(OnlyMemorizeNonVar &&) = default;
@@ -221,7 +221,7 @@ public:
   auto memoKey(AutoDerefTermSpec const& arg) -> Lib::Option<TermSpec>
   { 
     if (arg.term.term.isTerm()) {
-      return some(arg.term);
+      return Lib::some(arg.term);
     } else {
       return {};
     }
@@ -274,7 +274,7 @@ class AbstractingUnifier;
 class UnificationConstraint;
 
 class RobSubstitution
-:public Backtrackable
+:public Lib::Backtrackable
 {
   friend class AbstractingUnifier;
   friend class UnificationConstraint;
