@@ -46,7 +46,7 @@
 
 namespace SAT{
 
-  struct UninterpretedForZ3Exception : public ThrowableBase
+  struct UninterpretedForZ3Exception : public Lib::ThrowableBase
   {
     UninterpretedForZ3Exception()
     {
@@ -178,8 +178,8 @@ public:
       out << (self.isPredicate ? "pred " : "func ");
       out << (
         self.isPredicate
-          ? env.signature->getPredicate(self.id)->name()
-          : env.signature->getFunction(self.id)->name()
+          ? Lib::env.signature->getPredicate(self.id)->name()
+          : Lib::env.signature->getFunction(self.id)->name()
       );
       if(self.forSorts)
         for(unsigned i = 0; i < self.forSorts->numTypeArguments(); i++)

@@ -150,7 +150,7 @@ private:
     unsigned _size;
 
     struct Iterator {
-      Iterator(DArray<GenLit>::Iterator iter, unsigned left) : _iter(iter), _left(left) {}
+      Iterator(Lib::DArray<GenLit>::Iterator iter, unsigned left) : _iter(iter), _left(left) {}
 
       bool hasNext() {
         if (_left == 0) return false;
@@ -168,7 +168,7 @@ private:
     };
 
     Iterator genLiterals() {
-      return Iterator(DArray<GenLit>::Iterator(_literals), _size);
+      return Iterator(Lib::DArray<GenLit>::Iterator(_literals), _size);
     }
 
     unsigned size() {

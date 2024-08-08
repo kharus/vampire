@@ -162,7 +162,7 @@ private:
   Lib::DArray<unsigned> _fminbound;
   // Record for each clause the sorts of the variables 
   // As clauses are normalized variables will be numbered 0,1,...
-  Lib::DHMap<Clause*,DArray<unsigned>*> _clauseVariableSorts;
+  Lib::DHMap<Clause*,Lib::DArray<unsigned>*> _clauseVariableSorts;
 
   // There is a implicit mapping from ground terms to SAT variables
   // These offsets give the SAT variable for the *first* grounding of each function or predicate symbol
@@ -239,7 +239,7 @@ private:
   public:
     virtual bool init(unsigned, Lib::DArray<unsigned>&, Lib::Stack<std::pair<unsigned,unsigned>>&, Lib::Stack<std::pair<unsigned,unsigned>>&) { return true; }
     virtual void learnNogood(Constraint_Generator_Vals& nogood, unsigned weight) = 0;
-    virtual bool increaseModelSizes(DArray<unsigned>& newSortSizes, Lib::DArray<unsigned>& sortMaxes) = 0;
+    virtual bool increaseModelSizes(Lib::DArray<unsigned>& newSortSizes, Lib::DArray<unsigned>& sortMaxes) = 0;
     virtual bool isFmbComplete(unsigned noDomains) { return false; }
     virtual ~DSAEnumerator() {}
   };
@@ -279,7 +279,7 @@ private:
     bool _keepOldGenerators;
     Lib::Stack<Constraint_Generator*> _old_generators; // keeping old generators degraded performance on average ...
   protected:
-    bool checkConstriant(DArray<unsigned>& newSortSizes, Constraint_Generator_Vals& constraint);
+    bool checkConstriant(Lib::DArray<unsigned>& newSortSizes, Constraint_Generator_Vals& constraint);
 
   public:
     HackyDSAE(bool keepOldGenerators) : _maxWeightSoFar(0), _keepOldGenerators(keepOldGenerators) {}
@@ -293,7 +293,7 @@ private:
 
     bool isFmbComplete(unsigned noDomains) override { return (noDomains <= 1) && !_skippedSomeSizes; }
     void learnNogood(Constraint_Generator_Vals& nogood, unsigned weight) override;
-    bool increaseModelSizes(DArray<unsigned>& newSortSizes, Lib::DArray<unsigned>& sortMaxes) override;
+    bool increaseModelSizes(Lib::DArray<unsigned>& newSortSizes, Lib::DArray<unsigned>& sortMaxes) override;
   };
 
 #if VZ3
@@ -304,14 +304,14 @@ private:
     Lib::DArray<z3::expr*> _sizeConstants;
     bool _skippedSomeSizes;
   protected:
-    unsigned loadSizesFromSmt(DArray<unsigned>& szs);
+    unsigned loadSizesFromSmt(Lib::DArray<unsigned>& szs);
     void reportZ3OutOfMemory();
   public:
     SmtBasedDSAE() : _smtSolver(_context) {}
 
     bool init(unsigned, Lib::DArray<unsigned>&, Lib::Stack<std::pair<unsigned,unsigned>>&, Lib::Stack<std::pair<unsigned,unsigned>>&) override;
     void learnNogood(Constraint_Generator_Vals& nogood, unsigned weight) override;
-    bool increaseModelSizes(DArray<unsigned>& newSortSizes, Lib::DArray<unsigned>& sortMaxes) override;
+    bool increaseModelSizes(Lib::DArray<unsigned>& newSortSizes, Lib::DArray<unsigned>& sortMaxes) override;
     bool isFmbComplete(unsigned) override { return !_skippedSomeSizes; }
   };
 #endif

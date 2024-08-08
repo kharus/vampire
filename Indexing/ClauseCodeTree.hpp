@@ -48,7 +48,7 @@ private:
 
   struct InitialLiteralOrderingComparator;
 
-  void optimizeLiteralOrder(DArray<Literal*>& lits);
+  void optimizeLiteralOrder(Lib::DArray<Literal*>& lits);
   void evalSharing(Literal* lit, CodeOp* startOp, size_t& sharedLen, size_t& unsharedLen, CodeOp*& nextOp);
   static void matchCode(CodeStack& code, CodeOp* startOp, size_t& matchedCnt, CodeOp*& nextOp);
 
@@ -135,7 +135,7 @@ public:
      */
     Lib::DArray<LitInfo> lInfos;
 
-    Lib::Stack<Recycled<LiteralMatcher, NoReset>> lms;
+    Lib::Stack<Lib::Recycled<LiteralMatcher, Lib::NoReset>> lms;
   };
 
 private:

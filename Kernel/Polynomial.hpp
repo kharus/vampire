@@ -1147,9 +1147,9 @@ struct std::hash<Kernel::Polynom<NumTraits>>
     using namespace Kernel;
     using namespace Lib;
 
-    unsigned out = HashUtils::combine(0,0);
+    unsigned out = Lib::HashUtils::combine(0,0);
     for (auto c : x._summands) {
-      out = HashUtils::combine(
+      out = Lib::HashUtils::combine(
         StlHash::hash(c.factors),
         StlHash::hash(c.numeral),
         out

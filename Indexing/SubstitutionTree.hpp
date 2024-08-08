@@ -213,7 +213,7 @@ public:
   template<class I, class TermOrLit, class... Args>
   auto iterator(TermOrLit query, bool retrieveSubstitutions, bool reversed, Args... args)
   { return isEmpty() ? Lib::VirtualIterator<ELEMENT_TYPE(I)>::getEmpty()
-                     : pvi(iterPointer(Recycled<I>(this, _root, query, retrieveSubstitutions, reversed, std::move(args)...)));
+                     : pvi(iterPointer(Lib::Recycled<I>(this, _root, query, retrieveSubstitutions, reversed, std::move(args)...)));
   }
 
   class LDComparator
@@ -222,6 +222,7 @@ public:
     template<class LD>
     static Lib::Comparison compare(const LD& ld1, const LD& ld2)
     {
+      using namespace Lib;
       return ld1 < ld2 ? Comparison::LESS 
            : ld1 > ld2 ? Comparison::GREATER
            : Comparison::EQUAL;
@@ -504,6 +505,7 @@ public:
       public:
         inline static Lib::Comparison compare(TermList::Top& l, Node* r)
         { 
+          using namespace Lib;
           if(l.var()) {
             return r->term().isVar() ? Lib::Int::compare(*l.var(), r->term().var())
                                      : LESS;
@@ -528,7 +530,7 @@ public:
       Binding(int v,TermList t) : var(v), term(t) {}
     }; // class SubstitutionTree::Binding
 
-    typedef Lib::DHMap<unsigned,TermList,IdentityHash,DefaultHash> BindingMap;
+    typedef Lib::DHMap<unsigned,TermList,Lib::IdentityHash,Lib::DefaultHash> BindingMap;
     typedef Lib::Stack<unsigned> VarStack;
 
     Leaf* findLeaf(BindingMap& svBindings)
@@ -765,7 +767,7 @@ public:
        * Inheritors must ensure that the size of this map will
        * be at least @b _maxVar+1
        */
-      ArrayMap<TermList> _bindings;
+      Lib::ArrayMap<TermList> _bindings;
     };
 
     /**
@@ -1291,7 +1293,7 @@ public:
           Node* n=*_nodeIterators.top().next();
           DEBUG_QUERY(1, "trying S", _svStack.top(), " -> ", n->term())
 
-          _bdStack.push(BacktrackData());
+          _bdStack.push(Lib::BacktrackData());
 
           if (runRecording([&]() { return _algo.associate(_svStack.top(), n->term());})) {
             prepareChildren(n, /* backtrackable */ true);
@@ -1337,9 +1339,9 @@ public:
       bool _retrieveSubstitution;
       Lib::Option<LDIterator> _leafData;
       Lib::Stack<NodeIterator> _nodeIterators;
-      Lib::Stack<BacktrackData> _bdStack;
+      Lib::Stack<Lib::BacktrackData> _bdStack;
       bool _normalizationRecording;
-      BacktrackData _normalizationBacktrackData;
+      Lib::BacktrackData _normalizationBacktrackData;
       InstanceCntr _iterCntr;
 
     public:
@@ -1410,7 +1412,7 @@ public:
         Unifier unifier() { return ResultSubstitution::fromSubstitution(&_subs, QUERY_BANK, RESULT_BANK); }
 
         /** same as in @Backtrackable */
-        void bdRecord(BacktrackData& bd) { _subs.bdRecord(bd); }
+        void bdRecord(Lib::BacktrackData& bd) { _subs.bdRecord(bd); }
 
         /** same as in @Backtrackable */
         void bdDone() { _subs.bdDone(); }
@@ -1484,7 +1486,7 @@ public:
         void bindQuerySpecialVar(unsigned var, TermList term)
         { _unif.subs().bindSpecialVar(var, term, QUERY_BANK); }
 
-        void bdRecord(BacktrackData& bd)
+        void bdRecord(Lib::BacktrackData& bd)
         { _unif.subs().bdRecord(bd); }
 
         void bdDone()

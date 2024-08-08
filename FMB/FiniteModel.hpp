@@ -80,7 +80,7 @@ public:
    Term* t;
    if(_domainConstants.find(c,t)) return t;
    std::string name = "domainConstant";//+Lib::Int::toString(c);
-   unsigned f = env.signature->addFreshFunction(0,name.c_str()); 
+   unsigned f = Lib::env.signature->addFreshFunction(0,name.c_str()); 
    t = Term::createConstant(f);
    _domainConstants.insert(c,t);
    _domainConstantsRev.insert(t,c);

@@ -124,7 +124,7 @@ public:
     out << "{ ";
     for (auto& t : self._trees) {
       if (!t->isEmpty()) {
-        auto f = env.signature->getPredicate(idxToFunctor(i));
+        auto f = Lib::env.signature->getPredicate(idxToFunctor(i));
         if (idxIsNegative(i)) out << "~";
         out << *f << "(" << *t << "), "; 
       }
@@ -138,7 +138,7 @@ public:
     out << "{ " << std::endl;
     for (auto& t : self.self._trees) {
       if (!t->isEmpty()) {
-        auto f = env.signature->getPredicate(idxToFunctor(i));
+        auto f = Lib::env.signature->getPredicate(idxToFunctor(i));
         OutputMultiline<LiteralSubstitutionTree>::outputIndent(out, self.indent);
         out << (idxIsNegative(i) ? "~" : " ") << *f << "(" << multiline(*t, self.indent + 1) << ")" << std::endl; 
       }

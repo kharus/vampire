@@ -201,7 +201,7 @@
 class SyntaxSugar {
 public:
   static void reset() {
-    env.signature = new Signature();
+    Lib::env.signature = new Signature();
   }
 };
 
@@ -383,11 +383,11 @@ public:
   TermSugar sort(SortId s) { _srt = s; return *this; }
 
   static TermSugar createConstant(const char* name, SortSugar s, bool skolem) {
-    unsigned f = env.signature->addFunction(name,0);                                                                
+    unsigned f = Lib::env.signature->addFunction(name,0);                                                                
 
-    env.signature->getFunction(f)->setType(OperatorType::getFunctionType({}, s.sugaredExpr()));
+    Lib::env.signature->getFunction(f)->setType(OperatorType::getFunctionType({}, s.sugaredExpr()));
     if (skolem) {
-      env.signature->getFunction(f)->markSkolem();
+      Lib::env.signature->getFunction(f)->markSkolem();
     }
     return TermSugar(TermList(Term::createConstant(f)));                                                          
   }                                                                                                                 
@@ -548,7 +548,7 @@ public:
       as.push(a.sugaredExpr());
 
     bool added = false;
-    _functor = env.signature->addFunction(name, as.size() + taArity, added);
+    _functor = Lib::env.signature->addFunction(name, as.size() + taArity, added);
     _arity = as.size();
     if (added){
       TermList res = result.sugaredExpr();
@@ -559,7 +559,7 @@ public:
         SortHelper::normaliseSort(vars, res);
       }
 
-      env.signature
+      Lib::env.signature
         ->getFunction(_functor)
         ->setType(OperatorType::getFunctionType(as.size(), as.begin(), res, taArity));    
     }
@@ -569,7 +569,7 @@ public:
     ASS_L(i, arity())
     ASS (symbol()->termAlgebraCons()) 
     return FuncSugar(
-        env.signature->getTermAlgebraConstructor(functor())
+        Lib::env.signature->getTermAlgebraConstructor(functor())
           ->destructorFunctor(i));
   }
 
@@ -585,7 +585,7 @@ public:
   }
   unsigned functor() const { return _functor; }
   unsigned arity() const { return _arity; }
-  Signature::Symbol* symbol() const { return env.signature->getFunction(functor()); }
+  Signature::Symbol* symbol() const { return Lib::env.signature->getFunction(functor()); }
 
   friend std::ostream& operator<<(std::ostream& out, FuncSugar const& self) 
   { return out << self.symbol()->name(); }
@@ -609,9 +609,9 @@ public:
   TypeConSugar(const char* name, unsigned arity)
   {
     bool added = false;
-    _functor = env.signature->addTypeCon(name, arity, added);
+    _functor = Lib::env.signature->addTypeCon(name, arity, added);
     if (added)
-      env.signature
+      Lib::env.signature
         ->getTypeCon(_functor)
         ->setType(OperatorType::getTypeConType(arity));   
   }
@@ -656,8 +656,8 @@ public:
       SortHelper::normaliseArgSorts(vars, as);
     }
 
-    _functor = env.signature->addPredicate(name, as.size() + taArity);
-    env.signature
+    _functor = Lib::env.signature->addPredicate(name, as.size() + taArity);
+    Lib::env.signature
       ->getPredicate(_functor)
       ->setType(OperatorType::getPredicateType(as.size(), as.begin(), taArity));    
   }
@@ -713,14 +713,14 @@ inline void createTermAlgebra(SortSugar sort, std::initializer_list<FuncSugar> f
   Lib::Stack<TermAlgebraConstructor*> cons;
 
   for (auto f : funcs) {
-    env.signature->getFunction(f.functor())
+    Lib::env.signature->getFunction(f.functor())
       ->markTermAlgebraCons();
 
     auto dtor = [&](unsigned i) {
       std::stringstream name;
       name << f << "@" << i;
       auto d = FuncSugar(name.str(), { f.result() }, f.arg(i));
-      env.signature->getFunction(d.functor())
+      Lib::env.signature->getFunction(d.functor())
         ->markTermAlgebraDest();
       return d;
     };
@@ -732,7 +732,7 @@ inline void createTermAlgebra(SortSugar sort, std::initializer_list<FuncSugar> f
 
     cons.push(new TermAlgebraConstructor(f.functor(), dtors));
   }
-  env.signature->addTermAlgebra(new TermAlgebra(sort.sugaredExpr(), cons.size(), cons.begin()));
+  Lib::env.signature->addTermAlgebra(new TermAlgebra(sort.sugaredExpr(), cons.size(), cons.begin()));
 }
 
 #endif // __TEST__SYNTAX_SUGAR__H__

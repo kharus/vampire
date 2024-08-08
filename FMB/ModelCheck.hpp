@@ -206,7 +206,7 @@ static void addDefinition(FiniteModel& model,Literal* lit,bool negated,
           if(left->isVar()) USER_ERROR("Expect term on left of definition");
           Term* fun = left->term();
           unsigned f = fun->functor();
-          unsigned arity = env.signature->functionArity(f);
+          unsigned arity = Lib::env.signature->functionArity(f);
           if(arity==0) model.addConstantDefinition(f,res);
           else{
             Lib::DArray<unsigned> args(arity);
@@ -223,7 +223,7 @@ static void addDefinition(FiniteModel& model,Literal* lit,bool negated,
           if(!lit->polarity()) negated=!negated;
           // Defining a predicate or proposition
           unsigned p = lit->functor();
-          unsigned arity = env.signature->predicateArity(p);
+          unsigned arity = Lib::env.signature->predicateArity(p);
           if(arity==0) model.addPropositionalDefinition(p,!negated);
           else{
             Lib::DArray<unsigned> args(arity);

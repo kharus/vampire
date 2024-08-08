@@ -17,16 +17,13 @@ s/(\s)Vector</\1Lib::Vector</g
 s/(\s)Set</\1Lib::Set</g
 s/(\s)DHSet</\1Lib::DHSet</g
 s/(\s)Array</\1Lib::Array</g
-s/(\s)DArray</\1Lib::DArray</g
 s/\(Stack</\(Lib::Stack</g
-s/<DArray</<Lib::DArray</g
 s/(\s)Int::/\1Lib::Int::/g
 s/(\s|\()ValueNotFoundException/\1Lib::ValueNotFoundException/g
 s/(\s)SmartPtr</\1Lib::SmartPtr</g
 s/\(DHSet</\(Lib::DHSet</g
 s/(\s)arrayIter\(/\1Lib::arrayIter\(/g
 s/(\s)Deque</\1Lib::Deque</g
-s/\(env\.signature/\(Lib::env\.signature/g
 s/(\s)IteratorCore</\1Lib::IteratorCore</g
 s/([^:])getSingletonIterator\(/\1Lib::getSingletonIterator\(/g
 s/([^:])getRangeIterator</\1Lib::getRangeIterator</g
@@ -37,3 +34,8 @@ s/(^|([^[:alnum:]^:]))Option</\1Lib::Option</g
 s/(^|([^[:alnum:]^:]))Perfect</\1Lib::Perfect</g
 s/(^|([^[:alnum:]^:]))none</\1Lib::none</g
 s/(^|([^[:alnum:]^:]))Stack</\1Lib::Stack</g
+s/(^|([^[:alnum:]^:]))DArray</\1Lib::DArray</g
+s/(^|([^[:alnum:]^:]))env\.signature/\1Lib::env\.signature/g
+s/(^|([^[:alnum:]^:]))ArrayMap</\1Lib::ArrayMap</g
+s/(^|([^[:alnum:]^:]))Recycled</\1Lib::Recycled</g
+s/public ThrowableBase/public Lib::ThrowableBase/g
