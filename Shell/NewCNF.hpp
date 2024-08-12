@@ -206,7 +206,7 @@ private:
   typedef Lib::SmartPtr<GenClause> SPGenClause;
 
   void toClauses(SPGenClause gc, Lib::Stack<Clause*>& output);
-  bool mapSubstitution(List<GenLit>* gc, Substitution subst, bool onlyFormulaLevel, Lib::List<GenLit>* &output);
+  bool mapSubstitution(Lib::List<GenLit>* gc, Substitution subst, bool onlyFormulaLevel, Lib::List<GenLit>* &output);
   Clause* toClause(SPGenClause gc);
 
   typedef std::list<SPGenClause> GenClauses;
@@ -333,7 +333,7 @@ private:
 
     bool isNonEmpty() {
       while (true) {
-        if (List<Occurrence>::isEmpty(_occurrences)) {
+        if (Lib::List<Occurrence>::isEmpty(_occurrences)) {
           ASS_EQ(_size, 0);
           return false;
         }
@@ -393,7 +393,7 @@ private:
 
     class Iterator {
     public:
-      Iterator(Occurrences &occurrences): _iterator(List<Occurrence>::DelIterator(occurrences._occurrences)) {}
+      Iterator(Occurrences &occurrences): _iterator(Lib::List<Occurrence>::DelIterator(occurrences._occurrences)) {}
 
       inline bool hasNext() {
         while (_iterator.hasNext()) {
@@ -416,8 +416,8 @@ private:
     };
   };
 
-  SPGenClause makeGenClause(List<GenLit>* gls, BindingList* bindings, BindingList* foolBindings) {
-    SPGenClause gc = SPGenClause(new GenClause(List<GenLit>::length(gls), bindings, foolBindings));
+  SPGenClause makeGenClause(Lib::List<GenLit>* gls, BindingList* bindings, BindingList* foolBindings) {
+    SPGenClause gc = SPGenClause(new GenClause(Lib::List<GenLit>::length(gls), bindings, foolBindings));
 
     ASS(_literalsCache.isEmpty());
     ASS(_formulasCache.isEmpty());
@@ -433,7 +433,7 @@ private:
     return gc;
   }
 
-  void introduceGenClause(List<GenLit>* gls, BindingList* bindings, BindingList* foolBindings) {
+  void introduceGenClause(Lib::List<GenLit>* gls, BindingList* bindings, BindingList* foolBindings) {
     SPGenClause gc = makeGenClause(gls, bindings, foolBindings);
 
     if (gc->size() != Lib::List<GenLit>::length(gls)) {
@@ -636,8 +636,8 @@ private:
 
   TermList findITEs(TermList ts, Lib::Stack<unsigned> &variables, Lib::Stack<Formula*> &conditions,
                     Lib::Stack<TermList> &thenBranches, Lib::Stack<TermList> &elseBranches,
-                    Lib::Stack<unsigned> &matchVariables, Lib::Stack<List<Formula*>*> &matchConditions,
-                    Lib::Stack<List<TermList>*> &matchBranches);
+                    Lib::Stack<unsigned> &matchVariables, Lib::Stack<Lib::List<Formula*>*> &matchConditions,
+                    Lib::Stack<Lib::List<TermList>*> &matchBranches);
 
   unsigned createFreshVariable(TermList sort);
   void createFreshVariableRenaming(unsigned oldVar, unsigned freshVar);

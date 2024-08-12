@@ -62,6 +62,7 @@ class BestLiteralSelector
 protected:
   void doSelection(Clause* c, unsigned eligible) override
   {
+    using namespace Lib;
     unsigned besti=0;
     Literal* best=(*c)[0];
     for(unsigned i=1;i<eligible;i++) {

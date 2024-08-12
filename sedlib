@@ -1,4 +1,3 @@
-s/(\s)List</\1Lib::List</g
 s/(\s)SharedSet</\1Lib::SharedSet</g
 s/(\s)SingleParamEvent</\1Lib::SingleParamEvent</g
 s/(\s)ZIArray</\1Lib::ZIArray</g
@@ -46,3 +45,4 @@ s/(^|([^[:alnum:]^:]))env\.colorUsed/\1Lib::env\.colorUsed/g
 s/(^|([^[:alnum:]^:]))DHSet</\1Lib::DHSet</g
 s/(^|([^[:alnum:]^:]))DHMap</\1Lib::DHMap</g
 s/(^|([^[:alnum:]^:]))Slice</\1Lib::Slice</g
+s/(^|([^[:alnum:]^:]))List</\1Lib::List</g

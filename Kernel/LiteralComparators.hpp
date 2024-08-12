@@ -205,7 +205,7 @@ struct LexComparator : public LiteralComparator
     ASS(l2->shared());
 
     if(l1->header()!=l2->header()) {
-      return Int::compare(l1->header(),l2->header());
+      return Lib::Int::compare(l1->header(),l2->header());
     }
 
     SubtermIterator sit1(l1);
@@ -219,7 +219,7 @@ struct LexComparator : public LiteralComparator
 	  unsigned f1=st1.term()->functor();
 	  unsigned f2=st2.term()->functor();
 	  if(f1!=f2) {
-	    return Int::compare(f1,f2);
+	    return Lib::Int::compare(f1,f2);
 	  }
 	} else {
 	  return GREATER;
@@ -229,7 +229,7 @@ struct LexComparator : public LiteralComparator
 	  return LESS;
 	} else {
 	  if(st1.var()!=st2.var()) {
-	    return Int::compare(st1.var(),st2.var());
+	    return Lib::Int::compare(st1.var(),st2.var());
 	  }
 	}
       }
@@ -254,14 +254,14 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
     ASS_EQ(t1->isLiteral(), t2->isLiteral());
 
     if(t1->weight()!=t2->weight()) {
-      return Int::compare(t1->weight(),t2->weight());
+      return Lib::Int::compare(t1->weight(),t2->weight());
     }
     if(t1->functor()!=t2->functor()) {
-      return Int::compare(t1->functor(),t2->functor());
+      return Lib::Int::compare(t1->functor(),t2->functor());
     }
     if(t1->isLiteral() && !ignorePolarity &&
 	    static_cast<Literal*>(t1)->polarity()!=static_cast<Literal*>(t2)->polarity()) {
-      return Int::compare(static_cast<Literal*>(t1)->polarity(),
+      return Lib::Int::compare(static_cast<Literal*>(t1)->polarity(),
 	      static_cast<Literal*>(t2)->polarity());
     }
 
@@ -289,7 +289,7 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
       if(dis.first.isTerm()) {
 	if(dis.second.isTerm()) {
 	  ASS_NEQ(dis.first.term()->functor(), dis.second.term()->functor());
-	  return Int::compare(dis.first.term()->functor(), dis.second.term()->functor());
+	  return Lib::Int::compare(dis.first.term()->functor(), dis.second.term()->functor());
 	}
 	return GREATER;
       }
@@ -299,7 +299,7 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
       int firstNorm=firstNums.findOrInsert(dis.first.var(), firstNums.size());
       int secondNorm=secondNums.findOrInsert(dis.second.var(), secondNums.size());
       if(firstNorm!=secondNorm) {
-	return Int::compare(secondNorm, firstNorm);
+	return Lib::Int::compare(secondNorm, firstNorm);
       }
     }
     //they're variants of each other
@@ -308,6 +308,7 @@ struct NormalizedLinearComparatorByWeight : public LiteralComparator
 
   Lib::Comparison compare(TermList t1, TermList t2)
   {
+    using namespace Lib;
     if(t1.isVar()) {
       if(t2.isVar()) {
 	return EQUAL;

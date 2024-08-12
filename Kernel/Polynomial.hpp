@@ -532,7 +532,7 @@ Monom<Number>::Monom(Monom<Number>::Numeral numeral, Lib::Perfect<MonomFactors<N
 template<class Number>
 Monom<Number> Monom<Number>::zero() 
 { 
-  static Monom p = Monom(Numeral(0), perfect(MonomFactors<Number>()));
+  static Monom p = Monom(Numeral(0), Lib::perfect(MonomFactors<Number>()));
   return p; 
 }
 
@@ -1092,7 +1092,7 @@ Polynom<Number> Polynom<Number>::replaceTerms(PolyNf* simplifiedTerms) const
   for (auto& monom : _summands) {
     out.push(Monom(
           monom.numeral, 
-          perfect(monom.factors->replaceTerms(&simplifiedTerms[offs]))));
+          Lib::perfect(monom.factors->replaceTerms(&simplifiedTerms[offs]))));
     offs += monom.factors->nFactors();
   }
   return Polynom(std::move(out));

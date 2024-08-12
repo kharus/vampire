@@ -335,6 +335,7 @@ public:
   template<class... Args>
   TermSpec createTerm(unsigned functor, Args... args)
   {
+    using namespace Lib;
     TermSpec out;
     if (iterItems(args...).count() == 0) {
       return TermSpec(TermList(Term::create(functor, 0, nullptr)), /* index */ 0);
