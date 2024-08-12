@@ -77,7 +77,7 @@ public:
   SortInference(ClauseList* clauses,
                 Lib::DArray<unsigned> del_f,
                 Lib::DArray<unsigned> del_p,
-                Lib::Stack<DHSet<unsigned>*> equiv_v_sorts,
+                Lib::Stack<Lib::DHSet<unsigned>*> equiv_v_sorts,
                 Lib::Stack<std::pair<unsigned,unsigned>>& cons) :
                 _clauses(clauses), _del_f(del_f), _del_p(del_p),
                 _equiv_v_sorts(equiv_v_sorts), _equiv_vs(Lib::env.signature->typeCons()),
@@ -127,8 +127,8 @@ private:
   ClauseList* _clauses;
   Lib::DArray<unsigned> _del_f;
   Lib::DArray<unsigned> _del_p;
-  Lib::Stack<DHSet<unsigned>*> _equiv_v_sorts;
-  IntUnionFind _equiv_vs;
+  Lib::Stack<Lib::DHSet<unsigned>*> _equiv_v_sorts;
+  Lib::IntUnionFind _equiv_vs;
 
   Lib::Stack<std::pair<unsigned,unsigned>>& _sort_constraints;
 

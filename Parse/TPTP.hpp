@@ -594,7 +594,7 @@ private:
   /** term lists */
   Lib::Stack<TermList> _termLists;
   /** name table for variable names */
-  IntNameTable _vars;
+  Lib::IntNameTable _vars;
   /** When parsing a question, make note of the inverse mapping to _vars, i.e. from the ints back to the vstrings, for better user reporting */
   Lib::Map<int,std::string> _curQuestionVarNames;
   /** parsed types */

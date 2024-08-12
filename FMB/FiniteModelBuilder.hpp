@@ -259,7 +259,10 @@ private:
 
     struct Constraint_Generator_Compare {
       static Lib::Comparison compare (Constraint_Generator* c1, Constraint_Generator* c2)
-      { return c1->_weight < c2->_weight ? LESS : c1->_weight == c2->_weight ? EQUAL : GREATER; }
+      {
+        using namespace Lib;
+        return c1->_weight < c2->_weight ? LESS : c1->_weight == c2->_weight ? EQUAL : GREATER;
+      }
     };
 
     typedef Lib::BinaryHeap<Constraint_Generator*,Constraint_Generator_Compare> Constraint_Generator_Heap;

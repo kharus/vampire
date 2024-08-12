@@ -14,7 +14,6 @@ s/<Stack</<Lib::Stack</g
 s/(\s)HashUtils::/\1Lib::HashUtils::/g
 s/(\s)Vector</\1Lib::Vector</g
 s/(\s)Set</\1Lib::Set</g
-s/(\s)DHSet</\1Lib::DHSet</g
 s/(\s)Array</\1Lib::Array</g
 s/\(Stack</\(Lib::Stack</g
 s/(\s)Int::/\1Lib::Int::/g
@@ -27,7 +26,6 @@ s/(\s)IteratorCore</\1Lib::IteratorCore</g
 s/([^:])getSingletonIterator\(/\1Lib::getSingletonIterator\(/g
 s/([^:])getRangeIterator</\1Lib::getRangeIterator</g
 s/\(Comparison(\s)/\(Lib::Comparison\1/g
-s/([^[:alnum:]^:])DHMap</\1Lib::DHMap</g
 s/(^|([^[:alnum:]^:]))IterTraits</\2Lib::IterTraits</g
 s/(^|([^[:alnum:]^:]))Option</\1Lib::Option</g
 s/(^|([^[:alnum:]^:]))Perfect</\1Lib::Perfect</g
@@ -45,3 +43,6 @@ s/(^|([^[:alnum:]^:]))env\.options/\1Lib::env\.options/g
 s/(^|([^[:alnum:]^:]))DHMultiset</\1Lib::DHMultiset</g
 s/(^|([^[:alnum:]^:]))env\.setMainProblem/\1Lib::env\.setMainProblem/g
 s/(^|([^[:alnum:]^:]))env\.colorUsed/\1Lib::env\.colorUsed/g
+s/(^|([^[:alnum:]^:]))DHSet</\1Lib::DHSet</g
+s/(^|([^[:alnum:]^:]))DHMap</\1Lib::DHMap</g
+s/(^|([^[:alnum:]^:]))Slice</\1Lib::Slice</g
