@@ -49,9 +49,9 @@ private:
   /** stack to collect the results */
   Lib::Stack<Clause*>* _result;
   /** stack of literals collected so far */
-  Stack <Literal*> _literals;
+  Lib::Stack <Literal*> _literals;
   /** stack of formulas  */
-  Stack <Formula*> _formulas;
+  Lib::Stack <Formula*> _formulas;
 }; // class CNF
 
 }

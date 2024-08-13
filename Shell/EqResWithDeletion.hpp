@@ -41,7 +41,7 @@ private:
 
   /** The substitution induced by resolved inequalities
    * (It is reset with each clause). */
-  Lib::DHMap<unsigned, TermList, IdentityHash, DefaultHash> _subst;
+  Lib::DHMap<unsigned, TermList, Lib::IdentityHash, Lib::DefaultHash> _subst;
   Literal* _ansLit = nullptr;
 };
 

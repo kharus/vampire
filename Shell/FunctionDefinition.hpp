@@ -96,7 +96,7 @@ private:
 //   void apply (TermList& ls,UnitList& parents);
 //   void apply (Term& l,UnitList& parents);
 
-  typedef Lib::DHMap<int, Def*, IdentityHash, DefaultHash> Fn2DefMap;
+  typedef Lib::DHMap<int, Def*, Lib::IdentityHash, Lib::DefaultHash> Fn2DefMap;
   Fn2DefMap _defs;
 
   /** stack where definitions are put when they're marked as blocked */
@@ -104,7 +104,7 @@ private:
 
   Lib::Stack<Def*> _safeDefs;
   /** Counters for occurrences of function symbols */
-  MultiCounter _counter;
+  Lib::MultiCounter _counter;
   /** The number of found definitions */
   int _found;
   /** The number of removed definitions */

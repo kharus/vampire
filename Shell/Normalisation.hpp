@@ -54,6 +54,7 @@ private:
   inline static
   Lib::Comparison compare (int i1, int i2)
   {
+    using namespace Lib;
     return i1 > i2
            ? GREATER
            : i1 == i2
@@ -63,7 +64,10 @@ private:
 
   inline static
   Lib::Comparison compare (unsigned i1, unsigned i2)
-  { return i1 > i2 ? GREATER : i1 == i2 ? EQUAL : LESS; }
+  {
+    using namespace Lib;
+    return i1 > i2 ? GREATER : i1 == i2 ? EQUAL : LESS;
+  }
 
   /**
    * Return the result of comparison of two booleans b1 and b2.
@@ -72,6 +76,7 @@ private:
   inline static
   Lib::Comparison compare (bool b1, bool b2)
   {
+    using namespace Lib;
     return b1 ? (b2 ? EQUAL : LESS) : (b2 ? GREATER : EQUAL);
   }
 

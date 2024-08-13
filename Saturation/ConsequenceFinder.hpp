@@ -59,7 +59,7 @@ private:
 
   Lib::Stack<unsigned> _redundantsToHandle;
 
-  typedef Lib::SkipList<Clause*,Int> ClauseSL;
+  typedef Lib::SkipList<Clause*,Lib::Int> ClauseSL;
 
   /** Index of clauses that contain specific consequence-finding
    * name predicate */
@@ -72,9 +72,9 @@ private:
   DuplicateLiteralRemovalISE _dlr;
 
   /** SubscriptionData for the @b onClauseInserted method */
-  SubscriptionData _sdInsertion;
+  Lib::SubscriptionData _sdInsertion;
   /** SubscriptionData for the @b onClauseRemoved method */
-  SubscriptionData _sdRemoval;
+  Lib::SubscriptionData _sdRemoval;
 };
 
 }

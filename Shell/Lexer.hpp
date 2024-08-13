@@ -35,7 +35,7 @@ class Lexer;
  * @since 14/07/2004 Turku
  */
 class LexerException
-  : public ParsingRelatedException
+  : public Lib::ParsingRelatedException
 {
  public:
   LexerException(std::string message,const Lexer&);

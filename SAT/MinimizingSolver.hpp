@@ -150,7 +150,7 @@ private:
    * 
    * Heap is empty when _assignmentValid.
    */  
-  DynamicHeap<unsigned, CntComparator, Lib::ArrayMap<size_t> > _heap;
+  Lib::DynamicHeap<unsigned, CntComparator, Lib::ArrayMap<size_t> > _heap;
   
   /**
    * Not yet satisfied clauses indexed by each variable
