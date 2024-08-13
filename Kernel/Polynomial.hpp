@@ -704,7 +704,7 @@ Lib::Perfect<Polynom<Number>> PolyNf::wrapPoly() const
     return this->unwrap<AnyPoly>()
             .unwrap<Lib::Perfect<Polynom<Number>>>();
   } else {
-    return perfect(Polynom<Number>(*this));
+    return Lib::perfect(Polynom<Number>(*this));
   }
 }
 
@@ -974,7 +974,7 @@ Polynom<Number>::Polynom(Monom m)
 
 template<class Number>
 Polynom<Number>::Polynom(Numeral numeral, PolyNf term) 
-  : Polynom(Monom(numeral, perfect(MonomFactors(term))))
+  : Polynom(Monom(numeral, Lib::perfect(MonomFactors(term))))
 {  }
 
 template<class Number>
@@ -984,7 +984,7 @@ Polynom<Number>::Polynom(PolyNf t)
 
 template<class Number>
 Polynom<Number>::Polynom(Numeral constant) 
-  : Polynom(Monom(constant, perfect(MonomFactors::one()))) 
+  : Polynom(Monom(constant, Lib::perfect(MonomFactors::one()))) 
 {  }
 
 
@@ -1135,7 +1135,7 @@ void Polynom<Number>::integrity() const {
 
 template<class Number> 
 TermList Polynom<Number>::denormalize()  const
-{ return PolyNf(AnyPoly(perfect(Polynom(*this)))).denormalize(); }
+{ return PolyNf(AnyPoly(Lib::perfect(Polynom(*this)))).denormalize(); }
 
 } // namespace Kernel
 
