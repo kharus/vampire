@@ -30,6 +30,8 @@
 namespace Indexing
 {
 
+using namespace Lib;
+
 class InstanceRedundancyHandler::SubstitutionCoverTree
   : public CodeTree
 {
